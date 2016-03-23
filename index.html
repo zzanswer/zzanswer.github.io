@@ -73,7 +73,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"always"},
+    sidebar: {"position":"right","display":"always"},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -112,7 +112,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
+  <div class="container one-collumn sidebar-position-right 
    page-home 
  ">
     <div class="headband"></div>
@@ -247,6 +247,105 @@
 
       
     
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/23/Dijkstra的双栈算术表达式求值算法/" itemprop="url">
+                  Dijkstra的双栈算术表达式求值算法 Java实现
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-23T17:28:36+08:00" content="2016-03-23">
+              2016-03-23
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/23/Dijkstra的双栈算术表达式求值算法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/23/Dijkstra的双栈算术表达式求值算法/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>《算法 第四版》中讲栈的时候提到了一个算法，用来完成初级算术运算符的操作，但书中所给的代码有些问题，故自己用Java重新实现了一下这个算法。</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>为了方便的实现算法，略去其他的细节，假设表达式是由括号、运算符和操作数（数字）组成。根据以下四种情况<strong>从左到右</strong>逐个将这些实体送入栈处理：</p>
+<pre><code>* 将操作数压入操作数栈；
+* 将运算符压入运算符栈；
+* 忽略左括号；
+* 在遇到右括号时，弹出一个运算符，弹出所需数量的操作数，并将运算符和操作数的运算结果压入操作数栈。
+</code></pre><h2 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h2><p>下图为Dijkstra的双栈算术表表达式求值算法的轨迹。</p>
+<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Dijkstra.png" alt="id"></p>
+<h2 id="java实现"><a href="#java实现" class="headerlink" title="java实现"></a>java实现</h2><p>这段代码将一个字符串输入后得到计算结果，使用了泛型。简单起见，没有设置其他限制条件，也不允许输入空格。<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">import java.util.Scanner;&#10;import java.util.Stack;&#10;&#10;public class MyEvaluate &#123;&#10;&#9;public static void main(String[] args) &#123;&#10;&#9;&#9;Stack&#60;Character&#62; ops = new Stack&#60;Character&#62;();&#10;&#9;&#9;Stack&#60;Double&#62; vals = new Stack&#60;Double&#62;();&#10;&#9;&#9;&#10;&#9;&#9;Scanner sc = new Scanner(System.in);&#10;&#9;&#9;System.out.println(&#34;&#35831;&#36755;&#20837;&#19968;&#20010;&#34920;&#36798;&#24335;&#65306;&#34;);&#10;&#9;&#9;String s = sc.nextLine();&#10;&#9;&#9;char[] ch = s.toCharArray();&#10;&#9;&#9;sc.close();&#10;&#9;&#9;&#10;&#9;&#9;for(int i = 0; i &#60; ch.length; i++) &#123;&#10;&#9;&#9;&#9;if(ch[i] == &#39;+&#39;) &#123;&#10;&#9;&#9;&#9;&#9;ops.push(ch[i]);&#10;&#9;&#9;&#9;&#125; else if(ch[i] == &#39;-&#39;) &#123;&#10;&#9;&#9;&#9;&#9;ops.push(ch[i]);&#10;&#9;&#9;&#9;&#125; else if(ch[i] == &#39;*&#39;) &#123;&#10;&#9;&#9;&#9;&#9;ops.push(ch[i]);&#10;&#9;&#9;&#9;&#125; else if(ch[i] == &#39;/&#39;) &#123;&#10;&#9;&#9;&#9;&#9;ops.push(ch[i]);&#10;&#9;&#9;&#9;&#125; else if(ch[i] == &#39;(&#39;) &#123;&#10;&#9;&#9;&#9;&#9;//do nothing&#10;&#9;&#9;&#9;&#125; else if(ch[i] == &#39;)&#39;) &#123;&#9;//&#22914;&#26524;&#23383;&#31526;&#20026;&#34;)&#34;&#65292;&#24377;&#20986;&#36816;&#31639;&#31526;&#21644;&#25805;&#20316;&#25968;&#65292;&#35745;&#31639;&#32467;&#26524;&#24182;&#21387;&#20837;&#26632;&#10;&#9;&#9;&#9;&#9;char op = ops.pop();&#10;&#9;&#9;&#9;&#9;Double val = vals.pop();&#10;&#9;&#9;&#9;&#9;&#10;&#9;&#9;&#9;&#9;if(op == &#39;+&#39;) &#123;&#10;&#9;&#9;&#9;&#9;&#9;val = vals.pop() + val;&#10;&#9;&#9;&#9;&#9;&#125; else if(op == &#39;-&#39;) &#123;&#10;&#9;&#9;&#9;&#9;&#9;val = vals.pop() - val;&#10;&#9;&#9;&#9;&#9;&#125; else if(op == &#39;*&#39;) &#123;&#10;&#9;&#9;&#9;&#9;&#9;val = vals.pop() * val;&#10;&#9;&#9;&#9;&#9;&#125; else if(op == &#39;/&#39;) &#123;&#10;&#9;&#9;&#9;&#9;&#9;val = vals.pop() / val;&#10;&#9;&#9;&#9;&#9;&#125;&#10;&#9;&#9;&#9;&#9;&#10;&#9;&#9;&#9;&#9;vals.push(val);&#10;&#9;&#9;&#9;&#125; else &#123;&#9;//&#23558;&#38500;&#20102;&#36816;&#31639;&#31526;&#21644;&#25324;&#21495;&#30340;&#23383;&#31526;&#65292;&#20316;&#20026;double&#20540;&#21387;&#20837;&#26632;&#10;&#9;&#9;&#9;&#9;vals.push(Double.parseDouble(Character.toString(ch[i])));&#10;&#9;&#9;&#9;&#125;&#10;&#9;&#9;&#125;&#10;&#9;&#9;&#10;&#9;&#9;System.out.println(&#34;&#32467;&#26524;&#26159;&#65306;&#34; + vals.pop());&#10;&#9;&#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -516,7 +615,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -533,7 +632,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="R,分词,文本挖掘," />
+  <meta name="keywords" content="Java,算法," />
 
 
 
@@ -57,20 +57,32 @@
 
 
 
-<meta name="description" content="背景在R语言中，对中文分词支持较好的包有两个，一个是RWordseg，一个是jiebaR，前者安装需要配置Java环境等繁琐操作，后者安装方便，感觉功能也更强大一些，本文就是用0.8版本的jiebaR进行分词等一系列操作，然后用wordcloud包来进行词云展示。
-分词加载packagelibrary(jiebaRD)&amp;#10;library(jiebaR)">
+<meta name="description" content="背景《算法 第四版》中讲栈的时候提到了一个算法，用来完成初级算术运算符的操作，但书中所给的代码有些问题，故自己用Java重新实现了一下这个算法。
+原理为了方便的实现算法，略去其他的细节，假设表达式是由括号、运算符和操作数（数字）组成。根据以下四种情况从左到右逐个将这些实体送入栈处理：
+* 将操作数压入操作数栈；
+* 将运算符压入运算符栈；
+* 忽略左括号；
+* 在遇到右括号时，弹出一个运算符，弹出">
 <meta property="og:type" content="article">
-<meta property="og:title" content="文本挖掘—《三体》分词、词云展示">
-<meta property="og:url" content="http://yoursite.com/2016/03/19/文本挖掘—《三体》分词、词云展示/index.html">
+<meta property="og:title" content="Dijkstra的双栈算术表达式求值算法 Java实现">
+<meta property="og:url" content="http://yoursite.com/2016/03/23/Dijkstra的双栈算术表达式求值算法/index.html">
 <meta property="og:site_name" content="zzanswer的博客">
-<meta property="og:description" content="背景在R语言中，对中文分词支持较好的包有两个，一个是RWordseg，一个是jiebaR，前者安装需要配置Java环境等繁琐操作，后者安装方便，感觉功能也更强大一些，本文就是用0.8版本的jiebaR进行分词等一系列操作，然后用wordcloud包来进行词云展示。
-分词加载packagelibrary(jiebaRD)&amp;#10;library(jiebaR)">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/threebodywordcloud.png">
-<meta property="og:updated_time" content="2016-03-19T08:37:43.076Z">
+<meta property="og:description" content="背景《算法 第四版》中讲栈的时候提到了一个算法，用来完成初级算术运算符的操作，但书中所给的代码有些问题，故自己用Java重新实现了一下这个算法。
+原理为了方便的实现算法，略去其他的细节，假设表达式是由括号、运算符和操作数（数字）组成。根据以下四种情况从左到右逐个将这些实体送入栈处理：
+* 将操作数压入操作数栈；
+* 将运算符压入运算符栈；
+* 忽略左括号；
+* 在遇到右括号时，弹出一个运算符，弹出">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Dijkstra.png">
+<meta property="og:updated_time" content="2016-03-23T09:34:05.059Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="文本挖掘—《三体》分词、词云展示">
-<meta name="twitter:description" content="背景在R语言中，对中文分词支持较好的包有两个，一个是RWordseg，一个是jiebaR，前者安装需要配置Java环境等繁琐操作，后者安装方便，感觉功能也更强大一些，本文就是用0.8版本的jiebaR进行分词等一系列操作，然后用wordcloud包来进行词云展示。
-分词加载packagelibrary(jiebaRD)&amp;#10;library(jiebaR)">
+<meta name="twitter:title" content="Dijkstra的双栈算术表达式求值算法 Java实现">
+<meta name="twitter:description" content="背景《算法 第四版》中讲栈的时候提到了一个算法，用来完成初级算术运算符的操作，但书中所给的代码有些问题，故自己用Java重新实现了一下这个算法。
+原理为了方便的实现算法，略去其他的细节，假设表达式是由括号、运算符和操作数（数字）组成。根据以下四种情况从左到右逐个将这些实体送入栈处理：
+* 将操作数压入操作数栈；
+* 将运算符压入运算符栈；
+* 忽略左括号；
+* 在遇到右括号时，弹出一个运算符，弹出">
 
 
 
@@ -88,7 +100,7 @@
   };
 </script>
 
-  <title> 文本挖掘—《三体》分词、词云展示 | zzanswer的博客 </title>
+  <title> Dijkstra的双栈算术表达式求值算法 Java实现 | zzanswer的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -257,7 +269,7 @@
             
             
               
-                文本挖掘—《三体》分词、词云展示
+                Dijkstra的双栈算术表达式求值算法 Java实现
               
             
           </h1>
@@ -269,38 +281,19 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-19T15:14:23+08:00" content="2016-03-19">
-              2016-03-19
+            <time itemprop="dateCreated" datetime="2016-03-23T17:28:36+08:00" content="2016-03-23">
+              2016-03-23
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/R语言/" itemprop="url" rel="index">
-                    <span itemprop="name">R语言</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/19/文本挖掘—《三体》分词、词云展示/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/19/文本挖掘—《三体》分词、词云展示/" itemprop="commentsCount"></span>
+                <a href="/2016/03/23/Dijkstra的双栈算术表达式求值算法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/23/Dijkstra的双栈算术表达式求值算法/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -321,17 +314,15 @@
       
 
       
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在R语言中，对中文分词支持较好的包有两个，一个是RWordseg，一个是jiebaR，前者安装需要配置Java环境等繁琐操作，后者安装方便，感觉功能也更强大一些，本文就是用0.8版本的jiebaR进行分词等一系列操作，然后用wordcloud包来进行词云展示。</p>
-<h2 id="分词"><a href="#分词" class="headerlink" title="分词"></a>分词</h2><h3 id="加载package"><a href="#加载package" class="headerlink" title="加载package"></a>加载package</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line">library(jiebaRD)&#10;library(jiebaR)</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<h3 id="建立分词引擎"><a href="#建立分词引擎" class="headerlink" title="建立分词引擎"></a>建立分词引擎</h3><p>这是jiebaR相比较RWordseg而言非常好用的一点，它将添加用户词典和停用词库放在一条命令中，只需要添加相应的参数就可以了,用户词典的源文件在jiebaRD的目录下dict文件夹中，直接将词库复制进去即可，其中的停用词库也可以直接用，不需要自己下载了。除此之外，还有7种类型的引擎供选词，以及同时新建多个分词引擎等，具体用法可以参照jiebaR作者写的<a href="http://qinwenfeng.com/jiebaR/worker.html" target="_blank" rel="external">说明文档</a>。<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line"># &#24314;&#31435;&#20998;&#35789;&#24341;&#25806; &#28155;&#21152;stop_word&#20572;&#27490;&#35789;&#21442;&#25968;&#10;mixseg = worker(stop_word = &#34;stop_words.utf8&#34;)&#10;#&#23545;&#25991;&#26412;&#36827;&#34892;&#20998;&#35789;&#10;segwords &#60;- segment(&#34;threebody.txt&#34;, mixseg)</span><br></pre></td></tr></table></figure></p>
-<h3 id="文本读取与清洗"><a href="#文本读取与清洗" class="headerlink" title="文本读取与清洗"></a>文本读取与清洗</h3><p>读取中文时要注意文本编码格式为UTF-8，否则读入R中就是一团乱麻，这里可能会有空行警告<br>，这个警告对读取没有什么影响，如果想要消除警告的话，可以打开你分析的文本在最后加空<br>行。<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line"># &#23558;&#20998;&#35789;&#21518;&#30340;&#25991;&#26412;&#35835;&#20837;R&#20013;&#10;mytxt &#60;- read.csv(file = segwords, head = F, stringsAsFactors = F, sep = &#34;&#34;, encoding = &#34;UTF-8&#34;)&#10;# &#23558;&#20998;&#35789;&#21518;&#30340;&#25991;&#26412;&#36716;&#25442;&#20026;&#21521;&#37327;&#10;mytxtvector &#60;- unlist(mytxt)</span><br></pre></td></tr></table></figure></p>
-<p>文本清洗就是去除一些无意义的词汇和符号等，这里可以自己根据分析的内容自行改动。<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line"># &#21435;&#25481;&#19981;&#38656;&#35201;&#12289;&#26080;&#24847;&#20041;&#30340;&#23383;&#31526;&#10;mytxtvector &#60;- gsub(&#34;[0-9a-zA-Z]+?&#34;, &#34;&#34;, mytxtvector)&#10;mytxtvector &#60;- gsub(&#34;\n&#34;, &#34;&#34;, mytxtvector)&#10;mytxtvector &#60;- gsub(&#34; &#34;, &#34;&#34;, mytxtvector)&#10;# &#21435;&#25481;&#19968;&#20010;&#23383;&#30340;&#35789;&#10;mytxtvector &#60;- subset(mytxtvector, nchar(as.character(mytxtvector)) &#62; 1)&#10;# &#32479;&#35745;&#35789;&#39057; &#20889;&#20837;&#25968;&#25454;&#26694;&#20013;&#10;myfreq &#60;- table(unlist(mytxtvector))&#10;myfreq &#60;- rev(sort(myfreq))&#10;myfreq &#60;- data.frame(word = names(myfreq), freq = myfreq)&#10;# &#21435;&#25481;&#21482;&#20986;&#29616;&#36807;&#19968;&#27425;&#30340;&#35789;&#10;myfreq2 = subset(myfreq, myfreq$freq &#62;= 2)</span><br></pre></td></tr></table></figure></p>
-<h2 id="绘制词云"><a href="#绘制词云" class="headerlink" title="绘制词云"></a>绘制词云</h2><h3 id="加载package-1"><a href="#加载package-1" class="headerlink" title="加载package"></a>加载package</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line">library(RColorBrewer)&#10;library(wordcloud)</span><br></pre></td></tr></table></figure>
-<h3 id="设置颜色、字体-画图"><a href="#设置颜色、字体-画图" class="headerlink" title="设置颜色、字体 画图"></a>设置颜色、字体 画图</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line"># &#35774;&#32622;&#19968;&#20010;&#39068;&#33394;&#31995;&#10;mycolors &#60;- brewer.pal(8, &#34;Dark2&#34;)&#10;# &#35774;&#32622;&#23383;&#20307;&#10;windowsFonts(myFont = windowsFont(&#34;&#24494;&#36719;&#38597;&#40657;&#34;))&#10;# &#30011;&#20986;&#20113;&#22270;&#10;wordcloud(myfreq2$word, myfreq2$freq, random.order = F, random.color = F, colors = mycolors, family = &#34;myFont&#34;)</span><br></pre></td></tr></table></figure>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/threebodywordcloud.png" alt="id"></p>
-<p>“没有”最多，其次是两位主人公的姓名，看来注定是悲剧收场了……</p>
-<p>##参考文献<br>[1]<a href="http://qinwenfeng.com/jiebaR/index.html" target="_blank" rel="external">jiebaR中文分词</a></p>
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>《算法 第四版》中讲栈的时候提到了一个算法，用来完成初级算术运算符的操作，但书中所给的代码有些问题，故自己用Java重新实现了一下这个算法。</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>为了方便的实现算法，略去其他的细节，假设表达式是由括号、运算符和操作数（数字）组成。根据以下四种情况<strong>从左到右</strong>逐个将这些实体送入栈处理：</p>
+<pre><code>* 将操作数压入操作数栈；
+* 将运算符压入运算符栈；
+* 忽略左括号；
+* 在遇到右括号时，弹出一个运算符，弹出所需数量的操作数，并将运算符和操作数的运算结果压入操作数栈。
+</code></pre><h2 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h2><p>下图为Dijkstra的双栈算术表表达式求值算法的轨迹。</p>
+<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Dijkstra.png" alt="id"></p>
+<h2 id="java实现"><a href="#java实现" class="headerlink" title="java实现"></a>java实现</h2><p>这段代码将一个字符串输入后得到计算结果，使用了泛型。简单起见，没有设置其他限制条件，也不允许输入空格。<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">import java.util.Scanner;&#10;import java.util.Stack;&#10;&#10;public class MyEvaluate &#123;&#10;&#9;public static void main(String[] args) &#123;&#10;&#9;&#9;Stack&#60;Character&#62; ops = new Stack&#60;Character&#62;();&#10;&#9;&#9;Stack&#60;Double&#62; vals = new Stack&#60;Double&#62;();&#10;&#9;&#9;&#10;&#9;&#9;Scanner sc = new Scanner(System.in);&#10;&#9;&#9;System.out.println(&#34;&#35831;&#36755;&#20837;&#19968;&#20010;&#34920;&#36798;&#24335;&#65306;&#34;);&#10;&#9;&#9;String s = sc.nextLine();&#10;&#9;&#9;char[] ch = s.toCharArray();&#10;&#9;&#9;sc.close();&#10;&#9;&#9;&#10;&#9;&#9;for(int i = 0; i &#60; ch.length; i++) &#123;&#10;&#9;&#9;&#9;if(ch[i] == &#39;+&#39;) &#123;&#10;&#9;&#9;&#9;&#9;ops.push(ch[i]);&#10;&#9;&#9;&#9;&#125; else if(ch[i] == &#39;-&#39;) &#123;&#10;&#9;&#9;&#9;&#9;ops.push(ch[i]);&#10;&#9;&#9;&#9;&#125; else if(ch[i] == &#39;*&#39;) &#123;&#10;&#9;&#9;&#9;&#9;ops.push(ch[i]);&#10;&#9;&#9;&#9;&#125; else if(ch[i] == &#39;/&#39;) &#123;&#10;&#9;&#9;&#9;&#9;ops.push(ch[i]);&#10;&#9;&#9;&#9;&#125; else if(ch[i] == &#39;(&#39;) &#123;&#10;&#9;&#9;&#9;&#9;//do nothing&#10;&#9;&#9;&#9;&#125; else if(ch[i] == &#39;)&#39;) &#123;&#9;//&#22914;&#26524;&#23383;&#31526;&#20026;&#34;)&#34;&#65292;&#24377;&#20986;&#36816;&#31639;&#31526;&#21644;&#25805;&#20316;&#25968;&#65292;&#35745;&#31639;&#32467;&#26524;&#24182;&#21387;&#20837;&#26632;&#10;&#9;&#9;&#9;&#9;char op = ops.pop();&#10;&#9;&#9;&#9;&#9;Double val = vals.pop();&#10;&#9;&#9;&#9;&#9;&#10;&#9;&#9;&#9;&#9;if(op == &#39;+&#39;) &#123;&#10;&#9;&#9;&#9;&#9;&#9;val = vals.pop() + val;&#10;&#9;&#9;&#9;&#9;&#125; else if(op == &#39;-&#39;) &#123;&#10;&#9;&#9;&#9;&#9;&#9;val = vals.pop() - val;&#10;&#9;&#9;&#9;&#9;&#125; else if(op == &#39;*&#39;) &#123;&#10;&#9;&#9;&#9;&#9;&#9;val = vals.pop() * val;&#10;&#9;&#9;&#9;&#9;&#125; else if(op == &#39;/&#39;) &#123;&#10;&#9;&#9;&#9;&#9;&#9;val = vals.pop() / val;&#10;&#9;&#9;&#9;&#9;&#125;&#10;&#9;&#9;&#9;&#9;&#10;&#9;&#9;&#9;&#9;vals.push(val);&#10;&#9;&#9;&#9;&#125; else &#123;&#9;//&#23558;&#38500;&#20102;&#36816;&#31639;&#31526;&#21644;&#25324;&#21495;&#30340;&#23383;&#31526;&#65292;&#20316;&#20026;double&#20540;&#21387;&#20837;&#26632;&#10;&#9;&#9;&#9;&#9;vals.push(Double.parseDouble(Character.toString(ch[i])));&#10;&#9;&#9;&#9;&#125;&#10;&#9;&#9;&#125;&#10;&#9;&#9;&#10;&#9;&#9;System.out.println(&#34;&#32467;&#26524;&#26159;&#65306;&#34; + vals.pop());&#10;&#9;&#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -340,11 +331,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/R/" rel="tag">#R</a>
+            <a href="/tags/Java/" rel="tag">#Java</a>
           
-            <a href="/tags/分词/" rel="tag">#分词</a>
-          
-            <a href="/tags/文本挖掘/" rel="tag">#文本挖掘</a>
+            <a href="/tags/算法/" rel="tag">#算法</a>
           
         </div>
       
@@ -353,13 +342,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/03/23/ggplot2-qplot()用法/" rel="next" title="ggplot2-qplot()用法">
+                <i class="fa fa-chevron-left"></i> ggplot2-qplot()用法
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/23/ggplot2-qplot()用法/" rel="prev" title="ggplot2-qplot()用法">
-                ggplot2-qplot()用法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -374,10 +363,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/03/19/文本挖掘—《三体》分词、词云展示/"
-     data-title="文本挖掘—《三体》分词、词云展示"
+        <div class="ds-share flat" data-thread-key="2016/03/23/Dijkstra的双栈算术表达式求值算法/"
+     data-title="Dijkstra的双栈算术表达式求值算法 Java实现"
      data-content=""
-     data-url="http://yoursite.com/2016/03/19/文本挖掘—《三体》分词、词云展示/">
+     data-url="http://yoursite.com/2016/03/23/Dijkstra的双栈算术表达式求值算法/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -404,8 +393,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/19/文本挖掘—《三体》分词、词云展示/"
-           data-title="文本挖掘—《三体》分词、词云展示" data-url="http://yoursite.com/2016/03/19/文本挖掘—《三体》分词、词云展示/">
+      <div class="ds-thread" data-thread-key="2016/03/23/Dijkstra的双栈算术表达式求值算法/"
+           data-title="Dijkstra的双栈算术表达式求值算法 Java实现" data-url="http://yoursite.com/2016/03/23/Dijkstra的双栈算术表达式求值算法/">
       </div>
     
   </div>
@@ -518,7 +507,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分词"><span class="nav-number">2.</span> <span class="nav-text">分词</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加载package"><span class="nav-number">2.1.</span> <span class="nav-text">加载package</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建立分词引擎"><span class="nav-number">2.2.</span> <span class="nav-text">建立分词引擎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文本读取与清洗"><span class="nav-number">2.3.</span> <span class="nav-text">文本读取与清洗</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制词云"><span class="nav-number">3.</span> <span class="nav-text">绘制词云</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加载package-1"><span class="nav-number">3.1.</span> <span class="nav-text">加载package</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置颜色、字体-画图"><span class="nav-number">3.2.</span> <span class="nav-text">设置颜色、字体 画图</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">2.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图解"><span class="nav-number">3.</span> <span class="nav-text">图解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java实现"><span class="nav-number">4.</span> <span class="nav-text">java实现</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
