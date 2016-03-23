@@ -74,7 +74,7 @@
 * 忽略左括号；
 * 在遇到右括号时，弹出一个运算符，弹出">
 <meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Dijkstra.png">
-<meta property="og:updated_time" content="2016-03-23T09:34:05.059Z">
+<meta property="og:updated_time" content="2016-03-23T09:37:03.945Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dijkstra的双栈算术表达式求值算法 Java实现">
 <meta name="twitter:description" content="背景《算法 第四版》中讲栈的时候提到了一个算法，用来完成初级算术运算符的操作，但书中所给的代码有些问题，故自己用Java重新实现了一下这个算法。
@@ -320,7 +320,8 @@
 * 将运算符压入运算符栈；
 * 忽略左括号；
 * 在遇到右括号时，弹出一个运算符，弹出所需数量的操作数，并将运算符和操作数的运算结果压入操作数栈。
-</code></pre><h2 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h2><p>下图为Dijkstra的双栈算术表表达式求值算法的轨迹。</p>
+</code></pre><a id="more"></a>   
+<h2 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h2><p>下图为Dijkstra的双栈算术表表达式求值算法的轨迹。</p>
 <p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Dijkstra.png" alt="id"></p>
 <h2 id="java实现"><a href="#java实现" class="headerlink" title="java实现"></a>java实现</h2><p>这段代码将一个字符串输入后得到计算结果，使用了泛型。简单起见，没有设置其他限制条件，也不允许输入空格。<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">import java.util.Scanner;&#10;import java.util.Stack;&#10;&#10;public class MyEvaluate &#123;&#10;&#9;public static void main(String[] args) &#123;&#10;&#9;&#9;Stack&#60;Character&#62; ops = new Stack&#60;Character&#62;();&#10;&#9;&#9;Stack&#60;Double&#62; vals = new Stack&#60;Double&#62;();&#10;&#9;&#9;&#10;&#9;&#9;Scanner sc = new Scanner(System.in);&#10;&#9;&#9;System.out.println(&#34;&#35831;&#36755;&#20837;&#19968;&#20010;&#34920;&#36798;&#24335;&#65306;&#34;);&#10;&#9;&#9;String s = sc.nextLine();&#10;&#9;&#9;char[] ch = s.toCharArray();&#10;&#9;&#9;sc.close();&#10;&#9;&#9;&#10;&#9;&#9;for(int i = 0; i &#60; ch.length; i++) &#123;&#10;&#9;&#9;&#9;if(ch[i] == &#39;+&#39;) &#123;&#10;&#9;&#9;&#9;&#9;ops.push(ch[i]);&#10;&#9;&#9;&#9;&#125; else if(ch[i] == &#39;-&#39;) &#123;&#10;&#9;&#9;&#9;&#9;ops.push(ch[i]);&#10;&#9;&#9;&#9;&#125; else if(ch[i] == &#39;*&#39;) &#123;&#10;&#9;&#9;&#9;&#9;ops.push(ch[i]);&#10;&#9;&#9;&#9;&#125; else if(ch[i] == &#39;/&#39;) &#123;&#10;&#9;&#9;&#9;&#9;ops.push(ch[i]);&#10;&#9;&#9;&#9;&#125; else if(ch[i] == &#39;(&#39;) &#123;&#10;&#9;&#9;&#9;&#9;//do nothing&#10;&#9;&#9;&#9;&#125; else if(ch[i] == &#39;)&#39;) &#123;&#9;//&#22914;&#26524;&#23383;&#31526;&#20026;&#34;)&#34;&#65292;&#24377;&#20986;&#36816;&#31639;&#31526;&#21644;&#25805;&#20316;&#25968;&#65292;&#35745;&#31639;&#32467;&#26524;&#24182;&#21387;&#20837;&#26632;&#10;&#9;&#9;&#9;&#9;char op = ops.pop();&#10;&#9;&#9;&#9;&#9;Double val = vals.pop();&#10;&#9;&#9;&#9;&#9;&#10;&#9;&#9;&#9;&#9;if(op == &#39;+&#39;) &#123;&#10;&#9;&#9;&#9;&#9;&#9;val = vals.pop() + val;&#10;&#9;&#9;&#9;&#9;&#125; else if(op == &#39;-&#39;) &#123;&#10;&#9;&#9;&#9;&#9;&#9;val = vals.pop() - val;&#10;&#9;&#9;&#9;&#9;&#125; else if(op == &#39;*&#39;) &#123;&#10;&#9;&#9;&#9;&#9;&#9;val = vals.pop() * val;&#10;&#9;&#9;&#9;&#9;&#125; else if(op == &#39;/&#39;) &#123;&#10;&#9;&#9;&#9;&#9;&#9;val = vals.pop() / val;&#10;&#9;&#9;&#9;&#9;&#125;&#10;&#9;&#9;&#9;&#9;&#10;&#9;&#9;&#9;&#9;vals.push(val);&#10;&#9;&#9;&#9;&#125; else &#123;&#9;//&#23558;&#38500;&#20102;&#36816;&#31639;&#31526;&#21644;&#25324;&#21495;&#30340;&#23383;&#31526;&#65292;&#20316;&#20026;double&#20540;&#21387;&#20837;&#26632;&#10;&#9;&#9;&#9;&#9;vals.push(Double.parseDouble(Character.toString(ch[i])));&#10;&#9;&#9;&#9;&#125;&#10;&#9;&#9;&#125;&#10;&#9;&#9;&#10;&#9;&#9;System.out.println(&#34;&#32467;&#26524;&#26159;&#65306;&#34; + vals.pop());&#10;&#9;&#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
 
