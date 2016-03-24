@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Java,算法," />
+  <meta name="keywords" content="R,ggplot2," />
 
 
 
@@ -57,32 +57,37 @@
 
 
 
-<meta name="description" content="背景《算法 第四版》中讲栈的时候提到了一个算法，用来完成初级算术运算符的操作，但书中所给的代码有些问题，故自己用Java重新实现了一下这个算法。
-原理为了方便的实现算法，略去其他的细节，假设表达式是由括号、运算符和操作数（数字）组成。根据以下四种情况从左到右逐个将这些实体送入栈处理：
-* 将操作数压入操作数栈；
-* 将运算符压入运算符栈；
-* 忽略左括号；
-* 在遇到右括号时，弹出一个运算符，弹出">
+<meta name="description" content="简介本文主要对ggplot2的语法和组成部件做一个总结，gglot2的理论基础是图形图层语法。图层语法定义的图由以下几部分组成：
+
+一个默认的数据集和一组从变量到图形属性的映射；
+一个或多个图层，每个都是由一种几何对象、一种统计变换和一种位置调整组成，另外数据集和图形属性映射也是可选的；
+标度，每个图形属性映射都对应一个标度；
+一个坐标系统；
+分面设定。一句话来总结就是一个图形对象就是一个包含数据">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Dijkstra的双栈算术表达式求值算法 Java实现">
-<meta property="og:url" content="http://yoursite.com/2016/03/23/Dijkstra的双栈算术表达式求值算法/index.html">
+<meta property="og:title" content="ggplot2语法突破">
+<meta property="og:url" content="http://yoursite.com/2016/03/24/ggplot2语法突破/index.html">
 <meta property="og:site_name" content="zzanswer的博客">
-<meta property="og:description" content="背景《算法 第四版》中讲栈的时候提到了一个算法，用来完成初级算术运算符的操作，但书中所给的代码有些问题，故自己用Java重新实现了一下这个算法。
-原理为了方便的实现算法，略去其他的细节，假设表达式是由括号、运算符和操作数（数字）组成。根据以下四种情况从左到右逐个将这些实体送入栈处理：
-* 将操作数压入操作数栈；
-* 将运算符压入运算符栈；
-* 忽略左括号；
-* 在遇到右括号时，弹出一个运算符，弹出">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Dijkstra.png">
-<meta property="og:updated_time" content="2016-03-23T09:44:19.040Z">
+<meta property="og:description" content="简介本文主要对ggplot2的语法和组成部件做一个总结，gglot2的理论基础是图形图层语法。图层语法定义的图由以下几部分组成：
+
+一个默认的数据集和一组从变量到图形属性的映射；
+一个或多个图层，每个都是由一种几何对象、一种统计变换和一种位置调整组成，另外数据集和图形属性映射也是可选的；
+标度，每个图形属性映射都对应一个标度；
+一个坐标系统；
+分面设定。一句话来总结就是一个图形对象就是一个包含数据">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/mpg.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/e2.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/ggplot2%E7%BB%98%E5%9B%BE%E8%BF%87%E7%A8%8B%E5%9B%BE%E8%A7%A3.png">
+<meta property="og:updated_time" content="2016-03-24T04:22:26.955Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Dijkstra的双栈算术表达式求值算法 Java实现">
-<meta name="twitter:description" content="背景《算法 第四版》中讲栈的时候提到了一个算法，用来完成初级算术运算符的操作，但书中所给的代码有些问题，故自己用Java重新实现了一下这个算法。
-原理为了方便的实现算法，略去其他的细节，假设表达式是由括号、运算符和操作数（数字）组成。根据以下四种情况从左到右逐个将这些实体送入栈处理：
-* 将操作数压入操作数栈；
-* 将运算符压入运算符栈；
-* 忽略左括号；
-* 在遇到右括号时，弹出一个运算符，弹出">
+<meta name="twitter:title" content="ggplot2语法突破">
+<meta name="twitter:description" content="简介本文主要对ggplot2的语法和组成部件做一个总结，gglot2的理论基础是图形图层语法。图层语法定义的图由以下几部分组成：
+
+一个默认的数据集和一组从变量到图形属性的映射；
+一个或多个图层，每个都是由一种几何对象、一种统计变换和一种位置调整组成，另外数据集和图形属性映射也是可选的；
+标度，每个图形属性映射都对应一个标度；
+一个坐标系统；
+分面设定。一句话来总结就是一个图形对象就是一个包含数据">
 
 
 
@@ -100,7 +105,7 @@
   };
 </script>
 
-  <title> Dijkstra的双栈算术表达式求值算法 Java实现 | zzanswer的博客 </title>
+  <title> ggplot2语法突破 | zzanswer的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -269,7 +274,7 @@
             
             
               
-                Dijkstra的双栈算术表达式求值算法 Java实现
+                ggplot2语法突破
               
             
           </h1>
@@ -281,8 +286,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-23T17:28:36+08:00" content="2016-03-23">
-              2016-03-23
+            <time itemprop="dateCreated" datetime="2016-03-24T10:39:25+08:00" content="2016-03-24">
+              2016-03-24
             </time>
           </span>
 
@@ -295,8 +300,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
+                  <a href="/categories/R语言/" itemprop="url" rel="index">
+                    <span itemprop="name">R语言</span>
                   </a>
                 </span>
 
@@ -311,8 +316,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/23/Dijkstra的双栈算术表达式求值算法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/23/Dijkstra的双栈算术表达式求值算法/" itemprop="commentsCount"></span>
+                <a href="/2016/03/24/ggplot2语法突破/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/24/ggplot2语法突破/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -333,16 +338,28 @@
       
 
       
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>《算法 第四版》中讲栈的时候提到了一个算法，用来完成初级算术运算符的操作，但书中所给的代码有些问题，故自己用Java重新实现了一下这个算法。</p>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>为了方便的实现算法，略去其他的细节，假设表达式是由括号、运算符和操作数（数字）组成。根据以下四种情况<strong>从左到右</strong>逐个将这些实体送入栈处理：</p>
-<pre><code>* 将操作数压入操作数栈；
-* 将运算符压入运算符栈；
-* 忽略左括号；
-* 在遇到右括号时，弹出一个运算符，弹出所需数量的操作数，并将运算符和操作数的运算结果压入操作数栈。
-</code></pre><a id="more"></a>   
-<h2 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h2><p>下图为Dijkstra的双栈算术表表达式求值算法的轨迹。</p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Dijkstra.png" alt="id"></p>
-<h2 id="java实现"><a href="#java实现" class="headerlink" title="java实现"></a>java实现</h2><p>这段代码将一个字符串输入后得到计算结果，使用了泛型。简单起见，没有设置其他限制条件，也不允许输入空格。<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">import java.util.Scanner;&#10;import java.util.Stack;&#10;&#10;public class MyEvaluate &#123;&#10;&#9;public static void main(String[] args) &#123;&#10;&#9;&#9;Stack&#60;Character&#62; ops = new Stack&#60;Character&#62;();&#10;&#9;&#9;Stack&#60;Double&#62; vals = new Stack&#60;Double&#62;();&#10;&#9;&#9;&#10;&#9;&#9;Scanner sc = new Scanner(System.in);&#10;&#9;&#9;System.out.println(&#34;&#35831;&#36755;&#20837;&#19968;&#20010;&#34920;&#36798;&#24335;&#65306;&#34;);&#10;&#9;&#9;String s = sc.nextLine();&#10;&#9;&#9;char[] ch = s.toCharArray();&#10;&#9;&#9;sc.close();&#10;&#9;&#9;&#10;&#9;&#9;for(int i = 0; i &#60; ch.length; i++) &#123;&#10;&#9;&#9;&#9;if(ch[i] == &#39;+&#39;) &#123;&#10;&#9;&#9;&#9;&#9;ops.push(ch[i]);&#10;&#9;&#9;&#9;&#125; else if(ch[i] == &#39;-&#39;) &#123;&#10;&#9;&#9;&#9;&#9;ops.push(ch[i]);&#10;&#9;&#9;&#9;&#125; else if(ch[i] == &#39;*&#39;) &#123;&#10;&#9;&#9;&#9;&#9;ops.push(ch[i]);&#10;&#9;&#9;&#9;&#125; else if(ch[i] == &#39;/&#39;) &#123;&#10;&#9;&#9;&#9;&#9;ops.push(ch[i]);&#10;&#9;&#9;&#9;&#125; else if(ch[i] == &#39;(&#39;) &#123;&#10;&#9;&#9;&#9;&#9;//do nothing&#10;&#9;&#9;&#9;&#125; else if(ch[i] == &#39;)&#39;) &#123;&#9;//&#22914;&#26524;&#23383;&#31526;&#20026;&#34;)&#34;&#65292;&#24377;&#20986;&#36816;&#31639;&#31526;&#21644;&#25805;&#20316;&#25968;&#65292;&#35745;&#31639;&#32467;&#26524;&#24182;&#21387;&#20837;&#26632;&#10;&#9;&#9;&#9;&#9;char op = ops.pop();&#10;&#9;&#9;&#9;&#9;Double val = vals.pop();&#10;&#9;&#9;&#9;&#9;&#10;&#9;&#9;&#9;&#9;if(op == &#39;+&#39;) &#123;&#10;&#9;&#9;&#9;&#9;&#9;val = vals.pop() + val;&#10;&#9;&#9;&#9;&#9;&#125; else if(op == &#39;-&#39;) &#123;&#10;&#9;&#9;&#9;&#9;&#9;val = vals.pop() - val;&#10;&#9;&#9;&#9;&#9;&#125; else if(op == &#39;*&#39;) &#123;&#10;&#9;&#9;&#9;&#9;&#9;val = vals.pop() * val;&#10;&#9;&#9;&#9;&#9;&#125; else if(op == &#39;/&#39;) &#123;&#10;&#9;&#9;&#9;&#9;&#9;val = vals.pop() / val;&#10;&#9;&#9;&#9;&#9;&#125;&#10;&#9;&#9;&#9;&#9;&#10;&#9;&#9;&#9;&#9;vals.push(val);&#10;&#9;&#9;&#9;&#125; else &#123;&#9;//&#23558;&#38500;&#20102;&#36816;&#31639;&#31526;&#21644;&#25324;&#21495;&#30340;&#23383;&#31526;&#65292;&#20316;&#20026;double&#20540;&#21387;&#20837;&#26632;&#10;&#9;&#9;&#9;&#9;vals.push(Double.parseDouble(Character.toString(ch[i])));&#10;&#9;&#9;&#9;&#125;&#10;&#9;&#9;&#125;&#10;&#9;&#9;&#10;&#9;&#9;System.out.println(&#34;&#32467;&#26524;&#26159;&#65306;&#34; + vals.pop());&#10;&#9;&#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>本文主要对ggplot2的语法和组成部件做一个总结，gglot2的理论基础是<strong>图形图层语法</strong>。图层语法定义的图由以下几部分组成：</p>
+<ul>
+<li>一个默认的<strong>数据集</strong>和一组从变量到图形属性的<strong>映射</strong>；</li>
+<li>一个或多个<strong>图层</strong>，每个都是由一种几何对象、一种统计变换和一种位置调整组成，另外数据集和图形属性映射也是可选的；</li>
+<li><strong>标度</strong>，每个图形属性映射都对应一个标度；</li>
+<li>一个<strong>坐标</strong>系统；</li>
+<li><strong>分面</strong>设定。<br>一句话来总结就是一个图形对象就是一个包含<strong>数据</strong>、<strong>映射</strong>、<strong>图层</strong>、<strong>标度</strong>、<strong>坐标</strong>和<strong>分面</strong>的列表。<a id="more"></a>
+<h2 id="绘图举例"><a href="#绘图举例" class="headerlink" title="绘图举例"></a>绘图举例</h2><h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3>选用gglpot2自带的耗油量数据集mpg。下表列出mpg中的前10行数据，cty和hwy分别记录了城市和高速公路驾驶时的耗油量（英里每加仑，mpg），displ表示发动机排量（以升为单位）<br><img src="http://7xs1l0.com1.z0.glb.clouddn.com/mpg.png" alt="id"><h3 id="代码实现及原理解释"><a href="#代码实现及原理解释" class="headerlink" title="代码实现及原理解释"></a>代码实现及原理解释</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(displ, hwy, data = mpg, colour = factor(cyl))&#10;``` &#10;![id](http://7xs1l0.com1.z0.glb.clouddn.com/e1.png)&#10;&#10;&#39318;&#20808;&#65292;ggplot2&#20570;&#30340;&#26159;&#23558;&#22270;&#24418;&#23646;&#24615;&#26144;&#23556;&#20026;&#19968;&#20010;&#21464;&#37327;&#25110;&#24120;&#25968;&#65292;&#22312;&#19978;&#22270;&#20013;&#65292;&#28857;&#30340;&#27700;&#24179;&#20301;&#32622;&#65288;x&#65289;&#26144;&#23556;&#30340;&#26159;&#21464;&#37327;displ&#65292;&#28857;&#30340;&#31446;&#30452;&#20301;&#32622;&#26144;&#23556;&#30340;&#26159;&#21464;&#37327;hwy&#65292;&#21464;&#37327;cyl&#21017;&#26159;&#25511;&#21046;&#28857;&#30340;&#39068;&#33394;&#65292;&#20854;&#20182;&#27809;&#26377;&#25351;&#23450;&#30340;&#27604;&#22914;&#28857;&#30340;&#22823;&#23567;&#21644;&#24418;&#29366;&#21017;&#20351;&#29992;&#30340;&#26159;&#40664;&#35748;&#20540;&#65288;&#24120;&#25968;&#65289;&#12290;&#10;&#10;&#20854;&#27425;&#65292;&#26144;&#23556;&#23436;&#25104;&#21518;&#65292;&#23601;&#38656;&#35201;&#25226;&#37027;&#20123;&#25968;&#20540;&#36716;&#25442;&#20026;&#35745;&#31639;&#26426;&#21487;&#35782;&#21035;&#30340;&#29289;&#29702;&#21333;&#20301;&#65288;&#22914;&#20687;&#32032;&#21644;&#39068;&#33394;&#65289;&#65292;&#36825;&#20010;&#36716;&#25442;&#30340;&#36807;&#31243;&#23601;&#26159;&#26631;&#24230;&#21464;&#25442;&#12290;&#22312;&#19978;&#38754;&#30340;&#20363;&#23376;&#20013;&#65292;&#27700;&#24179;&#20301;&#32622;&#21644;&#31446;&#30452;&#20301;&#32622;&#30452;&#25509;&#23558;&#25968;&#25454;&#30340;&#33539;&#22260;&#26144;&#23556;&#21040;&#22352;&#26631;&#36724;&#30340;&#33539;&#22260;&#20013;&#23601;&#21487;&#20197;&#20102;&#65292;&#32780;&#39068;&#33394;&#38656;&#35201;&#36716;&#25442;&#20026;&#19968;&#20010;&#19977;&#32500;&#30340;&#39068;&#33394;&#31354;&#38388;&#25165;&#33021;&#30830;&#23450;&#39068;&#33394;&#30340;&#20540;&#12290;&#10;&#10;&#26368;&#21518;&#65292;&#28210;&#26579;&#25968;&#25454;&#23601;&#21487;&#20197;&#29983;&#25104;&#33021;&#22312;&#23631;&#24149;&#19978;&#23637;&#31034;&#30340;&#22270;&#24418;&#23545;&#35937;&#20102;&#12290;&#10;&#10;&#19979;&#38754;&#20877;&#30475;&#19968;&#20010;&#31245;&#24494;&#22797;&#26434;&#19968;&#28857;&#30340;&#20363;&#23376;&#12290;&#10;```&#123;r&#125;&#10;qplot(displ, hwy, data = mpg, facets = .~year) + geom_smooth()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/e2.png" alt="id"></p>
+<p>这幅图与上一幅图比较增加了分面，多个图层和统计量。</p>
+<p>分面和图层将原数据切割成多个小数据集，即每个图层的每个分面面板都含有一个小数据集。</p>
+<p>统计量指的是这幅图中增加了一个平滑曲线层，它没有展示元数据，而是展示了<strong>统计变换</strong>后的数据。与上面的步骤相比就加了一个环节：将数据映射到图形属性后，要对其进行统计变换（即处理数据）。</p>
+<p>因为添加了统计变换，所以在进行标度变换时需要添加步骤。标度变换实际上出现在三个地方：标度转换，标度训练和标度映射。</p>
+<ul>
+<li>标度转换在统计变换前面，因此统计量都是基于标度变换后的数据计算的。</li>
+<li>计算完成后，所有分面和图层的数据集中的每个标度都会被“训练”。标度训练将根据所有小数据集里的数据的范围得到<strong>整体</strong>数据的范围。</li>
+<li>最后，标度映射将数据映射到图形属性中。</li>
+</ul>
+<h2 id="ggplot2绘图过程图解"><a href="#ggplot2绘图过程图解" class="headerlink" title="ggplot2绘图过程图解"></a>ggplot2绘图过程图解</h2><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/ggplot2%E7%BB%98%E5%9B%BE%E8%BF%87%E7%A8%8B%E5%9B%BE%E8%A7%A3.png" alt="id"></p>
+<p>每个正方形代表一个图层，本土图展示了一个含有三个图层和三个分面面板的图。除了标度训练部对数据框做变换，其他步骤都对每个小数据集做变换。</p>
 
       
     </div>
@@ -351,9 +368,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Java/" rel="tag">#Java</a>
+            <a href="/tags/R/" rel="tag">#R</a>
           
-            <a href="/tags/算法/" rel="tag">#算法</a>
+            <a href="/tags/ggplot2/" rel="tag">#ggplot2</a>
           
         </div>
       
@@ -362,17 +379,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/23/ggplot2-qplot()用法/" rel="next" title="ggplot2-qplot()用法">
-                <i class="fa fa-chevron-left"></i> ggplot2-qplot()用法
+              <a href="/2016/03/23/Dijkstra的双栈算术表达式求值算法/" rel="next" title="Dijkstra的双栈算术表达式求值算法 Java实现">
+                <i class="fa fa-chevron-left"></i> Dijkstra的双栈算术表达式求值算法 Java实现
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/24/ggplot2语法突破/" rel="prev" title="ggplot2语法突破">
-                ggplot2语法突破 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -387,10 +400,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/03/23/Dijkstra的双栈算术表达式求值算法/"
-     data-title="Dijkstra的双栈算术表达式求值算法 Java实现"
+        <div class="ds-share flat" data-thread-key="2016/03/24/ggplot2语法突破/"
+     data-title="ggplot2语法突破"
      data-content=""
-     data-url="http://yoursite.com/2016/03/23/Dijkstra的双栈算术表达式求值算法/">
+     data-url="http://yoursite.com/2016/03/24/ggplot2语法突破/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -417,8 +430,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/23/Dijkstra的双栈算术表达式求值算法/"
-           data-title="Dijkstra的双栈算术表达式求值算法 Java实现" data-url="http://yoursite.com/2016/03/23/Dijkstra的双栈算术表达式求值算法/">
+      <div class="ds-thread" data-thread-key="2016/03/24/ggplot2语法突破/"
+           data-title="ggplot2语法突破" data-url="http://yoursite.com/2016/03/24/ggplot2语法突破/">
       </div>
     
   </div>
@@ -531,7 +544,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">2.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图解"><span class="nav-number">3.</span> <span class="nav-text">图解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java实现"><span class="nav-number">4.</span> <span class="nav-text">java实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘图举例"><span class="nav-number">2.</span> <span class="nav-text">绘图举例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据集"><span class="nav-number">2.1.</span> <span class="nav-text">数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现及原理解释"><span class="nav-number">2.2.</span> <span class="nav-text">代码实现及原理解释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ggplot2绘图过程图解"><span class="nav-number">3.</span> <span class="nav-text">ggplot2绘图过程图解</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
