@@ -63,7 +63,9 @@
 一个或多个图层，每个都是由一种几何对象、一种统计变换和一种位置调整组成，另外数据集和图形属性映射也是可选的；
 标度，每个图形属性映射都对应一个标度；
 一个坐标系统；
-分面设定。一句话来总结就是一个图形对象就是一个包含数据">
+分面设定。
+
+一句话来总结就是一个图形对象就是一个包含">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ggplot2语法突破">
 <meta property="og:url" content="http://yoursite.com/2016/03/24/ggplot2语法突破/index.html">
@@ -74,12 +76,14 @@
 一个或多个图层，每个都是由一种几何对象、一种统计变换和一种位置调整组成，另外数据集和图形属性映射也是可选的；
 标度，每个图形属性映射都对应一个标度；
 一个坐标系统；
-分面设定。一句话来总结就是一个图形对象就是一个包含数据">
+分面设定。
+
+一句话来总结就是一个图形对象就是一个包含">
 <meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/mpg.png">
 <meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/mpg.png">
 <meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/e2.png">
 <meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/ggplot2%E7%BB%98%E5%9B%BE%E8%BF%87%E7%A8%8B%E5%9B%BE%E8%A7%A3.png">
-<meta property="og:updated_time" content="2016-03-24T05:00:03.197Z">
+<meta property="og:updated_time" content="2016-03-24T05:05:44.815Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ggplot2语法突破">
 <meta name="twitter:description" content="简介本文主要对ggplot2的语法和组成部件做一个总结，gglot2的理论基础是图形图层语法。图层语法定义的图由以下几部分组成：
@@ -88,7 +92,9 @@
 一个或多个图层，每个都是由一种几何对象、一种统计变换和一种位置调整组成，另外数据集和图形属性映射也是可选的；
 标度，每个图形属性映射都对应一个标度；
 一个坐标系统；
-分面设定。一句话来总结就是一个图形对象就是一个包含数据">
+分面设定。
+
+一句话来总结就是一个图形对象就是一个包含">
 
 
 
@@ -345,15 +351,18 @@
 <li>一个或多个<strong>图层</strong>，每个都是由一种几何对象、一种统计变换和一种位置调整组成，另外数据集和图形属性映射也是可选的；</li>
 <li><strong>标度</strong>，每个图形属性映射都对应一个标度；</li>
 <li>一个<strong>坐标</strong>系统；</li>
-<li><strong>分面</strong>设定。<br>一句话来总结就是一个图形对象就是一个包含<strong>数据</strong>、<strong>映射</strong>、<strong>图层</strong>、<strong>标度</strong>、<strong>坐标</strong>和<strong>分面</strong>的列表。<a id="more"></a>
-<h2 id="绘图举例"><a href="#绘图举例" class="headerlink" title="绘图举例"></a>绘图举例</h2><h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3>选用gglpot2自带的耗油量数据集mpg。下表列出mpg中的前10行数据，cty和hwy分别记录了城市和高速公路驾驶时的耗油量（英里每加仑，mpg），displ表示发动机排量（以升为单位）</li>
+<li><strong>分面</strong>设定。</li>
 </ul>
+<p>一句话来总结就是一个图形对象就是一个包含<strong>数据</strong>、<strong>映射</strong>、<strong>图层</strong>、<strong>标度</strong>、<strong>坐标</strong>和<strong>分面</strong>的列表。<br><a id="more"></a></p>
+<h2 id="绘图举例"><a href="#绘图举例" class="headerlink" title="绘图举例"></a>绘图举例</h2><h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><p>选用gglpot2自带的耗油量数据集mpg。下表列出mpg中的前10行数据，cty和hwy分别记录了城市和高速公路驾驶时的耗油量（英里每加仑，mpg），displ表示发动机排量（以升为单位）</p>
 <p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/mpg.png" alt="id"></p>
 <h3 id="代码实现及原理解释"><a href="#代码实现及原理解释" class="headerlink" title="代码实现及原理解释"></a>代码实现及原理解释</h3><pre><code>qplot(displ, hwy, data = mpg, colour = factor(cyl))
 </code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/mpg.png" alt="id"><br>首先，ggplot2做的是将图形属性映射为一个变量或常数，在上图中，点的水平位置（x）映射的是变量displ，点的竖直位置映射的是变量hwy，变量cyl则是控制点的颜色，其他没有指定的比如点的大小和形状则使用的是默认值（常数）。</p>
 <p>其次，映射完成后，就需要把那些数值转换为计算机可识别的物理单位（如像素和颜色），这个转换的过程就是标度变换。在上面的例子中，水平位置和竖直位置直接将数据的范围映射到坐标轴的范围中就可以了，而颜色需要转换为一个三维的颜色空间才能确定颜色的值。</p>
 <p>最后，渲染数据就可以生成能在屏幕上展示的图形对象了。</p>
-<p>下面再看一个稍微复杂一点的例子。<br>    qplot(displ, hwy, data = mpg, facets = .~year) + geom_smooth()<br><img src="http://7xs1l0.com1.z0.glb.clouddn.com/e2.png" alt="id"></p>
+<p>下面再看一个稍微复杂一点的例子。</p>
+<pre><code>qplot(displ, hwy, data = mpg, facets = .~year) + geom_smooth()
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/e2.png" alt="id"></p>
 <p>这幅图与上一幅图比较增加了分面，多个图层和统计量。</p>
 <p>分面和图层将原数据切割成多个小数据集，即每个图层的每个分面面板都含有一个小数据集。</p>
 <p>统计量指的是这幅图中增加了一个平滑曲线层，它没有展示元数据，而是展示了<strong>统计变换</strong>后的数据。与上面的步骤相比就加了一个环节：将数据映射到图形属性后，要对其进行统计变换（即处理数据）。</p>
