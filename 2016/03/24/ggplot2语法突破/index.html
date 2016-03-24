@@ -80,10 +80,10 @@
 
 一句话来总结就是一个图形对象就是一个包含">
 <meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/mpg.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/mpg.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/e1.png">
 <meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/e2.png">
 <meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/ggplot2%E7%BB%98%E5%9B%BE%E8%BF%87%E7%A8%8B%E5%9B%BE%E8%A7%A3.png">
-<meta property="og:updated_time" content="2016-03-24T05:05:44.815Z">
+<meta property="og:updated_time" content="2016-03-24T06:48:36.292Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ggplot2语法突破">
 <meta name="twitter:description" content="简介本文主要对ggplot2的语法和组成部件做一个总结，gglot2的理论基础是图形图层语法。图层语法定义的图由以下几部分组成：
@@ -357,7 +357,7 @@
 <h2 id="绘图举例"><a href="#绘图举例" class="headerlink" title="绘图举例"></a>绘图举例</h2><h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><p>选用gglpot2自带的耗油量数据集mpg。下表列出mpg中的前10行数据，cty和hwy分别记录了城市和高速公路驾驶时的耗油量（英里每加仑，mpg），displ表示发动机排量（以升为单位）</p>
 <p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/mpg.png" alt="id"></p>
 <h3 id="代码实现及原理解释"><a href="#代码实现及原理解释" class="headerlink" title="代码实现及原理解释"></a>代码实现及原理解释</h3><pre><code>qplot(displ, hwy, data = mpg, colour = factor(cyl))
-</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/mpg.png" alt="id"><br>首先，ggplot2做的是将图形属性映射为一个变量或常数，在上图中，点的水平位置（x）映射的是变量displ，点的竖直位置映射的是变量hwy，变量cyl则是控制点的颜色，其他没有指定的比如点的大小和形状则使用的是默认值（常数）。</p>
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/e1.png" alt="id"><br>首先，ggplot2做的是将图形属性映射为一个变量或常数，在上图中，点的水平位置（x）映射的是变量displ，点的竖直位置映射的是变量hwy，变量cyl则是控制点的颜色，其他没有指定的比如点的大小和形状则使用的是默认值（常数）。</p>
 <p>其次，映射完成后，就需要把那些数值转换为计算机可识别的物理单位（如像素和颜色），这个转换的过程就是标度变换。在上面的例子中，水平位置和竖直位置直接将数据的范围映射到坐标轴的范围中就可以了，而颜色需要转换为一个三维的颜色空间才能确定颜色的值。</p>
 <p>最后，渲染数据就可以生成能在屏幕上展示的图形对象了。</p>
 <p>下面再看一个稍微复杂一点的例子。</p>
@@ -374,6 +374,7 @@
 </ul>
 <h2 id="ggplot2绘图过程图解"><a href="#ggplot2绘图过程图解" class="headerlink" title="ggplot2绘图过程图解"></a>ggplot2绘图过程图解</h2><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/ggplot2%E7%BB%98%E5%9B%BE%E8%BF%87%E7%A8%8B%E5%9B%BE%E8%A7%A3.png" alt="id"></p>
 <p>每个正方形代表一个图层，本土图展示了一个含有三个图层和三个分面面板的图。除了标度训练部对数据框做变换，其他步骤都对每个小数据集做变换。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1][ggplot2:数据分析与图形艺术]</p>
 
       
     </div>
@@ -558,7 +559,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘图举例"><span class="nav-number">2.</span> <span class="nav-text">绘图举例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据集"><span class="nav-number">2.1.</span> <span class="nav-text">数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现及原理解释"><span class="nav-number">2.2.</span> <span class="nav-text">代码实现及原理解释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ggplot2绘图过程图解"><span class="nav-number">3.</span> <span class="nav-text">ggplot2绘图过程图解</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘图举例"><span class="nav-number">2.</span> <span class="nav-text">绘图举例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据集"><span class="nav-number">2.1.</span> <span class="nav-text">数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现及原理解释"><span class="nav-number">2.2.</span> <span class="nav-text">代码实现及原理解释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ggplot2绘图过程图解"><span class="nav-number">3.</span> <span class="nav-text">ggplot2绘图过程图解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
