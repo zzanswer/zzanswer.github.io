@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="R,ggplot2," />
+  <meta name="keywords" content="Java,算法," />
 
 
 
@@ -57,44 +57,31 @@
 
 
 
-<meta name="description" content="简介本文主要对ggplot2的语法和组成部件做一个总结，gglot2的理论基础是图形图层语法。图层语法定义的图由以下几部分组成：
+<meta name="description" content="背景参考《算法 第四版》用Java实现一份泛型的可迭代的Stack API，这是所有集合类抽象数据类型实现的模板。它将所有元素保存在数组中，并动态调整数组的大小以保持数组大小和栈大小之比小于一个常数。
+优缺点优点
+每项操作的用时都与集合大小无关；
+空间需求总是不超过集合大小乘以一个常数。
 
-一个默认的数据集和一组从变量到图形属性的映射；
-一个或多个图层，每个都是由一种几何对象、一种统计变换和一种位置调整组成，另外数据集和图形属性映射也是可选的；
-标度，每个图形属性映射都对应一个标度；
-一个坐标系统；
-分面设定。
-
-一句话来总结就是一个图形对象就是一个包含">
+缺点缺点在于某些push()和pop()操作会调整数组的大小：这项操作的耗时和栈大小成正比。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ggplot2语法突破">
-<meta property="og:url" content="http://yoursite.com/2016/03/24/ggplot2语法突破/index.html">
+<meta property="og:title" content="能够动态调整数组大小的下压栈 Java实现">
+<meta property="og:url" content="http://yoursite.com/2016/03/28/能够动态调整数组大小的下压栈-Java实现/index.html">
 <meta property="og:site_name" content="zzanswer的博客">
-<meta property="og:description" content="简介本文主要对ggplot2的语法和组成部件做一个总结，gglot2的理论基础是图形图层语法。图层语法定义的图由以下几部分组成：
+<meta property="og:description" content="背景参考《算法 第四版》用Java实现一份泛型的可迭代的Stack API，这是所有集合类抽象数据类型实现的模板。它将所有元素保存在数组中，并动态调整数组的大小以保持数组大小和栈大小之比小于一个常数。
+优缺点优点
+每项操作的用时都与集合大小无关；
+空间需求总是不超过集合大小乘以一个常数。
 
-一个默认的数据集和一组从变量到图形属性的映射；
-一个或多个图层，每个都是由一种几何对象、一种统计变换和一种位置调整组成，另外数据集和图形属性映射也是可选的；
-标度，每个图形属性映射都对应一个标度；
-一个坐标系统；
-分面设定。
-
-一句话来总结就是一个图形对象就是一个包含">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/mpg.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/e1.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/e2.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/ggplot2%E7%BB%98%E5%9B%BE%E8%BF%87%E7%A8%8B%E5%9B%BE%E8%A7%A3.png">
-<meta property="og:updated_time" content="2016-03-24T06:48:36.292Z">
+缺点缺点在于某些push()和pop()操作会调整数组的大小：这项操作的耗时和栈大小成正比。">
+<meta property="og:updated_time" content="2016-03-28T15:23:05.276Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ggplot2语法突破">
-<meta name="twitter:description" content="简介本文主要对ggplot2的语法和组成部件做一个总结，gglot2的理论基础是图形图层语法。图层语法定义的图由以下几部分组成：
+<meta name="twitter:title" content="能够动态调整数组大小的下压栈 Java实现">
+<meta name="twitter:description" content="背景参考《算法 第四版》用Java实现一份泛型的可迭代的Stack API，这是所有集合类抽象数据类型实现的模板。它将所有元素保存在数组中，并动态调整数组的大小以保持数组大小和栈大小之比小于一个常数。
+优缺点优点
+每项操作的用时都与集合大小无关；
+空间需求总是不超过集合大小乘以一个常数。
 
-一个默认的数据集和一组从变量到图形属性的映射；
-一个或多个图层，每个都是由一种几何对象、一种统计变换和一种位置调整组成，另外数据集和图形属性映射也是可选的；
-标度，每个图形属性映射都对应一个标度；
-一个坐标系统；
-分面设定。
-
-一句话来总结就是一个图形对象就是一个包含">
+缺点缺点在于某些push()和pop()操作会调整数组的大小：这项操作的耗时和栈大小成正比。">
 
 
 
@@ -112,7 +99,7 @@
   };
 </script>
 
-  <title> ggplot2语法突破 | zzanswer的博客 </title>
+  <title> 能够动态调整数组大小的下压栈 Java实现 | zzanswer的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -281,7 +268,7 @@
             
             
               
-                ggplot2语法突破
+                能够动态调整数组大小的下压栈 Java实现
               
             
           </h1>
@@ -293,8 +280,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-24T10:39:25+08:00" content="2016-03-24">
-              2016-03-24
+            <time itemprop="dateCreated" datetime="2016-03-28T23:18:26+08:00" content="2016-03-28">
+              2016-03-28
             </time>
           </span>
 
@@ -307,8 +294,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/R语言/" itemprop="url" rel="index">
-                    <span itemprop="name">R语言</span>
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
                   </a>
                 </span>
 
@@ -323,8 +310,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/24/ggplot2语法突破/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/24/ggplot2语法突破/" itemprop="commentsCount"></span>
+                <a href="/2016/03/28/能够动态调整数组大小的下压栈-Java实现/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/28/能够动态调整数组大小的下压栈-Java实现/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -345,37 +332,13 @@
       
 
       
-        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>本文主要对ggplot2的语法和组成部件做一个总结，gglot2的理论基础是<strong>图形图层语法</strong>。图层语法定义的图由以下几部分组成：</p>
-<ul>
-<li>一个默认的<strong>数据集</strong>和一组从变量到图形属性的<strong>映射</strong>；</li>
-<li>一个或多个<strong>图层</strong>，每个都是由一种几何对象、一种统计变换和一种位置调整组成，另外数据集和图形属性映射也是可选的；</li>
-<li><strong>标度</strong>，每个图形属性映射都对应一个标度；</li>
-<li>一个<strong>坐标</strong>系统；</li>
-<li><strong>分面</strong>设定。</li>
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>参考《算法 第四版》用Java实现一份泛型的可迭代的Stack API，这是所有集合类抽象数据类型实现的模板。它将所有元素保存在数组中，并动态调整数组的大小以保持数组大小和栈大小之比小于一个常数。</p>
+<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>每项操作的用时都与集合大小无关；</li>
+<li>空间需求总是不超过集合大小乘以一个常数。</li>
 </ul>
-<p>一句话来总结就是一个图形对象就是一个包含<strong>数据</strong>、<strong>映射</strong>、<strong>图层</strong>、<strong>标度</strong>、<strong>坐标</strong>和<strong>分面</strong>的列表。<br><a id="more"></a></p>
-<h2 id="绘图举例"><a href="#绘图举例" class="headerlink" title="绘图举例"></a>绘图举例</h2><h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><p>选用gglpot2自带的耗油量数据集mpg。下表列出mpg中的前10行数据，cty和hwy分别记录了城市和高速公路驾驶时的耗油量（英里每加仑，mpg），displ表示发动机排量（以升为单位）</p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/mpg.png" alt="id"></p>
-<h3 id="代码实现及原理解释"><a href="#代码实现及原理解释" class="headerlink" title="代码实现及原理解释"></a>代码实现及原理解释</h3><pre><code>qplot(displ, hwy, data = mpg, colour = factor(cyl))
-</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/e1.png" alt="id"><br>首先，ggplot2做的是将图形属性映射为一个变量或常数，在上图中，点的水平位置（x）映射的是变量displ，点的竖直位置映射的是变量hwy，变量cyl则是控制点的颜色，其他没有指定的比如点的大小和形状则使用的是默认值（常数）。</p>
-<p>其次，映射完成后，就需要把那些数值转换为计算机可识别的物理单位（如像素和颜色），这个转换的过程就是标度变换。在上面的例子中，水平位置和竖直位置直接将数据的范围映射到坐标轴的范围中就可以了，而颜色需要转换为一个三维的颜色空间才能确定颜色的值。</p>
-<p>最后，渲染数据就可以生成能在屏幕上展示的图形对象了。</p>
-<p>下面再看一个稍微复杂一点的例子。</p>
-<pre><code>qplot(displ, hwy, data = mpg, facets = .~year) + geom_smooth()
-</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/e2.png" alt="id"></p>
-<p>这幅图与上一幅图比较增加了分面，多个图层和统计量。</p>
-<p>分面和图层将原数据切割成多个小数据集，即每个图层的每个分面面板都含有一个小数据集。</p>
-<p>统计量指的是这幅图中增加了一个平滑曲线层，它没有展示元数据，而是展示了<strong>统计变换</strong>后的数据。与上面的步骤相比就加了一个环节：将数据映射到图形属性后，要对其进行统计变换（即处理数据）。</p>
-<p>因为添加了统计变换，所以在进行标度变换时需要添加步骤。标度变换实际上出现在三个地方：标度转换，标度训练和标度映射。</p>
-<ul>
-<li>标度转换在统计变换前面，因此统计量都是基于标度变换后的数据计算的。</li>
-<li>计算完成后，所有分面和图层的数据集中的每个标度都会被“训练”。标度训练将根据所有小数据集里的数据的范围得到<strong>整体</strong>数据的范围。</li>
-<li>最后，标度映射将数据映射到图形属性中。</li>
-</ul>
-<h2 id="ggplot2绘图过程图解"><a href="#ggplot2绘图过程图解" class="headerlink" title="ggplot2绘图过程图解"></a>ggplot2绘图过程图解</h2><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/ggplot2%E7%BB%98%E5%9B%BE%E8%BF%87%E7%A8%8B%E5%9B%BE%E8%A7%A3.png" alt="id"></p>
-<p>每个正方形代表一个图层，本土图展示了一个含有三个图层和三个分面面板的图。除了标度训练部对数据框做变换，其他步骤都对每个小数据集做变换。</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1][ggplot2:数据分析与图形艺术]</p>
-
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>缺点在于某些push()和pop()操作会调整数组的大小：这项操作的耗时和栈大小成正比。<br><a id="more"></a></p>
+<h2 id="Java实现"><a href="#Java实现" class="headerlink" title="Java实现"></a>Java实现</h2><figure class="highlight"><table><tr><td class="code"><pre><span class="line">import java.util.Iterator;&#10;&#10;public class ResizingArrayStack&#60;Item&#62; implements Iterator&#60;Item&#62; &#123;&#10;&#9;private Item[] a = (Item[]) new Object[1];&#9;&#9;// &#26632;&#20803;&#32032;&#10;&#9;private int N = 0;&#9;&#9;// &#20803;&#32032;&#25968;&#37327;&#10;&#10;&#9;public boolean isEmpty() &#123;&#10;&#9;&#9;return N == 0;&#10;&#9;&#125;&#10;&#10;&#9;public int size() &#123;&#10;&#9;&#9;return N;&#10;&#9;&#125;&#10;&#10;&#9;private void resize(int max) &#123;&#9;&#9;// &#23558;&#26632;&#31227;&#21160;&#21040;&#19968;&#20010;&#22823;&#23567;&#20026;max&#30340;&#26032;&#25968;&#32452;&#10;&#9;&#9;Item[] temp = (Item[]) new Object[max];&#10;&#10;&#9;&#9;for(int i = 0; i &#60; N; i++) &#123;&#10;&#9;&#9;&#9;temp[i] = a[i];&#10;&#9;&#9;&#125;&#10;&#10;&#9;&#9;a = temp;&#10;&#9;&#125;&#10;&#10;&#9;public void push(Item item) &#123;&#9;&#9;//&#23558;&#20803;&#32032;&#28155;&#21152;&#21040;&#26632;&#39030;&#10;&#9;&#9;if(N == a.length) &#123;&#10;&#9;&#9;&#9;resize(2 * a.length);&#10;&#9;&#9;&#125;&#10;&#10;&#9;&#9;a[N++] = item;&#10;&#9;&#125;&#10;&#10;&#9;public Item pop() &#123;&#9;&#9;//&#20174;&#26632;&#39030;&#21024;&#38500;&#20803;&#32032;&#10;&#9;&#9;Item item = a[--N];&#10;&#9;&#9;a[N] = null;&#9;//&#36991;&#20813;&#23545;&#35937;&#28216;&#31163;&#10;&#10;&#9;&#9;if(N &#62; 0 &#38;&#38; N == a.length/4) &#123;&#10;&#9;&#9;&#9;resize(a.length/2);&#10;&#9;&#9;&#125;&#10;&#10;&#9;&#9;return item;&#10;&#9;&#125;&#10;&#10;&#9;public Iterator&#60;Item&#62; Iterator() &#123;&#10;&#9;&#9;return new ResizingArrayIterator();&#10;&#9;&#125;&#10;&#10;&#9;private class ResizingArrayIterator implements Iterator&#60;Item&#62; &#123;&#9;&#9;//&#25903;&#25345;&#21518;&#36827;&#20808;&#20986;&#30340;&#36845;&#20195;&#10;&#9;&#9;private int i = N;&#10;&#10;&#9;&#9;public boolean hasNext() &#123;&#10;&#9;&#9;&#9;return i &#62; 0;&#10;&#9;&#9;&#125;&#10;&#10;&#9;&#9;public Item next() &#123;&#10;&#9;&#9;&#9;return a[--i];&#10;&#9;&#9;&#125;&#10;&#10;&#9;&#9;public void remove() &#123;&#10;&#9;&#9;&#9;// nothing&#10;&#9;&#9;&#125;&#10;&#9;&#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -383,9 +346,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/R/" rel="tag">#R</a>
+            <a href="/tags/Java/" rel="tag">#Java</a>
           
-            <a href="/tags/ggplot2/" rel="tag">#ggplot2</a>
+            <a href="/tags/算法/" rel="tag">#算法</a>
           
         </div>
       
@@ -394,17 +357,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/23/Dijkstra的双栈算术表达式求值算法/" rel="next" title="Dijkstra的双栈算术表达式求值算法 Java实现">
-                <i class="fa fa-chevron-left"></i> Dijkstra的双栈算术表达式求值算法 Java实现
+              <a href="/2016/03/24/ggplot2语法突破/" rel="next" title="ggplot2语法突破">
+                <i class="fa fa-chevron-left"></i> ggplot2语法突破
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/28/能够动态调整数组大小的下压栈-Java实现/" rel="prev" title="能够动态调整数组大小的下压栈 Java实现">
-                能够动态调整数组大小的下压栈 Java实现 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -419,10 +378,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/03/24/ggplot2语法突破/"
-     data-title="ggplot2语法突破"
+        <div class="ds-share flat" data-thread-key="2016/03/28/能够动态调整数组大小的下压栈-Java实现/"
+     data-title="能够动态调整数组大小的下压栈 Java实现"
      data-content=""
-     data-url="http://yoursite.com/2016/03/24/ggplot2语法突破/">
+     data-url="http://yoursite.com/2016/03/28/能够动态调整数组大小的下压栈-Java实现/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -449,8 +408,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/24/ggplot2语法突破/"
-           data-title="ggplot2语法突破" data-url="http://yoursite.com/2016/03/24/ggplot2语法突破/">
+      <div class="ds-thread" data-thread-key="2016/03/28/能够动态调整数组大小的下压栈-Java实现/"
+           data-title="能够动态调整数组大小的下压栈 Java实现" data-url="http://yoursite.com/2016/03/28/能够动态调整数组大小的下压栈-Java实现/">
       </div>
     
   </div>
@@ -563,7 +522,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘图举例"><span class="nav-number">2.</span> <span class="nav-text">绘图举例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据集"><span class="nav-number">2.1.</span> <span class="nav-text">数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现及原理解释"><span class="nav-number">2.2.</span> <span class="nav-text">代码实现及原理解释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ggplot2绘图过程图解"><span class="nav-number">3.</span> <span class="nav-text">ggplot2绘图过程图解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优缺点"><span class="nav-number">2.</span> <span class="nav-text">优缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优点"><span class="nav-number">2.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺点"><span class="nav-number">2.2.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java实现"><span class="nav-number">3.</span> <span class="nav-text">Java实现</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
