@@ -71,7 +71,7 @@
 它可以处理任意类型的数据；
 所需的空间总是和集合的大小成正比；
 操作所需的时间总是和集合的大小无关。">
-<meta property="og:updated_time" content="2016-03-29T07:10:19.784Z">
+<meta property="og:updated_time" content="2016-03-29T07:13:24.076Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="下压堆栈（链表实现） Java实现">
 <meta name="twitter:description" content="优点链表在栈中的使用达到了最优设计的目标。
@@ -334,9 +334,9 @@
 <li>它可以处理任意类型的数据；</li>
 <li>所需的空间总是和集合的大小成正比；</li>
 <li>操作所需的时间总是和集合的大小无关。<a id="more"></a>
-<h2 id="Java实现"><a href="#Java实现" class="headerlink" title="Java实现"></a>Java实现</h2><figure class="highlight"><table><tr><td class="code"><pre><span class="line">public class Stack&#60;Item&#62; &#123;&#10;&#9;private Node first; &#9;// &#26632;&#39030;&#65288;&#26368;&#36817;&#28155;&#21152;&#30340;&#20803;&#32032;&#65289;&#10;&#9;private int N; &#9;&#9;// &#20803;&#32032;&#25968;&#37327;&#10;&#10;&#9;private class Node &#123; &#9;// &#23450;&#20041;&#20102;&#32467;&#28857;&#30340;&#23884;&#22871;&#31867;&#10;&#9;&#9;Item item;&#10;&#9;&#9;Node next;&#10;&#9;&#125;&#10;&#10;&#9;public boolean isEmpty() &#123;&#10;&#9;&#9;return first = null;&#10;&#9;&#125;&#10;&#10;&#9;public int size() &#123;&#10;&#9;&#9;return N;&#10;&#9;&#125;&#10;&#10;&#9;public void push(Item item) &#123; &#9;&#9;//&#21521;&#26632;&#39030;&#28155;&#21152;&#20803;&#32032;&#10;&#9;&#9;Node oldfirst = first;&#10;&#9;&#9;first = new Node();&#10;&#9;&#9;first.item = item;&#10;&#9;&#9;first.next = oldfirst;&#10;&#9;&#9;N++;&#10;&#9;&#125;&#10;&#10;&#9;public Item pop() &#123; &#9;&#9;//&#20174;&#26632;&#39030;&#21024;&#38500;&#20803;&#32032;&#10;&#9;&#9;Item item = first.item;&#10;&#9;&#9;first = first.next;&#10;&#9;&#9;N--;&#10;&#9;&#9;return item;&#10;&#9;&#125;&#10;&#125;</span><br></pre></td></tr></table></figure></li>
+</li>
 </ul>
-
+<h2 id="Java实现"><a href="#Java实现" class="headerlink" title="Java实现"></a>Java实现</h2><figure class="highlight"><table><tr><td class="code"><pre><span class="line">public class Stack&#60;Item&#62; &#123;&#10;&#9;private Node first; &#9;// &#26632;&#39030;&#65288;&#26368;&#36817;&#28155;&#21152;&#30340;&#20803;&#32032;&#65289;&#10;&#9;private int N; &#9;&#9;// &#20803;&#32032;&#25968;&#37327;&#10;&#10;&#9;private class Node &#123; &#9;// &#23450;&#20041;&#20102;&#32467;&#28857;&#30340;&#23884;&#22871;&#31867;&#10;&#9;&#9;Item item;&#10;&#9;&#9;Node next;&#10;&#9;&#125;&#10;&#10;&#9;public boolean isEmpty() &#123;&#10;&#9;&#9;return first = null;&#10;&#9;&#125;&#10;&#10;&#9;public int size() &#123;&#10;&#9;&#9;return N;&#10;&#9;&#125;&#10;&#10;&#9;public void push(Item item) &#123; &#9;&#9;//&#21521;&#26632;&#39030;&#28155;&#21152;&#20803;&#32032;&#10;&#9;&#9;Node oldfirst = first;&#10;&#9;&#9;first = new Node();&#10;&#9;&#9;first.item = item;&#10;&#9;&#9;first.next = oldfirst;&#10;&#9;&#9;N++;&#10;&#9;&#125;&#10;&#10;&#9;public Item pop() &#123; &#9;&#9;//&#20174;&#26632;&#39030;&#21024;&#38500;&#20803;&#32032;&#10;&#9;&#9;Item item = first.item;&#10;&#9;&#9;first = first.next;&#10;&#9;&#9;N--;&#10;&#9;&#9;return item;&#10;&#9;&#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
