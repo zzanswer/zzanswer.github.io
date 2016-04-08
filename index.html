@@ -337,101 +337,15 @@
 
       
         
-          
-            <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>本文主要对ggplot2中图层、几何对象、统计变换和位置调整的工作方式作一些技术说明：如何对它们进行调用和自定义。</p>
+          <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>本文主要对ggplot2中图层、几何对象、统计变换和位置调整的工作方式作一些技术说明：如何对它们进行调用和自定义。</p>
 <h2 id="创建绘图对象"><a href="#创建绘图对象" class="headerlink" title="创建绘图对象"></a>创建绘图对象</h2><p>当我们调用qplot()时，它已经帮我们做了这样一个流程：创建一个图形对象，添加图层并且展示结果。但如果我们想手动创建图形对象，就要用到ggplot()函数。该函数主要有两个参数：数据和图形属性的映射。其余全部参数可查看R帮助文档。举例：数据为diamonds，x为carat，y为price，colour为cut。</p>
 <pre><code>p &lt;- ggplot(diamonds, aes(carat, price, colour = cut))
-</code></pre><p>上面的代码就是创建一个图形对象，在加上图层之前是无法显示图形的。从这行代码可以看出图形对象可以存储到一个变量里，这有个好处就是有利于代码避繁就简。在文章后面会展示这一优点。</p>
-<h2 id="图层"><a href="#图层" class="headerlink" title="图层"></a>图层</h2><p>我们给上面的图形对象添加一个简单的图层，直接添加一个点几何对象。</p>
-<pre><code>p &lt;- p + geom_point()
-</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/pointgeom.png" alt="id"></p>
-<p>因为图形对象可以储存在变量中，我们可以通过<code>summary(p)</code>来查看图形对象的结构。<br>之前说的手动创建对象的好处可以使代码简洁。例如，一组图形可以先用不同的数据来进行初始化，然后加上相同的图层，如果后面想改变图层，只需要修改一个地方即可。下面的例子创建了一个带有半透明深蓝色回归线的图层。</p>
-<pre><code>library(scales)
-bestfit &lt;- geom_smooth(method = &quot;lm&quot;, se = F, colour = alpha(&quot;steelblue&quot;, 0.5), size = 2)
-</code></pre><p>用不同的数据来展示：</p>
-<pre><code>qplot(sleep_rem, sleep_total, data = msleep) + bestfit
-</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/lm1.png" alt="id"></p>
-<pre><code>qplot(awake, brainwt, data = msleep, log = &quot;y&quot;) + bestfit
-</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/lm2.png" alt="id"></p>
-<pre><code>qplot(bodywt, brainwt, data = msleep, log = &quot;xy&quot;) + bestfit
-</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/lm3.png" alt="id"></p>
-<h2 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h2><ul>
-<li>类型必须是一个数据框；</li>
-<li>在更改数据集时，可以任意改变它的值和维数；</li>
-<li>在不使用分面的时候不必设定默认的数据集；</li>
-<li>数据是以副本而不是引用的形式存储到图形对象中的。</li>
-</ul>
-<h2 id="图形属性映射"><a href="#图形属性映射" class="headerlink" title="图形属性映射"></a>图形属性映射</h2><p>aes()函数用来将数据变量映射到图形中，从而使变量成为可以被感知的图形属性。举个例子：将x坐标映射到weight，y坐标 映射到height，colour映射到age。前两个参数也可以省略。</p>
-<pre><code>aes(x = weight, y = height, colour = age)
-</code></pre><p>注意也可以使用变量的函数值作为参数。</p>
-<pre><code>aes(weight, height, colour = sqrt(age))
-</code></pre><h3 id="图和图层"><a href="#图和图层" class="headerlink" title="图和图层"></a>图和图层</h3><p>举个例子来看图形对象在新图层里进行的扩充或修改。</p>
-<pre><code>p &lt;- ggplot(mtcars, aes(x = mpg, y = wt))
-p + geom_point()
-</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/tc1.png" alt="id"></p>
-<pre><code>p + geom_point(aes(colour = factor(cyl)))
-</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/tc2.png" alt="id"></p>
-<pre><code>p + geom_point(aes(y = disp))
-</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/tc3.png" alt="id"></p>
-<p>具体的添加、修改和删除规则见下表：</p>
-<table>
-<thead>
-<tr>
-<th>操作</th>
-<th>层图形属性</th>
-<th>结果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>添加</td>
-<td>aes(colour = cyl)</td>
-<td>aes(mpg, wt, colour = cyl)</td>
-</tr>
-<tr>
-<td>修改</td>
-<td>aes(y = disp)</td>
-<td>aes(mpg, disp)</td>
-</tr>
-<tr>
-<td>删除</td>
-<td>aes(y = NULL)</td>
-<td>aes(mpg)</td>
-</tr>
-</tbody>
-</table>
-<h3 id="设定和映射"><a href="#设定和映射" class="headerlink" title="设定和映射"></a>设定和映射</h3><p>我们可以在图层的参数里将映射设定为一个单一值，图形属性可以根据观测的不同而变化，但是参数则不行。下面的例子用图层里的colour参数设定了点的颜色为深蓝色：</p>
-<pre><code>p &lt;- ggplot(mtcars, aes(mpg, wt))
-p + geom_point(colour = &quot;darkblue&quot;)
-</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/sd1.png" alt="id"></p>
-<p>下面这个例子将colour映射到”darkblue”颜色。实际上是先创建了一个只含有”darkblue”字符的变量，然后将colour映射到这个新变量。因为这个新变量的值是离散型的，所以默认的颜色标度将用色轮上等间距的颜色，并且此处新变量只有一个值，因此这个颜色就是桃红色。</p>
-<pre><code>p + geom_point(aes(colour = &quot;darkblue&quot;))
-</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/sd2.png" alt="id"></p>
-<h3 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h3><p>在ggplot2里，几何对象可以大致分为个体(individual)几何对象和群组(collective)几何对象两大类。个体几何对象对数据框的每一条数据绘制一个可以区别于其他个体的图形对象。而群组几何对象用来表示多个观测，可以是某个统计摘要的一个结果，或者是几何对象的基础展示。</p>
-<p>图中所有离散型变量的交互作用被设为分组的默认值，通常这样可以正确地给数据分组，但是如果没能正确分组或者图中<strong>没有离散型变量</strong>，那么就需要自定义分组结构，即将group映射到一个在不同的组有不同取值的变量。当现有的单个变量不能够正确地分组，而两个变量的组合可以正确分组时，可以使用interaction()函数。这里可以类比SQL语言的分组语句。</p>
-<p>通常有三种情况是默认分组不能解决的，下文会介绍。在下面的例子中，数据集采用nlme包中的一个简单的纵向数据集Oxboys。该数据记录了26名男孩(Subjiect)在9个不同时期(Occasion)所测定的身高(height)和中心化后的年龄(age)。</p>
-<h4 id="多个分组与单个图形属性"><a href="#多个分组与单个图形属性" class="headerlink" title="多个分组与单个图形属性"></a>多个分组与单个图形属性</h4><p>很多时候，我们都想将数据分成若干组，并用相同的方式对每个组进行渲染。当从总体上来查看数据时，我们通常希望区分每个个体而不是识别他们。这类图形被称为“细面图”(spahetti plot)。</p>
-<p>画出每个男孩的时间序列图，每条线代表一个男孩，指定了Subject为分组变量。代码如下：</p>
-<pre><code>ggplot(Oxboys, aes(age, height, group = Subject)) + geom_line()
-</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/dg1.png" alt="id"></p>
-<p>如果不指定分组变量，就会得到一个无意义的奇怪的折线图：</p>
-<pre><code>ggplot(Oxboys, aes(age, height)) + geom_line()
-</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/dg2.png" alt="id"></p>
-<h4 id="不同图层上的不同分组"><a href="#不同图层上的不同分组" class="headerlink" title="不同图层上的不同分组"></a>不同图层上的不同分组</h4><p>有时我们想根据不同水平的数据整合来对统计汇总信息(summary)进行图形绘制，从而不同的图层可能有不同的分组图形属性，因此，有的图层展示个体水平的数据，而有的图层则展示更大组群的统计信息。</p>
-<p>在前面例子的基础上，假设我们想根据<strong>所有</strong>男孩的年龄和身高在图中添加一条光滑线条。如果还和前面一样的分组方式，则会给<strong>每一个</strong>男孩添加一条光滑线条：</p>
-<pre><code>p + geom_smooth(aes(group = Subject), method = &quot;lm&quot;, se = F)
-</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/xt1.png" alt="id"></p>
-<p>因此，新图层需要的是一个不同的分组图形属性，group = 1，这样所绘出的线条才是基于整体数据的，代码如下：</p>
-<pre><code>p + geom_smooth(aes(group = 1), method = &quot;lm&quot;, size = 2, se = F)
-</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/xt2.png" alt="id"></p>
-<h4 id="修改默认分组"><a href="#修改默认分组" class="headerlink" title="修改默认分组"></a>修改默认分组</h4><p>如果图像中含有离散型变量，而你却想绘制连接所有分组的线条，那么你可以采取绘制交互作用图、轮廓图以及平行坐标图时所用的策略。这里以绘制各个测量时期(Occasion)身高(height)的线箱图为例，这里就没必要设定组图形属性，因为Occasion是一个离散型变量，默认的分组变量就是Occasion。</p>
-<pre><code>boysbox &lt;- ggplot(Oxboys, aes(Occasion, height)) + geom_boxplot()
-</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/mr1.png" alt="id"></p>
-<p>如果要在上面的基础上添加个体轨迹，则就要用<code>aes(group = Subject)</code>修改第一层的默认分组：</p>
-<pre><code>boysbox + geom_line(aes(group = Subject), colour = &quot;#3366FF&quot;)
-</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/mr2.png" alt="id"></p>
-<h3 id=""><a href="#" class="headerlink" title=" "></a> </h3>
-          
+</code></pre><p>上面的代码就是创建一个图形对象，在加上图层之前是无法显示图形的。从这行代码可以看出图形对象可以存储到一个变量里，这有个好处就是有利于代码避繁就简。在文章后面会展示这一优点。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/06/ggplot2用图层构建图像/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -471,8 +385,8 @@ p + geom_point(colour = &quot;darkblue&quot;)
             
               
                 
-                <a class="post-title-link" href="/2016/03/29/下压堆栈（链表实现）-Java实现/" itemprop="url">
-                  支持泛型和迭代的背包、队列和栈的链表实现 Java实现
+                <a class="post-title-link" href="/2016/03/29/支持泛型和迭代的背包、队列和栈的链表实现/" itemprop="url">
+                  支持泛型和迭代的背包、队列和栈的链表实现
                 </a>
               
             
@@ -515,8 +429,8 @@ p + geom_point(colour = &quot;darkblue&quot;)
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/29/下压堆栈（链表实现）-Java实现/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/29/下压堆栈（链表实现）-Java实现/" itemprop="commentsCount"></span>
+                <a href="/2016/03/29/支持泛型和迭代的背包、队列和栈的链表实现/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/29/支持泛型和迭代的背包、队列和栈的链表实现/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -545,7 +459,7 @@ p + geom_point(colour = &quot;darkblue&quot;)
 <li>操作所需的时间总是和集合的大小无关。</li>
 </ul>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/29/下压堆栈（链表实现）-Java实现/#more" rel="contents">
+            <a class="btn" href="/2016/03/29/支持泛型和迭代的背包、队列和栈的链表实现/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>

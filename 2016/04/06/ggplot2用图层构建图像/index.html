@@ -80,7 +80,7 @@
 <meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/xt2.png">
 <meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/mr1.png">
 <meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/mr2.png">
-<meta property="og:updated_time" content="2016-04-08T03:45:13.710Z">
+<meta property="og:updated_time" content="2016-04-08T08:06:11.457Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ggplot2用图层构建图像">
 <meta name="twitter:description" content="简介本文主要对ggplot2中图层、几何对象、统计变换和位置调整的工作方式作一些技术说明：如何对它们进行调用和自定义。
@@ -338,7 +338,7 @@
         <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>本文主要对ggplot2中图层、几何对象、统计变换和位置调整的工作方式作一些技术说明：如何对它们进行调用和自定义。</p>
 <h2 id="创建绘图对象"><a href="#创建绘图对象" class="headerlink" title="创建绘图对象"></a>创建绘图对象</h2><p>当我们调用qplot()时，它已经帮我们做了这样一个流程：创建一个图形对象，添加图层并且展示结果。但如果我们想手动创建图形对象，就要用到ggplot()函数。该函数主要有两个参数：数据和图形属性的映射。其余全部参数可查看R帮助文档。举例：数据为diamonds，x为carat，y为price，colour为cut。</p>
 <pre><code>p &lt;- ggplot(diamonds, aes(carat, price, colour = cut))
-</code></pre><p>上面的代码就是创建一个图形对象，在加上图层之前是无法显示图形的。从这行代码可以看出图形对象可以存储到一个变量里，这有个好处就是有利于代码避繁就简。在文章后面会展示这一优点。</p>
+</code></pre><p>上面的代码就是创建一个图形对象，在加上图层之前是无法显示图形的。从这行代码可以看出图形对象可以存储到一个变量里，这有个好处就是有利于代码避繁就简。在文章后面会展示这一优点。<br><a id="more"></a></p>
 <h2 id="图层"><a href="#图层" class="headerlink" title="图层"></a>图层</h2><p>我们给上面的图形对象添加一个简单的图层，直接添加一个点几何对象。</p>
 <pre><code>p &lt;- p + geom_point()
 </code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/pointgeom.png" alt="id"></p>
@@ -446,8 +446,8 @@ p + geom_point(colour = &quot;darkblue&quot;)
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/29/下压堆栈（链表实现）-Java实现/" rel="next" title="支持泛型和迭代的背包、队列和栈的链表实现 Java实现">
-                <i class="fa fa-chevron-left"></i> 支持泛型和迭代的背包、队列和栈的链表实现 Java实现
+              <a href="/2016/03/29/支持泛型和迭代的背包、队列和栈的链表实现/" rel="next" title="支持泛型和迭代的背包、队列和栈的链表实现">
+                <i class="fa fa-chevron-left"></i> 支持泛型和迭代的背包、队列和栈的链表实现
               </a>
             
           </div>
