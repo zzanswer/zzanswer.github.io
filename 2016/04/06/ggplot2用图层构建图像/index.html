@@ -57,32 +57,34 @@
 
 
 
-<meta name="description" content="简介qplot()是ggplot2中的一个作图函数，意思是快速作图(quick plot)，qplot()基于图形语法，使得我们可以用简单的、富有表达能力的语句来描述一张图形。下图是qplot()的一些知识概况：">
+<meta name="description" content="简介本文主要对ggplot2中图层、几何对象、统计变换和位置调整的工作方式作一些技术说明：如何对它们进行调用和自定义。
+创建绘图对象当我们调用qplot()时，它已经帮我们做了这样一个流程：创建一个图形对象，添加图层并且展示结果。但如果我们想手动创建图形对象，就要用到ggplot()函数。该函数主要有两个参数：数据和图形属性的映射。其余全部参数可查看R帮助文档。举例：数据为diamonds，x为c">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ggplot2-qplot()用法">
-<meta property="og:url" content="http://yoursite.com/2016/03/23/ggplot2-qplot()用法/index.html">
+<meta property="og:title" content="ggplot2用图层构建图像">
+<meta property="og:url" content="http://yoursite.com/2016/04/06/ggplot2用图层构建图像/index.html">
 <meta property="og:site_name" content="zzanswer的博客">
-<meta property="og:description" content="简介qplot()是ggplot2中的一个作图函数，意思是快速作图(quick plot)，qplot()基于图形语法，使得我们可以用简单的、富有表达能力的语句来描述一张图形。下图是qplot()的一些知识概况：">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/qplot.jpg">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot1.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot2.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot3.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot4.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot5.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot6.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot7.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot8.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot9.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot10.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot11.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot12.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot13.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot14.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot15.png">
-<meta property="og:updated_time" content="2016-03-23T06:43:12.989Z">
+<meta property="og:description" content="简介本文主要对ggplot2中图层、几何对象、统计变换和位置调整的工作方式作一些技术说明：如何对它们进行调用和自定义。
+创建绘图对象当我们调用qplot()时，它已经帮我们做了这样一个流程：创建一个图形对象，添加图层并且展示结果。但如果我们想手动创建图形对象，就要用到ggplot()函数。该函数主要有两个参数：数据和图形属性的映射。其余全部参数可查看R帮助文档。举例：数据为diamonds，x为c">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/pointgeom.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/lm1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/lm2.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/lm3.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/tc1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/tc2.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/tc3.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/sd1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/sd2.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/dg1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/dg2.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/xt1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/xt2.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/mr1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/mr2.png">
+<meta property="og:updated_time" content="2016-04-08T03:45:13.710Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ggplot2-qplot()用法">
-<meta name="twitter:description" content="简介qplot()是ggplot2中的一个作图函数，意思是快速作图(quick plot)，qplot()基于图形语法，使得我们可以用简单的、富有表达能力的语句来描述一张图形。下图是qplot()的一些知识概况：">
+<meta name="twitter:title" content="ggplot2用图层构建图像">
+<meta name="twitter:description" content="简介本文主要对ggplot2中图层、几何对象、统计变换和位置调整的工作方式作一些技术说明：如何对它们进行调用和自定义。
+创建绘图对象当我们调用qplot()时，它已经帮我们做了这样一个流程：创建一个图形对象，添加图层并且展示结果。但如果我们想手动创建图形对象，就要用到ggplot()函数。该函数主要有两个参数：数据和图形属性的映射。其余全部参数可查看R帮助文档。举例：数据为diamonds，x为c">
 
 
 
@@ -100,7 +102,7 @@
   };
 </script>
 
-  <title> ggplot2-qplot()用法 | zzanswer的博客 </title>
+  <title> ggplot2用图层构建图像 | zzanswer的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -269,7 +271,7 @@
             
             
               
-                ggplot2-qplot()用法
+                ggplot2用图层构建图像
               
             
           </h1>
@@ -281,8 +283,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-23T12:19:42+08:00" content="2016-03-23">
-              2016-03-23
+            <time itemprop="dateCreated" datetime="2016-04-06T10:46:47+08:00" content="2016-04-06">
+              2016-04-06
             </time>
           </span>
 
@@ -311,8 +313,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/23/ggplot2-qplot()用法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/23/ggplot2-qplot()用法/" itemprop="commentsCount"></span>
+                <a href="/2016/04/06/ggplot2用图层构建图像/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/06/ggplot2用图层构建图像/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -333,33 +335,99 @@
       
 
       
-        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>qplot()是ggplot2中的一个作图函数，意思是快速作图(quick plot)，qplot()基于图形语法，使得我们可以用简单的、富有表达能力的语句来描述一张图形。下图是qplot()的一些知识概况：<br><a id="more"></a><br><img src="http://7xs1l0.com1.z0.glb.clouddn.com/qplot.jpg" alt="id"></p>
-<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><h3 id="加载package和数据集"><a href="#加载package和数据集" class="headerlink" title="加载package和数据集"></a>加载package和数据集</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line">library(ggplot2)&#10;set.seed(1410) ## &#35753;&#26679;&#26412;&#21487;&#37325;&#22797;&#10;dsmall &#60;- diamonds[sample(nrow(diamonds), 100), ] ##&#20351;&#29992;ggplot2&#20013;&#30340;diamonds&#25968;&#25454;&#38598;</span><br></pre></td></tr></table></figure>
-<h3 id="基本参数绘图"><a href="#基本参数绘图" class="headerlink" title="基本参数绘图"></a>基本参数绘图</h3><p>qplot()有三个基本的参数是x,y,data,分别表示x坐标，y坐标和数据集。默认绘制散点图，展示砖石价格和重量的关系。<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, price, data = diamonds)</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot1.png" alt="id"></p>
-<h3 id="变量的函数"><a href="#变量的函数" class="headerlink" title="变量的函数"></a>变量的函数</h3><p>qplot()可以直接将变量的函数作为绘图的参数。<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(log(carat), log(price), data = diamonds)</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot2.png" alt="id"><br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, x * y * z, data = diamonds)</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot3.png" alt="id"></p>
-<h2 id="图形属性"><a href="#图形属性" class="headerlink" title="图形属性"></a>图形属性</h2><p>qplot()中有个非常重要的概念：<strong>变量映射</strong>，指的是将数据的取值映射到该图形属性的有效取值上，比如颜色、大小和形状等是图形属性的具体化，用qplot()就可以将数据集中的数据映射到图形属性。除此之外，也可以用I()函数来手动设定。</p>
-<h3 id="自动设定"><a href="#自动设定" class="headerlink" title="自动设定"></a>自动设定</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, price, data = dsmall, colour = color) ## &#23558;color&#21464;&#37327;&#26144;&#23556;&#21040;&#28857;&#30340;&#39068;&#33394;</span><br></pre></td></tr></table></figure>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot4.png" alt="id"><br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, price, data = dsmall, shape = cut) ## &#23558;cut&#21464;&#37327;&#26144;&#23556;&#21040;&#28857;&#30340;&#24418;&#29366;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot5.png" alt="id"></p>
-<h3 id="手动设定"><a href="#手动设定" class="headerlink" title="手动设定"></a>手动设定</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, price, data = diamonds, alpha = I(1/10)) ## alpha&#25351;&#36879;&#26126;&#24230;</span><br></pre></td></tr></table></figure>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot6.png" alt="id"><br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, price, data = diamonds, alpha = I(1/100)) ## &#20998;&#27597;&#34920;&#31034;&#32463;&#36807;&#22810;&#23569;&#27425;&#37325;&#21472;&#39068;&#33394;&#21464;&#24471;&#19981;&#36879;&#26126;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot7.png" alt="id"><br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, price, data = diamonds, alpha = I(1/200)) ## &#35266;&#23519;&#22823;&#37096;&#20998;&#28857;&#22312;&#21738;&#37324;&#37325;&#21472;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot8.png" alt="id"></p>
-<h2 id="几何对象"><a href="#几何对象" class="headerlink" title="几何对象"></a>几何对象</h2><p>qplot()除了绘制散点图之外，通过改变几何对象，几乎可以画出任何一种类型的图形。具体的分类可以参考文章最上方的思维导图。这里直接上代码：<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, price, data = dsmall, geom = c(&#34;point&#34;, &#34;smooth&#34;)) ## &#25311;&#21512;&#24179;&#28369;&#26354;&#32447;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot9.png" alt="id"><br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(color, price / carat, data = diamonds, geom = &#34;jitter&#34;, alpha = I(1/50)) ## &#25200;&#21160;&#28857;&#22270;&#65292;&#21487;&#25913;&#21464;&#36879;&#26126;&#24230;&#26469;&#35266;&#23519;&#20197;&#39068;&#33394;&#20026;&#26465;&#20214;&#30340;&#30742;&#30707;&#27599;&#20811;&#25289;&#20215;&#26684;&#30340;&#20998;&#24067;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot10.png" alt="id"><br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, data = diamonds, geom = &#34;density&#34;, colour = color) ## &#23494;&#24230;&#26354;&#32447;&#22270;&#65292;&#21152;&#19978;&#39068;&#33394;&#30340;&#22270;&#24418;&#26144;&#23556;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot11.png" alt="id"><br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, data = diamonds, geom = &#34;histogram&#34;, binwidth = 0.1, fill = color) ## &#30452;&#26041;&#22270;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot12.png" alt="id"><br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(color, data = diamonds, geom = &#34;bar&#34;) ## &#26465;&#24418;&#22270;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot13.png" alt="id"></p>
-<h2 id="分面"><a href="#分面" class="headerlink" title="分面"></a>分面</h2><p>分面不同于图形属性，简单的说就是将不同属性的图分别画出来，在一张大图中有若干的小图，不同的小图之间来进行比较。下面举一个直方图的例子：<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, data = diamonds, facets = color ~ ., geom = &#34;histogram&#34;, binwidth = 0.1, xlim = c(0, 3)) ## binwidth&#20026;&#32452;&#36317;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot14.png" alt="id"></p>
-<h2 id="外观"><a href="#外观" class="headerlink" title="外观"></a>外观</h2><p>qplot()中有一些控制图形外观的参数，比如坐标轴区间，标签文字等。直接举个例子：<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, price, data = dsmall,&#10;      xlab = &#34;Price ($)&#34;, ylab = &#34;Weight (carats)&#34;,&#10;      main = &#34;Price-weight relationship&#34;&#10;      )</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot15.png" alt="id"></p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1][ggplot2:数据分析与图形艺术]</p>
-
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>本文主要对ggplot2中图层、几何对象、统计变换和位置调整的工作方式作一些技术说明：如何对它们进行调用和自定义。</p>
+<h2 id="创建绘图对象"><a href="#创建绘图对象" class="headerlink" title="创建绘图对象"></a>创建绘图对象</h2><p>当我们调用qplot()时，它已经帮我们做了这样一个流程：创建一个图形对象，添加图层并且展示结果。但如果我们想手动创建图形对象，就要用到ggplot()函数。该函数主要有两个参数：数据和图形属性的映射。其余全部参数可查看R帮助文档。举例：数据为diamonds，x为carat，y为price，colour为cut。</p>
+<pre><code>p &lt;- ggplot(diamonds, aes(carat, price, colour = cut))
+</code></pre><p>上面的代码就是创建一个图形对象，在加上图层之前是无法显示图形的。从这行代码可以看出图形对象可以存储到一个变量里，这有个好处就是有利于代码避繁就简。在文章后面会展示这一优点。</p>
+<h2 id="图层"><a href="#图层" class="headerlink" title="图层"></a>图层</h2><p>我们给上面的图形对象添加一个简单的图层，直接添加一个点几何对象。</p>
+<pre><code>p &lt;- p + geom_point()
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/pointgeom.png" alt="id"></p>
+<p>因为图形对象可以储存在变量中，我们可以通过<code>summary(p)</code>来查看图形对象的结构。<br>之前说的手动创建对象的好处可以使代码简洁。例如，一组图形可以先用不同的数据来进行初始化，然后加上相同的图层，如果后面想改变图层，只需要修改一个地方即可。下面的例子创建了一个带有半透明深蓝色回归线的图层。</p>
+<pre><code>library(scales)
+bestfit &lt;- geom_smooth(method = &quot;lm&quot;, se = F, colour = alpha(&quot;steelblue&quot;, 0.5), size = 2)
+</code></pre><p>用不同的数据来展示：</p>
+<pre><code>qplot(sleep_rem, sleep_total, data = msleep) + bestfit
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/lm1.png" alt="id"></p>
+<pre><code>qplot(awake, brainwt, data = msleep, log = &quot;y&quot;) + bestfit
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/lm2.png" alt="id"></p>
+<pre><code>qplot(bodywt, brainwt, data = msleep, log = &quot;xy&quot;) + bestfit
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/lm3.png" alt="id"></p>
+<h2 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h2><ul>
+<li>类型必须是一个数据框；</li>
+<li>在更改数据集时，可以任意改变它的值和维数；</li>
+<li>在不使用分面的时候不必设定默认的数据集；</li>
+<li>数据是以副本而不是引用的形式存储到图形对象中的。</li>
+</ul>
+<h2 id="图形属性映射"><a href="#图形属性映射" class="headerlink" title="图形属性映射"></a>图形属性映射</h2><p>aes()函数用来将数据变量映射到图形中，从而使变量成为可以被感知的图形属性。举个例子：将x坐标映射到weight，y坐标 映射到height，colour映射到age。前两个参数也可以省略。</p>
+<pre><code>aes(x = weight, y = height, colour = age)
+</code></pre><p>注意也可以使用变量的函数值作为参数。</p>
+<pre><code>aes(weight, height, colour = sqrt(age))
+</code></pre><h3 id="图和图层"><a href="#图和图层" class="headerlink" title="图和图层"></a>图和图层</h3><p>举个例子来看图形对象在新图层里进行的扩充或修改。</p>
+<pre><code>p &lt;- ggplot(mtcars, aes(x = mpg, y = wt))
+p + geom_point()
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/tc1.png" alt="id"></p>
+<pre><code>p + geom_point(aes(colour = factor(cyl)))
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/tc2.png" alt="id"></p>
+<pre><code>p + geom_point(aes(y = disp))
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/tc3.png" alt="id"></p>
+<p>具体的添加、修改和删除规则见下表：</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>层图形属性</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>添加</td>
+<td>aes(colour = cyl)</td>
+<td>aes(mpg, wt, colour = cyl)</td>
+</tr>
+<tr>
+<td>修改</td>
+<td>aes(y = disp)</td>
+<td>aes(mpg, disp)</td>
+</tr>
+<tr>
+<td>删除</td>
+<td>aes(y = NULL)</td>
+<td>aes(mpg)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="设定和映射"><a href="#设定和映射" class="headerlink" title="设定和映射"></a>设定和映射</h3><p>我们可以在图层的参数里将映射设定为一个单一值，图形属性可以根据观测的不同而变化，但是参数则不行。下面的例子用图层里的colour参数设定了点的颜色为深蓝色：</p>
+<pre><code>p &lt;- ggplot(mtcars, aes(mpg, wt))
+p + geom_point(colour = &quot;darkblue&quot;)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/sd1.png" alt="id"></p>
+<p>下面这个例子将colour映射到”darkblue”颜色。实际上是先创建了一个只含有”darkblue”字符的变量，然后将colour映射到这个新变量。因为这个新变量的值是离散型的，所以默认的颜色标度将用色轮上等间距的颜色，并且此处新变量只有一个值，因此这个颜色就是桃红色。</p>
+<pre><code>p + geom_point(aes(colour = &quot;darkblue&quot;))
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/sd2.png" alt="id"></p>
+<h3 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h3><p>在ggplot2里，几何对象可以大致分为个体(individual)几何对象和群组(collective)几何对象两大类。个体几何对象对数据框的每一条数据绘制一个可以区别于其他个体的图形对象。而群组几何对象用来表示多个观测，可以是某个统计摘要的一个结果，或者是几何对象的基础展示。</p>
+<p>图中所有离散型变量的交互作用被设为分组的默认值，通常这样可以正确地给数据分组，但是如果没能正确分组或者图中<strong>没有离散型变量</strong>，那么就需要自定义分组结构，即将group映射到一个在不同的组有不同取值的变量。当现有的单个变量不能够正确地分组，而两个变量的组合可以正确分组时，可以使用interaction()函数。这里可以类比SQL语言的分组语句。</p>
+<p>通常有三种情况是默认分组不能解决的，下文会介绍。在下面的例子中，数据集采用nlme包中的一个简单的纵向数据集Oxboys。该数据记录了26名男孩(Subjiect)在9个不同时期(Occasion)所测定的身高(height)和中心化后的年龄(age)。</p>
+<h4 id="多个分组与单个图形属性"><a href="#多个分组与单个图形属性" class="headerlink" title="多个分组与单个图形属性"></a>多个分组与单个图形属性</h4><p>很多时候，我们都想将数据分成若干组，并用相同的方式对每个组进行渲染。当从总体上来查看数据时，我们通常希望区分每个个体而不是识别他们。这类图形被称为“细面图”(spahetti plot)。</p>
+<p>画出每个男孩的时间序列图，每条线代表一个男孩，指定了Subject为分组变量。代码如下：</p>
+<pre><code>ggplot(Oxboys, aes(age, height, group = Subject)) + geom_line()
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/dg1.png" alt="id"></p>
+<p>如果不指定分组变量，就会得到一个无意义的奇怪的折线图：</p>
+<pre><code>ggplot(Oxboys, aes(age, height)) + geom_line()
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/dg2.png" alt="id"></p>
+<h4 id="不同图层上的不同分组"><a href="#不同图层上的不同分组" class="headerlink" title="不同图层上的不同分组"></a>不同图层上的不同分组</h4><p>有时我们想根据不同水平的数据整合来对统计汇总信息(summary)进行图形绘制，从而不同的图层可能有不同的分组图形属性，因此，有的图层展示个体水平的数据，而有的图层则展示更大组群的统计信息。</p>
+<p>在前面例子的基础上，假设我们想根据<strong>所有</strong>男孩的年龄和身高在图中添加一条光滑线条。如果还和前面一样的分组方式，则会给<strong>每一个</strong>男孩添加一条光滑线条：</p>
+<pre><code>p + geom_smooth(aes(group = Subject), method = &quot;lm&quot;, se = F)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/xt1.png" alt="id"></p>
+<p>因此，新图层需要的是一个不同的分组图形属性，group = 1，这样所绘出的线条才是基于整体数据的，代码如下：</p>
+<pre><code>p + geom_smooth(aes(group = 1), method = &quot;lm&quot;, size = 2, se = F)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/xt2.png" alt="id"></p>
+<h4 id="修改默认分组"><a href="#修改默认分组" class="headerlink" title="修改默认分组"></a>修改默认分组</h4><p>如果图像中含有离散型变量，而你却想绘制连接所有分组的线条，那么你可以采取绘制交互作用图、轮廓图以及平行坐标图时所用的策略。这里以绘制各个测量时期(Occasion)身高(height)的线箱图为例，这里就没必要设定组图形属性，因为Occasion是一个离散型变量，默认的分组变量就是Occasion。</p>
+<pre><code>boysbox &lt;- ggplot(Oxboys, aes(Occasion, height)) + geom_boxplot()
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/mr1.png" alt="id"></p>
+<p>如果要在上面的基础上添加个体轨迹，则就要用<code>aes(group = Subject)</code>修改第一层的默认分组：</p>
+<pre><code>boysbox + geom_line(aes(group = Subject), colour = &quot;#3366FF&quot;)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/mr2.png" alt="id"></p>
+<h3 id=""><a href="#" class="headerlink" title=" "></a> </h3>
       
     </div>
 
@@ -378,17 +446,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/19/文本挖掘—《三体》分词、词云展示/" rel="next" title="文本挖掘—《三体》分词、词云展示">
-                <i class="fa fa-chevron-left"></i> 文本挖掘—《三体》分词、词云展示
+              <a href="/2016/03/29/下压堆栈（链表实现）-Java实现/" rel="next" title="支持泛型和迭代的背包、队列和栈的链表实现 Java实现">
+                <i class="fa fa-chevron-left"></i> 支持泛型和迭代的背包、队列和栈的链表实现 Java实现
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/23/Dijkstra的双栈算术表达式求值算法/" rel="prev" title="Dijkstra的双栈算术表达式求值算法 Java实现">
-                Dijkstra的双栈算术表达式求值算法 Java实现 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -403,10 +467,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/03/23/ggplot2-qplot()用法/"
-     data-title="ggplot2-qplot()用法"
+        <div class="ds-share flat" data-thread-key="2016/04/06/ggplot2用图层构建图像/"
+     data-title="ggplot2用图层构建图像"
      data-content=""
-     data-url="http://yoursite.com/2016/03/23/ggplot2-qplot()用法/">
+     data-url="http://yoursite.com/2016/04/06/ggplot2用图层构建图像/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -433,8 +497,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/23/ggplot2-qplot()用法/"
-           data-title="ggplot2-qplot()用法" data-url="http://yoursite.com/2016/03/23/ggplot2-qplot()用法/">
+      <div class="ds-thread" data-thread-key="2016/04/06/ggplot2用图层构建图像/"
+           data-title="ggplot2用图层构建图像" data-url="http://yoursite.com/2016/04/06/ggplot2用图层构建图像/">
       </div>
     
   </div>
@@ -547,7 +611,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本用法"><span class="nav-number">2.</span> <span class="nav-text">基本用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加载package和数据集"><span class="nav-number">2.1.</span> <span class="nav-text">加载package和数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本参数绘图"><span class="nav-number">2.2.</span> <span class="nav-text">基本参数绘图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量的函数"><span class="nav-number">2.3.</span> <span class="nav-text">变量的函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图形属性"><span class="nav-number">3.</span> <span class="nav-text">图形属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自动设定"><span class="nav-number">3.1.</span> <span class="nav-text">自动设定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#手动设定"><span class="nav-number">3.2.</span> <span class="nav-text">手动设定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#几何对象"><span class="nav-number">4.</span> <span class="nav-text">几何对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分面"><span class="nav-number">5.</span> <span class="nav-text">分面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#外观"><span class="nav-number">6.</span> <span class="nav-text">外观</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">7.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建绘图对象"><span class="nav-number">2.</span> <span class="nav-text">创建绘图对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图层"><span class="nav-number">3.</span> <span class="nav-text">图层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据"><span class="nav-number">4.</span> <span class="nav-text">数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图形属性映射"><span class="nav-number">5.</span> <span class="nav-text">图形属性映射</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#图和图层"><span class="nav-number">5.1.</span> <span class="nav-text">图和图层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设定和映射"><span class="nav-number">5.2.</span> <span class="nav-text">设定和映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分组"><span class="nav-number">5.3.</span> <span class="nav-text">分组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#多个分组与单个图形属性"><span class="nav-number">5.3.1.</span> <span class="nav-text">多个分组与单个图形属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不同图层上的不同分组"><span class="nav-number">5.3.2.</span> <span class="nav-text">不同图层上的不同分组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改默认分组"><span class="nav-number">5.3.3.</span> <span class="nav-text">修改默认分组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">5.4.</span> <span class="nav-text"> </span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
