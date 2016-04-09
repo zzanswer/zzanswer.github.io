@@ -80,7 +80,13 @@
 <meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/xt2.png">
 <meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/mr1.png">
 <meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/mr2.png">
-<meta property="og:updated_time" content="2016-04-08T08:06:11.457Z">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/tj.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/zf1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/zf2.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/yc1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/yc2.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/yc3.png">
+<meta property="og:updated_time" content="2016-04-09T03:17:23.970Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ggplot2用图层构建图像">
 <meta name="twitter:description" content="简介本文主要对ggplot2中图层、几何对象、统计变换和位置调整的工作方式作一些技术说明：如何对它们进行调用和自定义。
@@ -427,7 +433,71 @@ p + geom_point(colour = &quot;darkblue&quot;)
 <p>如果要在上面的基础上添加个体轨迹，则就要用<code>aes(group = Subject)</code>修改第一层的默认分组：</p>
 <pre><code>boysbox + geom_line(aes(group = Subject), colour = &quot;#3366FF&quot;)
 </code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/mr2.png" alt="id"></p>
-<h3 id=""><a href="#" class="headerlink" title=" "></a> </h3>
+<h3 id="匹配图形属性和图形对象"><a href="#匹配图形属性和图形对象" class="headerlink" title="匹配图形属性和图形对象"></a>匹配图形属性和图形对象</h3><ul>
+<li>线条和路径遵循差一原则：观测点比线段数目多一。</li>
+<li>对于其他的群组几何对象，如多边形，只有当所有个体的图形属性都相同时，该图形属性才会被使用，否则将使用默认值。</li>
+</ul>
+<h2 id="几何对象"><a href="#几何对象" class="headerlink" title="几何对象"></a>几何对象</h2><ol>
+<li>几何图形对象，简称为geom，它执行着图层的实际渲染，控制着生成的图像类型。</li>
+<li>每个几个对象都有一组它能识别的图形属性和一组绘图所需的值。</li>
+<li>有些几何对象主要在它们参数化的方式上有所不同。</li>
+<li>每一个几何对象都有一个默认的统计变换，并且每一个统计变换都有一个默认的几何对象。</li>
+</ol>
+<h2 id="统计变换"><a href="#统计变换" class="headerlink" title="统计变换"></a>统计变换</h2><p>统计变换，简称为stat，即对数据进行统计变换，它通常以某种方式对数据信息进行汇总。</p>
+<p>统计变换可将输入的数据集看做输入，将返回的数据集作为输出，因此统计变换可以向原数据集中插入新的变量。例如，常被用来绘制直方图的stat_bin统计变换会生成如下变量：</p>
+<ul>
+<li>count,每个组里观测值的数目；</li>
+<li>density，每个组里观测值的密度（占整体的百分数/组宽）；</li>
+<li>x，组的中心位置。</li>
+</ul>
+<p>直方图默认的是将条形高度赋值为观测值的频数(count)，也可以用密度(density)来代替。下面的例子是给出钻石数据集中的克拉(carat)的密度直方图。</p>
+<pre><code>ggplot(diamonds, aes(carat)) + geom_histogram(aes(y = ..density..), binwidth = 0.1)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/tj.png" alt="id"></p>
+<p>生成的变量名必须用<code>..</code>围起来。作用是防止原数据集中过的变量和生成变量重名时造成混淆。具体额生成变量名称在每个统计变换的帮助文档中列出了。类似地，用<code>qplot()</code>生成上图的代码如下：</p>
+<pre><code>qplot(carat, ..density.., data = diamonds, geom = &quot;histogram&quot;, binwidth = 0.1)
+</code></pre><h2 id="位置调整"><a href="#位置调整" class="headerlink" title="位置调整"></a>位置调整</h2><p>位置调整指的是对该层中的元素位置进行微调。一般多用于处理离散型数据。一共有如下五种位置调整参数：</p>
+<ol>
+<li>dodge：避免重叠，并排放置</li>
+<li>fill：堆叠图形元素并将高度标准化为1</li>
+<li>identity：不做任何调整</li>
+<li>jitter：给点添加扰动避免重合</li>
+<li>stack：将图形元素堆叠起来</li>
+</ol>
+<h2 id="整合"><a href="#整合" class="headerlink" title="整合"></a>整合</h2><h3 id="结合几何对象和统计变换"><a href="#结合几何对象和统计变换" class="headerlink" title="结合几何对象和统计变换"></a>结合几何对象和统计变换</h3><p>下面给出例子，都是应用了基于直方图的统计变换，使用了不同的几何对象来展示结果：面积和点。</p>
+<pre><code>d &lt;- ggplot(diamonds, aes(carat)) + xlim(0, 3)
+d + stat_bin(aes(ymax = ..count..), binwidth = 0.1, geom = &quot;area&quot;)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/zf1.png" alt="id"></p>
+<pre><code>d + stat_bin(aes(size = ..density..), binwidth = 0.1, geom = &quot;point&quot;, position = &quot;identity&quot;)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/zf2.png" alt="id"></p>
+<h3 id="显示已计算过的统计量"><a href="#显示已计算过的统计量" class="headerlink" title="显示已计算过的统计量"></a>显示已计算过的统计量</h3><p>如果已经有了汇总过的数据，并且想直接用，可以使用<code>stat_identity()</code>，然后将合适的变量映射到相应的图形属性中。</p>
+<h3 id="改变图形属性和数据集"><a href="#改变图形属性和数据集" class="headerlink" title="改变图形属性和数据集"></a>改变图形属性和数据集</h3><p>ggplot2还有一个功能就是将不同的数据画在不同的图层上。下面举个例子，还是以之前的Oxboys数据集为例。</p>
+<p>首先读入nlme包，然后拟合一个截距和斜率都包含随机效应的混合模型。先建一个图形对象作为模板，然后利用从模型中导出的数据对模型进行渲染。</p>
+<pre><code>require(nlme, quietly = T)
+model &lt;- lme(height ~ age, data = Oxboys, random = ~ 1 + age | Subject)
+oplot &lt;- ggplot(Oxboys, aes(age, height, group = Subject)) + geom_line()
+</code></pre><p>随后，对预测的生长轨迹和实际的生长轨迹进行对比。先建立一个包含所有年龄(age)和个体(subject)组合的网络数据框。接下来把模型的预测值添加到刚刚生成的数据集中，变量名叫height。</p>
+<pre><code>age_grid &lt;- seq(-1, 1, length = 10)
+subjects &lt;- unique(Oxboys$Subject)
+preds &lt;- expand.grid(age = age_grid, Subject = subjects)
+preds$height &lt;- predict(model, preds)
+</code></pre><p>得到预测值后，把它和原始数据绘制到同一张图上。因为在新数据集preds里，使用了与原始数据集Oxboys相同的变量名，并且目的是使用相同的分组图形属性，所以不用修改任何图形属性，只需要修改默认的数据集。</p>
+<pre><code>oplot + geom_line(data = preds, colour = &quot;#3366FF&quot;, size = 0.4)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/yc1.png" alt="id"></p>
+<p>从图形上看，这个模型似乎很好地拟合了该数据更深层次的结构，但是仍然很难分辨细节。我们使用另一种比较模型拟合好坏的方法————观察残差。</p>
+<p>首先把拟合值(fitted)和残差(resid)都添加到原数据里去，然后更新数据集，将默认的y图形属性改为resid，最后对整个数据加一条光滑曲线。</p>
+<pre><code>Oxboys$fitted &lt;- predict(model)
+Oxboys$resid &lt;- with(Oxboys, fitted - height)
+oplot %+% Oxboys + aes(y = resid) + geom_smooth(aes(group = 1))
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/yc2.png" alt="id"></p>
+<p>从图形可以看到残差并不是随机分布的，因此所建立的模型有缺陷。做一个修改，向模型中添加一个二次项，再次计算拟合值和残差并重新绘制残差图。</p>
+<pre><code>model2 &lt;- update(model, height ~ age + I(age ^ 2))
+Oxboys$fitted2 &lt;- predict(model2)
+Oxboys$resid2 &lt;- with(Oxboys, fitted2 - height)
+oplot %+% Oxboys + aes(y = resid2) + geom_smooth(aes(group = 1))
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/yc3.png" alt="id"></p>
+<p>从上面的流畅看出来，我们对图形对象的修是非常容易的。更新了数据并且重新作了两次图却没有再次运行过oplot，这正是ggplot2图层功能所秉承的理念：使得反复拟合和评估模型变得轻松而自然。So easy!</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1][ggplot2:数据分析与图形艺术]</p>
+
       
     </div>
 
@@ -611,7 +681,7 @@ p + geom_point(colour = &quot;darkblue&quot;)
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建绘图对象"><span class="nav-number">2.</span> <span class="nav-text">创建绘图对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图层"><span class="nav-number">3.</span> <span class="nav-text">图层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据"><span class="nav-number">4.</span> <span class="nav-text">数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图形属性映射"><span class="nav-number">5.</span> <span class="nav-text">图形属性映射</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#图和图层"><span class="nav-number">5.1.</span> <span class="nav-text">图和图层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设定和映射"><span class="nav-number">5.2.</span> <span class="nav-text">设定和映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分组"><span class="nav-number">5.3.</span> <span class="nav-text">分组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#多个分组与单个图形属性"><span class="nav-number">5.3.1.</span> <span class="nav-text">多个分组与单个图形属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不同图层上的不同分组"><span class="nav-number">5.3.2.</span> <span class="nav-text">不同图层上的不同分组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改默认分组"><span class="nav-number">5.3.3.</span> <span class="nav-text">修改默认分组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">5.4.</span> <span class="nav-text"> </span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建绘图对象"><span class="nav-number">2.</span> <span class="nav-text">创建绘图对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图层"><span class="nav-number">3.</span> <span class="nav-text">图层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据"><span class="nav-number">4.</span> <span class="nav-text">数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图形属性映射"><span class="nav-number">5.</span> <span class="nav-text">图形属性映射</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#图和图层"><span class="nav-number">5.1.</span> <span class="nav-text">图和图层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设定和映射"><span class="nav-number">5.2.</span> <span class="nav-text">设定和映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分组"><span class="nav-number">5.3.</span> <span class="nav-text">分组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#多个分组与单个图形属性"><span class="nav-number">5.3.1.</span> <span class="nav-text">多个分组与单个图形属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不同图层上的不同分组"><span class="nav-number">5.3.2.</span> <span class="nav-text">不同图层上的不同分组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改默认分组"><span class="nav-number">5.3.3.</span> <span class="nav-text">修改默认分组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#匹配图形属性和图形对象"><span class="nav-number">5.4.</span> <span class="nav-text">匹配图形属性和图形对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#几何对象"><span class="nav-number">6.</span> <span class="nav-text">几何对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#统计变换"><span class="nav-number">7.</span> <span class="nav-text">统计变换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#位置调整"><span class="nav-number">8.</span> <span class="nav-text">位置调整</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整合"><span class="nav-number">9.</span> <span class="nav-text">整合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#结合几何对象和统计变换"><span class="nav-number">9.1.</span> <span class="nav-text">结合几何对象和统计变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显示已计算过的统计量"><span class="nav-number">9.2.</span> <span class="nav-text">显示已计算过的统计量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改变图形属性和数据集"><span class="nav-number">9.3.</span> <span class="nav-text">改变图形属性和数据集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">10.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
