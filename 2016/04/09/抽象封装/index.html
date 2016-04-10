@@ -67,7 +67,7 @@
 <meta property="og:description" content="背景本文为《冒号课堂：编程范式与OOP思想》一书中第七课的思考与总结。
 问题与解答抽象在软件开发中无处不在，你能总结一下吗？抽象贯穿于软件开发的三个最核心的阶段中，分别是分析(analysis)、设计(design)和实现(implementation)。
 其中，分析阶段的主要任务是在理解问题领域(problem domain)和明确业务需求(business requirement)的基础上制定">
-<meta property="og:updated_time" content="2016-04-10T03:06:38.879Z">
+<meta property="og:updated_time" content="2016-04-10T03:12:03.916Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="抽象封装">
 <meta name="twitter:description" content="背景本文为《冒号课堂：编程范式与OOP思想》一书中第七课的思考与总结。
@@ -413,7 +413,7 @@ class Person {
 <li><p>getBirthday返回Date类型的生日，用户可以在调用此方法后直接对生日进行操作，从而破坏了信息隐藏的规则。即如果一个方法返回了一个可变(mutable)域对象(field object)的引用，无异于前门紧闭而后门洞开，解决的方法是用防御性编程，具体的说就是防御性复制(defensive copying)，即返回对象的一个复制品(如果一个域对象中又包含其他可变的对象，简单的按位复制(bitwise copy),也就是所谓的浅拷贝(shallow copy)是不够的，需要其他的复制策略，如深拷贝(deep copy)或迟拷贝(lazy copy))。实现代码：</p>
 <p> public Date getBirthday() {</p>
 <pre><code>return(birthday == null) ? null : new Date(birthday.getTime());
-</code></pre><p> }</p>
+</code></pre><p> } </p>
 </li>
 <li><p>构造器和setBirthday也有信息泄露问题，因为它们都直接将传入参数赋值给了域对象birthday。</p>
 </li>
