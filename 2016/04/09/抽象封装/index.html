@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="ADT,封装,抽象," />
+  <meta name="keywords" content="ADT,OOP,封装,抽象," />
 
 
 
@@ -58,21 +58,21 @@
 
 
 <meta name="description" content="背景本文为《冒号课堂：编程范式与OOP思想》一书中第七课的思考与总结。
-抽象在软件开发中无处不在，你能总结一下吗？抽象贯穿于软件开发的三个最核心的阶段中，分别是分析(analysis)、设计(design)和实现(implementation)。
-其中，分析阶段的主要任务是在理解问题领域(problem domain)和明确业务需求(business requirement)的基础上制定功能规范(">
+问题与解答抽象在软件开发中无处不在，你能总结一下吗？抽象贯穿于软件开发的三个最核心的阶段中，分别是分析(analysis)、设计(design)和实现(implementation)。
+其中，分析阶段的主要任务是在理解问题领域(problem domain)和明确业务需求(business requirement)的基础上制定">
 <meta property="og:type" content="article">
 <meta property="og:title" content="抽象封装">
 <meta property="og:url" content="http://yoursite.com/2016/04/09/抽象封装/index.html">
 <meta property="og:site_name" content="zzanswer的博客">
 <meta property="og:description" content="背景本文为《冒号课堂：编程范式与OOP思想》一书中第七课的思考与总结。
-抽象在软件开发中无处不在，你能总结一下吗？抽象贯穿于软件开发的三个最核心的阶段中，分别是分析(analysis)、设计(design)和实现(implementation)。
-其中，分析阶段的主要任务是在理解问题领域(problem domain)和明确业务需求(business requirement)的基础上制定功能规范(">
-<meta property="og:updated_time" content="2016-04-10T03:01:09.888Z">
+问题与解答抽象在软件开发中无处不在，你能总结一下吗？抽象贯穿于软件开发的三个最核心的阶段中，分别是分析(analysis)、设计(design)和实现(implementation)。
+其中，分析阶段的主要任务是在理解问题领域(problem domain)和明确业务需求(business requirement)的基础上制定">
+<meta property="og:updated_time" content="2016-04-10T03:06:38.879Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="抽象封装">
 <meta name="twitter:description" content="背景本文为《冒号课堂：编程范式与OOP思想》一书中第七课的思考与总结。
-抽象在软件开发中无处不在，你能总结一下吗？抽象贯穿于软件开发的三个最核心的阶段中，分别是分析(analysis)、设计(design)和实现(implementation)。
-其中，分析阶段的主要任务是在理解问题领域(problem domain)和明确业务需求(business requirement)的基础上制定功能规范(">
+问题与解答抽象在软件开发中无处不在，你能总结一下吗？抽象贯穿于软件开发的三个最核心的阶段中，分别是分析(analysis)、设计(design)和实现(implementation)。
+其中，分析阶段的主要任务是在理解问题领域(problem domain)和明确业务需求(business requirement)的基础上制定">
 
 
 
@@ -324,7 +324,7 @@
 
       
         <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>本文为《冒号课堂：编程范式与OOP思想》一书中第七课的思考与总结。</p>
-<h3 id="抽象在软件开发中无处不在，你能总结一下吗？"><a href="#抽象在软件开发中无处不在，你能总结一下吗？" class="headerlink" title="抽象在软件开发中无处不在，你能总结一下吗？"></a>抽象在软件开发中无处不在，你能总结一下吗？</h3><p>抽象贯穿于软件开发的三个最核心的阶段中，分别是分析(analysis)、设计(design)和实现(implementation)。</p>
+<h2 id="问题与解答"><a href="#问题与解答" class="headerlink" title="问题与解答"></a>问题与解答</h2><h3 id="抽象在软件开发中无处不在，你能总结一下吗？"><a href="#抽象在软件开发中无处不在，你能总结一下吗？" class="headerlink" title="抽象在软件开发中无处不在，你能总结一下吗？"></a>抽象在软件开发中无处不在，你能总结一下吗？</h3><p>抽象贯穿于软件开发的三个最核心的阶段中，分别是分析(analysis)、设计(design)和实现(implementation)。</p>
 <p>其中，分析阶段的主要任务是在理解问题领域(problem domain)和明确业务需求(business requirement)的基础上制定功能规范(functional specification)，其对应的是OOA(Object-Oriented Analysis)。设计阶段的主要任务是在分析的基础上制定出实现规范(implementation specification),其对应的是OOD(Object-Oriented Design)。实现阶段则在设计的基础上完成软件编码，其对应的是OOP(Object-Oriented Programming)。</p>
 <p>在这三个阶段中，抽象的程度是依次递减的。分析阶段多采用性质导向式抽象(property-oriented abstraction),通过对系统性质的逻辑描述来制定规范。所谓性质导向的，即关注“是什么”(what)的问题而不是“怎么样”(how)的问题，因此一般不在设计上作任何决定或限制。设计阶段则多采用模型导向式抽象(model-oriented abstraction)，通过构造数学模型来满足系统的性质，从而实现功能规范。实现阶段就是具体到实际编程了，常用两种抽象机制：一种是参数抽象(abstraction by parameterization)，一种是规范抽象(abstraction by specification)。<br><a id="more"></a></p>
 <h3 id="在软件的分析、设计和实现过程中，合理地控制抽象的级别有何重要意义？"><a href="#在软件的分析、设计和实现过程中，合理地控制抽象的级别有何重要意义？" class="headerlink" title="在软件的分析、设计和实现过程中，合理地控制抽象的级别有何重要意义？"></a>在软件的分析、设计和实现过程中，合理地控制抽象的级别有何重要意义？</h3><p>一方面，抽象的程度越高，越接近设计，越远离实现，相应的语言也越高级。</p>
@@ -430,6 +430,8 @@ class Person {
         <div class="post-tags">
           
             <a href="/tags/ADT/" rel="tag">#ADT</a>
+          
+            <a href="/tags/OOP/" rel="tag">#OOP</a>
           
             <a href="/tags/封装/" rel="tag">#封装</a>
           
@@ -556,7 +558,7 @@ class Person {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -607,7 +609,7 @@ class Person {
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#抽象在软件开发中无处不在，你能总结一下吗？"><span class="nav-number">1.1.</span> <span class="nav-text">抽象在软件开发中无处不在，你能总结一下吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在软件的分析、设计和实现过程中，合理地控制抽象的级别有何重要意义？"><span class="nav-number">1.2.</span> <span class="nav-text">在软件的分析、设计和实现过程中，合理地控制抽象的级别有何重要意义？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在软件设计和开发过程中，你是否切实贯彻了规范抽象的原则？"><span class="nav-number">1.3.</span> <span class="nav-text">在软件设计和开发过程中，你是否切实贯彻了规范抽象的原则？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在软件开发中，你是否会合理地运用防御性编程和契约式设计的思想？"><span class="nav-number">1.4.</span> <span class="nav-text">在软件开发中，你是否会合理地运用防御性编程和契约式设计的思想？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#你是如何理解“Programming-to-an-Interface-not-an-Implementation”的？"><span class="nav-number">1.5.</span> <span class="nav-text">你是如何理解“Programming to an Interface,not an Implementation”的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么说数据抽象是OOP的起源？"><span class="nav-number">1.6.</span> <span class="nav-text">为什么说数据抽象是OOP的起源？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#你如何理解文中的一个比方：“基本类型好比单质，抽象数据类型好比化合物，具体数据类型好比混合物”？"><span class="nav-number">1.7.</span> <span class="nav-text">你如何理解文中的一个比方：“基本类型好比单质，抽象数据类型好比化合物，具体数据类型好比混合物”？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请总结一下封装和信息隐藏的原则和注意事项。"><span class="nav-number">1.8.</span> <span class="nav-text">请总结一下封装和信息隐藏的原则和注意事项。</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题与解答"><span class="nav-number">2.</span> <span class="nav-text">问题与解答</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#抽象在软件开发中无处不在，你能总结一下吗？"><span class="nav-number">2.1.</span> <span class="nav-text">抽象在软件开发中无处不在，你能总结一下吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在软件的分析、设计和实现过程中，合理地控制抽象的级别有何重要意义？"><span class="nav-number">2.2.</span> <span class="nav-text">在软件的分析、设计和实现过程中，合理地控制抽象的级别有何重要意义？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在软件设计和开发过程中，你是否切实贯彻了规范抽象的原则？"><span class="nav-number">2.3.</span> <span class="nav-text">在软件设计和开发过程中，你是否切实贯彻了规范抽象的原则？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在软件开发中，你是否会合理地运用防御性编程和契约式设计的思想？"><span class="nav-number">2.4.</span> <span class="nav-text">在软件开发中，你是否会合理地运用防御性编程和契约式设计的思想？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#你是如何理解“Programming-to-an-Interface-not-an-Implementation”的？"><span class="nav-number">2.5.</span> <span class="nav-text">你是如何理解“Programming to an Interface,not an Implementation”的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么说数据抽象是OOP的起源？"><span class="nav-number">2.6.</span> <span class="nav-text">为什么说数据抽象是OOP的起源？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#你如何理解文中的一个比方：“基本类型好比单质，抽象数据类型好比化合物，具体数据类型好比混合物”？"><span class="nav-number">2.7.</span> <span class="nav-text">你如何理解文中的一个比方：“基本类型好比单质，抽象数据类型好比化合物，具体数据类型好比混合物”？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请总结一下封装和信息隐藏的原则和注意事项。"><span class="nav-number">2.8.</span> <span class="nav-text">请总结一下封装和信息隐藏的原则和注意事项。</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
