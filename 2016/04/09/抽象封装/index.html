@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Java,算法," />
+  <meta name="keywords" content="ADT,封装,抽象," />
 
 
 
@@ -57,31 +57,22 @@
 
 
 
-<meta name="description" content="背景参考《算法 第四版》用Java实现一份泛型的可迭代的Stack API，这是所有集合类抽象数据类型实现的模板。它将所有元素保存在数组中，并动态调整数组的大小以保持数组大小和栈大小之比小于一个常数。
-优缺点优点
-每项操作的用时都与集合大小无关；
-空间需求总是不超过集合大小乘以一个常数。
-
-缺点缺点在于某些push()和pop()操作会调整数组的大小：这项操作的耗时和栈大小成正比。">
+<meta name="description" content="背景本文为《冒号课堂：编程范式与OOP思想》一书中第七课的思考与总结。
+抽象在软件开发中无处不在，你能总结一下吗？抽象贯穿于软件开发的三个最核心的阶段中，分别是分析(analysis)、设计(design)和实现(implementation)。
+其中，分析阶段的主要任务是在理解问题领域(problem domain)和明确业务需求(business requirement)的基础上制定功能规范(">
 <meta property="og:type" content="article">
-<meta property="og:title" content="能够动态调整数组大小的下压栈 Java实现">
-<meta property="og:url" content="http://yoursite.com/2016/03/28/能够动态调整数组大小的下压栈-Java实现/index.html">
+<meta property="og:title" content="抽象封装">
+<meta property="og:url" content="http://yoursite.com/2016/04/09/抽象封装/index.html">
 <meta property="og:site_name" content="zzanswer的博客">
-<meta property="og:description" content="背景参考《算法 第四版》用Java实现一份泛型的可迭代的Stack API，这是所有集合类抽象数据类型实现的模板。它将所有元素保存在数组中，并动态调整数组的大小以保持数组大小和栈大小之比小于一个常数。
-优缺点优点
-每项操作的用时都与集合大小无关；
-空间需求总是不超过集合大小乘以一个常数。
-
-缺点缺点在于某些push()和pop()操作会调整数组的大小：这项操作的耗时和栈大小成正比。">
-<meta property="og:updated_time" content="2016-03-28T15:23:05.276Z">
+<meta property="og:description" content="背景本文为《冒号课堂：编程范式与OOP思想》一书中第七课的思考与总结。
+抽象在软件开发中无处不在，你能总结一下吗？抽象贯穿于软件开发的三个最核心的阶段中，分别是分析(analysis)、设计(design)和实现(implementation)。
+其中，分析阶段的主要任务是在理解问题领域(problem domain)和明确业务需求(business requirement)的基础上制定功能规范(">
+<meta property="og:updated_time" content="2016-04-10T03:01:09.888Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="能够动态调整数组大小的下压栈 Java实现">
-<meta name="twitter:description" content="背景参考《算法 第四版》用Java实现一份泛型的可迭代的Stack API，这是所有集合类抽象数据类型实现的模板。它将所有元素保存在数组中，并动态调整数组的大小以保持数组大小和栈大小之比小于一个常数。
-优缺点优点
-每项操作的用时都与集合大小无关；
-空间需求总是不超过集合大小乘以一个常数。
-
-缺点缺点在于某些push()和pop()操作会调整数组的大小：这项操作的耗时和栈大小成正比。">
+<meta name="twitter:title" content="抽象封装">
+<meta name="twitter:description" content="背景本文为《冒号课堂：编程范式与OOP思想》一书中第七课的思考与总结。
+抽象在软件开发中无处不在，你能总结一下吗？抽象贯穿于软件开发的三个最核心的阶段中，分别是分析(analysis)、设计(design)和实现(implementation)。
+其中，分析阶段的主要任务是在理解问题领域(problem domain)和明确业务需求(business requirement)的基础上制定功能规范(">
 
 
 
@@ -99,7 +90,7 @@
   };
 </script>
 
-  <title> 能够动态调整数组大小的下压栈 Java实现 | zzanswer的博客 </title>
+  <title> 抽象封装 | zzanswer的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -268,7 +259,7 @@
             
             
               
-                能够动态调整数组大小的下压栈 Java实现
+                抽象封装
               
             
           </h1>
@@ -280,8 +271,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-28T23:18:26+08:00" content="2016-03-28">
-              2016-03-28
+            <time itemprop="dateCreated" datetime="2016-04-09T21:49:04+08:00" content="2016-04-09">
+              2016-04-09
             </time>
           </span>
 
@@ -294,8 +285,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
+                  <a href="/categories/OOP/" itemprop="url" rel="index">
+                    <span itemprop="name">OOP</span>
                   </a>
                 </span>
 
@@ -310,8 +301,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/28/能够动态调整数组大小的下压栈-Java实现/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/28/能够动态调整数组大小的下压栈-Java实现/" itemprop="commentsCount"></span>
+                <a href="/2016/04/09/抽象封装/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/09/抽象封装/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -332,13 +323,105 @@
       
 
       
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>参考《算法 第四版》用Java实现一份泛型的可迭代的Stack API，这是所有集合类抽象数据类型实现的模板。它将所有元素保存在数组中，并动态调整数组的大小以保持数组大小和栈大小之比小于一个常数。</p>
-<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>每项操作的用时都与集合大小无关；</li>
-<li>空间需求总是不超过集合大小乘以一个常数。</li>
-</ul>
-<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>缺点在于某些push()和pop()操作会调整数组的大小：这项操作的耗时和栈大小成正比。<br><a id="more"></a></p>
-<h2 id="Java实现"><a href="#Java实现" class="headerlink" title="Java实现"></a>Java实现</h2><figure class="highlight"><table><tr><td class="code"><pre><span class="line">import java.util.Iterator;&#10;&#10;public class ResizingArrayStack&#60;Item&#62; implements Iterator&#60;Item&#62; &#123;&#10;&#9;private Item[] a = (Item[]) new Object[1];&#9;&#9;// &#26632;&#20803;&#32032;&#10;&#9;private int N = 0;&#9;&#9;// &#20803;&#32032;&#25968;&#37327;&#10;&#10;&#9;public boolean isEmpty() &#123;&#10;&#9;&#9;return N == 0;&#10;&#9;&#125;&#10;&#10;&#9;public int size() &#123;&#10;&#9;&#9;return N;&#10;&#9;&#125;&#10;&#10;&#9;private void resize(int max) &#123;&#9;&#9;// &#23558;&#26632;&#31227;&#21160;&#21040;&#19968;&#20010;&#22823;&#23567;&#20026;max&#30340;&#26032;&#25968;&#32452;&#10;&#9;&#9;Item[] temp = (Item[]) new Object[max];&#10;&#10;&#9;&#9;for(int i = 0; i &#60; N; i++) &#123;&#10;&#9;&#9;&#9;temp[i] = a[i];&#10;&#9;&#9;&#125;&#10;&#10;&#9;&#9;a = temp;&#10;&#9;&#125;&#10;&#10;&#9;public void push(Item item) &#123;&#9;&#9;//&#23558;&#20803;&#32032;&#28155;&#21152;&#21040;&#26632;&#39030;&#10;&#9;&#9;if(N == a.length) &#123;&#10;&#9;&#9;&#9;resize(2 * a.length);&#10;&#9;&#9;&#125;&#10;&#10;&#9;&#9;a[N++] = item;&#10;&#9;&#125;&#10;&#10;&#9;public Item pop() &#123;&#9;&#9;//&#20174;&#26632;&#39030;&#21024;&#38500;&#20803;&#32032;&#10;&#9;&#9;Item item = a[--N];&#10;&#9;&#9;a[N] = null;&#9;//&#36991;&#20813;&#23545;&#35937;&#28216;&#31163;&#10;&#10;&#9;&#9;if(N &#62; 0 &#38;&#38; N == a.length/4) &#123;&#10;&#9;&#9;&#9;resize(a.length/2);&#10;&#9;&#9;&#125;&#10;&#10;&#9;&#9;return item;&#10;&#9;&#125;&#10;&#10;&#9;public Iterator&#60;Item&#62; Iterator() &#123;&#10;&#9;&#9;return new ResizingArrayIterator();&#10;&#9;&#125;&#10;&#10;&#9;private class ResizingArrayIterator implements Iterator&#60;Item&#62; &#123;&#9;&#9;//&#25903;&#25345;&#21518;&#36827;&#20808;&#20986;&#30340;&#36845;&#20195;&#10;&#9;&#9;private int i = N;&#10;&#10;&#9;&#9;public boolean hasNext() &#123;&#10;&#9;&#9;&#9;return i &#62; 0;&#10;&#9;&#9;&#125;&#10;&#10;&#9;&#9;public Item next() &#123;&#10;&#9;&#9;&#9;return a[--i];&#10;&#9;&#9;&#125;&#10;&#10;&#9;&#9;public void remove() &#123;&#10;&#9;&#9;&#9;// nothing&#10;&#9;&#9;&#125;&#10;&#9;&#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>本文为《冒号课堂：编程范式与OOP思想》一书中第七课的思考与总结。</p>
+<h3 id="抽象在软件开发中无处不在，你能总结一下吗？"><a href="#抽象在软件开发中无处不在，你能总结一下吗？" class="headerlink" title="抽象在软件开发中无处不在，你能总结一下吗？"></a>抽象在软件开发中无处不在，你能总结一下吗？</h3><p>抽象贯穿于软件开发的三个最核心的阶段中，分别是分析(analysis)、设计(design)和实现(implementation)。</p>
+<p>其中，分析阶段的主要任务是在理解问题领域(problem domain)和明确业务需求(business requirement)的基础上制定功能规范(functional specification)，其对应的是OOA(Object-Oriented Analysis)。设计阶段的主要任务是在分析的基础上制定出实现规范(implementation specification),其对应的是OOD(Object-Oriented Design)。实现阶段则在设计的基础上完成软件编码，其对应的是OOP(Object-Oriented Programming)。</p>
+<p>在这三个阶段中，抽象的程度是依次递减的。分析阶段多采用性质导向式抽象(property-oriented abstraction),通过对系统性质的逻辑描述来制定规范。所谓性质导向的，即关注“是什么”(what)的问题而不是“怎么样”(how)的问题，因此一般不在设计上作任何决定或限制。设计阶段则多采用模型导向式抽象(model-oriented abstraction)，通过构造数学模型来满足系统的性质，从而实现功能规范。实现阶段就是具体到实际编程了，常用两种抽象机制：一种是参数抽象(abstraction by parameterization)，一种是规范抽象(abstraction by specification)。<br><a id="more"></a></p>
+<h3 id="在软件的分析、设计和实现过程中，合理地控制抽象的级别有何重要意义？"><a href="#在软件的分析、设计和实现过程中，合理地控制抽象的级别有何重要意义？" class="headerlink" title="在软件的分析、设计和实现过程中，合理地控制抽象的级别有何重要意义？"></a>在软件的分析、设计和实现过程中，合理地控制抽象的级别有何重要意义？</h3><p>一方面，抽象的程度越高，越接近设计，越远离实现，相应的语言也越高级。</p>
+<p>另一方面，越是抽象的模型越不受细节的羁绊，因而稳定性越高，普适性越强，可重用性越高。</p>
+<h3 id="在软件设计和开发过程中，你是否切实贯彻了规范抽象的原则？"><a href="#在软件设计和开发过程中，你是否切实贯彻了规范抽象的原则？" class="headerlink" title="在软件设计和开发过程中，你是否切实贯彻了规范抽象的原则？"></a>在软件设计和开发过程中，你是否切实贯彻了规范抽象的原则？</h3><p>规范抽象指的是通过规范使代码的功能与实现相分离的方法。一般是通过注释文档来实现的。合格的文档注释中至少应包括先验条件(precondition)和后验条件(postcondition)，分别指代码执行前后必须满足的条件。前者是客户方的承诺，后者是服务方的承诺。有了文档注释或规范说明(specification)的函数成为使用者与实现者之间的一种契约————只要使用者提出满足规范的请求，实现者一定提供满足规范的服务。</p>
+<p>补充一下规范抽象的三个好处：</p>
+<ol>
+<li>文档性(documentation)————使用者不必阅读代码便可了解其用途并能正确使用它们，既省时又准确；</li>
+<li>局部性(locality)————无论是阅读还是改写某个抽象的实现代码，都不必参考其他抽象的实现代码；</li>
+<li>可变性(modifiability)————实现者在遵循规范的前提下可自由修改实现代码，不用担心影响客户代码。</li>
+</ol>
+<p>以及两个缺点：一是自然语言不够精确；二是不能确保规范的实施。</p>
+<h3 id="在软件开发中，你是否会合理地运用防御性编程和契约式设计的思想？"><a href="#在软件开发中，你是否会合理地运用防御性编程和契约式设计的思想？" class="headerlink" title="在软件开发中，你是否会合理地运用防御性编程和契约式设计的思想？"></a>在软件开发中，你是否会合理地运用防御性编程和契约式设计的思想？</h3><p>契约式设计通过编程语言的内建支持（如Eiffel、D等直接支持）或引入形式规范语言（如Java利用JML结合一些工具来实现以及关键字assert），对规范抽象的语义契约实施保障，以增强软件的规范性和可靠性。这种做法强调职责分明，认为先验条件是客户方的责任，服务方无须过问。</p>
+<p>防御性编程的目的是维护代码安全。如果遭遇意外的输入，一般会尽可能地作妥善处理，必要时返回错误代码或抛出异常转交客户处理。这种方法有一些缺陷：</p>
+<ol>
+<li>导致先验条件的重复检查。比如函数已经检查了一个参数的合法性，当该函数把该参数继续传入另一个函数时，后者很可能还要对它检查一遍，既增加了代码冗余，又降低了程序效率。</li>
+<li>增加了程序员的负担和困惑。主要集中在选择处理非法参数的方案上。</li>
+<li>职责不明。究竟谁该保证先验条件的成立？出了问题该追究谁的责任？怎么追究？</li>
+</ol>
+<p>这两者是互补关系。契约式设计重在保证软件的正确性，适合应付不应当发生的异常————代码中的缺陷；防御性编程重在保证软件的健壮性，适合应付无法防止或难以预测的异常。</p>
+<h3 id="你是如何理解“Programming-to-an-Interface-not-an-Implementation”的？"><a href="#你是如何理解“Programming-to-an-Interface-not-an-Implementation”的？" class="headerlink" title="你是如何理解“Programming to an Interface,not an Implementation”的？"></a>你是如何理解“Programming to an Interface,not an Implementation”的？</h3><p>“以接口为中心”是就设计而言的，强调对象的行为，以及对象之间的交互，不关心底层的实现细节，更多地属于OOD的范畴；“以数据为中心”是就实现而言的，强调算法对数据的依赖性，以别于过程式编程“以算法为中心”的风格，更多地属于OOP的范畴。</p>
+<p>对于开发者而言，接口与实现的分离，有利于开发时间的分离及开发人员的分离。开发时间的分离指的是：开发人员可以推迟在不同实现方式中作最后抉择。开发人员的分离指的是：代码的修改和维护不局限于原作者。</p>
+<p>对于使用者而言，可以摆脱数据类型的底层细节，通过高层接口来操纵对象，保证了客户代码的可读性和稳定性。</p>
+<h3 id="为什么说数据抽象是OOP的起源？"><a href="#为什么说数据抽象是OOP的起源？" class="headerlink" title="为什么说数据抽象是OOP的起源？"></a>为什么说数据抽象是OOP的起源？</h3><p>是封装、继承和多态的基础。</p>
+<h3 id="你如何理解文中的一个比方：“基本类型好比单质，抽象数据类型好比化合物，具体数据类型好比混合物”？"><a href="#你如何理解文中的一个比方：“基本类型好比单质，抽象数据类型好比化合物，具体数据类型好比混合物”？" class="headerlink" title="你如何理解文中的一个比方：“基本类型好比单质，抽象数据类型好比化合物，具体数据类型好比混合物”？"></a>你如何理解文中的一个比方：“基本类型好比单质，抽象数据类型好比化合物，具体数据类型好比混合物”？</h3><p>抽象是有多层级别的，是相对的。</p>
+<p>基本类型相对上级而言是具体的，以整型为例，整型的抽象之处在于：用户不须知道一个整数的底层究竟是如何表示的，以及整数运算时如何实现的，只须知道整型代表着数学概念上的整数，支持加减乘除等运算即可。</p>
+<p>抽象数据类型的目的就是为了把自定义的复合类型当作基本类型来看待和运用。</p>
+<p>具体数据类型兼而有之，它只是单纯地作数据存取用，基本不具备行为能力，依赖于其具体实现。（例如通信地址：省、市、街道、邮编）</p>
+<h3 id="请总结一下封装和信息隐藏的原则和注意事项。"><a href="#请总结一下封装和信息隐藏的原则和注意事项。" class="headerlink" title="请总结一下封装和信息隐藏的原则和注意事项。"></a>请总结一下封装和信息隐藏的原则和注意事项。</h3><p>信息隐藏是一种原则，而封装是实现这种原则的一种方式。广义的封装仅仅是一种打包，即package或bundle，是密封的但可以是透明的。狭义的封装是在打包的基础上加上访问控制(access control),以实现信息隐藏。给一段Java代码来分析：</p>
+<pre><code>import java.util.Date;
+import java.util.Calendar;
+
+class Person {
+    private Date birthday;     // 生日
+    private boolean sex;     // 性别。true代表男，false代表女
+    private Person[] children;        // 所有子女
+
+    public Person(Date birthday, boolean sex) {
+        this.birthday = birthday;
+        this.sex = sex;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public Person[] getChildren() {
+        return children;
+    }
+
+    public void setChildren(Person[] children) {
+        this.children = children;
+    }
+
+    public boolean getSex() {
+        return sex;
+    }
+
+    public void setSex(boolean sex) { 
+        this.sex = sex;
+    }
+
+    /** 计算年龄，负数表示未知*/
+    public int computeAge() {
+        if (birthday == null) {
+            return -1;
+        }
+
+        Calendar dob = Calendar.getInstance();
+        dob.setTime(birthday);
+        Calendar now = Calendar.getInstance();
+        int age = now.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+
+        if (now.get(Calendar.DAY_OF_YEAR) &lt; dob.get(Calendar.DAY_OF_YEAR)) {
+            --age;
+        }
+
+        return age;
+    }
+}
+</code></pre><ol>
+<li><p>getBirthday返回Date类型的生日，用户可以在调用此方法后直接对生日进行操作，从而破坏了信息隐藏的规则。即如果一个方法返回了一个可变(mutable)域对象(field object)的引用，无异于前门紧闭而后门洞开，解决的方法是用防御性编程，具体的说就是防御性复制(defensive copying)，即返回对象的一个复制品(如果一个域对象中又包含其他可变的对象，简单的按位复制(bitwise copy),也就是所谓的浅拷贝(shallow copy)是不够的，需要其他的复制策略，如深拷贝(deep copy)或迟拷贝(lazy copy))。实现代码：</p>
+<p> public Date getBirthday() {</p>
+<pre><code>return(birthday == null) ? null : new Date(birthday.getTime());
+</code></pre><p> }</p>
+</li>
+<li><p>构造器和setBirthday也有信息泄露问题，因为它们都直接将传入参数赋值给了域对象birthday。</p>
+</li>
+<li>getChildren可以作优化，提供getChild(int index)等接口，来使实现代码因较少复制数组而高效，客户代码因较少操作数组而简洁，甚至连getChildren都不是必需的了。birthday要复制的根本原因在于：它语法上是引用对象，语义上确实值对象。我们关心的是它的值(value)而非它的同一性(identity)，不希望不同的对象因共享相同的引用而导致同步修改，故有必要通过值拷贝来预防。child则正相反，它是独立的的对象，重要的是同一性而非值，不需要也不应该进行值拷贝。</li>
+<li>一个建议：getSex换成isMale和isFemale。</li>
+<li>方法computeAge的问题在于命名，暴露了实现方式，因该为getAge。信息隐藏中的信息不仅仅是数据结构，还包括实现方式和策略。</li>
+</ol>
+
       
     </div>
 
@@ -346,9 +429,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Java/" rel="tag">#Java</a>
+            <a href="/tags/ADT/" rel="tag">#ADT</a>
           
-            <a href="/tags/算法/" rel="tag">#算法</a>
+            <a href="/tags/封装/" rel="tag">#封装</a>
+          
+            <a href="/tags/抽象/" rel="tag">#抽象</a>
           
         </div>
       
@@ -357,17 +442,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/24/ggplot2语法突破/" rel="next" title="ggplot2语法突破">
-                <i class="fa fa-chevron-left"></i> ggplot2语法突破
+              <a href="/2016/04/06/ggplot2用图层构建图像/" rel="next" title="ggplot2用图层构建图像">
+                <i class="fa fa-chevron-left"></i> ggplot2用图层构建图像
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/29/支持泛型和迭代的背包、队列和栈的链表实现/" rel="prev" title="支持泛型和迭代的背包、队列和栈的链表实现">
-                支持泛型和迭代的背包、队列和栈的链表实现 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -382,10 +463,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/03/28/能够动态调整数组大小的下压栈-Java实现/"
-     data-title="能够动态调整数组大小的下压栈 Java实现"
+        <div class="ds-share flat" data-thread-key="2016/04/09/抽象封装/"
+     data-title="抽象封装"
      data-content=""
-     data-url="http://yoursite.com/2016/03/28/能够动态调整数组大小的下压栈-Java实现/">
+     data-url="http://yoursite.com/2016/04/09/抽象封装/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -412,8 +493,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/28/能够动态调整数组大小的下压栈-Java实现/"
-           data-title="能够动态调整数组大小的下压栈 Java实现" data-url="http://yoursite.com/2016/03/28/能够动态调整数组大小的下压栈-Java实现/">
+      <div class="ds-thread" data-thread-key="2016/04/09/抽象封装/"
+           data-title="抽象封装" data-url="http://yoursite.com/2016/04/09/抽象封装/">
       </div>
     
   </div>
@@ -526,7 +607,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优缺点"><span class="nav-number">2.</span> <span class="nav-text">优缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优点"><span class="nav-number">2.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺点"><span class="nav-number">2.2.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java实现"><span class="nav-number">3.</span> <span class="nav-text">Java实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#抽象在软件开发中无处不在，你能总结一下吗？"><span class="nav-number">1.1.</span> <span class="nav-text">抽象在软件开发中无处不在，你能总结一下吗？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在软件的分析、设计和实现过程中，合理地控制抽象的级别有何重要意义？"><span class="nav-number">1.2.</span> <span class="nav-text">在软件的分析、设计和实现过程中，合理地控制抽象的级别有何重要意义？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在软件设计和开发过程中，你是否切实贯彻了规范抽象的原则？"><span class="nav-number">1.3.</span> <span class="nav-text">在软件设计和开发过程中，你是否切实贯彻了规范抽象的原则？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在软件开发中，你是否会合理地运用防御性编程和契约式设计的思想？"><span class="nav-number">1.4.</span> <span class="nav-text">在软件开发中，你是否会合理地运用防御性编程和契约式设计的思想？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#你是如何理解“Programming-to-an-Interface-not-an-Implementation”的？"><span class="nav-number">1.5.</span> <span class="nav-text">你是如何理解“Programming to an Interface,not an Implementation”的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么说数据抽象是OOP的起源？"><span class="nav-number">1.6.</span> <span class="nav-text">为什么说数据抽象是OOP的起源？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#你如何理解文中的一个比方：“基本类型好比单质，抽象数据类型好比化合物，具体数据类型好比混合物”？"><span class="nav-number">1.7.</span> <span class="nav-text">你如何理解文中的一个比方：“基本类型好比单质，抽象数据类型好比化合物，具体数据类型好比混合物”？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请总结一下封装和信息隐藏的原则和注意事项。"><span class="nav-number">1.8.</span> <span class="nav-text">请总结一下封装和信息隐藏的原则和注意事项。</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
