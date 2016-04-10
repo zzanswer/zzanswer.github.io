@@ -67,7 +67,7 @@
 <meta property="og:description" content="背景本文为《冒号课堂：编程范式与OOP思想》一书中第七课的思考与总结。
 问题与解答抽象在软件开发中无处不在，你能总结一下吗？抽象贯穿于软件开发的三个最核心的阶段中，分别是分析(analysis)、设计(design)和实现(implementation)。
 其中，分析阶段的主要任务是在理解问题领域(problem domain)和明确业务需求(business requirement)的基础上制定">
-<meta property="og:updated_time" content="2016-04-10T03:12:03.916Z">
+<meta property="og:updated_time" content="2016-04-10T03:14:27.690Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="抽象封装">
 <meta name="twitter:description" content="背景本文为《冒号课堂：编程范式与OOP思想》一书中第七课的思考与总结。
@@ -410,13 +410,14 @@ class Person {
     }
 }
 </code></pre><ol>
-<li><p>getBirthday返回Date类型的生日，用户可以在调用此方法后直接对生日进行操作，从而破坏了信息隐藏的规则。即如果一个方法返回了一个可变(mutable)域对象(field object)的引用，无异于前门紧闭而后门洞开，解决的方法是用防御性编程，具体的说就是防御性复制(defensive copying)，即返回对象的一个复制品(如果一个域对象中又包含其他可变的对象，简单的按位复制(bitwise copy),也就是所谓的浅拷贝(shallow copy)是不够的，需要其他的复制策略，如深拷贝(deep copy)或迟拷贝(lazy copy))。实现代码：</p>
-<p> public Date getBirthday() {</p>
-<pre><code>return(birthday == null) ? null : new Date(birthday.getTime());
-</code></pre><p> } </p>
-</li>
-<li><p>构造器和setBirthday也有信息泄露问题，因为它们都直接将传入参数赋值给了域对象birthday。</p>
-</li>
+<li>getBirthday返回Date类型的生日，用户可以在调用此方法后直接对生日进行操作，从而破坏了信息隐藏的规则。即如果一个方法返回了一个可变(mutable)域对象(field object)的引用，无异于前门紧闭而后门洞开，解决的方法是用防御性编程，具体的说就是防御性复制(defensive copying)，即返回对象的一个复制品(如果一个域对象中又包含其他可变的对象，简单的按位复制(bitwise copy),也就是所谓的浅拷贝(shallow copy)是不够的，需要其他的复制策略，如深拷贝(deep copy)或迟拷贝(lazy copy))。实现代码：</li>
+</ol>
+<pre><code class="{java}">public Date getBirthday() {
+    return(birthday == null) ? null : new Date(birthday.getTime());
+}
+</code></pre>
+<ol>
+<li>构造器和setBirthday也有信息泄露问题，因为它们都直接将传入参数赋值给了域对象birthday。</li>
 <li>getChildren可以作优化，提供getChild(int index)等接口，来使实现代码因较少复制数组而高效，客户代码因较少操作数组而简洁，甚至连getChildren都不是必需的了。birthday要复制的根本原因在于：它语法上是引用对象，语义上确实值对象。我们关心的是它的值(value)而非它的同一性(identity)，不希望不同的对象因共享相同的引用而导致同步修改，故有必要通过值拷贝来预防。child则正相反，它是独立的的对象，重要的是同一性而非值，不需要也不应该进行值拷贝。</li>
 <li>一个建议：getSex换成isMale和isFemale。</li>
 <li>方法computeAge的问题在于命名，暴露了实现方式，因该为getAge。信息隐藏中的信息不仅仅是数据结构，还包括实现方式和策略。</li>
