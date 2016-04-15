@@ -1,0 +1,1092 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="R,ggplot2," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="简介本文列举了ggplot2中大量几何对象和统计变换的一部分，并把它们按照用途进行了细分。
+图层叠加的总体策略总体来说，图层有三种用途：
+
+用以展示数据本身。这一层不必多说，几乎在每一幅图形上都会出现。
+用以展示数据的统计摘要。我们可以从数据摘要中进一步理解数据，同时对模型作出评价。本层通常绘制在数据层之上。
+用以添加额外的元数据（metadata）、上下文信息和注解。元数据层展示了背景的上下文信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ggplot2工具箱">
+<meta property="og:url" content="http://yoursite.com/2016/04/12/ggplot2工具箱/index.html">
+<meta property="og:site_name" content="zzanswer的博客">
+<meta property="og:description" content="简介本文列举了ggplot2中大量几何对象和统计变换的一部分，并把它们按照用途进行了细分。
+图层叠加的总体策略总体来说，图层有三种用途：
+
+用以展示数据本身。这一层不必多说，几乎在每一幅图形上都会出现。
+用以展示数据的统计摘要。我们可以从数据摘要中进一步理解数据，同时对模型作出评价。本层通常绘制在数据层之上。
+用以添加额外的元数据（metadata）、上下文信息和注解。元数据层展示了背景的上下文信">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/point.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/bar.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/line.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/area.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/path.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/text.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/tile.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/polygon.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/5.4.1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/5.4.2.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/5.4.3.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/xxt1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/xxt2.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/jitter1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/jitter2.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/density1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/density2.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/p1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/p2.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/p3.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/p4.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/p5.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/p6.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/td1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/td2.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/jit1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/jit2.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/jit3.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/jit4.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/d1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/d2.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/d3.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/d4.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/d5.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/d6.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/d7.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/map1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/map2.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/map3.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/zz1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/zz2.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/zz3.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/zz4.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/zz5.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/zz6.png">
+<meta property="og:updated_time" content="2016-04-14T02:14:17.555Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ggplot2工具箱">
+<meta name="twitter:description" content="简介本文列举了ggplot2中大量几何对象和统计变换的一部分，并把它们按照用途进行了细分。
+图层叠加的总体策略总体来说，图层有三种用途：
+
+用以展示数据本身。这一层不必多说，几乎在每一幅图形上都会出现。
+用以展示数据的统计摘要。我们可以从数据摘要中进一步理解数据，同时对模型作出评价。本层通常绘制在数据层之上。
+用以添加额外的元数据（metadata）、上下文信息和注解。元数据层展示了背景的上下文信">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> ggplot2工具箱 | zzanswer的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?44ddfc9b0cc56445f07e8c0c54e1b40f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">zzanswer的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'cv_CXT8pifMcXfAEzUW2SfW','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ggplot2工具箱
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-12T09:23:00+08:00" content="2016-04-12">
+              2016-04-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/R语言/" itemprop="url" rel="index">
+                    <span itemprop="name">R语言</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/12/ggplot2工具箱/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/12/ggplot2工具箱/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>本文列举了ggplot2中大量几何对象和统计变换的一部分，并把它们按照用途进行了细分。</p>
+<h2 id="图层叠加的总体策略"><a href="#图层叠加的总体策略" class="headerlink" title="图层叠加的总体策略"></a>图层叠加的总体策略</h2><p>总体来说，图层有三种用途：</p>
+<ol>
+<li>用以展示<strong>数据本身</strong>。这一层不必多说，几乎在每一幅图形上都会出现。</li>
+<li>用以展示数据的统计<strong>摘要</strong>。我们可以从数据摘要中进一步理解数据，同时对模型作出评价。本层通常绘制在数据层之上。</li>
+<li>用以添加额外的<strong>元数据（metadata）</strong>、上下文信息和注解。元数据层展示了背景的上下文信息，也可以为原始数据赋予有现实意义的注解。<a id="more"></a>
+</li>
+</ol>
+<h2 id="基本图形类型"><a href="#基本图形类型" class="headerlink" title="基本图形类型"></a>基本图形类型</h2><p>以下几何对象是ggplot2图形的基本组成部分。每种几何对象自身即可独立构建图形，同时也可以组合起来构建更复杂的几何对象。</p>
+<ul>
+<li>geom_area()用于绘制面积图(area plot)，即在普通线图的基础上，依y轴方向填充了下方面积的图形。对于分组数据，各组将按照依次堆积的方式绘制。</li>
+<li>geom_bar(stat = “identity”)绘制条形图。需要指定stat = “identity”，因为默认的统计变换将自动对“值”进行计数。而统计变换identity将保持数据不变。</li>
+<li>geom_line()绘制线条图。</li>
+<li>geom_point()绘制散点图。</li>
+<li>geom_path()绘制路径图。</li>
+<li>geom_polygon()绘制多边形，即填充后的路径。</li>
+<li>geom_text()可在指定点处添加标签。它是这些几何对象中唯一一个需要额外图形属性的：它需要指定label参数。</li>
+<li>geom_tile()用来绘制色深图(image plot)或水平图(level plot)。所有的瓦片(tile)构成了对平面的一个规则切分，且往往将fill图形属性映射至另一个变量。</li>
+</ul>
+<p>代码举例：</p>
+<pre><code>df &lt;- data.frame(x = c(3, 1, 5), y = c(2, 4, 6), label = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;))
+p &lt;- ggplot(df, aes(x, y)) + xlab(NULL) + ylab(NULL)
+p + geom_point() + labs(title = &quot;geom_point&quot;)  // 散点图
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/point.png" alt="id"></p>
+<pre><code>p + geom_bar(stat = &quot;identity&quot;) + labs(title = &quot;geom_bar(stat=\&quot;identity\&quot;)&quot;)       // 条形图
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/bar.png" alt="id"></p>
+<pre><code>p + geom_line() + labs(title = &quot;geom_line&quot;)     // 线条图
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/line.png" alt="id"></p>
+<pre><code>p + geom_area() + labs(title = &quot;geom_area&quot;)     // 面积图
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/area.png" alt="id"></p>
+<pre><code>p + geom_path() + labs(title = &quot;geom_path&quot;)     // 路径图
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/path.png" alt="id"></p>
+<pre><code>p + geom_text(aes(label = label)) + labs(title = &quot;geom_text&quot;)   //含标签的散点图
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/text.png" alt="id"></p>
+<pre><code>p + geom_tile() + labs(title = &quot;geom_tile&quot;)     // 色深图or水平图
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/tile.png" alt="id">   </p>
+<pre><code>p + geom_polygon() + labs(title = &quot;geom_polygon&quot;)   // 多边形图
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/polygon.png" alt="id"></p>
+<h2 id="展示数据分布"><a href="#展示数据分布" class="headerlink" title="展示数据分布"></a>展示数据分布</h2><p>有一些几何对象可以用于展示数据的分布，具体使用哪种取决于分布的维度、分布是连续型或是离散型，以及我们感兴趣的是条件分布还是联合分布。</p>
+<p>有多种方式可以用来进行分布的跨组比较：</p>
+<ul>
+<li>同时绘制多个小的直方图，facets = . ~ var；</li>
+<li>使用条件密度图，position = “fill”；</li>
+<li>使用频率多边形(frequency polygon),geom = “freqpoly”。</li>
+</ul>
+<pre><code>depth_dist &lt;- ggplot(diamonds, aes(depth)) + xlim(58, 68)
+depth_dist + geom_histogram(aes(y = ..density..), binwidth = 0.1) + facet_grid(cut ~ .)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/5.4.1.png" alt="id"></p>
+<pre><code>depth_dist + geom_histogram(aes(fill = cut), binwidth = 0.1, position = &quot;fill&quot;)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/5.4.2.png" alt="id"></p>
+<pre><code>depth_dist + geom_freqpoly(aes(y = ..density.., colour = cut), binwidth = 0.1)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/5.4.3.png" alt="id"></p>
+<p>和分布相关的许多几何对象都是以几何对象(geom)/统计变换(stat)的形式成对出现的。这些几何对象中大多数的本质都是别名(alias):一个基本几何对象结合一个统计变换，即可绘制出想要的图形。</p>
+<ul>
+<li>geom_boxplot = stat_boxplot + geom_boxplot: 箱线图，即一个连续型变量针对一个类别型变量取条件所得的图形。当类别型变量有许多独立的取值时，这种图形比较有用。箱线图也可对连续型变量取条件，前提是数据预先经过巧妙地封箱(binning)处理。下面给出例子：</li>
+</ul>
+<pre><code>library(plyr)
+qplot(cut, depth, data = diamonds, geom = &quot;boxplot&quot;)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/xxt1.png" alt="id"></p>
+<pre><code>qplot(carat, depth, data = diamonds, geom = &quot;boxplot&quot;, group = round_any(carat, 0.1, floor), xlim = c(0, 3))
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/xxt2.png" alt="id"></p>
+<ul>
+<li>geom_jitter = position_jitter + geom_point: 通过在离散型分布上添加随机噪声以避免遮盖绘制问题，这是一种较为粗糙的方法。下面的例子：</li>
+</ul>
+<pre><code>qplot(class, cty, data = mpg, geom = &quot;jitter&quot;)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/jitter1.png" alt="id"></p>
+<pre><code>qplot(calss, drv, data = mpg, geom = &quot;jitter&quot;)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/jitter2.png" alt="id"></p>
+<ul>
+<li>geom_density = stat_density + geom_area: 基于核平滑方法进行平滑后得到的频率多边形。给出下面的例子：</li>
+</ul>
+<pre><code>qplot(depth, data = diamonds, geom = &quot;density&quot;, xlim = c(54, 70))
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/density1.png" alt="id"></p>
+<pre><code>qplot(depth, data = diamonds, geom = &quot;density&quot;, xlim = c(54, 70), fill = cut, alpha = I(0.2))
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/density2.png" alt="id"></p>
+<h2 id="处理遮盖绘制问题"><a href="#处理遮盖绘制问题" class="headerlink" title="处理遮盖绘制问题"></a>处理遮盖绘制问题</h2><p>散点图是研究两个连续型变量间关系的重要工具。但是当数据量很大时，这些点经常会出现重叠现象，从而掩盖真实的关系。在极端情况下，甚至只能看到数据所在的大致范围，根据这种图形作出的任何结论都是值得怀疑的。这种问题被称为遮盖绘制(overplotting),对付它有许多方法：</p>
+<ul>
+<li>小规模的遮盖绘制问题可以通过绘制更小的点加以缓解，或者使用中空的符号。下面给个例子，数据是从两个独立的正态分布中抽样所得的200个点：</li>
+</ul>
+<pre><code>df &lt;- data.frame(x = rnorm(2000), y = rnorm(2000))
+norm &lt;- ggplot(df, aes(x, y))
+norm + geom_point()
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/p1.png" alt="id"></p>
+<pre><code>norm + geom_point(shape = 1)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/p2.png" alt="id"></p>
+<pre><code>norm + geom_point(shape = &quot;.&quot;)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/p3.png" alt="id"></p>
+<ul>
+<li>对于更大的数据集产生的更为严重的遮盖绘制问题，我们可以使用alpha让点呈现透明效果。下面给出代码：</li>
+</ul>
+<pre><code>norm + geom_point(colour = &quot;black&quot;, alpha = 1/3)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/p4.png" alt="id"></p>
+<pre><code>norm + geom_point(colour = &quot;black&quot;, alpha = 1/5)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/p5.png" alt="id"></p>
+<pre><code>norm + geom_point(colour = &quot;black&quot;, alpha = 1/10)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/p6.png" alt="id"></p>
+<ul>
+<li>如果数据存在一定的离散性，我们可以通过在点上增加随机扰动来减轻重叠。特别是在与透明度一起使用时，这种方法很有效。下面给出代码：</li>
+</ul>
+<pre><code>td &lt;- ggplot(diamonds, aes(table, depth)) + xlim(50, 70) + ylim(50, 70)
+td + geom_point()
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/td1.png" alt="id"></p>
+<pre><code>td + geom_jitter()
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/td2.png" alt="id"></p>
+<pre><code>jit &lt;- position_jitter(width = 0.5)
+td + geom_jitter(position = jit)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/jit1.png" alt="id"></p>
+<pre><code>td + geom_jitter(position = jit, colour = &quot;black&quot;, alpha = 1/10)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/jit2.png" alt="id"></p>
+<pre><code>td + geom_jitter(position = jit, colour = &quot;black&quot;, alpha = 1/50)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/jit3.png" alt="id"></p>
+<pre><code>td + geom_jitter(position = jit, colour = &quot;black&quot;, alpha = 1/200)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/jit4.png" alt="id"></p>
+<p>从上面可以得到启发，可以认为遮盖绘制问题是一种二维核密度估计问题，下面再给出两种方法：</p>
+<ul>
+<li>将点分箱并统计每个箱中点的数量，然后通过某种方式可视化这个数量（直方图的二维推广）。</li>
+</ul>
+<pre><code>d &lt;- ggplot(diamonds, aes(carat, price)) + xlim(1, 3) + theme(legend.position = &quot;none&quot;)
+d + stat_bin2d()
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/d1.png" alt="id"></p>
+<pre><code>d + stat_bin2d(bins = 10)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/d2.png" alt="id"></p>
+<pre><code>d + stat_bin2d(binwidth = c(0.02, 200))
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/d3.png" alt="id"></p>
+<ul>
+<li>使用<code>stat_density2d</code>作二维密度估计，并将等高线添加到散点图中，或以着色瓦片(color3d tiles)直接展示密度，或使用大小与分布密度成比例的点进行展示。</li>
+</ul>
+<pre><code>d + geom_point() + geom_density2d()
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/d4.png" alt="id"></p>
+<pre><code>d + stat_density2d(geom = &quot;point&quot;, aes(size = ..density..), contour = F) + scale_size_area()
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/d5.png" alt="id"></p>
+<pre><code>d + stat_density2d(geom = &quot;tile&quot;, aes(fill = ..density..), contour = F)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/d6.png" alt="id"></p>
+<pre><code>last_plot() + scale_fill_gradient(limits = c(1e-5, 8e-4))
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/d7.png" alt="id"></p>
+<h2 id="曲面图"><a href="#曲面图" class="headerlink" title="曲面图"></a>曲面图</h2><p>ggplot2暂不支持真正的三维曲面图。但具有在二维平面上展现三维曲面的常见工具：等高线图，着色瓦片(colored tiles)以及气泡图。</p>
+<h2 id="绘制地图"><a href="#绘制地图" class="headerlink" title="绘制地图"></a>绘制地图</h2><p>ggplot2中的maps包只有美国本土等地图，要想绘制中国地图，参考《<a href="http://cos.name/2009/07/drawing-china-map-using-r/" target="_blank" rel="external">用R软件绘制中国分省市地图</a>》一文。下面给出绘制美图地图的例子：</p>
+<pre><code>library(maps)
+data(us.cities)
+big_cities &lt;- subset(us.cities, pop &gt; 500000)   //美国（2006年1月）五十万人口以上的城市
+qplot(long, lat, data = big_cities) + borders(&quot;state&quot;, size = 0.5)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/map1.png" alt="id"></p>
+<pre><code>library(maps)
+states &lt;- map_data(&quot;state&quot;)
+arrests &lt;- USArrests
+names(arrests) &lt;- tolower(names(arrests))
+arrests$region &lt;- tolower(rownames(USArrests))
+choro &lt;- merge(states, arrests, by = &quot;region&quot;)
+choro &lt;- choro[order(choro$order), ]
+qplot(long, lat, data = choro, group = group, fill = assault, geom = &quot;polygon&quot;)     //美国各州人身伤害案件的数量
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/map2.png" alt="id"></p>
+<pre><code>qplot(long, lat, data = choro, group = group, fill = assault / murder, geom = &quot;polygon&quot;)    //人身伤害和谋杀类案件的比率
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/map3.png" alt="id"></p>
+<h2 id="揭示不确定性"><a href="#揭示不确定性" class="headerlink" title="揭示不确定性"></a>揭示不确定性</h2><p>不论是从模型所得或是对分布的假设而得，如果已经知道了一些关于数据中不确定性的信息，那么对这些信息加以展示通常是很重要的。ggplot2中有四类几何对象用于这项工作，它们均假设我们对给定x时y的条件分布感兴趣，并且都使用了图形属性ymin和ymax来确定y的值域。请看下表：</p>
+<table>
+<thead>
+<tr>
+<th>变量X类型</th>
+<th>仅展示区间</th>
+<th>同时展示区间和中间值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>连续型</td>
+<td>geom_ribbon</td>
+<td>geom_smooth(stat = “identity”</td>
+</tr>
+<tr>
+<td>离散型</td>
+<td>geom_errorbar</td>
+<td>geom_crossbar</td>
+</tr>
+<tr>
+<td></td>
+<td>geom_linerange</td>
+<td>geom_pointrange</td>
+</tr>
+</tbody>
+</table>
+<p>下面的例子拟合了一个双因素含交互效应回归模型，并且展示了如何提取边际效应(marginal effects)和条件效应(conditional effects),以及如何将其可视化：</p>
+<pre><code>d &lt;- subset(diamonds, carat &lt; 2.5 &amp; rbinom(nrow(diamonds), 1, 0.2) == 1)
+d$lcarat &lt;- log10(d$carat)
+d$lprice &lt;- log10(d$price)
+
+# 剔除整体的线性趋势
+detrend &lt;- lm(lprice ~ lcarat, data = d)
+d$lprice2 &lt;- resid(detrend)
+
+mod &lt;- lm(lprice2 ~ lcarat * color, data = d)
+
+library(effects)
+
+effectdf &lt;- function(...) {
+    suppressWarnings(as.data.frame(effect(...)))
+}
+color &lt;- effectdf(&quot;color&quot;, mod)
+both1 &lt;- effectdf(&quot;lcarat:color&quot;, mod)
+carat &lt;- effectdf(&quot;lcarat&quot;, mod, default.levels = 50)
+both2 &lt;- effectdf(&quot;lcarat:color&quot;, mod, default.levels = 3)
+# 进行数据变换以移除显而易见的效应
+qplot(lcarat, lprice, data = d, colour = color)     //对x轴和y轴的数据均取以10为底的对数以剔除非线性性
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/zz1.png" alt="id"></p>
+<pre><code>qplot(lcarat, lprice2, data = d, colour = color)    //剔除了主要的线性趋势
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/zz2.png" alt="id"></p>
+<pre><code>fplot &lt;- ggplot(mapping = aes(y = fit, ymin = lower, ymax = upper)) + ylim(range(both2$lower, both2$upper))
+# 展示模型估计结果中变量color的不确定性
+fplot %+% color + aes(x = color) + geom_point() + geom_errorbar()    //color的边际效应
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/zz3.png" alt="id"></p>
+<pre><code>fplot %+% both2 + aes(x = color, colour = lcarat, group = interaction(color, lcarat)) + geom_errorbar() + geom_line(aes(group = lcarat)) + scale_colour_gradient()      //针对变量carat的不同水平(level),变量color的条件效应
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/zz4.png" alt="id"></p>
+<pre><code># 展示模型估计结果中变量carat的不确定性
+fplot %+% carat + aes(x = lcarat) + geom_smooth(stat = &quot;identity&quot;)      //caret的边际效应
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/zz5.png" alt="id"></p>
+<pre><code>ends &lt;- subset(both1, lcarat == max(lcarat))
+fplot %+% both1 + aes(x = lcarat, colour = color) + geom_smooth(stat = &quot;identity&quot;) + scale_colour_hue() + theme(legend.position = &quot;none&quot;) + geom_text(aes(label = color, x = lcarat + 0.02), ends)      //针对变量color的不同水平，变量caret的条件效应
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/zz6.png" alt="id"></p>
+<h2 id="统计摘要"><a href="#统计摘要" class="headerlink" title="统计摘要"></a>统计摘要</h2><p>对于每个x的取值，计算对应y值得统计摘要通常是很有用的。ggplot2是用<code>stat_summary()</code>来完成。</p>
+<p>使用<code>stat_summary()</code>时，既可以为每个参数单独地指定摘要计算函数，也可以用一个统一的函数对它们进行组合。</p>
+<h3 id="单独的摘要计算函数"><a href="#单独的摘要计算函数" class="headerlink" title="单独的摘要计算函数"></a>单独的摘要计算函数</h3>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/R/" rel="tag">#R</a>
+          
+            <a href="/tags/ggplot2/" rel="tag">#ggplot2</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/10/抽象接口/" rel="next" title="抽象接口">
+                <i class="fa fa-chevron-left"></i> 抽象接口
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/04/12/ggplot2工具箱/"
+     data-title="ggplot2工具箱"
+     data-content=""
+     data-url="http://yoursite.com/2016/04/12/ggplot2工具箱/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/04/12/ggplot2工具箱/"
+           data-title="ggplot2工具箱" data-url="http://yoursite.com/2016/04/12/ggplot2工具箱/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/iverson.png"
+               alt="zzanswer" />
+          <p class="site-author-name" itemprop="name">zzanswer</p>
+          <p class="site-description motion-element" itemprop="description">学而不思则罔，思而不学则殆</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/zzanswer" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> github
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/zzanswer" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> zhihu
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图层叠加的总体策略"><span class="nav-number">2.</span> <span class="nav-text">图层叠加的总体策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本图形类型"><span class="nav-number">3.</span> <span class="nav-text">基本图形类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#展示数据分布"><span class="nav-number">4.</span> <span class="nav-text">展示数据分布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理遮盖绘制问题"><span class="nav-number">5.</span> <span class="nav-text">处理遮盖绘制问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#曲面图"><span class="nav-number">6.</span> <span class="nav-text">曲面图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制地图"><span class="nav-number">7.</span> <span class="nav-text">绘制地图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#揭示不确定性"><span class="nav-number">8.</span> <span class="nav-text">揭示不确定性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#统计摘要"><span class="nav-number">9.</span> <span class="nav-text">统计摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单独的摘要计算函数"><span class="nav-number">9.1.</span> <span class="nav-text">单独的摘要计算函数</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zzanswer</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zzanswer"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+  
+
+
+</body>
+</html>
