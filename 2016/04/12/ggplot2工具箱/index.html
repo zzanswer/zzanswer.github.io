@@ -118,7 +118,20 @@
 <meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/zz4.png">
 <meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/zz5.png">
 <meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/zz6.png">
-<meta property="og:updated_time" content="2016-04-14T02:14:17.555Z">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/zj1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/zj2.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/zj3.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/zj4.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/zj5.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/zj6.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/hq1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/hq2.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/hq3.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/hq4.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/hq5.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/hq6.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/hq7.png">
+<meta property="og:updated_time" content="2016-04-16T03:11:08.131Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ggplot2工具箱">
 <meta name="twitter:description" content="简介本文列举了ggplot2中大量几何对象和统计变换的一部分，并把它们按照用途进行了细分。
@@ -596,7 +609,51 @@ fplot %+% both1 + aes(x = lcarat, colour = color) + geom_smooth(stat = &quot;ide
 </code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/zz6.png" alt="id"></p>
 <h2 id="统计摘要"><a href="#统计摘要" class="headerlink" title="统计摘要"></a>统计摘要</h2><p>对于每个x的取值，计算对应y值得统计摘要通常是很有用的。ggplot2是用<code>stat_summary()</code>来完成。</p>
 <p>使用<code>stat_summary()</code>时，既可以为每个参数单独地指定摘要计算函数，也可以用一个统一的函数对它们进行组合。</p>
-<h3 id="单独的摘要计算函数"><a href="#单独的摘要计算函数" class="headerlink" title="单独的摘要计算函数"></a>单独的摘要计算函数</h3>
+<h2 id="添加图形注解"><a href="#添加图形注解" class="headerlink" title="添加图形注解"></a>添加图形注解</h2><p>记住一点：这些注解仅仅是额外的数据而已。两种方式：逐个添加或批量添加。下面的例子中，分别用以上两种方式，向经济数据中加入了有关美国总统的信息。</p>
+<pre><code>(unemp &lt;- qplot(date, unemploy, data = economics, geom = &quot;line&quot;, xlab = &quot;&quot;, ylab = &quot;No. unemployed (1000s)&quot;))
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/zj1.png" alt="id"></p>
+<pre><code>presidential &lt;- presidential[-(1:3), ]
+yrng &lt;- range(economics$unemploy)
+xrng &lt;- range(economics$date)
+unemp + geom_vline(aes(xintercept = as.numeric(start)), data = presidential)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/zj2.png" alt="id"></p>
+<pre><code>library(scales)
+unemp + geom_rect(aes(NULL, NULL, xmin = start, xmax = end, fill = party), ymin = yrng[1], ymax = yrng[2], data = presidential, alpha = 0.2) + scale_fill_manual(values = c(&quot;blue&quot;, &quot;red&quot;))
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/zj3.png" alt="id"></p>
+<pre><code>last_plot() + geom_text(aes(x = start, y = yrng[1], label = name), data = presidential, size = 3, hjust = 0, vjust = 0)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/zj4.png" alt="id"></p>
+<pre><code>caption &lt;- paste(strwrap(&quot;Unemployment rates in the US have varied a lot over the years&quot;, 40), collapse=&quot;\n&quot;)
+unemp + geom_text(aes(x, y, label = caption), data = data.frame(x = xrng[2], y = yrng[2]), hjust = 1, vjust = 1, size = 4)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/zj5.png" alt="id"></p>
+<pre><code>highest &lt;- subset(economics, unemploy == max(unemploy))
+unemp + geom_point(data = highest, size = 3, colour = &quot;red&quot;, alpha = 0.5)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/zj6.png" alt="id"></p>
+<ul>
+<li>geom_text 可添加文字叙述或为点添加标签。（使用取子集的方式）抽取部分观测添加标签可能会非常有用————往往希望标注出离群点或其他重要的点。</li>
+<li>geom_vline,geom_hline: 向图形添加垂直线或水平线。</li>
+<li>geom_abline: 向图形添加任意斜率和截距的直线。</li>
+<li>geom_rect 可强调图形中感兴趣的矩形区域。</li>
+<li>geom_line,geom_path 和 geom_segment 都可以添加直线。</li>
+</ul>
+<h2 id="含权数据"><a href="#含权数据" class="headerlink" title="含权数据"></a>含权数据</h2><p>这里以2000年美国人口普查中，中西部各州的统计数据为例。此数据中主要包含的是比例型数据（例如白种人比例、贫困线以下人口比例、有大学学历的人口比例）和每个郡的基本信息（面积、人口总数、人口密度）。</p>
+<p>首先，对于线和点这类简单的几何对象，我们可以根据点的数量调整图形属性size来改变点的大小。</p>
+<pre><code>qplot(percwhite, percbelowpoverty, data = midwest)      //无权重
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/hq1.png" alt="id"></p>
+<pre><code>qplot(percwhite, percbelowpoverty, data = midwest, size = poptotal / 1e6) + scale_size_area(&quot;Population\n(millions)&quot;, breaks = c(0.5, 1, 2, 4))     //以人口数量为权重
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/hq2.png" alt="id"></p>
+<pre><code>qplot(percwhite, percbelowpoverty, data = midwest, size = area) + scale_size_area()     //以面积为权重
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/hq3.png" alt="id"></p>
+<pre><code>lm_smooth &lt;- geom_smooth(method = lm, size = 1)
+qplot(percwhite, percbelowpoverty, data = midwest) + lm_smooth      //未考虑权重的最优拟合曲线
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/hq4.png" alt="id"></p>
+<pre><code>qplot(percwhite, percbelowpoverty, data = midwest, weight = popdensity, size = popdensity) + lm_smooth      //以人口数量作为权重的最优拟合曲线
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/hq5.png" alt="id"></p>
+<pre><code>qplot(percbelowpoverty, data = midwest, binwidth = 1)       //不含权重信息的直方图
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/hq6.png" alt="id"></p>
+<pre><code>qplot(percbelowpoverty, data = midwest, weight = poptotal, binwidth = 1) + ylab(&quot;population&quot;)       //含权重信息的直方图
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/hq7.png" alt="id"></p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1][ggplot2:数据分析与图形艺术]</p>
+
       
     </div>
 
@@ -780,7 +837,7 @@ fplot %+% both1 + aes(x = lcarat, colour = color) + geom_smooth(stat = &quot;ide
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图层叠加的总体策略"><span class="nav-number">2.</span> <span class="nav-text">图层叠加的总体策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本图形类型"><span class="nav-number">3.</span> <span class="nav-text">基本图形类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#展示数据分布"><span class="nav-number">4.</span> <span class="nav-text">展示数据分布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理遮盖绘制问题"><span class="nav-number">5.</span> <span class="nav-text">处理遮盖绘制问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#曲面图"><span class="nav-number">6.</span> <span class="nav-text">曲面图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制地图"><span class="nav-number">7.</span> <span class="nav-text">绘制地图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#揭示不确定性"><span class="nav-number">8.</span> <span class="nav-text">揭示不确定性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#统计摘要"><span class="nav-number">9.</span> <span class="nav-text">统计摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单独的摘要计算函数"><span class="nav-number">9.1.</span> <span class="nav-text">单独的摘要计算函数</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图层叠加的总体策略"><span class="nav-number">2.</span> <span class="nav-text">图层叠加的总体策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本图形类型"><span class="nav-number">3.</span> <span class="nav-text">基本图形类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#展示数据分布"><span class="nav-number">4.</span> <span class="nav-text">展示数据分布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理遮盖绘制问题"><span class="nav-number">5.</span> <span class="nav-text">处理遮盖绘制问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#曲面图"><span class="nav-number">6.</span> <span class="nav-text">曲面图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘制地图"><span class="nav-number">7.</span> <span class="nav-text">绘制地图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#揭示不确定性"><span class="nav-number">8.</span> <span class="nav-text">揭示不确定性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#统计摘要"><span class="nav-number">9.</span> <span class="nav-text">统计摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加图形注解"><span class="nav-number">10.</span> <span class="nav-text">添加图形注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#含权数据"><span class="nav-number">11.</span> <span class="nav-text">含权数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">12.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
