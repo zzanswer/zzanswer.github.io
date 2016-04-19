@@ -57,32 +57,42 @@
 
 
 
-<meta name="description" content="简介qplot()是ggplot2中的一个作图函数，意思是快速作图(quick plot)，qplot()基于图形语法，使得我们可以用简单的、富有表达能力的语句来描述一张图形。下图是qplot()的一些知识概况：">
+<meta name="description" content="简介标度(scale)控制着数据到图形属性的映射。标度将我们的数据转化为视觉上可以感知的东西：例如大小、颜色、位置或形状。标度也为我们提供了读图所使用的工具：坐标轴和图例(总的来说可称为引导元素)。
+标度的工作原理要阐明标度的工作原理，首先需要了解标度的定义域(即数据空间)和标度的值域(即图形属性空间)，然后说明两者之间进行映射的过程。
+输入变量可能是离散型，也可能是连续型的，但只需要关注他们作为">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ggplot2-qplot()用法">
-<meta property="og:url" content="http://yoursite.com/2016/03/23/ggplot2-qplot()用法/index.html">
+<meta property="og:title" content="ggplot2标度、坐标轴和图例">
+<meta property="og:url" content="http://yoursite.com/2016/04/18/ggplot2标度、坐标轴和图例/index.html">
 <meta property="og:site_name" content="zzanswer的博客">
-<meta property="og:description" content="简介qplot()是ggplot2中的一个作图函数，意思是快速作图(quick plot)，qplot()基于图形语法，使得我们可以用简单的、富有表达能力的语句来描述一张图形。下图是qplot()的一些知识概况：">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/qplot.jpg">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot1.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot2.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot3.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot4.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot5.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot6.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot7.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot8.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot9.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot10.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot11.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot12.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot13.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot14.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot15.png">
-<meta property="og:updated_time" content="2016-03-23T06:43:12.989Z">
+<meta property="og:description" content="简介标度(scale)控制着数据到图形属性的映射。标度将我们的数据转化为视觉上可以感知的东西：例如大小、颜色、位置或形状。标度也为我们提供了读图所使用的工具：坐标轴和图例(总的来说可称为引导元素)。
+标度的工作原理要阐明标度的工作原理，首先需要了解标度的定义域(即数据空间)和标度的值域(即图形属性空间)，然后说明两者之间进行映射的过程。
+输入变量可能是离散型，也可能是连续型的，但只需要关注他们作为">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/pp1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/pp2.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/pp3.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/pp4.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/pp5.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/pp6.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/ppp1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/ppp2.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/ppp3.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/ppp4.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/ppp5.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/ppp6.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/x1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/x2.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/sdd1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/sdd2.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/sdd3.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/bd1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/bd2.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/bd3.png">
+<meta property="og:updated_time" content="2016-04-19T01:47:03.805Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ggplot2-qplot()用法">
-<meta name="twitter:description" content="简介qplot()是ggplot2中的一个作图函数，意思是快速作图(quick plot)，qplot()基于图形语法，使得我们可以用简单的、富有表达能力的语句来描述一张图形。下图是qplot()的一些知识概况：">
+<meta name="twitter:title" content="ggplot2标度、坐标轴和图例">
+<meta name="twitter:description" content="简介标度(scale)控制着数据到图形属性的映射。标度将我们的数据转化为视觉上可以感知的东西：例如大小、颜色、位置或形状。标度也为我们提供了读图所使用的工具：坐标轴和图例(总的来说可称为引导元素)。
+标度的工作原理要阐明标度的工作原理，首先需要了解标度的定义域(即数据空间)和标度的值域(即图形属性空间)，然后说明两者之间进行映射的过程。
+输入变量可能是离散型，也可能是连续型的，但只需要关注他们作为">
 
 
 
@@ -100,7 +110,7 @@
   };
 </script>
 
-  <title> ggplot2-qplot()用法 | zzanswer的博客 </title>
+  <title> ggplot2标度、坐标轴和图例 | zzanswer的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -269,7 +279,7 @@
             
             
               
-                ggplot2-qplot()用法
+                ggplot2标度、坐标轴和图例
               
             
           </h1>
@@ -281,8 +291,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-23T12:19:42+08:00" content="2016-03-23">
-              2016-03-23
+            <time itemprop="dateCreated" datetime="2016-04-18T09:36:47+08:00" content="2016-04-18">
+              2016-04-18
             </time>
           </span>
 
@@ -311,8 +321,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/23/ggplot2-qplot()用法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/23/ggplot2-qplot()用法/" itemprop="commentsCount"></span>
+                <a href="/2016/04/18/ggplot2标度、坐标轴和图例/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/18/ggplot2标度、坐标轴和图例/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -333,31 +343,91 @@
       
 
       
-        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>qplot()是ggplot2中的一个作图函数，意思是快速作图(quick plot)，qplot()基于图形语法，使得我们可以用简单的、富有表达能力的语句来描述一张图形。下图是qplot()的一些知识概况：<br><a id="more"></a><br><img src="http://7xs1l0.com1.z0.glb.clouddn.com/qplot.jpg" alt="id"></p>
-<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><h3 id="加载package和数据集"><a href="#加载package和数据集" class="headerlink" title="加载package和数据集"></a>加载package和数据集</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line">library(ggplot2)&#10;set.seed(1410) ## &#35753;&#26679;&#26412;&#21487;&#37325;&#22797;&#10;dsmall &#60;- diamonds[sample(nrow(diamonds), 100), ] ##&#20351;&#29992;ggplot2&#20013;&#30340;diamonds&#25968;&#25454;&#38598;</span><br></pre></td></tr></table></figure>
-<h3 id="基本参数绘图"><a href="#基本参数绘图" class="headerlink" title="基本参数绘图"></a>基本参数绘图</h3><p>qplot()有三个基本的参数是x,y,data,分别表示x坐标，y坐标和数据集。默认绘制散点图，展示砖石价格和重量的关系。<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, price, data = diamonds)</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot1.png" alt="id"></p>
-<h3 id="变量的函数"><a href="#变量的函数" class="headerlink" title="变量的函数"></a>变量的函数</h3><p>qplot()可以直接将变量的函数作为绘图的参数。<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(log(carat), log(price), data = diamonds)</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot2.png" alt="id"><br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, x * y * z, data = diamonds)</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot3.png" alt="id"></p>
-<h2 id="图形属性"><a href="#图形属性" class="headerlink" title="图形属性"></a>图形属性</h2><p>qplot()中有个非常重要的概念：<strong>变量映射</strong>，指的是将数据的取值映射到该图形属性的有效取值上，比如颜色、大小和形状等是图形属性的具体化，用qplot()就可以将数据集中的数据映射到图形属性。除此之外，也可以用I()函数来手动设定。</p>
-<h3 id="自动设定"><a href="#自动设定" class="headerlink" title="自动设定"></a>自动设定</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, price, data = dsmall, colour = color) ## &#23558;color&#21464;&#37327;&#26144;&#23556;&#21040;&#28857;&#30340;&#39068;&#33394;</span><br></pre></td></tr></table></figure>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot4.png" alt="id"><br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, price, data = dsmall, shape = cut) ## &#23558;cut&#21464;&#37327;&#26144;&#23556;&#21040;&#28857;&#30340;&#24418;&#29366;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot5.png" alt="id"></p>
-<h3 id="手动设定"><a href="#手动设定" class="headerlink" title="手动设定"></a>手动设定</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, price, data = diamonds, alpha = I(1/10)) ## alpha&#25351;&#36879;&#26126;&#24230;</span><br></pre></td></tr></table></figure>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot6.png" alt="id"><br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, price, data = diamonds, alpha = I(1/100)) ## &#20998;&#27597;&#34920;&#31034;&#32463;&#36807;&#22810;&#23569;&#27425;&#37325;&#21472;&#39068;&#33394;&#21464;&#24471;&#19981;&#36879;&#26126;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot7.png" alt="id"><br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, price, data = diamonds, alpha = I(1/200)) ## &#35266;&#23519;&#22823;&#37096;&#20998;&#28857;&#22312;&#21738;&#37324;&#37325;&#21472;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot8.png" alt="id"></p>
-<h2 id="几何对象"><a href="#几何对象" class="headerlink" title="几何对象"></a>几何对象</h2><p>qplot()除了绘制散点图之外，通过改变几何对象，几乎可以画出任何一种类型的图形。具体的分类可以参考文章最上方的思维导图。这里直接上代码：<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, price, data = dsmall, geom = c(&#34;point&#34;, &#34;smooth&#34;)) ## &#25311;&#21512;&#24179;&#28369;&#26354;&#32447;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot9.png" alt="id"><br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(color, price / carat, data = diamonds, geom = &#34;jitter&#34;, alpha = I(1/50)) ## &#25200;&#21160;&#28857;&#22270;&#65292;&#21487;&#25913;&#21464;&#36879;&#26126;&#24230;&#26469;&#35266;&#23519;&#20197;&#39068;&#33394;&#20026;&#26465;&#20214;&#30340;&#30742;&#30707;&#27599;&#20811;&#25289;&#20215;&#26684;&#30340;&#20998;&#24067;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot10.png" alt="id"><br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, data = diamonds, geom = &#34;density&#34;, colour = color) ## &#23494;&#24230;&#26354;&#32447;&#22270;&#65292;&#21152;&#19978;&#39068;&#33394;&#30340;&#22270;&#24418;&#26144;&#23556;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot11.png" alt="id"><br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, data = diamonds, geom = &#34;histogram&#34;, binwidth = 0.1, fill = color) ## &#30452;&#26041;&#22270;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot12.png" alt="id"><br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(color, data = diamonds, geom = &#34;bar&#34;) ## &#26465;&#24418;&#22270;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot13.png" alt="id"></p>
-<h2 id="分面"><a href="#分面" class="headerlink" title="分面"></a>分面</h2><p>分面不同于图形属性，简单的说就是将不同属性的图分别画出来，在一张大图中有若干的小图，不同的小图之间来进行比较。下面举一个直方图的例子：<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, data = diamonds, facets = color ~ ., geom = &#34;histogram&#34;, binwidth = 0.1, xlim = c(0, 3)) ## binwidth&#20026;&#32452;&#36317;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot14.png" alt="id"></p>
-<h2 id="外观"><a href="#外观" class="headerlink" title="外观"></a>外观</h2><p>qplot()中有一些控制图形外观的参数，比如坐标轴区间，标签文字等。直接举个例子：<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, price, data = dsmall,&#10;      xlab = &#34;Price ($)&#34;, ylab = &#34;Weight (carats)&#34;,&#10;      main = &#34;Price-weight relationship&#34;&#10;      )</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot15.png" alt="id"></p>
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>标度(scale)控制着数据到图形属性的映射。标度将我们的数据转化为视觉上可以感知的东西：例如大小、颜色、位置或形状。标度也为我们提供了读图所使用的工具：坐标轴和图例(总的来说可称为引导元素)。</p>
+<h2 id="标度的工作原理"><a href="#标度的工作原理" class="headerlink" title="标度的工作原理"></a>标度的工作原理</h2><p>要阐明标度的工作原理，首先需要了解标度的定义域(即数据空间)和标度的值域(即图形属性空间)，然后说明两者之间进行映射的过程。</p>
+<p>输入变量可能是离散型，也可能是连续型的，但只需要关注他们作为标度输入的本质————一个函数的定义域。</p>
+<p>标度的值域也可以是离散型或连续型的。对于离散型标度，它的值域是输入值对应的图形属性值组成的一个向量。对于连续型标度，它的值域是穿过某种更复杂空间的一条一维路径。<br><a id="more"></a><br>将定义域映射到值域的过程包括以下阶段：</p>
+<ul>
+<li>变换：（仅针对连续型的定义域）对数据进行变换后再进行展示往往是有益的，例如对数据取对数或开根号。</li>
+<li>训练：在这个关键的阶段，将通过学习(learning)得到标度的定义域。有时，学习某个标度的定义域相当简单直接：在一个仅有一个图层且仅呈现原始数据的图形中，这个学习过程包括确定某个（变换后的）连续型变量的最小值和最大值，或者是列出某个类别型变量的所有水平。</li>
+<li>映射：执行这个映射数据到图形属性的函数。</li>
+</ul>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>如果要添加一个不同的标度或修改默认标度的某些特征，我们必须构造一个新的标度，然后使用 + 将其添加到图形上。所有的标度构建器(scale constructor)都拥有一套通用的命名方案。它们以<code>scale</code>开头，接下来是图形属性的名称(例如，colour<em>、shape</em>或x_)，最后以标度的名称结尾(例如，gradient、hue或manual)。</p>
+<h2 id="标度详解"><a href="#标度详解" class="headerlink" title="标度详解"></a>标度详解</h2><p>标度可大致分为四组：</p>
+<ul>
+<li>位置标度，用于将连续型、离散型和日期-时间型变量映射到绘图区域，以及构造对应的坐标轴。</li>
+<li>颜色标度，用于将连续型和离散型变量映射到颜色。</li>
+<li>手动标度，用于将离散型变量映射到我们选择的符号大小、线条类型、形状或颜色，以及创建对应的图例。</li>
+<li>同一型标度，用于直接将变量值绘制为图形属性，而不去映射他们。</li>
+</ul>
+<h3 id="通用参数"><a href="#通用参数" class="headerlink" title="通用参数"></a>通用参数</h3><p>以下参数对所有标度通用。</p>
+<ul>
+<li>name: 设置坐标轴或图例上出现的标签。有三个辅助函数<code>xlab()</code>,<code>ylab()</code>和<code>labs()</code>可以让我们减少部分键入。下面给出例子：</li>
+</ul>
+<pre><code>p &lt;- qplot(cty, hwy, data = mpg, colour = displ)
+p
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/pp1.png" alt="id"></p>
+<pre><code>p + scale_x_continuous(&quot;City mpg&quot;)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/pp2.png" alt="id"></p>
+<pre><code>p + xlab(&quot;City mpg&quot;)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/pp3.png" alt="id"></p>
+<pre><code>p + ylab(&quot;Highway mpg&quot;)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/pp4.png" alt="id"></p>
+<pre><code>p + labs(x = &quot;City mpg&quot;, y = &quot;Highway&quot;, colour = &quot;Displacement&quot;)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/pp5.png" alt="id"></p>
+<pre><code>p + xlab(expression(frac(miles, gallon)))
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/pp6.png" alt="id"></p>
+<ul>
+<li><p>limits: 固定标度的定义域。连续型标度接受一个长度为2的数值型向量；离散型标度接受一个字符型向量。一旦设定了limits，数据将不再进行任何训练。</p>
+</li>
+<li><p>breaks和labels：breaks控制着显示在坐标轴或图例上的值，即，坐标轴上应该显示哪些刻度线的值，或一个连续型标度在一个图例中将被如何分段。labels指定了应在断点处显示的标签。若设置了labels，则必须同时指定breaks，只有这样，这两个参数才能被正确匹配。区分两者：breaks影响显示在坐标轴和图例上的元素，而limits影响显示在图形上的元素。</p>
+</li>
+</ul>
+<pre><code>p &lt;- qplot(cyl, wt, data = mtcars)
+p
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/ppp1.png" alt="id"></p>
+<pre><code>p + scale_x_continuous(breaks = c(5.5, 6.5))
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/ppp2.png" alt="id"></p>
+<pre><code>p + scale_x_continuous(limits = c(5.5, 6.5))
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/ppp3.png" alt="id"></p>
+<pre><code>p &lt;- qplot(wt, cyl, data = mtcars, colour = cyl)
+p
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/ppp4.png" alt="id"></p>
+<pre><code>p + scale_colour_gradient(breaks = c(5.5, 6.5))
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/ppp5.png" alt="id"></p>
+<pre><code>p + scale_colour_gradient(limits = c(5.5, 6.5))
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/ppp6.png" alt="id"></p>
+<ul>
+<li>formatter: 如果未指定任何标签，则将在每个断点处自动调用格式刷(formatter)来格式化生成标签。对于连续型标度，可用的标签刷为：comma，percent，dollar和scientific；对于离散型标度，则为abbreviate。</li>
+</ul>
+<h3 id="位置标度"><a href="#位置标度" class="headerlink" title="位置标度"></a>位置标度</h3><p>每幅图形一定拥有两个位置标度，一个指定水平位置（x标度），另外一个指定竖直位置（y标度）。ggplot2提供了连续型、离散型（针对因子型、字符型和逻辑型向量）以及日期型标度。</p>
+<h4 id="连续型"><a href="#连续型" class="headerlink" title="连续型"></a>连续型</h4><p>最常用的连续型位置标度是<code>scale_x_continuous</code>和<code>scale_y_continuous</code>，它们均将数据映射到x轴和y轴。而最有趣的变式是通过变换来生成的。每个连续型标度均可接受一个trans参数，允许指定若干种线性或非线性的变换。下面展示一种图相同而标签不同的例子：</p>
+<pre><code>qplot(log10(carat), log10(price), data = diamonds)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/x1.png" alt="id"></p>
+<pre><code>qplot(carat, price, data = diamonds) + scale_x_log10() + scale_y_log10()
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/x2.png" alt="id"></p>
+<h4 id="日期和时间"><a href="#日期和时间" class="headerlink" title="日期和时间"></a>日期和时间</h4><p>对于日期坐标轴，有三个参数可用于控制其外观和刻度的位置：major、minor以及format。</p>
+<h4 id="离散型"><a href="#离散型" class="headerlink" title="离散型"></a>离散型</h4><p>离散型位置标度将输入中的各水平映射为整数。结果的顺序可用参数breaks进行控制，不想要的水平可以使用limits（或使用<code>xlim()</code>或<code>ylim()</code>）进行丢弃。</p>
+<h3 id="颜色标度"><a href="#颜色标度" class="headerlink" title="颜色标度"></a>颜色标度</h3><p>有相当多的方法用来将值映射为颜色：对连续型值有三种基于渐变的方法，对离散型值有两种方法。具体实现细节参考文档。</p>
+<h3 id="手动离散型标度"><a href="#手动离散型标度" class="headerlink" title="手动离散型标度"></a>手动离散型标度</h3><p>首先演示<code>scale_manual()</code>的使用方法。</p>
+<pre><code>p &lt;- qplot(brainwt, bodywt, data = msleep, log = &quot;xy&quot;)
+p + aes(colour = vore) + scale_colour_manual(values = c(&quot;red&quot;, &quot;orange&quot;, &quot;yellow&quot;, &quot;green&quot;, &quot;blue&quot;))
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/sdd1.png" alt="id"></p>
+<pre><code>colours &lt;- c(carni = &quot;red&quot;, &quot;NA&quot; = &quot;orange&quot;, insecti = &quot;yellow&quot;, herbi = &quot;green&quot;, omni = &quot;blue&quot;)
+p + aes(colour = vore) + scale_colour_manual(values = colours)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/sdd2.png" alt="id"></p>
+<pre><code>p + aes(shape = vore) + scale_shape_manual(values = c(1, 2, 6, 0, 23))
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/sdd3.png" alt="id"></p>
+<p>有时可能需要在同一幅图上展示多个变量并显示一个有用的图例，下面的例子就是这种用法。</p>
+<pre><code>huron &lt;- data.frame(year = 1875:1972, level = LakeHuron)
+ggplot(huron, aes(year)) + geom_line(aes(y = level - 5), colour = &quot;blue&quot;) + geom_line(aes(y = level + 5), colour = &quot;red&quot;)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/bd1.png" alt="id"></p>
+<pre><code>ggplot(huron, aes(year)) + geom_line(aes(y = level - 5, colour = &quot;below&quot;)) + geom_line(aes(y = level + 5, colour = &quot;above&quot;))
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/bd2.png" alt="id"></p>
+<pre><code>ggplot(huron, aes(year)) + geom_line(aes(y = level - 5, colour = &quot;below&quot;)) + geom_line(aes(y = level + 5, colour = &quot;above&quot;)) + scale_colour_manual(&quot;Direction&quot;, values = c(&quot;below&quot; = &quot;blue&quot;, &quot;above&quot; = &quot;red&quot;))
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/bd3.png" alt="id"></p>
+<h3 id="同一型标度"><a href="#同一型标度" class="headerlink" title="同一型标度"></a>同一型标度</h3><p>当数据能被R中的绘图函数理解时，即数据空间和图形属性空间相同时，可以使用同一型标度(identity scale)。这就意味着此时无法仅从数据本身派生出有意义的图例，所以默认是不绘制图例的。</p>
+<h2 id="图例和坐标轴"><a href="#图例和坐标轴" class="headerlink" title="图例和坐标轴"></a>图例和坐标轴</h2><p>坐标轴和坐标被共同称为<strong>引导元素</strong>，它们都是标度的逆函数：它们允许你在图中读出观测并将其映射回原始值。</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1][ggplot2:数据分析与图形艺术]</p>
 
       
@@ -378,17 +448,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/19/文本挖掘—《三体》分词、词云展示/" rel="next" title="文本挖掘—《三体》分词、词云展示">
-                <i class="fa fa-chevron-left"></i> 文本挖掘—《三体》分词、词云展示
+              <a href="/2016/04/16/union-find算法分析/" rel="next" title="union-find算法分析">
+                <i class="fa fa-chevron-left"></i> union-find算法分析
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/23/Dijkstra的双栈算术表达式求值算法/" rel="prev" title="Dijkstra的双栈算术表达式求值算法 Java实现">
-                Dijkstra的双栈算术表达式求值算法 Java实现 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -403,10 +469,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/03/23/ggplot2-qplot()用法/"
-     data-title="ggplot2-qplot()用法"
+        <div class="ds-share flat" data-thread-key="2016/04/18/ggplot2标度、坐标轴和图例/"
+     data-title="ggplot2标度、坐标轴和图例"
      data-content=""
-     data-url="http://yoursite.com/2016/03/23/ggplot2-qplot()用法/">
+     data-url="http://yoursite.com/2016/04/18/ggplot2标度、坐标轴和图例/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -433,8 +499,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/23/ggplot2-qplot()用法/"
-           data-title="ggplot2-qplot()用法" data-url="http://yoursite.com/2016/03/23/ggplot2-qplot()用法/">
+      <div class="ds-thread" data-thread-key="2016/04/18/ggplot2标度、坐标轴和图例/"
+           data-title="ggplot2标度、坐标轴和图例" data-url="http://yoursite.com/2016/04/18/ggplot2标度、坐标轴和图例/">
       </div>
     
   </div>
@@ -547,7 +613,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本用法"><span class="nav-number">2.</span> <span class="nav-text">基本用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加载package和数据集"><span class="nav-number">2.1.</span> <span class="nav-text">加载package和数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本参数绘图"><span class="nav-number">2.2.</span> <span class="nav-text">基本参数绘图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量的函数"><span class="nav-number">2.3.</span> <span class="nav-text">变量的函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图形属性"><span class="nav-number">3.</span> <span class="nav-text">图形属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自动设定"><span class="nav-number">3.1.</span> <span class="nav-text">自动设定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#手动设定"><span class="nav-number">3.2.</span> <span class="nav-text">手动设定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#几何对象"><span class="nav-number">4.</span> <span class="nav-text">几何对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分面"><span class="nav-number">5.</span> <span class="nav-text">分面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#外观"><span class="nav-number">6.</span> <span class="nav-text">外观</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">7.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标度的工作原理"><span class="nav-number">2.</span> <span class="nav-text">标度的工作原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用法"><span class="nav-number">3.</span> <span class="nav-text">用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标度详解"><span class="nav-number">4.</span> <span class="nav-text">标度详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通用参数"><span class="nav-number">4.1.</span> <span class="nav-text">通用参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#位置标度"><span class="nav-number">4.2.</span> <span class="nav-text">位置标度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#连续型"><span class="nav-number">4.2.1.</span> <span class="nav-text">连续型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#日期和时间"><span class="nav-number">4.2.2.</span> <span class="nav-text">日期和时间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#离散型"><span class="nav-number">4.2.3.</span> <span class="nav-text">离散型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#颜色标度"><span class="nav-number">4.3.</span> <span class="nav-text">颜色标度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#手动离散型标度"><span class="nav-number">4.4.</span> <span class="nav-text">手动离散型标度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同一型标度"><span class="nav-number">4.5.</span> <span class="nav-text">同一型标度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图例和坐标轴"><span class="nav-number">5.</span> <span class="nav-text">图例和坐标轴</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">6.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
