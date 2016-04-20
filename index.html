@@ -337,54 +337,12 @@
 
       
         
-          
-            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>本文主要讨论几个初级排序算法，用Java语言来实现。首先给出一个排序算法类模板Example类：将排序代码放在类的sort()方法中，该类还将包含辅助函数less()和exch()以及一个示例用例main()。less()方法对元素进行比较，exch()方法将元素交换位置。下面给出代码：</p>
-<pre><code>import edu.princeton.cs.algs4.StdIn;
-import edu.princeton.cs.algs4.StdOut;
-
-public class Example {
-    public static void sort(Comparable[] a) {
-        // 此为各种排序算法
-    }
-
-    private static boolean less(Comparable v, Comparable w) {
-        return v.compareTo(w) &lt; 0;
-    }
-
-    private static void exch(Comparable[] a, int i, int j) {
-        Comparable t = a[i];
-        a[i] = a[j];
-        a[j] = t;
-    }
-
-    // 在单行中打印数组
-    private static void show(Comparable[] a) {
-        for (int i = 0; i &lt; a.length; i++) {
-            StdOut.print(a[i] + &quot; &quot;);
-        StdOut.println();
-        }
-    }
-
-    // 测试数组元素是否有序
-    public static boolean isSorted(Comparable[] a) {
-        for (int i = 1; i &lt; a.length; i++) {
-            if (less(a[i], a[i-1])) {
-                return false;
-            return true;
-            }
-        }
-    }
-
-    // 从标准输入读取字符串，将它们排序并输出
-    public static void main(String[] args) {
-        String[] a = In.readStrings();
-        sort(a);
-        assert isSorted(a);
-        show(a);
-    }
-}
-</code></pre><h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2>
-          
+          <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>本文主要讨论几个初级排序算法，用Java语言来实现。首先给出一个排序算法类模板Example类：将排序代码放在类的sort()方法中，该类还将包含辅助函数less()和exch()以及一个示例用例main()。less()方法对元素进行比较，exch()方法将元素交换位置。下面给出代码：<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/20/初级排序算法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>

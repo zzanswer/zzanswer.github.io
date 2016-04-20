@@ -57,22 +57,16 @@
 
 
 
-<meta name="description" content="背景本文主要讨论几个初级排序算法，用Java语言来实现。首先给出一个排序算法类模板Example类：将排序代码放在类的sort()方法中，该类还将包含辅助函数less()和exch()以及一个示例用例main()。less()方法对元素进行比较，exch()方法将元素交换位置。下面给出代码：
-import edu.princeton.cs.algs4.StdIn;
-import edu.princ">
+<meta name="description" content="背景本文主要讨论几个初级排序算法，用Java语言来实现。首先给出一个排序算法类模板Example类：将排序代码放在类的sort()方法中，该类还将包含辅助函数less()和exch()以及一个示例用例main()。less()方法对元素进行比较，exch()方法将元素交换位置。下面给出代码：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="初级排序算法">
 <meta property="og:url" content="http://yoursite.com/2016/04/20/初级排序算法/index.html">
 <meta property="og:site_name" content="zzanswer的博客">
-<meta property="og:description" content="背景本文主要讨论几个初级排序算法，用Java语言来实现。首先给出一个排序算法类模板Example类：将排序代码放在类的sort()方法中，该类还将包含辅助函数less()和exch()以及一个示例用例main()。less()方法对元素进行比较，exch()方法将元素交换位置。下面给出代码：
-import edu.princeton.cs.algs4.StdIn;
-import edu.princ">
-<meta property="og:updated_time" content="2016-04-20T07:15:26.822Z">
+<meta property="og:description" content="背景本文主要讨论几个初级排序算法，用Java语言来实现。首先给出一个排序算法类模板Example类：将排序代码放在类的sort()方法中，该类还将包含辅助函数less()和exch()以及一个示例用例main()。less()方法对元素进行比较，exch()方法将元素交换位置。下面给出代码：">
+<meta property="og:updated_time" content="2016-04-20T12:14:47.062Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初级排序算法">
-<meta name="twitter:description" content="背景本文主要讨论几个初级排序算法，用Java语言来实现。首先给出一个排序算法类模板Example类：将排序代码放在类的sort()方法中，该类还将包含辅助函数less()和exch()以及一个示例用例main()。less()方法对元素进行比较，exch()方法将元素交换位置。下面给出代码：
-import edu.princeton.cs.algs4.StdIn;
-import edu.princ">
+<meta name="twitter:description" content="背景本文主要讨论几个初级排序算法，用Java语言来实现。首先给出一个排序算法类模板Example类：将排序代码放在类的sort()方法中，该类还将包含辅助函数less()和exch()以及一个示例用例main()。less()方法对元素进行比较，exch()方法将元素交换位置。下面给出代码：">
 
 
 
@@ -323,11 +317,8 @@ import edu.princ">
       
 
       
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>本文主要讨论几个初级排序算法，用Java语言来实现。首先给出一个排序算法类模板Example类：将排序代码放在类的sort()方法中，该类还将包含辅助函数less()和exch()以及一个示例用例main()。less()方法对元素进行比较，exch()方法将元素交换位置。下面给出代码：</p>
-<pre><code>import edu.princeton.cs.algs4.StdIn;
-import edu.princeton.cs.algs4.StdOut;
-
-public class Example {
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>本文主要讨论几个初级排序算法，用Java语言来实现。首先给出一个排序算法类模板Example类：将排序代码放在类的sort()方法中，该类还将包含辅助函数less()和exch()以及一个示例用例main()。less()方法对元素进行比较，exch()方法将元素交换位置。下面给出代码：<br><a id="more"></a><br>    import edu.princeton.cs.algs4.StdIn;<br>    import edu.princeton.cs.algs4.StdOut;</p>
+<pre><code>public class Example {
     public static void sort(Comparable[] a) {
         // 此为各种排序算法
     }
@@ -368,7 +359,73 @@ public class Example {
         show(a);
     }
 }
-</code></pre><h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2>
+</code></pre><h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><p>首先，找到数组中最小的那个元素，其次，将它和数组的第一个元素交换位置（如果第一个元素就是最小元素那么它就和自己交换）。再次，在剩下的元素中找到最小的元素，将它与数组的第二个元素交换位置。如此往复，直到将整个数组排序。</p>
+<p>它有两个鲜明的特点：</p>
+<ul>
+<li>运行时间和输入无关。</li>
+<li>数据移动是最少的。</li>
+</ul>
+<p>下面给出代码实现：</p>
+<pre><code>public class Selection {
+    // 将a[]按升序排列
+    public static void sort(Comparable[] a) {
+        int N = a.length;        // 数组长度
+
+        // 将a[i]和a[i+1..N]中最小的元素交换
+        for (int i = 0; i &lt; N; i++) {
+            int min = i；     // 最小元素的索引
+
+            for (int j = i + 1; j &lt; N; j++) {
+                if (less(a[j], a[min])) {
+                    min = j;
+                }
+            }
+
+            exch(a, j, min);
+        }
+    }
+}
+</code></pre><h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><p>插入排序即将元素插入到有序的元素中，在实现中，为了要给插入的元素腾出空间，需要将其余所有元素在插入之前都向右移动一位。</p>
+<p>插入排序所需的时间取决于输入中元素的初始顺序。插入排序对于实际应用中常见的某些类型的非随机数组很有效。下面给出代码实现：</p>
+<pre><code>public class Insertion {
+    // 将a[]按升序排列
+    public static void sort(Comparable[] a) {
+        int N = a.length;
+
+        // 将a[i]插入到a[i-1]、a[i-2]、a[i-3]...之中
+        for (int i = 1; i &lt; N; i++) {
+            for (int j = i; j &gt; 0 &amp;&amp; less(a[j], a[j-1]); j--) {
+                exch(a, j , j-1);
+            }
+        }
+    }
+}
+</code></pre><h2 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h2><p>希尔排序为了加快速度简单地改进了插入排序，交换不相邻的元素以对数组的局部进行排序，并最终用插入排序将局部有序的数组排序。希尔排序的思想是使数组中任意间隔为h的元素都是有序的。这样的数组被称为h有序数组。即一个h有序数组就是h个互相独立的有序数组编织在一起组成的一个数组。</p>
+<p>希尔排序更高效的原因是它权衡了子数组的规模和有序性。排序之初，各个子数组都很短，排序之后子数组都是部分有序的，这两种情况都很适合插入排序。子数组部分有序的程度取决于递增序列的选择。代码入下：</p>
+<pre><code>public class Shell {
+    // 将a[]按升序排列
+    public static void sort(Comparable[] a) {
+        int N = a.length;
+        int h = 1;
+
+        while(h &lt; N/3) {
+            h = 3 * h + 1;
+        }
+
+        // 将数组变为h有序
+        while(h &gt;= 1) {
+            // 将a[i]插入到a[i-h],a[i-2*h],a[i-3*h]...之中
+            for (int i = h; i &lt; N; i++) {
+                for (int j = i; j &gt;= h &amp;&amp; less(a[j], a[j-h]); j -= h) {
+                    exch(a, j, j-h);
+                }
+            }
+
+            h = h / 3;
+        }
+    }
+}
+</code></pre>
       
     </div>
 
@@ -560,7 +617,7 @@ public class Example {
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择排序"><span class="nav-number">2.</span> <span class="nav-text">选择排序</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择排序"><span class="nav-number">2.</span> <span class="nav-text">选择排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入排序"><span class="nav-number">3.</span> <span class="nav-text">插入排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#希尔排序"><span class="nav-number">4.</span> <span class="nav-text">希尔排序</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
