@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="R,ggplot2," />
+  <meta name="keywords" content="Java,归并排序,排序,算法," />
 
 
 
@@ -57,32 +57,16 @@
 
 
 
-<meta name="description" content="简介qplot()是ggplot2中的一个作图函数，意思是快速作图(quick plot)，qplot()基于图形语法，使得我们可以用简单的、富有表达能力的语句来描述一张图形。下图是qplot()的一些知识概况：">
+<meta name="description" content="简介归并这个操作的意思是将两个有序的数组归并成一个更大的有序数组。而这种递归排序算法就叫做：归并排序。要将一个数组排序，可以先（递归地）将它分成两半分别排序，然后将结果归并起来。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ggplot2-qplot()用法">
-<meta property="og:url" content="http://yoursite.com/2016/03/23/ggplot2-qplot()用法/index.html">
+<meta property="og:title" content="归并排序">
+<meta property="og:url" content="http://yoursite.com/2016/04/21/归并排序/index.html">
 <meta property="og:site_name" content="zzanswer的博客">
-<meta property="og:description" content="简介qplot()是ggplot2中的一个作图函数，意思是快速作图(quick plot)，qplot()基于图形语法，使得我们可以用简单的、富有表达能力的语句来描述一张图形。下图是qplot()的一些知识概况：">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/qplot.jpg">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot1.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot2.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot3.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot4.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot5.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot6.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot7.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot8.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot9.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot10.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot11.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot12.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot13.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot14.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot15.png">
-<meta property="og:updated_time" content="2016-03-23T06:43:12.989Z">
+<meta property="og:description" content="简介归并这个操作的意思是将两个有序的数组归并成一个更大的有序数组。而这种递归排序算法就叫做：归并排序。要将一个数组排序，可以先（递归地）将它分成两半分别排序，然后将结果归并起来。">
+<meta property="og:updated_time" content="2016-04-21T10:36:08.058Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ggplot2-qplot()用法">
-<meta name="twitter:description" content="简介qplot()是ggplot2中的一个作图函数，意思是快速作图(quick plot)，qplot()基于图形语法，使得我们可以用简单的、富有表达能力的语句来描述一张图形。下图是qplot()的一些知识概况：">
+<meta name="twitter:title" content="归并排序">
+<meta name="twitter:description" content="简介归并这个操作的意思是将两个有序的数组归并成一个更大的有序数组。而这种递归排序算法就叫做：归并排序。要将一个数组排序，可以先（递归地）将它分成两半分别排序，然后将结果归并起来。">
 
 
 
@@ -100,7 +84,7 @@
   };
 </script>
 
-  <title> ggplot2-qplot()用法 | zzanswer的博客 </title>
+  <title> 归并排序 | zzanswer的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -269,7 +253,7 @@
             
             
               
-                ggplot2-qplot()用法
+                归并排序
               
             
           </h1>
@@ -281,8 +265,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-23T12:19:42+08:00" content="2016-03-23">
-              2016-03-23
+            <time itemprop="dateCreated" datetime="2016-04-21T15:50:58+08:00" content="2016-04-21">
+              2016-04-21
             </time>
           </span>
 
@@ -295,8 +279,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/R语言/" itemprop="url" rel="index">
-                    <span itemprop="name">R语言</span>
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
                   </a>
                 </span>
 
@@ -311,8 +295,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/23/ggplot2-qplot()用法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/23/ggplot2-qplot()用法/" itemprop="commentsCount"></span>
+                <a href="/2016/04/21/归并排序/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/21/归并排序/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -333,33 +317,71 @@
       
 
       
-        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>qplot()是ggplot2中的一个作图函数，意思是快速作图(quick plot)，qplot()基于图形语法，使得我们可以用简单的、富有表达能力的语句来描述一张图形。下图是qplot()的一些知识概况：<br><a id="more"></a><br><img src="http://7xs1l0.com1.z0.glb.clouddn.com/qplot.jpg" alt="id"></p>
-<h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><h3 id="加载package和数据集"><a href="#加载package和数据集" class="headerlink" title="加载package和数据集"></a>加载package和数据集</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line">library(ggplot2)&#10;set.seed(1410) ## &#35753;&#26679;&#26412;&#21487;&#37325;&#22797;&#10;dsmall &#60;- diamonds[sample(nrow(diamonds), 100), ] ##&#20351;&#29992;ggplot2&#20013;&#30340;diamonds&#25968;&#25454;&#38598;</span><br></pre></td></tr></table></figure>
-<h3 id="基本参数绘图"><a href="#基本参数绘图" class="headerlink" title="基本参数绘图"></a>基本参数绘图</h3><p>qplot()有三个基本的参数是x,y,data,分别表示x坐标，y坐标和数据集。默认绘制散点图，展示砖石价格和重量的关系。<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, price, data = diamonds)</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot1.png" alt="id"></p>
-<h3 id="变量的函数"><a href="#变量的函数" class="headerlink" title="变量的函数"></a>变量的函数</h3><p>qplot()可以直接将变量的函数作为绘图的参数。<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(log(carat), log(price), data = diamonds)</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot2.png" alt="id"><br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, x * y * z, data = diamonds)</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot3.png" alt="id"></p>
-<h2 id="图形属性"><a href="#图形属性" class="headerlink" title="图形属性"></a>图形属性</h2><p>qplot()中有个非常重要的概念：<strong>变量映射</strong>，指的是将数据的取值映射到该图形属性的有效取值上，比如颜色、大小和形状等是图形属性的具体化，用qplot()就可以将数据集中的数据映射到图形属性。除此之外，也可以用I()函数来手动设定。</p>
-<h3 id="自动设定"><a href="#自动设定" class="headerlink" title="自动设定"></a>自动设定</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, price, data = dsmall, colour = color) ## &#23558;color&#21464;&#37327;&#26144;&#23556;&#21040;&#28857;&#30340;&#39068;&#33394;</span><br></pre></td></tr></table></figure>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot4.png" alt="id"><br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, price, data = dsmall, shape = cut) ## &#23558;cut&#21464;&#37327;&#26144;&#23556;&#21040;&#28857;&#30340;&#24418;&#29366;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot5.png" alt="id"></p>
-<h3 id="手动设定"><a href="#手动设定" class="headerlink" title="手动设定"></a>手动设定</h3><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, price, data = diamonds, alpha = I(1/10)) ## alpha&#25351;&#36879;&#26126;&#24230;</span><br></pre></td></tr></table></figure>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot6.png" alt="id"><br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, price, data = diamonds, alpha = I(1/100)) ## &#20998;&#27597;&#34920;&#31034;&#32463;&#36807;&#22810;&#23569;&#27425;&#37325;&#21472;&#39068;&#33394;&#21464;&#24471;&#19981;&#36879;&#26126;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot7.png" alt="id"><br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, price, data = diamonds, alpha = I(1/200)) ## &#35266;&#23519;&#22823;&#37096;&#20998;&#28857;&#22312;&#21738;&#37324;&#37325;&#21472;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot8.png" alt="id"></p>
-<h2 id="几何对象"><a href="#几何对象" class="headerlink" title="几何对象"></a>几何对象</h2><p>qplot()除了绘制散点图之外，通过改变几何对象，几乎可以画出任何一种类型的图形。具体的分类可以参考文章最上方的思维导图。这里直接上代码：<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, price, data = dsmall, geom = c(&#34;point&#34;, &#34;smooth&#34;)) ## &#25311;&#21512;&#24179;&#28369;&#26354;&#32447;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot9.png" alt="id"><br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(color, price / carat, data = diamonds, geom = &#34;jitter&#34;, alpha = I(1/50)) ## &#25200;&#21160;&#28857;&#22270;&#65292;&#21487;&#25913;&#21464;&#36879;&#26126;&#24230;&#26469;&#35266;&#23519;&#20197;&#39068;&#33394;&#20026;&#26465;&#20214;&#30340;&#30742;&#30707;&#27599;&#20811;&#25289;&#20215;&#26684;&#30340;&#20998;&#24067;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot10.png" alt="id"><br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, data = diamonds, geom = &#34;density&#34;, colour = color) ## &#23494;&#24230;&#26354;&#32447;&#22270;&#65292;&#21152;&#19978;&#39068;&#33394;&#30340;&#22270;&#24418;&#26144;&#23556;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot11.png" alt="id"><br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, data = diamonds, geom = &#34;histogram&#34;, binwidth = 0.1, fill = color) ## &#30452;&#26041;&#22270;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot12.png" alt="id"><br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(color, data = diamonds, geom = &#34;bar&#34;) ## &#26465;&#24418;&#22270;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot13.png" alt="id"></p>
-<h2 id="分面"><a href="#分面" class="headerlink" title="分面"></a>分面</h2><p>分面不同于图形属性，简单的说就是将不同属性的图分别画出来，在一张大图中有若干的小图，不同的小图之间来进行比较。下面举一个直方图的例子：<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, data = diamonds, facets = color ~ ., geom = &#34;histogram&#34;, binwidth = 0.1, xlim = c(0, 3)) ## binwidth&#20026;&#32452;&#36317;</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot14.png" alt="id"></p>
-<h2 id="外观"><a href="#外观" class="headerlink" title="外观"></a>外观</h2><p>qplot()中有一些控制图形外观的参数，比如坐标轴区间，标签文字等。直接举个例子：<br><figure class="highlight"><table><tr><td class="code"><pre><span class="line">qplot(carat, price, data = dsmall,&#10;      xlab = &#34;Price ($)&#34;, ylab = &#34;Weight (carats)&#34;,&#10;      main = &#34;Price-weight relationship&#34;&#10;      )</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/Rplot15.png" alt="id"></p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1][ggplot2:数据分析与图形艺术]</p>
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>归并这个操作的意思是将两个有序的数组归并成一个更大的有序数组。而这种递归排序算法就叫做：归并排序。要将一个数组排序，可以先（递归地）将它分成两半分别排序，然后将结果归并起来。<br><a id="more"></a></p>
+<h2 id="原地归并的抽象方法"><a href="#原地归并的抽象方法" class="headerlink" title="原地归并的抽象方法"></a>原地归并的抽象方法</h2><p>该方法先将所有元素复制到aux[]中，然后再归并回a[]中。方法在归并时（第二个for循环）进行了4个条件判断：左半边用尽（取右半边的元素）、右半边用尽（取左半边的元素）、右半边的当前元素小于左半边的当前元素（取右半边的元素）以及右半边的当前元素大于等于左半边的当前元素（取左半边的元素）。其中less()方法是一个辅助方法，作用是比较大小，可查看<a href="http://zzanswer.github.io/2016/04/20/初级排序算法/#more" target="_blank" rel="external">这篇文档</a>。下面给出代码：</p>
+<pre><code>// 将a[lo..mid]和a[mid+1..hi]合并
+public static void merge(Comparable[] a, int lo, int mid, int hi) {
+    int i = lo, j = mid + 1;
 
+    // 将a[lo..hi]复制到aux[lo..hi]
+    for (int k = lo; k &lt;= hi; k++) {
+        aux[k] = a[k];
+    }
+
+    // 归并回到a[lo..hi]
+    for (int k = lo; k &lt;= hi; k++) {
+        if (i &gt; mid) {
+            a[k] = aux[j++];
+        } else if (j &gt; hi) {
+            a[k] = aux[i++];
+        } else if (less(aux[j], aux[i])) {
+            a[k] = aux[j++];
+        } else {
+            a[k] = aux[i++];
+        }
+    }
+}
+</code></pre><h2 id="自顶向下的归并排序"><a href="#自顶向下的归并排序" class="headerlink" title="自顶向下的归并排序"></a>自顶向下的归并排序</h2><p>代码如下：</p>
+<pre><code>public class Merge {
+    private static Comparable[] aux;        // 归并所需的辅助数组
+
+    public static void sort(Comparable[] a) {
+        aux = new Comparable[a.length];        // 一次性分配空间
+        sort(a, 0, a.length - 1);
+    }
+
+    // 将数组a[lo..hi]排序
+    private static void sort(Comparable[] a, int lo, int hi) {
+        if (hi &lt;= lo) {
+            return;
+        }
+
+        int mid = lo + (hi - lo) / 2;
+        sort(a, lo, mid);        // 将左半边排序
+        sort(a, mid + 1, hi);    // 将右半边排序
+        merge(a, lo, mid, hi);    // 归并结果（代码见“原地归并的抽象方法”）
+    }
+}
+</code></pre><h2 id="自底向上的归并排序"><a href="#自底向上的归并排序" class="headerlink" title="自底向上的归并排序"></a>自底向上的归并排序</h2><p>代码如下：</p>
+<pre><code>public class MergeBU {
+    private static Comparable[] aux;        // 归并所需的辅助数组
+
+    // merge()方法的代码请见“原地归并的抽象方法”
+    // 进行lgN次两两归并
+    public static void sort(Comparable[] a) {
+        int N = a.length;
+        aux = new Comparable[N];
+
+        // sz子数组大小
+        for (int sz = 1; sz &lt; N; sz = sz + sz) {
+            // lo:子数组索引
+            for (int lo = 0; lo &lt; N - sz; lo += sz + sz) {
+                merge(a, lo, lo + sz - 1, Math.min(lo + sz + sz - 1, N - 1));
+            }
+        }
+    }
+}
+</code></pre>
       
     </div>
 
@@ -367,9 +389,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/R/" rel="tag">#R</a>
+            <a href="/tags/Java/" rel="tag">#Java</a>
           
-            <a href="/tags/ggplot2/" rel="tag">#ggplot2</a>
+            <a href="/tags/归并排序/" rel="tag">#归并排序</a>
+          
+            <a href="/tags/排序/" rel="tag">#排序</a>
+          
+            <a href="/tags/算法/" rel="tag">#算法</a>
           
         </div>
       
@@ -378,17 +404,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/19/文本挖掘—《三体》分词、词云展示/" rel="next" title="文本挖掘—《三体》分词、词云展示">
-                <i class="fa fa-chevron-left"></i> 文本挖掘—《三体》分词、词云展示
+              <a href="/2016/04/21/ggplot2定位/" rel="next" title="ggplot2定位">
+                <i class="fa fa-chevron-left"></i> ggplot2定位
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/23/Dijkstra的双栈算术表达式求值算法/" rel="prev" title="Dijkstra的双栈算术表达式求值算法 Java实现">
-                Dijkstra的双栈算术表达式求值算法 Java实现 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -403,10 +425,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/03/23/ggplot2-qplot()用法/"
-     data-title="ggplot2-qplot()用法"
+        <div class="ds-share flat" data-thread-key="2016/04/21/归并排序/"
+     data-title="归并排序"
      data-content=""
-     data-url="http://yoursite.com/2016/03/23/ggplot2-qplot()用法/">
+     data-url="http://yoursite.com/2016/04/21/归并排序/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -433,8 +455,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/23/ggplot2-qplot()用法/"
-           data-title="ggplot2-qplot()用法" data-url="http://yoursite.com/2016/03/23/ggplot2-qplot()用法/">
+      <div class="ds-thread" data-thread-key="2016/04/21/归并排序/"
+           data-title="归并排序" data-url="http://yoursite.com/2016/04/21/归并排序/">
       </div>
     
   </div>
@@ -547,7 +569,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本用法"><span class="nav-number">2.</span> <span class="nav-text">基本用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加载package和数据集"><span class="nav-number">2.1.</span> <span class="nav-text">加载package和数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本参数绘图"><span class="nav-number">2.2.</span> <span class="nav-text">基本参数绘图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量的函数"><span class="nav-number">2.3.</span> <span class="nav-text">变量的函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图形属性"><span class="nav-number">3.</span> <span class="nav-text">图形属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自动设定"><span class="nav-number">3.1.</span> <span class="nav-text">自动设定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#手动设定"><span class="nav-number">3.2.</span> <span class="nav-text">手动设定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#几何对象"><span class="nav-number">4.</span> <span class="nav-text">几何对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分面"><span class="nav-number">5.</span> <span class="nav-text">分面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#外观"><span class="nav-number">6.</span> <span class="nav-text">外观</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">7.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原地归并的抽象方法"><span class="nav-number">2.</span> <span class="nav-text">原地归并的抽象方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自顶向下的归并排序"><span class="nav-number">3.</span> <span class="nav-text">自顶向下的归并排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自底向上的归并排序"><span class="nav-number">4.</span> <span class="nav-text">自底向上的归并排序</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
