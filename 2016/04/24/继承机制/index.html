@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="OOP,封装,开闭原则,抽象," />
+  <meta name="keywords" content="OOP,合成,多态抽象,继承,规范抽象,里氏代换原则," />
 
 
 
@@ -57,25 +57,28 @@
 
 
 
-<meta name="description" content="背景本文为《冒号课堂：编程范式与OOP思想》一书中第八课的思考与总结。
-问题与解答如何看待软件重用与软件应变之间的关系？软件可重用性是建立在应变性的基础上的（类库和框架为例）。
-你是如何理解开闭原则的？开闭原则(open/closed principle，简称OCP)，开指的是对扩展开放，闭指的是对修改封闭。
-软件应该在模块的基础上进行扩展而不是修改，即严格遵循开闭原则的软件，不应该修改老代码，只">
+<meta name="description" content="背景本文为《冒号课堂：编程范式与OOP思想》一书中第九课的思考与总结。
+问题与解答请总结3类继承各自的特点和适用场合。3类继承：只继承实现，只继承接口（接口继承），既继承实现又继承接口（类继承）。
+只继承实现：C++可以实现，非公有继承可以看作是一种匿名的非显性合成，可以访问基类的protected成员，也可以覆盖(override)基类的方法。
+接口继承：生产可重用的新代码。
+类继承（又叫实现继">
 <meta property="og:type" content="article">
-<meta property="og:title" content="抽象接口">
-<meta property="og:url" content="http://yoursite.com/2016/04/10/抽象接口/index.html">
+<meta property="og:title" content="继承机制">
+<meta property="og:url" content="http://yoursite.com/2016/04/24/继承机制/index.html">
 <meta property="og:site_name" content="zzanswer的博客">
-<meta property="og:description" content="背景本文为《冒号课堂：编程范式与OOP思想》一书中第八课的思考与总结。
-问题与解答如何看待软件重用与软件应变之间的关系？软件可重用性是建立在应变性的基础上的（类库和框架为例）。
-你是如何理解开闭原则的？开闭原则(open/closed principle，简称OCP)，开指的是对扩展开放，闭指的是对修改封闭。
-软件应该在模块的基础上进行扩展而不是修改，即严格遵循开闭原则的软件，不应该修改老代码，只">
-<meta property="og:updated_time" content="2016-04-10T11:36:09.743Z">
+<meta property="og:description" content="背景本文为《冒号课堂：编程范式与OOP思想》一书中第九课的思考与总结。
+问题与解答请总结3类继承各自的特点和适用场合。3类继承：只继承实现，只继承接口（接口继承），既继承实现又继承接口（类继承）。
+只继承实现：C++可以实现，非公有继承可以看作是一种匿名的非显性合成，可以访问基类的protected成员，也可以覆盖(override)基类的方法。
+接口继承：生产可重用的新代码。
+类继承（又叫实现继">
+<meta property="og:updated_time" content="2016-04-25T03:00:02.874Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="抽象接口">
-<meta name="twitter:description" content="背景本文为《冒号课堂：编程范式与OOP思想》一书中第八课的思考与总结。
-问题与解答如何看待软件重用与软件应变之间的关系？软件可重用性是建立在应变性的基础上的（类库和框架为例）。
-你是如何理解开闭原则的？开闭原则(open/closed principle，简称OCP)，开指的是对扩展开放，闭指的是对修改封闭。
-软件应该在模块的基础上进行扩展而不是修改，即严格遵循开闭原则的软件，不应该修改老代码，只">
+<meta name="twitter:title" content="继承机制">
+<meta name="twitter:description" content="背景本文为《冒号课堂：编程范式与OOP思想》一书中第九课的思考与总结。
+问题与解答请总结3类继承各自的特点和适用场合。3类继承：只继承实现，只继承接口（接口继承），既继承实现又继承接口（类继承）。
+只继承实现：C++可以实现，非公有继承可以看作是一种匿名的非显性合成，可以访问基类的protected成员，也可以覆盖(override)基类的方法。
+接口继承：生产可重用的新代码。
+类继承（又叫实现继">
 
 
 
@@ -93,7 +96,7 @@
   };
 </script>
 
-  <title> 抽象接口 | zzanswer的博客 </title>
+  <title> 继承机制 | zzanswer的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -262,7 +265,7 @@
             
             
               
-                抽象接口
+                继承机制
               
             
           </h1>
@@ -274,8 +277,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-10T19:02:40+08:00" content="2016-04-10">
-              2016-04-10
+            <time itemprop="dateCreated" datetime="2016-04-24T22:45:08+08:00" content="2016-04-24">
+              2016-04-24
             </time>
           </span>
 
@@ -304,8 +307,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/04/10/抽象接口/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/10/抽象接口/" itemprop="commentsCount"></span>
+                <a href="/2016/04/24/继承机制/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/24/继承机制/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -326,12 +329,43 @@
       
 
       
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>本文为《冒号课堂：编程范式与OOP思想》一书中第八课的思考与总结。</p>
-<h2 id="问题与解答"><a href="#问题与解答" class="headerlink" title="问题与解答"></a>问题与解答</h2><h3 id="如何看待软件重用与软件应变之间的关系？"><a href="#如何看待软件重用与软件应变之间的关系？" class="headerlink" title="如何看待软件重用与软件应变之间的关系？"></a>如何看待软件重用与软件应变之间的关系？</h3><p>软件可重用性是建立在应变性的基础上的（类库和框架为例）。</p>
-<h3 id="你是如何理解开闭原则的？"><a href="#你是如何理解开闭原则的？" class="headerlink" title="你是如何理解开闭原则的？"></a>你是如何理解开闭原则的？</h3><p>开闭原则(open/closed principle，简称OCP)，开指的是对扩展开放，闭指的是对修改封闭。</p>
-<p>软件应该在模块的基础上进行扩展而不是修改，即严格遵循开闭原则的软件，不应该修改老代码，只能增加新代码。越是基础、越是核心的模块越应该遵循这一原则。<br><a id="more"></a></p>
-<h3 id="你在编程设计中是如何选择访问修饰符的？"><a href="#你在编程设计中是如何选择访问修饰符的？" class="headerlink" title="你在编程设计中是如何选择访问修饰符的？"></a>你在编程设计中是如何选择访问修饰符的？</h3><p>基本的原则是尽可能地使用限制性更强的修饰符。尤其是域成员，没有特殊理由都应该是private的，除非类是一个用作存储的具体数据类型、private内部类或域是一个静态(static)常量。</p>
-<p>访问控制是对<strong>静态代码</strong>的控制，而不是对<strong>动态对象</strong>的控制。</p>
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>本文为《冒号课堂：编程范式与OOP思想》一书中第九课的思考与总结。</p>
+<h2 id="问题与解答"><a href="#问题与解答" class="headerlink" title="问题与解答"></a>问题与解答</h2><h3 id="请总结3类继承各自的特点和适用场合。"><a href="#请总结3类继承各自的特点和适用场合。" class="headerlink" title="请总结3类继承各自的特点和适用场合。"></a>请总结3类继承各自的特点和适用场合。</h3><p>3类继承：只继承实现，只继承接口（接口继承），既继承实现又继承接口（类继承）。</p>
+<p>只继承实现：C++可以实现，非公有继承可以看作是一种匿名的非显性合成，可以访问基类的protected成员，也可以覆盖(override)基类的方法。</p>
+<p>接口继承：生产可重用的新代码。</p>
+<p>类继承（又叫实现继承）：消费可重用的旧代码。<br><a id="more"></a></p>
+<h3 id="里氏代换原则的重要意义何在？"><a href="#里氏代换原则的重要意义何在？" class="headerlink" title="里氏代换原则的重要意义何在？"></a>里氏代换原则的重要意义何在？</h3><p>里氏代换原则(Liskov Substitution Principle)：类型A的子类型B应该满足条件：将程序中类型A的对象置换为类型B的对象，不会影响程序的合理性和正确性。里氏代换原则的本质正是为了保证规范抽象。</p>
+<p>实现继承也应该遵循里氏代换原则，这既是一种义务，也是一种权益。说是义务，是因为实现继承在继承实现的同时也继承了接口，按理也应继承接口的规范；说是权益，是因为接口的继承能让代码被重用。如果只是为了重用基类的代码，并不希望重用它的接口，那就应该采用合成而不是类继承的方式。这涉及一个通用的编程原则，即尽可能地弥合语法与语义之间的缝隙，以压缩代码臭虫的生存空间。</p>
+<h3 id="数据抽象与多态抽象是OOP中最重要的两种抽象，它们分别在不同层次上完成了对接口与实现的分离。把握这两条主线对培养OOP的语感至关重要，请平时多加揣摩和实践。"><a href="#数据抽象与多态抽象是OOP中最重要的两种抽象，它们分别在不同层次上完成了对接口与实现的分离。把握这两条主线对培养OOP的语感至关重要，请平时多加揣摩和实践。" class="headerlink" title="数据抽象与多态抽象是OOP中最重要的两种抽象，它们分别在不同层次上完成了对接口与实现的分离。把握这两条主线对培养OOP的语感至关重要，请平时多加揣摩和实践。"></a>数据抽象与多态抽象是OOP中最重要的两种抽象，它们分别在不同层次上完成了对接口与实现的分离。把握这两条主线对培养OOP的语感至关重要，请平时多加揣摩和实践。</h3><p>所谓多态，意指一种类型可能具备多种类型的形式。显然，多态抽象是建立在类型层级的基础上的。或者说，接口继承在遵循里氏代换原则的前提下，通过接口重用达成规范重用，保证了多态抽象，进而维护了开闭原则，让客户一劳永逸地享受接口服务而无后顾之忧。</p>
+<h3 id="为什么要提倡接口继承，慎用实现继承？"><a href="#为什么要提倡接口继承，慎用实现继承？" class="headerlink" title="为什么要提倡接口继承，慎用实现继承？"></a>为什么要提倡接口继承，慎用实现继承？</h3><p>实现继承最大的硬伤是在类与类之间建立了强耦合关系，使代码趋于僵硬、脆弱和复杂。这种关系是永固的，一经建立无法解除；这种关系是纵深的，不限于相邻的父类与子类，更贯穿整个类族；这种关系还是双向的，从上到下、从下到上。如果想要覆盖某一方法成员，还得了解祖先类成员之间的内在逻辑关系；如果想增加一个方法成员，还得祈祷它不与祖先类将来的版本发生冲突。</p>
+<h3 id="你对方法修饰符的选择标准是什么？"><a href="#你对方法修饰符的选择标准是什么？" class="headerlink" title="你对方法修饰符的选择标准是什么？"></a>你对方法修饰符的选择标准是什么？</h3><p>推荐的方法修饰符：</p>
+<table>
+<thead>
+<tr>
+<th>方法修饰符/方法职责</th>
+<th>公开接口</th>
+<th>内部挂钩</th>
+<th>内部接口</th>
+<th>自用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>访问控制</td>
+<td>public</td>
+<td>protected或private(C++)</td>
+<td>protected或package(Java)intertal(C#)</td>
+<td>private</td>
+</tr>
+<tr>
+<td>多态</td>
+<td>非多态</td>
+<td>多态</td>
+<td>非多态</td>
+<td>非多态</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -342,11 +376,15 @@
           
             <a href="/tags/OOP/" rel="tag">#OOP</a>
           
-            <a href="/tags/封装/" rel="tag">#封装</a>
+            <a href="/tags/合成/" rel="tag">#合成</a>
           
-            <a href="/tags/开闭原则/" rel="tag">#开闭原则</a>
+            <a href="/tags/多态抽象/" rel="tag">#多态抽象</a>
           
-            <a href="/tags/抽象/" rel="tag">#抽象</a>
+            <a href="/tags/继承/" rel="tag">#继承</a>
+          
+            <a href="/tags/规范抽象/" rel="tag">#规范抽象</a>
+          
+            <a href="/tags/里氏代换原则/" rel="tag">#里氏代换原则</a>
           
         </div>
       
@@ -355,17 +393,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/09/抽象封装/" rel="next" title="抽象封装">
-                <i class="fa fa-chevron-left"></i> 抽象封装
+              <a href="/2016/04/21/归并排序/" rel="next" title="归并排序">
+                <i class="fa fa-chevron-left"></i> 归并排序
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/12/ggplot2工具箱/" rel="prev" title="ggplot2工具箱">
-                ggplot2工具箱 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -380,10 +414,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/04/10/抽象接口/"
-     data-title="抽象接口"
+        <div class="ds-share flat" data-thread-key="2016/04/24/继承机制/"
+     data-title="继承机制"
      data-content=""
-     data-url="http://yoursite.com/2016/04/10/抽象接口/">
+     data-url="http://yoursite.com/2016/04/24/继承机制/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -410,8 +444,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/04/10/抽象接口/"
-           data-title="抽象接口" data-url="http://yoursite.com/2016/04/10/抽象接口/">
+      <div class="ds-thread" data-thread-key="2016/04/24/继承机制/"
+           data-title="继承机制" data-url="http://yoursite.com/2016/04/24/继承机制/">
       </div>
     
   </div>
@@ -524,7 +558,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题与解答"><span class="nav-number">2.</span> <span class="nav-text">问题与解答</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何看待软件重用与软件应变之间的关系？"><span class="nav-number">2.1.</span> <span class="nav-text">如何看待软件重用与软件应变之间的关系？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#你是如何理解开闭原则的？"><span class="nav-number">2.2.</span> <span class="nav-text">你是如何理解开闭原则的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#你在编程设计中是如何选择访问修饰符的？"><span class="nav-number">2.3.</span> <span class="nav-text">你在编程设计中是如何选择访问修饰符的？</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题与解答"><span class="nav-number">2.</span> <span class="nav-text">问题与解答</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#请总结3类继承各自的特点和适用场合。"><span class="nav-number">2.1.</span> <span class="nav-text">请总结3类继承各自的特点和适用场合。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#里氏代换原则的重要意义何在？"><span class="nav-number">2.2.</span> <span class="nav-text">里氏代换原则的重要意义何在？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据抽象与多态抽象是OOP中最重要的两种抽象，它们分别在不同层次上完成了对接口与实现的分离。把握这两条主线对培养OOP的语感至关重要，请平时多加揣摩和实践。"><span class="nav-number">2.3.</span> <span class="nav-text">数据抽象与多态抽象是OOP中最重要的两种抽象，它们分别在不同层次上完成了对接口与实现的分离。把握这两条主线对培养OOP的语感至关重要，请平时多加揣摩和实践。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要提倡接口继承，慎用实现继承？"><span class="nav-number">2.4.</span> <span class="nav-text">为什么要提倡接口继承，慎用实现继承？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#你对方法修饰符的选择标准是什么？"><span class="nav-number">2.5.</span> <span class="nav-text">你对方法修饰符的选择标准是什么？</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
