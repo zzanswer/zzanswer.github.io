@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Java,希尔排序,排序,插入排序,算法,选择排序," />
+  <meta name="keywords" content="R,ggplot2," />
 
 
 
@@ -57,16 +57,28 @@
 
 
 
-<meta name="description" content="背景本文主要讨论几个初级排序算法，用Java语言来实现。首先给出一个排序算法类模板Example类：将排序代码放在类的sort()方法中，该类还将包含辅助函数less()和exch()以及一个示例用例main()。less()方法对元素进行比较，exch()方法将元素交换位置。下面给出代码：">
+<meta name="description" content="简介好的数据分析都应该具有灵活性这一优点。如果数据发生变化，或者出现一些很不利于基本假设的信息时，这时候我们应该能够快速、便捷地更改之前的图形。下面主要介绍三种减少重复性工作的方法。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="初级排序算法">
-<meta property="og:url" content="http://yoursite.com/2016/04/20/初级排序算法/index.html">
+<meta property="og:title" content="ggplot2减少重复性工作">
+<meta property="og:url" content="http://yoursite.com/2016/05/07/ggplot2减少重复性工作/index.html">
 <meta property="og:site_name" content="zzanswer的博客">
-<meta property="og:description" content="背景本文主要讨论几个初级排序算法，用Java语言来实现。首先给出一个排序算法类模板Example类：将排序代码放在类的sort()方法中，该类还将包含辅助函数less()和exch()以及一个示例用例main()。less()方法对元素进行比较，exch()方法将元素交换位置。下面给出代码：">
-<meta property="og:updated_time" content="2016-04-20T12:18:31.074Z">
+<meta property="og:description" content="简介好的数据分析都应该具有灵活性这一优点。如果数据发生变化，或者出现一些很不利于基本假设的信息时，这时候我们应该能够快速、便捷地更改之前的图形。下面主要介绍三种减少重复性工作的方法。">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/dd1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/dd2.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/dd3.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/dd4.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/dd5.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/dd6.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/htmb1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/htmb2.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/dgdx1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/dgdx2.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/hs1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/hs2.png">
+<meta property="og:updated_time" content="2016-05-07T07:51:32.608Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="初级排序算法">
-<meta name="twitter:description" content="背景本文主要讨论几个初级排序算法，用Java语言来实现。首先给出一个排序算法类模板Example类：将排序代码放在类的sort()方法中，该类还将包含辅助函数less()和exch()以及一个示例用例main()。less()方法对元素进行比较，exch()方法将元素交换位置。下面给出代码：">
+<meta name="twitter:title" content="ggplot2减少重复性工作">
+<meta name="twitter:description" content="简介好的数据分析都应该具有灵活性这一优点。如果数据发生变化，或者出现一些很不利于基本假设的信息时，这时候我们应该能够快速、便捷地更改之前的图形。下面主要介绍三种减少重复性工作的方法。">
 
 
 
@@ -84,7 +96,7 @@
   };
 </script>
 
-  <title> 初级排序算法 | zzanswer的博客 </title>
+  <title> ggplot2减少重复性工作 | zzanswer的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -253,7 +265,7 @@
             
             
               
-                初级排序算法
+                ggplot2减少重复性工作
               
             
           </h1>
@@ -265,8 +277,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-20T15:03:03+08:00" content="2016-04-20">
-              2016-04-20
+            <time itemprop="dateCreated" datetime="2016-05-07T14:48:37+08:00" content="2016-05-07">
+              2016-05-07
             </time>
           </span>
 
@@ -279,8 +291,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
+                  <a href="/categories/R语言/" itemprop="url" rel="index">
+                    <span itemprop="name">R语言</span>
                   </a>
                 </span>
 
@@ -295,8 +307,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/04/20/初级排序算法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/20/初级排序算法/" itemprop="commentsCount"></span>
+                <a href="/2016/05/07/ggplot2减少重复性工作/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/07/ggplot2减少重复性工作/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -317,118 +329,69 @@
       
 
       
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>本文主要讨论几个初级排序算法，用Java语言来实现。首先给出一个排序算法类模板Example类：将排序代码放在类的sort()方法中，该类还将包含辅助函数less()和exch()以及一个示例用例main()。less()方法对元素进行比较，exch()方法将元素交换位置。下面给出代码：<br><a id="more"></a></p>
-<pre><code>import edu.princeton.cs.algs4.StdIn;
-import edu.princeton.cs.algs4.StdOut;
-
-public class Example {
-    public static void sort(Comparable[] a) {
-        // 此为各种排序算法
-    }
-
-    private static boolean less(Comparable v, Comparable w) {
-        return v.compareTo(w) &lt; 0;
-    }
-
-    private static void exch(Comparable[] a, int i, int j) {
-        Comparable t = a[i];
-        a[i] = a[j];
-        a[j] = t;
-    }
-
-    // 在单行中打印数组
-    private static void show(Comparable[] a) {
-        for (int i = 0; i &lt; a.length; i++) {
-            StdOut.print(a[i] + &quot; &quot;);
-        StdOut.println();
-        }
-    }
-
-    // 测试数组元素是否有序
-    public static boolean isSorted(Comparable[] a) {
-        for (int i = 1; i &lt; a.length; i++) {
-            if (less(a[i], a[i-1])) {
-                return false;
-            return true;
-            }
-        }
-    }
-
-    // 从标准输入读取字符串，将它们排序并输出
-    public static void main(String[] args) {
-        String[] a = In.readStrings();
-        sort(a);
-        assert isSorted(a);
-        show(a);
-    }
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>好的数据分析都应该具有灵活性这一优点。如果数据发生变化，或者出现一些很不利于基本假设的信息时，这时候我们应该能够快速、便捷地更改之前的图形。下面主要介绍三种减少重复性工作的方法。<br><a id="more"></a></p>
+<h2 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h2><p>ggplot2会将最后一次绘制或修改的图形存储下来，输入<code>last_plot</code>即可获取该图形。我们可以从一个最基本的图形开始，迭代式地逐步添加图层和调整标度，直到得到结果。下面的例子就是将一个区域放大，并添加新的图层来突出发现的信息：x值和y值相同的钻石很少。</p>
+<pre><code>qplot(x, y, data = diamonds, na.rm = TRUE)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/dd1.png" alt="id"></p>
+<pre><code>last_plot() + xlim(3, 11) + ylim(3, 11)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/dd2.png" alt="id"></p>
+<pre><code>last_plot() + xlim(4, 10) + ylim(4, 10)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/dd3.png" alt="id"></p>
+<pre><code>last_plot() + xlim(4, 5) + ylim(4, 5)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/dd4.png" alt="id"></p>
+<pre><code>last_plot() + xlim(4, 4.5) + ylim(4, 4.5)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/dd5.png" alt="id"></p>
+<pre><code>last_plot() + geom_abline(colour = &quot;red&quot;)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/dd6.png" alt="id"></p>
+<p>调整完后最好再写一个能生成最终图形的独立代码：</p>
+<pre><code>qplot(x, y, data = diamonds, na.rm = T) + geom_abline(colour = &quot;red&quot;) + xlim(4, 4.5) + ylim(4, 4.5)
+</code></pre><h2 id="绘图模板"><a href="#绘图模板" class="headerlink" title="绘图模板"></a>绘图模板</h2><p>ggplot2图形的每一个组件都是一个对象：可以被创建、存储并独立应用于某个图形中。我们可以创建可重用的组件来自动执行某些常用的任务，从而不用多次重复输入冗长的函数。下面的例子创建了一个颜色标度并将其应用在两个图形中：</p>
+<pre><code>gradient_rb &lt;- scale_colour_gradient(low = &quot;red&quot;, high = &quot;blue&quot;)
+qplot(cty, hwy, data = mpg, colour = displ) + gradient_rb
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/htmb1.png" alt="id"></p>
+<pre><code>qplot(bodywt, brainwt, data = msleep, colour = awake, log = &quot;xy&quot;) + gradient_rb
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/htmb2.png" alt="id"></p>
+<p>同存储单个对象一样，也可以将ggplot2中的组件存储为list格式的列表。向某个图形中添加组件列表和将其中的组件按顺序逐个添加是一样的效果。下面的例子创建了两个连续标度，用来取消坐标轴标签和刻度。</p>
+<pre><code>xquiet &lt;- scale_x_continuous(&quot;&quot;, breaks = NULL)
+yquiet &lt;- scale_y_continuous(&quot;&quot;, breaks = NULL)
+quiet &lt;- list(xquiet, yquiet)
+qplot(mpg, wt, data = mtcars) + quiet
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/dgdx1.png" alt="id"></p>
+<pre><code>qplot(displ, cty, data = mpg) + quiet
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/dgdx2.png" alt="id"></p>
+<p>类似地，创建一个改变图层默认设置的函数也很简单。下面创建一个在图形中添加线性模型的函数：</p>
+<pre><code>geom_lm &lt;- function(formula = y ~ x) {
+    geom_smooth(formula = formula, se = FALSE, method = &quot;lm&quot;)
 }
-</code></pre><h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><p>首先，找到数组中最小的那个元素，其次，将它和数组的第一个元素交换位置（如果第一个元素就是最小元素那么它就和自己交换）。再次，在剩下的元素中找到最小的元素，将它与数组的第二个元素交换位置。如此往复，直到将整个数组排序。</p>
-<p>它有两个鲜明的特点：</p>
-<ul>
-<li>运行时间和输入无关。</li>
-<li>数据移动是最少的。</li>
-</ul>
-<p>下面给出代码实现：</p>
-<pre><code>public class Selection {
-    // 将a[]按升序排列
-    public static void sort(Comparable[] a) {
-        int N = a.length;        // 数组长度
-
-        // 将a[i]和a[i+1..N]中最小的元素交换
-        for (int i = 0; i &lt; N; i++) {
-            int min = i；     // 最小元素的索引
-
-            for (int j = i + 1; j &lt; N; j++) {
-                if (less(a[j], a[min])) {
-                    min = j;
-                }
-            }
-
-            exch(a, j, min);
-        }
-    }
+qplot(mpg, wt, data = mtcars) + geom_lm()
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/hs1.png" alt="id"></p>
+<pre><code>library(splines)
+qplot(mpg, wt, data = mtcars) + geom_lm(y ~ ns(x, 3))
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/hs2.png" alt="id"></p>
+<h2 id="绘图函数"><a href="#绘图函数" class="headerlink" title="绘图函数"></a>绘图函数</h2><p>如果对某一种基本图形，我们反反复复地将其应用到不同的数据集或参数上，这时很有必要将其所有不同的选项封装成一个简单的函数。下面给个例子：</p>
+<pre><code>range01 &lt;- function(x) {
+     rng &lt;- range(x, na.rm = TRUE)
+     (x - rng[1] / diff(rng))
 }
-</code></pre><h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><p>插入排序即将元素插入到有序的元素中，在实现中，为了要给插入的元素腾出空间，需要将其余所有元素在插入之前都向右移动一位。</p>
-<p>插入排序所需的时间取决于输入中元素的初始顺序。插入排序对于实际应用中常见的某些类型的非随机数组很有效。下面给出代码实现：</p>
-<pre><code>public class Insertion {
-    // 将a[]按升序排列
-    public static void sort(Comparable[] a) {
-        int N = a.length;
 
-        // 将a[i]插入到a[i-1]、a[i-2]、a[i-3]...之中
-        for (int i = 1; i &lt; N; i++) {
-            for (int j = i; j &gt; 0 &amp;&amp; less(a[j], a[j-1]); j--) {
-                exch(a, j , j-1);
-            }
-        }
-    }
+library(plyr)
+library(reshape2)
+
+pcp_data &lt;- function(df) {
+    numeric &lt;- laply(df, is.numeric)
+    df[numeric] &lt;- colwise(range01)(df[numeric])
+    df$.row &lt;- rownames(df)
+    dfm &lt;- melt(df, id = c(&quot;.row&quot;, names(df)[!numeric]))
+    class(dfm) &lt;- c(&quot;pcp&quot;, class(dfm))
+    dfm
 }
-</code></pre><h2 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h2><p>希尔排序为了加快速度简单地改进了插入排序，交换不相邻的元素以对数组的局部进行排序，并最终用插入排序将局部有序的数组排序。希尔排序的思想是使数组中任意间隔为h的元素都是有序的。这样的数组被称为h有序数组。即一个h有序数组就是h个互相独立的有序数组编织在一起组成的一个数组。</p>
-<p>希尔排序更高效的原因是它权衡了子数组的规模和有序性。排序之初，各个子数组都很短，排序之后子数组都是部分有序的，这两种情况都很适合插入排序。子数组部分有序的程度取决于递增序列的选择。代码如下：</p>
-<pre><code>public class Shell {
-    // 将a[]按升序排列
-    public static void sort(Comparable[] a) {
-        int N = a.length;
-        int h = 1;
 
-        while(h &lt; N/3) {
-            h = 3 * h + 1;
-        }
-
-        // 将数组变为h有序
-        while(h &gt;= 1) {
-            // 将a[i]插入到a[i-h],a[i-2*h],a[i-3*h]...之中
-            for (int i = h; i &lt; N; i++) {
-                for (int j = i; j &gt;= h &amp;&amp; less(a[j], a[j-h]); j -= h) {
-                    exch(a, j, j-h);
-                }
-            }
-
-            h = h / 3;
-        }
-    }
+pcp &lt;- function(df, ...) {
+    df &lt;- pcp_data(df)
+    ggplot(df, aes(variable, value)) + geom_line(aes(group = .row))
 }
-</code></pre>
+</code></pre><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1][ggplot2:数据分析与图形艺术]</p>
+
       
     </div>
 
@@ -436,17 +399,9 @@ public class Example {
       
         <div class="post-tags">
           
-            <a href="/tags/Java/" rel="tag">#Java</a>
+            <a href="/tags/R/" rel="tag">#R</a>
           
-            <a href="/tags/希尔排序/" rel="tag">#希尔排序</a>
-          
-            <a href="/tags/排序/" rel="tag">#排序</a>
-          
-            <a href="/tags/插入排序/" rel="tag">#插入排序</a>
-          
-            <a href="/tags/算法/" rel="tag">#算法</a>
-          
-            <a href="/tags/选择排序/" rel="tag">#选择排序</a>
+            <a href="/tags/ggplot2/" rel="tag">#ggplot2</a>
           
         </div>
       
@@ -455,17 +410,13 @@ public class Example {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/18/ggplot2标度、坐标轴和图例/" rel="next" title="ggplot2标度、坐标轴和图例">
-                <i class="fa fa-chevron-left"></i> ggplot2标度、坐标轴和图例
+              <a href="/2016/05/05/ggplot2数据操作/" rel="next" title="ggplot2数据操作">
+                <i class="fa fa-chevron-left"></i> ggplot2数据操作
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/21/ggplot2定位/" rel="prev" title="ggplot2定位">
-                ggplot2定位 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -480,10 +431,10 @@ public class Example {
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/04/20/初级排序算法/"
-     data-title="初级排序算法"
+        <div class="ds-share flat" data-thread-key="2016/05/07/ggplot2减少重复性工作/"
+     data-title="ggplot2减少重复性工作"
      data-content=""
-     data-url="http://yoursite.com/2016/04/20/初级排序算法/">
+     data-url="http://yoursite.com/2016/05/07/ggplot2减少重复性工作/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -510,8 +461,8 @@ public class Example {
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/04/20/初级排序算法/"
-           data-title="初级排序算法" data-url="http://yoursite.com/2016/04/20/初级排序算法/">
+      <div class="ds-thread" data-thread-key="2016/05/07/ggplot2减少重复性工作/"
+           data-title="ggplot2减少重复性工作" data-url="http://yoursite.com/2016/05/07/ggplot2减少重复性工作/">
       </div>
     
   </div>
@@ -624,7 +575,7 @@ public class Example {
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择排序"><span class="nav-number">2.</span> <span class="nav-text">选择排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入排序"><span class="nav-number">3.</span> <span class="nav-text">插入排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#希尔排序"><span class="nav-number">4.</span> <span class="nav-text">希尔排序</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迭代"><span class="nav-number">2.</span> <span class="nav-text">迭代</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘图模板"><span class="nav-number">3.</span> <span class="nav-text">绘图模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘图函数"><span class="nav-number">4.</span> <span class="nav-text">绘图函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
