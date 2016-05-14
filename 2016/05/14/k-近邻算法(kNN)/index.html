@@ -65,7 +65,7 @@
 <meta property="og:site_name" content="zzanswer的博客">
 <meta property="og:description" content="kNN简介简单地说，k-近邻算法采用测量不同特征值之间的距离方法进行分类。
 它的工作原理是：存在一个样本数据集合，也称做训练样本集，并且样本集中每个数据都存在标签，即我们知道样本集中每一数据与所属分类的对应关系。输入没有标签的新数据后，将新数据的每个特征与样本集中数据对应的特征进行比较，然后算法提取样本集中特征最相似数据（最近邻）的分类标签。一般来说，我们只选择样本数据集中前k个最相似的数据，这就">
-<meta property="og:updated_time" content="2016-05-14T12:00:27.386Z">
+<meta property="og:updated_time" content="2016-05-14T12:08:19.494Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="k-近邻算法(kNN)">
 <meta name="twitter:description" content="kNN简介简单地说，k-近邻算法采用测量不同特征值之间的距离方法进行分类。
@@ -360,8 +360,8 @@ def classify0(inX, dataSet, labels, k):
     sortedClassCount = sorted(classCount.iteritems(), key = operator.itemgetter(1), reverse = True)
     return sortedClassCount[0][0]
 </code></pre><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1][机器学习实战]</p>
-<p>[2][维基百科：最近邻居法]</p>
-<p>[3][百度百科：邻近算法]</p>
+<p>[2]<a href="https://zh.wikipedia.org/wiki/%E6%9C%80%E8%BF%91%E9%84%B0%E5%B1%85%E6%B3%95" target="_blank" rel="external">维基百科：最近邻居法</a></p>
+<p>[3]<a href="http://baike.baidu.com/link?url=LErplNKy3Ly-wI6YDJ2chzB9PYofrDiZ4JqYuYSY8TXCcp9Dfihhr6laIB9gNYjvxJisrBAE4xEbuULgfNnQEaAZX8REZVubOw2zBigkLyfr0KS6UWk1fMmX3v1xAaHeapEX-ZgA10d9gkjfGYOd8q" target="_blank" rel="external">百度百科：邻近算法</a></p>
 
       
     </div>
