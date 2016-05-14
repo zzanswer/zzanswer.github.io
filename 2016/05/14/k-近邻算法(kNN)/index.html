@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="R,ggplot2,主题," />
+  <meta name="keywords" content="Python,kNN,分类,机器学习," />
 
 
 
@@ -57,24 +57,19 @@
 
 
 
-<meta name="description" content="简介本文主要是介绍ggplot2的主题设置，通过它可对数据之外的图形外观进行控制。
-主题主题的控制包括标题、坐标轴标签、图例标签等文字调整，以及网格线、背景、轴须得颜色搭配。
-ggplot2的策略是：绘图时，首先确定数据如何展示，然后再用主题系统对细节进行渲染。">
+<meta name="description" content="kNN简介简单地说，k-近邻算法采用测量不同特征值之间的距离方法进行分类。
+它的工作原理是：存在一个样本数据集合，也称做训练样本集，并且样本集中每个数据都存在标签，即我们知道样本集中每一数据与所属分类的对应关系。输入没有标签的新数据后，将新数据的每个特征与样本集中数据对应的特征进行比较，然后算法提取样本集中特征最相似数据（最近邻）的分类标签。一般来说，我们只选择样本数据集中前k个最相似的数据，这就">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ggplot2精雕细琢">
-<meta property="og:url" content="http://yoursite.com/2016/04/26/ggplot2精雕细琢/index.html">
+<meta property="og:title" content="k-近邻算法(kNN)">
+<meta property="og:url" content="http://yoursite.com/2016/05/14/k-近邻算法(kNN)/index.html">
 <meta property="og:site_name" content="zzanswer的博客">
-<meta property="og:description" content="简介本文主要是介绍ggplot2的主题设置，通过它可对数据之外的图形外观进行控制。
-主题主题的控制包括标题、坐标轴标签、图例标签等文字调整，以及网格线、背景、轴须得颜色搭配。
-ggplot2的策略是：绘图时，首先确定数据如何展示，然后再用主题系统对细节进行渲染。">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/biaod1.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/biaod2.png">
-<meta property="og:updated_time" content="2016-05-04T01:52:06.632Z">
+<meta property="og:description" content="kNN简介简单地说，k-近邻算法采用测量不同特征值之间的距离方法进行分类。
+它的工作原理是：存在一个样本数据集合，也称做训练样本集，并且样本集中每个数据都存在标签，即我们知道样本集中每一数据与所属分类的对应关系。输入没有标签的新数据后，将新数据的每个特征与样本集中数据对应的特征进行比较，然后算法提取样本集中特征最相似数据（最近邻）的分类标签。一般来说，我们只选择样本数据集中前k个最相似的数据，这就">
+<meta property="og:updated_time" content="2016-05-14T12:00:27.386Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ggplot2精雕细琢">
-<meta name="twitter:description" content="简介本文主要是介绍ggplot2的主题设置，通过它可对数据之外的图形外观进行控制。
-主题主题的控制包括标题、坐标轴标签、图例标签等文字调整，以及网格线、背景、轴须得颜色搭配。
-ggplot2的策略是：绘图时，首先确定数据如何展示，然后再用主题系统对细节进行渲染。">
+<meta name="twitter:title" content="k-近邻算法(kNN)">
+<meta name="twitter:description" content="kNN简介简单地说，k-近邻算法采用测量不同特征值之间的距离方法进行分类。
+它的工作原理是：存在一个样本数据集合，也称做训练样本集，并且样本集中每个数据都存在标签，即我们知道样本集中每一数据与所属分类的对应关系。输入没有标签的新数据后，将新数据的每个特征与样本集中数据对应的特征进行比较，然后算法提取样本集中特征最相似数据（最近邻）的分类标签。一般来说，我们只选择样本数据集中前k个最相似的数据，这就">
 
 
 
@@ -92,7 +87,7 @@ ggplot2的策略是：绘图时，首先确定数据如何展示，然后再用�
   };
 </script>
 
-  <title> ggplot2精雕细琢 | zzanswer的博客 </title>
+  <title> k-近邻算法(kNN) | zzanswer的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -261,7 +256,7 @@ ggplot2的策略是：绘图时，首先确定数据如何展示，然后再用�
             
             
               
-                ggplot2精雕细琢
+                k-近邻算法(kNN)
               
             
           </h1>
@@ -273,8 +268,8 @@ ggplot2的策略是：绘图时，首先确定数据如何展示，然后再用�
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-26T11:59:17+08:00" content="2016-04-26">
-              2016-04-26
+            <time itemprop="dateCreated" datetime="2016-05-14T19:43:13+08:00" content="2016-05-14">
+              2016-05-14
             </time>
           </span>
 
@@ -287,8 +282,8 @@ ggplot2的策略是：绘图时，首先确定数据如何展示，然后再用�
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/R语言/" itemprop="url" rel="index">
-                    <span itemprop="name">R语言</span>
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
                   </a>
                 </span>
 
@@ -303,8 +298,8 @@ ggplot2的策略是：绘图时，首先确定数据如何展示，然后再用�
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/04/26/ggplot2精雕细琢/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/26/ggplot2精雕细琢/" itemprop="commentsCount"></span>
+                <a href="/2016/05/14/k-近邻算法(kNN)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/14/k-近邻算法(kNN)/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -325,34 +320,48 @@ ggplot2的策略是：绘图时，首先确定数据如何展示，然后再用�
       
 
       
-        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>本文主要是介绍ggplot2的主题设置，通过它可对数据之外的图形外观进行控制。</p>
-<h2 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h2><p>主题的控制包括标题、坐标轴标签、图例标签等文字调整，以及网格线、背景、轴须得颜色搭配。</p>
-<p>ggplot2的策略是：绘图时，首先确定数据如何展示，然后再用主题系统对细节进行渲染。<br><a id="more"></a></p>
-<h3 id="内置主题"><a href="#内置主题" class="headerlink" title="内置主题"></a>内置主题</h3><p>主题设置有两种方式：</p>
-<ul>
-<li>全局性设置：theme_set(theme_grey())或theme_set(theme_bw())。theme_set()返回先前的主题，可储存以备后用。</li>
-<li>局部性设置：只改变单个图形的主题，qplot(…) + theme_grey()。局部设置将会覆盖默认的全局性设置。</li>
-</ul>
-<h3 id="主题元素和元素函数"><a href="#主题元素和元素函数" class="headerlink" title="主题元素和元素函数"></a>主题元素和元素函数</h3><p>内置元素函数有四个基础类型：文本(text)、线条(lines)、矩形(rectangles)、空白(blank)。</p>
-<ul>
-<li><code>element_text()</code>绘制标签和标题，可控制字体的family，face，colour，size，hjust，vjust，angle，lineheight。下面给出例子：</li>
-<li><code>element_line()</code>控制线条或线段，该元素函数可控制colour，size，linetype。</li>
-<li><code>element_rect()</code>绘制主要供背景使用的矩形。可以控制填充颜色(fill)和边界的colour，size，linetype。</li>
-<li><code>element_blank()</code>表示空主题，即对元素不分配相应的绘图空间。</li>
-</ul>
-<h2 id="自定义标度和几何对象"><a href="#自定义标度和几何对象" class="headerlink" title="自定义标度和几何对象"></a>自定义标度和几何对象</h2><p>为保证新主题的整体连贯性，可能需要调整一些标度和几何对象的默认设置。</p>
-<h3 id="标度"><a href="#标度" class="headerlink" title="标度"></a>标度</h3><p>如果需要改变默认标度的显示方法，请重新定义或者用ggplot2中已经定义的可选方法覆盖控制相应图形属性的标度函数。该函数的命名方法通常是scale_aesthetics_continuous或者scale_aesthetics_discrete，请将函数命名中的aesthetics替换成相应的图形属性，比如color，fill，size等等。给出例子：</p>
-<pre><code>p &lt;- qplot(mpg, wt, data = mtcars, colour = factor(cyl))
-p
-</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/biaod1.png" alt="id"></p>
-<pre><code>scale_colour_discrete &lt;- scale_colour_brewer
-p
-</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/biaod2.png" alt="id"></p>
-<h3 id="几何对象和统计变换"><a href="#几何对象和统计变换" class="headerlink" title="几何对象和统计变换"></a>几何对象和统计变换</h3><p>下面例子展示了如何改变默认颜色和将默认直方图改变成密度直方图:</p>
-<pre><code>update_geom_defaults(&quot;point&quot;, aes(colour = &quot;darkblue&quot;))
-update_stat_defaults(&quot;bin&quot;, aes(y = ..density..))
-</code></pre><h2 id="存储输出"><a href="#存储输出" class="headerlink" title="存储输出"></a>存储输出</h2><p>主要使用ggsave()来存储当前图形。</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1][ggplot2:数据分析与图形艺术]</p>
+        <h2 id="kNN简介"><a href="#kNN简介" class="headerlink" title="kNN简介"></a>kNN简介</h2><p>简单地说，k-近邻算法采用测量不同特征值之间的距离方法进行分类。</p>
+<p>它的工作原理是：存在一个样本数据集合，也称做训练样本集，并且样本集中每个数据都存在标签，即我们知道样本集中每一数据与所属分类的对应关系。输入没有标签的新数据后，将新数据的每个特征与样本集中数据对应的特征进行比较，然后算法提取样本集中特征最相似数据（最近邻）的分类标签。一般来说，我们只选择样本数据集中前k个最相似的数据，这就是k-近邻算法的出处，通常k是不大于20的整数。最后，选择k个最相似数据中出现次数最多的分类，作为新数据的分类。<br><a id="more"></a></p>
+<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ol>
+<li>简单，易于理解，易于实现，无需估计参数，无需训练；</li>
+<li>适合对稀有事件进行分类；</li>
+<li>特别适合于多分类问题(multi-modal,对象具有多个类别标签)， kNN比SVM的表现要好。</li>
+</ol>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ol>
+<li>该算法在分类时有个主要的不足是，当样本不平衡时，如一个类的样本容量很大，而其他类样本容量很小时，有可能导致当输入一个新样本时，该样本的K个邻居中大容量类的样本占多数。 该算法只计算“最近的”邻居样本，某一类的样本数量很大，那么或者这类样本并不接近目标样本，或者这类样本很靠近目标样本。无论怎样，数量并不能影响运行结果。</li>
+<li>该方法的另一个不足之处是计算量较大，因为对每一个待分类的文本都要计算它到全体已知样本的距离，才能求得它的K个最近邻点。</li>
+</ol>
+<h2 id="Python实现"><a href="#Python实现" class="headerlink" title="Python实现"></a>Python实现</h2><pre><code>#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import numpy as np 
+import operator
+
+# kNN算法实现
+# inX:用于分类的输入向量
+# dataSet:输入的训练样本集
+# labels:标签向量
+# k:用于选择最近邻居的数目
+def classify0(inX, dataSet, labels, k):
+    dataSetSize = dataSet.shape[0]      # shape[0]表示行的数量
+    diffMat = np.tile(inX,(dataSetSize, 1)) - dataSet       # tile()此处以数组形式重复元素
+    sqDiffMat = diffMat ** 2
+    sqDistances = sqDiffMat.sum(axis = 1)       # axis = 1 将矩阵的每一行相加
+    distances = sqDistances ** 0.5
+    sortedDistIndicies = distances.argsort()    # argsort()返回数组值从小到大的索引值
+    classCount = {}
+
+    # 选择距离最小的k个点    
+    for i in range(k):
+        voteIlabel = labels[sortedDistIndicies[i]]
+        classCount[voteIlabel] = classCount.get(voteIlabel, 0) + 1
+
+    # 按照第二个元素的次序对元组进行排序
+    sortedClassCount = sorted(classCount.iteritems(), key = operator.itemgetter(1), reverse = True)
+    return sortedClassCount[0][0]
+</code></pre><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1][机器学习实战]</p>
+<p>[2][维基百科：最近邻居法]</p>
+<p>[3][百度百科：邻近算法]</p>
 
       
     </div>
@@ -361,11 +370,13 @@ update_stat_defaults(&quot;bin&quot;, aes(y = ..density..))
       
         <div class="post-tags">
           
-            <a href="/tags/R/" rel="tag">#R</a>
+            <a href="/tags/Python/" rel="tag">#Python</a>
           
-            <a href="/tags/ggplot2/" rel="tag">#ggplot2</a>
+            <a href="/tags/kNN/" rel="tag">#kNN</a>
           
-            <a href="/tags/主题/" rel="tag">#主题</a>
+            <a href="/tags/分类/" rel="tag">#分类</a>
+          
+            <a href="/tags/机器学习/" rel="tag">#机器学习</a>
           
         </div>
       
@@ -374,17 +385,13 @@ update_stat_defaults(&quot;bin&quot;, aes(y = ..density..))
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/25/快速排序/" rel="next" title="快速排序">
-                <i class="fa fa-chevron-left"></i> 快速排序
+              <a href="/2016/05/07/ggplot2减少重复性工作/" rel="next" title="ggplot2减少重复性工作">
+                <i class="fa fa-chevron-left"></i> ggplot2减少重复性工作
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/03/优先队列/" rel="prev" title="优先队列">
-                优先队列 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -399,10 +406,10 @@ update_stat_defaults(&quot;bin&quot;, aes(y = ..density..))
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/04/26/ggplot2精雕细琢/"
-     data-title="ggplot2精雕细琢"
+        <div class="ds-share flat" data-thread-key="2016/05/14/k-近邻算法(kNN)/"
+     data-title="k-近邻算法(kNN)"
      data-content=""
-     data-url="http://yoursite.com/2016/04/26/ggplot2精雕细琢/">
+     data-url="http://yoursite.com/2016/05/14/k-近邻算法(kNN)/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -429,8 +436,8 @@ update_stat_defaults(&quot;bin&quot;, aes(y = ..density..))
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/04/26/ggplot2精雕细琢/"
-           data-title="ggplot2精雕细琢" data-url="http://yoursite.com/2016/04/26/ggplot2精雕细琢/">
+      <div class="ds-thread" data-thread-key="2016/05/14/k-近邻算法(kNN)/"
+           data-title="k-近邻算法(kNN)" data-url="http://yoursite.com/2016/05/14/k-近邻算法(kNN)/">
       </div>
     
   </div>
@@ -543,7 +550,7 @@ update_stat_defaults(&quot;bin&quot;, aes(y = ..density..))
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主题"><span class="nav-number">2.</span> <span class="nav-text">主题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内置主题"><span class="nav-number">2.1.</span> <span class="nav-text">内置主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主题元素和元素函数"><span class="nav-number">2.2.</span> <span class="nav-text">主题元素和元素函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义标度和几何对象"><span class="nav-number">3.</span> <span class="nav-text">自定义标度和几何对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#标度"><span class="nav-number">3.1.</span> <span class="nav-text">标度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#几何对象和统计变换"><span class="nav-number">3.2.</span> <span class="nav-text">几何对象和统计变换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储输出"><span class="nav-number">4.</span> <span class="nav-text">存储输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#kNN简介"><span class="nav-number">1.</span> <span class="nav-text">kNN简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优缺点"><span class="nav-number">2.</span> <span class="nav-text">优缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优点"><span class="nav-number">2.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺点"><span class="nav-number">2.2.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python实现"><span class="nav-number">3.</span> <span class="nav-text">Python实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
