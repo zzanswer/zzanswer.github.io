@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="OOP,合成,多态抽象,继承,规范抽象,里氏代换原则," />
+  <meta name="keywords" content="Python,排序," />
 
 
 
@@ -57,28 +57,16 @@
 
 
 
-<meta name="description" content="背景本文为《冒号课堂：编程范式与OOP思想》一书中第九课的思考与总结。
-问题与解答请总结3类继承各自的特点和适用场合。3类继承：只继承实现，只继承接口（接口继承），既继承实现又继承接口（类继承）。
-只继承实现：C++可以实现，非公有继承可以看作是一种匿名的非显性合成，可以访问基类的protected成员，也可以覆盖(override)基类的方法。
-接口继承：生产可重用的新代码。
-类继承（又叫实现继">
+<meta name="description" content="简介本文对Python的排序方法做一个总结，主要的参照是Andrew Dalke的“Sorting Mini-HOWTO”。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="继承机制">
-<meta property="og:url" content="http://yoursite.com/2016/04/24/继承机制/index.html">
+<meta property="og:title" content="Python排序总结">
+<meta property="og:url" content="http://yoursite.com/2016/05/18/Python排序总结/index.html">
 <meta property="og:site_name" content="zzanswer的博客">
-<meta property="og:description" content="背景本文为《冒号课堂：编程范式与OOP思想》一书中第九课的思考与总结。
-问题与解答请总结3类继承各自的特点和适用场合。3类继承：只继承实现，只继承接口（接口继承），既继承实现又继承接口（类继承）。
-只继承实现：C++可以实现，非公有继承可以看作是一种匿名的非显性合成，可以访问基类的protected成员，也可以覆盖(override)基类的方法。
-接口继承：生产可重用的新代码。
-类继承（又叫实现继">
-<meta property="og:updated_time" content="2016-04-25T03:00:02.874Z">
+<meta property="og:description" content="简介本文对Python的排序方法做一个总结，主要的参照是Andrew Dalke的“Sorting Mini-HOWTO”。">
+<meta property="og:updated_time" content="2016-05-18T08:09:45.513Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="继承机制">
-<meta name="twitter:description" content="背景本文为《冒号课堂：编程范式与OOP思想》一书中第九课的思考与总结。
-问题与解答请总结3类继承各自的特点和适用场合。3类继承：只继承实现，只继承接口（接口继承），既继承实现又继承接口（类继承）。
-只继承实现：C++可以实现，非公有继承可以看作是一种匿名的非显性合成，可以访问基类的protected成员，也可以覆盖(override)基类的方法。
-接口继承：生产可重用的新代码。
-类继承（又叫实现继">
+<meta name="twitter:title" content="Python排序总结">
+<meta name="twitter:description" content="简介本文对Python的排序方法做一个总结，主要的参照是Andrew Dalke的“Sorting Mini-HOWTO”。">
 
 
 
@@ -96,7 +84,7 @@
   };
 </script>
 
-  <title> 继承机制 | zzanswer的博客 </title>
+  <title> Python排序总结 | zzanswer的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -265,7 +253,7 @@
             
             
               
-                继承机制
+                Python排序总结
               
             
           </h1>
@@ -277,8 +265,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-24T22:45:08+08:00" content="2016-04-24">
-              2016-04-24
+            <time itemprop="dateCreated" datetime="2016-05-18T15:38:30+08:00" content="2016-05-18">
+              2016-05-18
             </time>
           </span>
 
@@ -291,8 +279,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/OOP/" itemprop="url" rel="index">
-                    <span itemprop="name">OOP</span>
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
                   </a>
                 </span>
 
@@ -307,8 +295,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/04/24/继承机制/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/24/继承机制/" itemprop="commentsCount"></span>
+                <a href="/2016/05/18/Python排序总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/18/Python排序总结/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -329,44 +317,88 @@
       
 
       
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>本文为《冒号课堂：编程范式与OOP思想》一书中第九课的思考与总结。</p>
-<h2 id="问题与解答"><a href="#问题与解答" class="headerlink" title="问题与解答"></a>问题与解答</h2><h3 id="请总结3类继承各自的特点和适用场合。"><a href="#请总结3类继承各自的特点和适用场合。" class="headerlink" title="请总结3类继承各自的特点和适用场合。"></a>请总结3类继承各自的特点和适用场合。</h3><p>3类继承：只继承实现，只继承接口（接口继承），既继承实现又继承接口（类继承）。</p>
-<p>只继承实现：C++可以实现，非公有继承可以看作是一种匿名的非显性合成，可以访问基类的protected成员，也可以覆盖(override)基类的方法。</p>
-<p>接口继承：生产可重用的新代码。</p>
-<p>类继承（又叫实现继承）：消费可重用的旧代码。<br><a id="more"></a></p>
-<h3 id="里氏代换原则的重要意义何在？"><a href="#里氏代换原则的重要意义何在？" class="headerlink" title="里氏代换原则的重要意义何在？"></a>里氏代换原则的重要意义何在？</h3><p>里氏代换原则(Liskov Substitution Principle)：类型A的子类型B应该满足条件：将程序中类型A的对象置换为类型B的对象，不会影响程序的合理性和正确性。里氏代换原则的本质正是为了保证规范抽象。</p>
-<p>实现继承也应该遵循里氏代换原则，这既是一种义务，也是一种权益。说是义务，是因为实现继承在继承实现的同时也继承了接口，按理也应继承接口的规范；说是权益，是因为接口的继承能让代码被重用。如果只是为了重用基类的代码，并不希望重用它的接口，那就应该采用合成而不是类继承的方式。这涉及一个通用的编程原则，即尽可能地弥合语法与语义之间的缝隙，以压缩代码臭虫的生存空间。</p>
-<h3 id="数据抽象与多态抽象是OOP中最重要的两种抽象，它们分别在不同层次上完成了对接口与实现的分离。把握这两条主线对培养OOP的语感至关重要，请平时多加揣摩和实践。"><a href="#数据抽象与多态抽象是OOP中最重要的两种抽象，它们分别在不同层次上完成了对接口与实现的分离。把握这两条主线对培养OOP的语感至关重要，请平时多加揣摩和实践。" class="headerlink" title="数据抽象与多态抽象是OOP中最重要的两种抽象，它们分别在不同层次上完成了对接口与实现的分离。把握这两条主线对培养OOP的语感至关重要，请平时多加揣摩和实践。"></a>数据抽象与多态抽象是OOP中最重要的两种抽象，它们分别在不同层次上完成了对接口与实现的分离。把握这两条主线对培养OOP的语感至关重要，请平时多加揣摩和实践。</h3><p>所谓多态，意指一种类型可能具备多种类型的形式。显然，多态抽象是建立在类型层级的基础上的。或者说，接口继承在遵循里氏代换原则的前提下，通过接口重用达成规范重用，保证了多态抽象，进而维护了开闭原则，让客户一劳永逸地享受接口服务而无后顾之忧。</p>
-<h3 id="为什么要提倡接口继承，慎用实现继承？"><a href="#为什么要提倡接口继承，慎用实现继承？" class="headerlink" title="为什么要提倡接口继承，慎用实现继承？"></a>为什么要提倡接口继承，慎用实现继承？</h3><p>实现继承最大的硬伤是在类与类之间建立了强耦合关系，使代码趋于僵硬、脆弱和复杂。这种关系是永固的，一经建立无法解除；这种关系是纵深的，不限于相邻的父类与子类，更贯穿整个类族；这种关系还是双向的，从上到下、从下到上。如果想要覆盖某一方法成员，还得了解祖先类成员之间的内在逻辑关系；如果想增加一个方法成员，还得祈祷它不与祖先类将来的版本发生冲突。</p>
-<h3 id="你对方法修饰符的选择标准是什么？"><a href="#你对方法修饰符的选择标准是什么？" class="headerlink" title="你对方法修饰符的选择标准是什么？"></a>你对方法修饰符的选择标准是什么？</h3><p>推荐的方法修饰符：</p>
-<table>
-<thead>
-<tr>
-<th>方法修饰符/方法职责</th>
-<th>公开接口</th>
-<th>内部挂钩</th>
-<th>内部接口</th>
-<th>自用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>访问控制</td>
-<td>public</td>
-<td>protected或private(C++)</td>
-<td>protected或package(Java)intertal(C#)</td>
-<td>private</td>
-</tr>
-<tr>
-<td>多态</td>
-<td>非多态</td>
-<td>多态</td>
-<td>非多态</td>
-<td>非多态</td>
-</tr>
-</tbody>
-</table>
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>本文对Python的排序方法做一个总结，主要的参照是Andrew Dalke的<a href="https://wiki.python.org/moin/HowTo/Sorting" target="_blank" rel="external">“Sorting Mini-HOWTO”</a>。</p>
+<a id="more"></a>
+<h2 id="排序基础"><a href="#排序基础" class="headerlink" title="排序基础"></a>排序基础</h2><p>排序的基础函数是<code>sort()</code>和<code>sorted()</code>，这两者都可以实现排序，但是它们也有一些不同：</p>
+<ol>
+<li><code>sort()</code>是对原始列表进行排序，排序完成原始列表会变得有序；<code>sorted()</code>则是会创建一个副本，原始列表不变。</li>
+<li><code>sort()</code>是可变对象(字典、列表)的方法，无参数，无返回值，sort()会改变可变对象，因此无需返回值,<code>sort()</code>方法是可变对象独有的方法或者属性，而作为不可变对象如元组、字符串是不具有这些方法的，如果调用将会返回一个异常；<code>sorted()</code>是python的内置函数，并不是可变对象(列表、字典)的特有方法，<code>sorted()</code>函数需要一个参数(参数可以是列表、字典、元组、字符串)，无论传递什么参数，都将返回一个以列表为容器的返回值，如果是字典将返回键的列表。</li>
+</ol>
+<p>下面给出几个例子：</p>
+<pre><code>&gt;&gt;&gt; sorted([5, 2, 3, 1, 4])
+[1, 2, 3, 4, 5]
 
+&gt;&gt;&gt; a = [5, 2, 3, 1, 4]
+&gt;&gt;&gt; a.sort()
+&gt;&gt;&gt; a
+[1, 2, 3, 4, 5]
+
+&gt;&gt;&gt; sorted({1: &apos;D&apos;, 2: &apos;B&apos;, 3: &apos;B&apos;, 4: &apos;E&apos;, 5: &apos;A&apos;})
+[1, 2, 3, 4, 5]
+</code></pre><h2 id="Key参数"><a href="#Key参数" class="headerlink" title="Key参数"></a>Key参数</h2><p>Key的值应该是一个函数，来达到排序的目的。直接看例子：</p>
+<p>下面这个是按小写字母排序：</p>
+<pre><code>&gt;&gt;&gt; sorted(&quot;This is a test string from Andrew&quot;.split(), key=str.lower)      # 按小写字母排序
+[&apos;a&apos;, &apos;Andrew&apos;, &apos;from&apos;, &apos;is&apos;, &apos;string&apos;, &apos;test&apos;, &apos;This&apos;]
+</code></pre><p>最常用的是使用对象的索引来排序：</p>
+<pre><code>&gt;&gt;&gt; student_tuples = [
+        (&apos;john&apos;, &apos;A&apos;, 15),
+        (&apos;jane&apos;, &apos;B&apos;, 12),
+        (&apos;dave&apos;, &apos;B&apos;, 10),
+]
+&gt;&gt;&gt; sorted(student_tuples, key=lambda student: student[2])   # sort by age
+[(&apos;dave&apos;, &apos;B&apos;, 10), (&apos;jane&apos;, &apos;B&apos;, 12), (&apos;john&apos;, &apos;A&apos;, 15)]
+</code></pre><p>还可以为对象增加属性，利用属性来排序：</p>
+<pre><code>&gt;&gt;&gt; class Student:
+        def __init__(self, name, grade, age):
+                self.name = name
+                self.grade = grade
+                self.age = age
+        def __repr__(self):
+                return repr((self.name, self.grade, self.age))
+        def weighted_grade(self):
+                return &apos;CBA&apos;.index(self.grade) / float(self.age)
+
+&gt;&gt;&gt; student_objects = [
+        Student(&apos;john&apos;, &apos;A&apos;, 15),
+        Student(&apos;jane&apos;, &apos;B&apos;, 12),
+        Student(&apos;dave&apos;, &apos;B&apos;, 10),
+]
+&gt;&gt;&gt; sorted(student_objects, key=lambda student: student.age)   # sort by age
+[(&apos;dave&apos;, &apos;B&apos;, 10), (&apos;jane&apos;, &apos;B&apos;, 12), (&apos;john&apos;, &apos;A&apos;, 15)]
+</code></pre><h2 id="Operator模块"><a href="#Operator模块" class="headerlink" title="Operator模块"></a>Operator模块</h2><p>Python中提供了一个Operator模块来集成了一些函数，排序更方面，更快。看例子：</p>
+<pre><code>&gt;&gt;&gt; from operator import itemgetter, attrgetter, methodcaller
+
+&gt;&gt;&gt; sorted(student_tuples, key=itemgetter(2))
+[(&apos;dave&apos;, &apos;B&apos;, 10), (&apos;jane&apos;, &apos;B&apos;, 12), (&apos;john&apos;, &apos;A&apos;, 15)]
+
+&gt;&gt;&gt; sorted(student_objects, key=attrgetter(&apos;age&apos;))
+[(&apos;dave&apos;, &apos;B&apos;, 10), (&apos;jane&apos;, &apos;B&apos;, 12), (&apos;john&apos;, &apos;A&apos;, 15)]
+</code></pre><p>可以灵活的进行多条件排序，比如下面的根据成绩和年龄排序：</p>
+<pre><code>&gt;&gt;&gt; sorted(student_tuples, key=itemgetter(1,2))
+[(&apos;john&apos;, &apos;A&apos;, 15), (&apos;dave&apos;, &apos;B&apos;, 10), (&apos;jane&apos;, &apos;B&apos;, 12)]
+
+&gt;&gt;&gt; sorted(student_objects, key=attrgetter(&apos;grade&apos;, &apos;age&apos;))
+[(&apos;john&apos;, &apos;A&apos;, 15), (&apos;dave&apos;, &apos;B&apos;, 10), (&apos;jane&apos;, &apos;B&apos;, 12)]
+</code></pre><p>还可以对之前的类中的函数，加权评分来进行排序：</p>
+<pre><code>&gt;&gt;&gt; [(student.name, student.weighted_grade()) for student in student_objects]
+[(&apos;john&apos;, 0.13333333333333333), (&apos;jane&apos;, 0.08333333333333333), (&apos;dave&apos;, 0.1)]
+&gt;&gt;&gt; sorted(student_objects, key=methodcaller(&apos;weighted_grade&apos;))
+[(&apos;jane&apos;, &apos;B&apos;, 12), (&apos;dave&apos;, &apos;B&apos;, 10), (&apos;john&apos;, &apos;A&apos;, 15)]
+</code></pre><h2 id="升序和降序"><a href="#升序和降序" class="headerlink" title="升序和降序"></a>升序和降序</h2><p>主要是由<code>reverse</code>参数来控制，为True时为降序，False为升序：</p>
+<pre><code>&gt;&gt;&gt; sorted(student_tuples, key=itemgetter(2), reverse=True)
+[(&apos;john&apos;, &apos;A&apos;, 15), (&apos;jane&apos;, &apos;B&apos;, 12), (&apos;dave&apos;, &apos;B&apos;, 10)]
+
+&gt;&gt;&gt; sorted(student_objects, key=attrgetter(&apos;age&apos;), reverse=True)
+[(&apos;john&apos;, &apos;A&apos;, 15), (&apos;jane&apos;, &apos;B&apos;, 12), (&apos;dave&apos;, &apos;B&apos;, 10)]
+</code></pre><h2 id="排序稳定性和复杂排序"><a href="#排序稳定性和复杂排序" class="headerlink" title="排序稳定性和复杂排序"></a>排序稳定性和复杂排序</h2><p>主要指的是当二次排序时，前一次顺序会被保存下来的：</p>
+<pre><code>&gt;&gt;&gt; data = [(&apos;red&apos;, 1), (&apos;blue&apos;, 1), (&apos;red&apos;, 2), (&apos;blue&apos;, 2)]
+&gt;&gt;&gt; sorted(data, key=itemgetter(0))
+[(&apos;blue&apos;, 1), (&apos;blue&apos;, 2), (&apos;red&apos;, 1), (&apos;red&apos;, 2)]
+</code></pre><p>由于这个属性，就可以实行下面的功能：</p>
+<pre><code>&gt;&gt;&gt; s = sorted(student_objects, key=attrgetter(&apos;age&apos;))     # sort on secondary key
+&gt;&gt;&gt; sorted(s, key=attrgetter(&apos;grade&apos;), reverse=True)       # now sort on primary key, descending
+[(&apos;dave&apos;, &apos;B&apos;, 10), (&apos;jane&apos;, &apos;B&apos;, 12), (&apos;john&apos;, &apos;A&apos;, 15)]
+</code></pre>
       
     </div>
 
@@ -374,17 +406,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/OOP/" rel="tag">#OOP</a>
+            <a href="/tags/Python/" rel="tag">#Python</a>
           
-            <a href="/tags/合成/" rel="tag">#合成</a>
-          
-            <a href="/tags/多态抽象/" rel="tag">#多态抽象</a>
-          
-            <a href="/tags/继承/" rel="tag">#继承</a>
-          
-            <a href="/tags/规范抽象/" rel="tag">#规范抽象</a>
-          
-            <a href="/tags/里氏代换原则/" rel="tag">#里氏代换原则</a>
+            <a href="/tags/排序/" rel="tag">#排序</a>
           
         </div>
       
@@ -393,17 +417,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/21/归并排序/" rel="next" title="归并排序">
-                <i class="fa fa-chevron-left"></i> 归并排序
+              <a href="/2016/05/18/Python多条件排序/" rel="next" title="Python多条件排序">
+                <i class="fa fa-chevron-left"></i> Python多条件排序
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/25/快速排序/" rel="prev" title="快速排序">
-                快速排序 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -418,10 +438,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/04/24/继承机制/"
-     data-title="继承机制"
+        <div class="ds-share flat" data-thread-key="2016/05/18/Python排序总结/"
+     data-title="Python排序总结"
      data-content=""
-     data-url="http://yoursite.com/2016/04/24/继承机制/">
+     data-url="http://yoursite.com/2016/05/18/Python排序总结/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -448,8 +468,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/04/24/继承机制/"
-           data-title="继承机制" data-url="http://yoursite.com/2016/04/24/继承机制/">
+      <div class="ds-thread" data-thread-key="2016/05/18/Python排序总结/"
+           data-title="Python排序总结" data-url="http://yoursite.com/2016/05/18/Python排序总结/">
       </div>
     
   </div>
@@ -562,7 +582,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题与解答"><span class="nav-number">2.</span> <span class="nav-text">问题与解答</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#请总结3类继承各自的特点和适用场合。"><span class="nav-number">2.1.</span> <span class="nav-text">请总结3类继承各自的特点和适用场合。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#里氏代换原则的重要意义何在？"><span class="nav-number">2.2.</span> <span class="nav-text">里氏代换原则的重要意义何在？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据抽象与多态抽象是OOP中最重要的两种抽象，它们分别在不同层次上完成了对接口与实现的分离。把握这两条主线对培养OOP的语感至关重要，请平时多加揣摩和实践。"><span class="nav-number">2.3.</span> <span class="nav-text">数据抽象与多态抽象是OOP中最重要的两种抽象，它们分别在不同层次上完成了对接口与实现的分离。把握这两条主线对培养OOP的语感至关重要，请平时多加揣摩和实践。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要提倡接口继承，慎用实现继承？"><span class="nav-number">2.4.</span> <span class="nav-text">为什么要提倡接口继承，慎用实现继承？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#你对方法修饰符的选择标准是什么？"><span class="nav-number">2.5.</span> <span class="nav-text">你对方法修饰符的选择标准是什么？</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序基础"><span class="nav-number">2.</span> <span class="nav-text">排序基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Key参数"><span class="nav-number">3.</span> <span class="nav-text">Key参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Operator模块"><span class="nav-number">4.</span> <span class="nav-text">Operator模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#升序和降序"><span class="nav-number">5.</span> <span class="nav-text">升序和降序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序稳定性和复杂排序"><span class="nav-number">6.</span> <span class="nav-text">排序稳定性和复杂排序</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
