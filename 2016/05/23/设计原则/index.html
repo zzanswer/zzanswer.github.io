@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Python,列表," />
+  <meta name="keywords" content="OOP," />
 
 
 
@@ -57,16 +57,16 @@
 
 
 
-<meta name="description" content="用法Python中的range和xrange基本都是在循环的时候使用，输出结果是一样的：">
+<meta name="description" content="背景本文为《冒号课堂：编程范式与OOP思想》一书中第十二课的思考与总结。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python中range与xrange比较">
-<meta property="og:url" content="http://yoursite.com/2016/05/15/Python中range与xrange比较/index.html">
+<meta property="og:title" content="设计原则">
+<meta property="og:url" content="http://yoursite.com/2016/05/23/设计原则/index.html">
 <meta property="og:site_name" content="zzanswer的博客">
-<meta property="og:description" content="用法Python中的range和xrange基本都是在循环的时候使用，输出结果是一样的：">
-<meta property="og:updated_time" content="2016-05-15T01:39:01.775Z">
+<meta property="og:description" content="背景本文为《冒号课堂：编程范式与OOP思想》一书中第十二课的思考与总结。">
+<meta property="og:updated_time" content="2016-05-23T14:10:17.835Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python中range与xrange比较">
-<meta name="twitter:description" content="用法Python中的range和xrange基本都是在循环的时候使用，输出结果是一样的：">
+<meta name="twitter:title" content="设计原则">
+<meta name="twitter:description" content="背景本文为《冒号课堂：编程范式与OOP思想》一书中第十二课的思考与总结。">
 
 
 
@@ -84,7 +84,7 @@
   };
 </script>
 
-  <title> Python中range与xrange比较 | zzanswer的博客 </title>
+  <title> 设计原则 | zzanswer的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -253,7 +253,7 @@
             
             
               
-                Python中range与xrange比较
+                设计原则
               
             
           </h1>
@@ -265,8 +265,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-15T09:23:54+08:00" content="2016-05-15">
-              2016-05-15
+            <time itemprop="dateCreated" datetime="2016-05-23T20:53:42+08:00" content="2016-05-23">
+              2016-05-23
             </time>
           </span>
 
@@ -279,8 +279,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
+                  <a href="/categories/OOP/" itemprop="url" rel="index">
+                    <span itemprop="name">OOP</span>
                   </a>
                 </span>
 
@@ -295,8 +295,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/15/Python中range与xrange比较/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/15/Python中range与xrange比较/" itemprop="commentsCount"></span>
+                <a href="/2016/05/23/设计原则/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/23/设计原则/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -317,40 +317,11 @@
       
 
       
-        <h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>Python中的range和xrange基本都是在循环的时候使用，输出结果是一样的：<br><a id="more"></a></p>
-<pre><code>&gt;&gt;&gt; for i in range(0, 5):
-...     print i
-...
-0
-1
-2
-3
-4
-&gt;&gt;&gt; for i in xrange(0, 5):
-...     print i
-...
-0
-1
-2
-3
-4
-</code></pre><h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p>range生成的是一个列表对象，而xrange返回的则是一个生成器，因此xrange不需要一开始就开辟出一块很大的内存。</p>
-<p>即在做循环时，一般提倡用xrange，数据量很大的时候优势很明显。除非是想返回一个列表。下面给出代码示例：</p>
-<pre><code>&gt;&gt;&gt; a = range(0, 5)
-&gt;&gt;&gt; print type(a)
-&lt;type &apos;list&apos;&gt;
-&gt;&gt;&gt; print a
-[0, 1, 2, 3, 4]
-&gt;&gt;&gt; print a[0], a[1]
-0 1
-&gt;&gt;&gt; b = xrange(0, 5)
-&gt;&gt;&gt; print type(b)
-&lt;type &apos;xrange&apos;&gt;
-&gt;&gt;&gt; print b
-xrange(5)
-&gt;&gt;&gt; print b[0], b[1]
-0 1
-</code></pre>
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>本文为《冒号课堂：编程范式与OOP思想》一书中第十二课的思考与总结。<br><a id="more"></a></p>
+<h2 id="问题与解答"><a href="#问题与解答" class="headerlink" title="问题与解答"></a>问题与解答</h2><h3 id="间接层为什么能有效地解决许多计算机问题？它又可能带来哪些新的问题？"><a href="#间接层为什么能有效地解决许多计算机问题？它又可能带来哪些新的问题？" class="headerlink" title="间接层为什么能有效地解决许多计算机问题？它又可能带来哪些新的问题？"></a>间接层为什么能有效地解决许多计算机问题？它又可能带来哪些新的问题？</h3><p>一方面建立了名与实的映射，提高了代码的一致性和可维护性；另一方面实现了名与实的分离，提高了代码的灵活性和可扩展性。</p>
+<p>过多的间接层会给系统带来一定的复杂性，并有时空性能的损耗。</p>
+<h3 id="试论述依赖与控制之间的关系。"><a href="#试论述依赖与控制之间的关系。" class="headerlink" title="试论述依赖与控制之间的关系。"></a>试论述依赖与控制之间的关系。</h3><p>控制反转与依赖反转的共同点是：通过引入抽象来摆脱对外界不必要的依赖性，争取对外界必要的控制权；不同点是：前者更侧重保证组件的可重用性，后者更侧重保证组件的可维护性。</p>
+
       
     </div>
 
@@ -358,9 +329,7 @@ xrange(5)
       
         <div class="post-tags">
           
-            <a href="/tags/Python/" rel="tag">#Python</a>
-          
-            <a href="/tags/列表/" rel="tag">#列表</a>
+            <a href="/tags/OOP/" rel="tag">#OOP</a>
           
         </div>
       
@@ -369,17 +338,13 @@ xrange(5)
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/14/Python中重要数据结构总结/" rel="next" title="Python中重要数据结构总结">
-                <i class="fa fa-chevron-left"></i> Python中重要数据结构总结
+              <a href="/2016/05/23/值与引用/" rel="next" title="值与引用">
+                <i class="fa fa-chevron-left"></i> 值与引用
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/18/Python多条件排序/" rel="prev" title="Python多条件排序">
-                Python多条件排序 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -394,10 +359,10 @@ xrange(5)
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/05/15/Python中range与xrange比较/"
-     data-title="Python中range与xrange比较"
+        <div class="ds-share flat" data-thread-key="2016/05/23/设计原则/"
+     data-title="设计原则"
      data-content=""
-     data-url="http://yoursite.com/2016/05/15/Python中range与xrange比较/">
+     data-url="http://yoursite.com/2016/05/23/设计原则/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -424,8 +389,8 @@ xrange(5)
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/05/15/Python中range与xrange比较/"
-           data-title="Python中range与xrange比较" data-url="http://yoursite.com/2016/05/15/Python中range与xrange比较/">
+      <div class="ds-thread" data-thread-key="2016/05/23/设计原则/"
+           data-title="设计原则" data-url="http://yoursite.com/2016/05/23/设计原则/">
       </div>
     
   </div>
@@ -538,7 +503,7 @@ xrange(5)
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#用法"><span class="nav-number">1.</span> <span class="nav-text">用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#区别"><span class="nav-number">2.</span> <span class="nav-text">区别</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题与解答"><span class="nav-number">2.</span> <span class="nav-text">问题与解答</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#间接层为什么能有效地解决许多计算机问题？它又可能带来哪些新的问题？"><span class="nav-number">2.1.</span> <span class="nav-text">间接层为什么能有效地解决许多计算机问题？它又可能带来哪些新的问题？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#试论述依赖与控制之间的关系。"><span class="nav-number">2.2.</span> <span class="nav-text">试论述依赖与控制之间的关系。</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
