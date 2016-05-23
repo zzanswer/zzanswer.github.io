@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="OOP,多态,继承," />
+  <meta name="keywords" content="OOP,值,堆,引用,栈," />
 
 
 
@@ -57,16 +57,16 @@
 
 
 
-<meta name="description" content="背景本文为《冒号课堂：编程范式与OOP思想》一书中第十课的思考与总结。">
+<meta name="description" content="背景本文为《冒号课堂：编程范式与OOP思想》一书中第十一课的思考与总结。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="多态机制">
-<meta property="og:url" content="http://yoursite.com/2016/05/23/多态机制/index.html">
+<meta property="og:title" content="值与引用">
+<meta property="og:url" content="http://yoursite.com/2016/05/23/值与引用/index.html">
 <meta property="og:site_name" content="zzanswer的博客">
-<meta property="og:description" content="背景本文为《冒号课堂：编程范式与OOP思想》一书中第十课的思考与总结。">
-<meta property="og:updated_time" content="2016-05-23T07:03:09.931Z">
+<meta property="og:description" content="背景本文为《冒号课堂：编程范式与OOP思想》一书中第十一课的思考与总结。">
+<meta property="og:updated_time" content="2016-05-23T12:50:21.310Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="多态机制">
-<meta name="twitter:description" content="背景本文为《冒号课堂：编程范式与OOP思想》一书中第十课的思考与总结。">
+<meta name="twitter:title" content="值与引用">
+<meta name="twitter:description" content="背景本文为《冒号课堂：编程范式与OOP思想》一书中第十一课的思考与总结。">
 
 
 
@@ -84,7 +84,7 @@
   };
 </script>
 
-  <title> 多态机制 | zzanswer的博客 </title>
+  <title> 值与引用 | zzanswer的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -253,7 +253,7 @@
             
             
               
-                多态机制
+                值与引用
               
             
           </h1>
@@ -265,7 +265,7 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-23T14:12:12+08:00" content="2016-05-23">
+            <time itemprop="dateCreated" datetime="2016-05-23T15:29:23+08:00" content="2016-05-23">
               2016-05-23
             </time>
           </span>
@@ -295,8 +295,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/23/多态机制/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/23/多态机制/" itemprop="commentsCount"></span>
+                <a href="/2016/05/23/值与引用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/23/值与引用/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -317,18 +317,48 @@
       
 
       
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>本文为《冒号课堂：编程范式与OOP思想》一书中第十课的思考与总结。<br><a id="more"></a></p>
-<h2 id="问题与解答"><a href="#问题与解答" class="headerlink" title="问题与解答"></a>问题与解答</h2><h3 id="多态类型在何种程度上解放了静态类型的束缚？"><a href="#多态类型在何种程度上解放了静态类型的束缚？" class="headerlink" title="多态类型在何种程度上解放了静态类型的束缚？"></a>多态类型在何种程度上解放了静态类型的束缚？</h3><p>静态类型语言中的多态是动静结合的产物，将静态类型的安全性和动态类型的灵活性融为一体。它一般有两种实现方式：一种利用GP（泛型编程）中的参数多态，一种利用OOP中的包含多态或称子类型多态。</p>
-<h3 id="请总结参数多态与子类型多态的特点和适用场合。"><a href="#请总结参数多态与子类型多态的特点和适用场合。" class="headerlink" title="请总结参数多态与子类型多态的特点和适用场合。"></a>请总结参数多态与子类型多态的特点和适用场合。</h3><ol>
-<li>从实现机制上看，二者的不同之处在于何时将一个变量与其实际类型所定义的行为挂钩。前者在编译期，属于早绑定或静态绑定；后者在运行期，属于迟绑定或动态绑定。</li>
-<li>从应用形式上看，前者是发散式的，让相同的代码应用于不同的场合；后者是收敛式的，让不同的实现代码应用于相同的场合。</li>
-<li>从思维方式上看，前者是泛型式编程风格，看重的是算法的普适性；后者是对象式编程风格，看重的是接口与实现的分离度。</li>
-</ol>
-<h3 id="为什么抽象类型如此重要？"><a href="#为什么抽象类型如此重要？" class="headerlink" title="为什么抽象类型如此重要？"></a>为什么抽象类型如此重要？</h3><p>抽象是个相对概念，一个类型是否是抽象的完全取决于设计者对它的角色定位。如果想用它来创建对象，它就是可实例化的具体类型；如果想用它来作为其他类型的基类，它就是不可实例化的抽象类型。</p>
-<p>具体类型是创建对象的模板，抽象类型是创建类型的模块。一个是为对象服务的，一个是为类型服务的。</p>
-<p>抽象数据类型的核心是数据抽象，而抽象类型的核心是多态抽象。</p>
-<h3 id="区分接口与抽象类？"><a href="#区分接口与抽象类？" class="headerlink" title="区分接口与抽象类？"></a>区分接口与抽象类？</h3><p>语法区别：接口不能提供实现但能多重继承，抽象类则正相反；接口只能包含共有的、非静态的、抽象的方法成员，抽象类则无此限制。</p>
-<p>语义区别：接口是一套功能规范集合，相同的接口代表相同的功能，多表示“can-do”关系，一般是对象的边缘特征，在本质不同的类型之间建立横向联系；抽象类是一类对象的本质属性的抽象，相同的抽象基类代表相同的种类，多表示“is-a”关系，一般是对象的核心的特征，在本质相同的类型之间建立纵向联系。接口看重规范重用和可置换性；抽象类看重代码重用和可扩展性。</p>
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>本文为《冒号课堂：编程范式与OOP思想》一书中第十一课的思考与总结。<br><a id="more"></a></p>
+<h2 id="问题与解答"><a href="#问题与解答" class="headerlink" title="问题与解答"></a>问题与解答</h2><h3 id="请综合比较值与引用在语法和语义上的差异。"><a href="#请综合比较值与引用在语法和语义上的差异。" class="headerlink" title="请综合比较值与引用在语法和语义上的差异。"></a>请综合比较值与引用在语法和语义上的差异。</h3><table>
+<thead>
+<tr>
+<th>对比</th>
+<th>存储内容</th>
+<th>逻辑指代</th>
+<th>实际数据</th>
+<th>价值属性</th>
+<th>对象复制</th>
+<th>对象共享</th>
+<th>实现多态</th>
+<th>空值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>值</td>
+<td>数据</td>
+<td>直接</td>
+<td>在线</td>
+<td>内在价值</td>
+<td>赋值</td>
+<td>否</td>
+<td>否</td>
+<td>无</td>
+</tr>
+<tr>
+<td>引用</td>
+<td>地址</td>
+<td>间接</td>
+<td>离线</td>
+<td>使用价值</td>
+<td>克隆</td>
+<td>能</td>
+<td>能</td>
+<td>有</td>
+</tr>
+</tbody>
+</table>
+<h3 id="在对象建模和类图绘制的过程中，值语义与引用语义起到什么作用？"><a href="#在对象建模和类图绘制的过程中，值语义与引用语义起到什么作用？" class="headerlink" title="在对象建模和类图绘制的过程中，值语义与引用语义起到什么作用？"></a>在对象建模和类图绘制的过程中，值语义与引用语义起到什么作用？</h3><p>在UML类图中，类的性质可以用属性或关联来表示。其中，属性偏于值语义，关联偏于引用语义。</p>
+<h3 id="信息隐藏与信息过滤有何区别？"><a href="#信息隐藏与信息过滤有何区别？" class="headerlink" title="信息隐藏与信息过滤有何区别？"></a>信息隐藏与信息过滤有何区别？</h3><p>为了达到抽象的目的，实现级别的信息需要隐藏，靠的是访问控制；设计级别的信息需要过滤，靠的是抽象建模。</p>
 
       
     </div>
@@ -339,9 +369,13 @@
           
             <a href="/tags/OOP/" rel="tag">#OOP</a>
           
-            <a href="/tags/多态/" rel="tag">#多态</a>
+            <a href="/tags/值/" rel="tag">#值</a>
           
-            <a href="/tags/继承/" rel="tag">#继承</a>
+            <a href="/tags/堆/" rel="tag">#堆</a>
+          
+            <a href="/tags/引用/" rel="tag">#引用</a>
+          
+            <a href="/tags/栈/" rel="tag">#栈</a>
           
         </div>
       
@@ -350,17 +384,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/18/Python排序总结/" rel="next" title="Python排序总结">
-                <i class="fa fa-chevron-left"></i> Python排序总结
+              <a href="/2016/05/23/多态机制/" rel="next" title="多态机制">
+                <i class="fa fa-chevron-left"></i> 多态机制
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/23/值与引用/" rel="prev" title="值与引用">
-                值与引用 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -375,10 +405,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/05/23/多态机制/"
-     data-title="多态机制"
+        <div class="ds-share flat" data-thread-key="2016/05/23/值与引用/"
+     data-title="值与引用"
      data-content=""
-     data-url="http://yoursite.com/2016/05/23/多态机制/">
+     data-url="http://yoursite.com/2016/05/23/值与引用/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -405,8 +435,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/05/23/多态机制/"
-           data-title="多态机制" data-url="http://yoursite.com/2016/05/23/多态机制/">
+      <div class="ds-thread" data-thread-key="2016/05/23/值与引用/"
+           data-title="值与引用" data-url="http://yoursite.com/2016/05/23/值与引用/">
       </div>
     
   </div>
@@ -519,7 +549,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题与解答"><span class="nav-number">2.</span> <span class="nav-text">问题与解答</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多态类型在何种程度上解放了静态类型的束缚？"><span class="nav-number">2.1.</span> <span class="nav-text">多态类型在何种程度上解放了静态类型的束缚？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请总结参数多态与子类型多态的特点和适用场合。"><span class="nav-number">2.2.</span> <span class="nav-text">请总结参数多态与子类型多态的特点和适用场合。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么抽象类型如此重要？"><span class="nav-number">2.3.</span> <span class="nav-text">为什么抽象类型如此重要？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#区分接口与抽象类？"><span class="nav-number">2.4.</span> <span class="nav-text">区分接口与抽象类？</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题与解答"><span class="nav-number">2.</span> <span class="nav-text">问题与解答</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#请综合比较值与引用在语法和语义上的差异。"><span class="nav-number">2.1.</span> <span class="nav-text">请综合比较值与引用在语法和语义上的差异。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在对象建模和类图绘制的过程中，值语义与引用语义起到什么作用？"><span class="nav-number">2.2.</span> <span class="nav-text">在对象建模和类图绘制的过程中，值语义与引用语义起到什么作用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信息隐藏与信息过滤有何区别？"><span class="nav-number">2.3.</span> <span class="nav-text">信息隐藏与信息过滤有何区别？</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
