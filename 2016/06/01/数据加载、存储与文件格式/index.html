@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Python,列表," />
+  <meta name="keywords" content="Python," />
 
 
 
@@ -57,16 +57,17 @@
 
 
 
-<meta name="description" content="用法Python中的range和xrange基本都是在循环的时候使用，输出结果是一样的：">
+<meta name="description" content="简介本文为《利用Python进行数据分析》一书第6章“数据加载、存储与文件格式”的读书笔记。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python中range与xrange比较">
-<meta property="og:url" content="http://yoursite.com/2016/05/15/Python中range与xrange比较/index.html">
+<meta property="og:title" content="数据加载、存储与文件格式">
+<meta property="og:url" content="http://yoursite.com/2016/06/01/数据加载、存储与文件格式/index.html">
 <meta property="og:site_name" content="zzanswer的博客">
-<meta property="og:description" content="用法Python中的range和xrange基本都是在循环的时候使用，输出结果是一样的：">
-<meta property="og:updated_time" content="2016-05-15T01:39:01.775Z">
+<meta property="og:description" content="简介本文为《利用Python进行数据分析》一书第6章“数据加载、存储与文件格式”的读书笔记。">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E3%80%81%E5%AD%98%E5%82%A8%E4%B8%8E%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.png">
+<meta property="og:updated_time" content="2016-06-01T03:39:11.055Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python中range与xrange比较">
-<meta name="twitter:description" content="用法Python中的range和xrange基本都是在循环的时候使用，输出结果是一样的：">
+<meta name="twitter:title" content="数据加载、存储与文件格式">
+<meta name="twitter:description" content="简介本文为《利用Python进行数据分析》一书第6章“数据加载、存储与文件格式”的读书笔记。">
 
 
 
@@ -84,7 +85,7 @@
   };
 </script>
 
-  <title> Python中range与xrange比较 | zzanswer的博客 </title>
+  <title> 数据加载、存储与文件格式 | zzanswer的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -253,7 +254,7 @@
             
             
               
-                Python中range与xrange比较
+                数据加载、存储与文件格式
               
             
           </h1>
@@ -265,8 +266,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-15T09:23:54+08:00" content="2016-05-15">
-              2016-05-15
+            <time itemprop="dateCreated" datetime="2016-06-01T11:34:59+08:00" content="2016-06-01">
+              2016-06-01
             </time>
           </span>
 
@@ -295,8 +296,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/15/Python中range与xrange比较/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/15/Python中range与xrange比较/" itemprop="commentsCount"></span>
+                <a href="/2016/06/01/数据加载、存储与文件格式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/01/数据加载、存储与文件格式/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -317,40 +318,9 @@
       
 
       
-        <h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>Python中的range和xrange基本都是在循环的时候使用，输出结果是一样的：<br><a id="more"></a></p>
-<pre><code>&gt;&gt;&gt; for i in range(0, 5):
-...     print i
-...
-0
-1
-2
-3
-4
-&gt;&gt;&gt; for i in xrange(0, 5):
-...     print i
-...
-0
-1
-2
-3
-4
-</code></pre><h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p>range生成的是一个列表对象，而xrange返回的则是一个生成器，因此xrange不需要一开始就开辟出一块很大的内存。</p>
-<p>即在做循环时，一般提倡用xrange，数据量很大的时候优势很明显。除非是想返回一个列表。下面给出代码示例：</p>
-<pre><code>&gt;&gt;&gt; a = range(0, 5)
-&gt;&gt;&gt; print type(a)
-&lt;type &apos;list&apos;&gt;
-&gt;&gt;&gt; print a
-[0, 1, 2, 3, 4]
-&gt;&gt;&gt; print a[0], a[1]
-0 1
-&gt;&gt;&gt; b = xrange(0, 5)
-&gt;&gt;&gt; print type(b)
-&lt;type &apos;xrange&apos;&gt;
-&gt;&gt;&gt; print b
-xrange(5)
-&gt;&gt;&gt; print b[0], b[1]
-0 1
-</code></pre>
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>本文为《利用Python进行数据分析》一书第6章“数据加载、存储与文件格式”的读书笔记。<br><a id="more"></a></p>
+<h3 id="思维导图"><a href="#思维导图" class="headerlink" title="思维导图"></a>思维导图</h3><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E3%80%81%E5%AD%98%E5%82%A8%E4%B8%8E%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.png" alt="id"></p>
+
       
     </div>
 
@@ -360,8 +330,6 @@ xrange(5)
           
             <a href="/tags/Python/" rel="tag">#Python</a>
           
-            <a href="/tags/列表/" rel="tag">#列表</a>
-          
         </div>
       
 
@@ -369,17 +337,13 @@ xrange(5)
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/14/Python中重要数据结构总结/" rel="next" title="Python中重要数据结构总结">
-                <i class="fa fa-chevron-left"></i> Python中重要数据结构总结
+              <a href="/2016/05/30/pandas入门/" rel="next" title="pandas入门">
+                <i class="fa fa-chevron-left"></i> pandas入门
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/18/Python多条件排序/" rel="prev" title="Python多条件排序">
-                Python多条件排序 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -394,10 +358,10 @@ xrange(5)
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/05/15/Python中range与xrange比较/"
-     data-title="Python中range与xrange比较"
+        <div class="ds-share flat" data-thread-key="2016/06/01/数据加载、存储与文件格式/"
+     data-title="数据加载、存储与文件格式"
      data-content=""
-     data-url="http://yoursite.com/2016/05/15/Python中range与xrange比较/">
+     data-url="http://yoursite.com/2016/06/01/数据加载、存储与文件格式/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -424,8 +388,8 @@ xrange(5)
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/05/15/Python中range与xrange比较/"
-           data-title="Python中range与xrange比较" data-url="http://yoursite.com/2016/05/15/Python中range与xrange比较/">
+      <div class="ds-thread" data-thread-key="2016/06/01/数据加载、存储与文件格式/"
+           data-title="数据加载、存储与文件格式" data-url="http://yoursite.com/2016/06/01/数据加载、存储与文件格式/">
       </div>
     
   </div>
@@ -538,7 +502,7 @@ xrange(5)
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#用法"><span class="nav-number">1.</span> <span class="nav-text">用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#区别"><span class="nav-number">2.</span> <span class="nav-text">区别</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思维导图"><span class="nav-number">2.</span> <span class="nav-text">思维导图</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
