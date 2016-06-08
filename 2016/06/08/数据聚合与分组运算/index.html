@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Java,希尔排序,排序,插入排序,算法,选择排序," />
+  <meta name="keywords" content="Python," />
 
 
 
@@ -57,16 +57,17 @@
 
 
 
-<meta name="description" content="背景本文主要讨论几个初级排序算法，用Java语言来实现。首先给出一个排序算法类模板Example类：将排序代码放在类的sort()方法中，该类还将包含辅助函数less()和exch()以及一个示例用例main()。less()方法对元素进行比较，exch()方法将元素交换位置。下面给出代码：">
+<meta name="description" content="简介本文为《利用Python进行数据分析》一书第9章“数据聚合与分组运算”的读书笔记。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="初级排序算法">
-<meta property="og:url" content="http://yoursite.com/2016/04/20/初级排序算法/index.html">
+<meta property="og:title" content="数据聚合与分组运算">
+<meta property="og:url" content="http://yoursite.com/2016/06/08/数据聚合与分组运算/index.html">
 <meta property="og:site_name" content="zzanswer的博客">
-<meta property="og:description" content="背景本文主要讨论几个初级排序算法，用Java语言来实现。首先给出一个排序算法类模板Example类：将排序代码放在类的sort()方法中，该类还将包含辅助函数less()和exch()以及一个示例用例main()。less()方法对元素进行比较，exch()方法将元素交换位置。下面给出代码：">
-<meta property="og:updated_time" content="2016-05-14T14:18:39.256Z">
+<meta property="og:description" content="简介本文为《利用Python进行数据分析》一书第9章“数据聚合与分组运算”的读书笔记。">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/%E6%95%B0%E6%8D%AE%E8%81%9A%E5%90%88%E4%B8%8E%E5%88%86%E7%BB%84%E8%BF%90%E7%AE%97.png">
+<meta property="og:updated_time" content="2016-06-08T11:27:38.278Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="初级排序算法">
-<meta name="twitter:description" content="背景本文主要讨论几个初级排序算法，用Java语言来实现。首先给出一个排序算法类模板Example类：将排序代码放在类的sort()方法中，该类还将包含辅助函数less()和exch()以及一个示例用例main()。less()方法对元素进行比较，exch()方法将元素交换位置。下面给出代码：">
+<meta name="twitter:title" content="数据聚合与分组运算">
+<meta name="twitter:description" content="简介本文为《利用Python进行数据分析》一书第9章“数据聚合与分组运算”的读书笔记。">
 
 
 
@@ -84,7 +85,7 @@
   };
 </script>
 
-  <title> 初级排序算法 | zzanswer的博客 </title>
+  <title> 数据聚合与分组运算 | zzanswer的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -253,7 +254,7 @@
             
             
               
-                初级排序算法
+                数据聚合与分组运算
               
             
           </h1>
@@ -265,8 +266,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-20T15:03:03+08:00" content="2016-04-20">
-              2016-04-20
+            <time itemprop="dateCreated" datetime="2016-06-08T19:17:52+08:00" content="2016-06-08">
+              2016-06-08
             </time>
           </span>
 
@@ -279,8 +280,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构与算法</span>
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
                   </a>
                 </span>
 
@@ -295,8 +296,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/04/20/初级排序算法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/20/初级排序算法/" itemprop="commentsCount"></span>
+                <a href="/2016/06/08/数据聚合与分组运算/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/08/数据聚合与分组运算/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -317,118 +318,9 @@
       
 
       
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>本文主要讨论几个初级排序算法，用Java语言来实现。首先给出一个排序算法类模板Example类：将排序代码放在类的sort()方法中，该类还将包含辅助函数less()和exch()以及一个示例用例main()。less()方法对元素进行比较，exch()方法将元素交换位置。下面给出代码：<br><a id="more"></a></p>
-<pre><code>import edu.princeton.cs.algs4.StdIn;
-import edu.princeton.cs.algs4.StdOut;
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>本文为《利用Python进行数据分析》一书第9章“数据聚合与分组运算”的读书笔记。<br><a id="more"></a></p>
+<h3 id="思维导图"><a href="#思维导图" class="headerlink" title="思维导图"></a>思维导图</h3><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/%E6%95%B0%E6%8D%AE%E8%81%9A%E5%90%88%E4%B8%8E%E5%88%86%E7%BB%84%E8%BF%90%E7%AE%97.png" alt="id"></p>
 
-public class Example {
-    public static void sort(Comparable[] a) {
-        // 此为各种排序算法
-    }
-
-    private static boolean less(Comparable v, Comparable w) {
-        return v.compareTo(w) &lt; 0;
-    }
-
-    private static void exch(Comparable[] a, int i, int j) {
-        Comparable t = a[i];
-        a[i] = a[j];
-        a[j] = t;
-    }
-
-    // 在单行中打印数组
-    private static void show(Comparable[] a) {
-        for (int i = 0; i &lt; a.length; i++) {
-            StdOut.print(a[i] + &quot; &quot;);
-        StdOut.println();
-        }
-    }
-
-    // 测试数组元素是否有序
-    public static boolean isSorted(Comparable[] a) {
-        for (int i = 1; i &lt; a.length; i++) {
-            if (less(a[i], a[i-1])) {
-                return false;
-            return true;
-            }
-        }
-    }
-
-    // 从标准输入读取字符串，将它们排序并输出
-    public static void main(String[] args) {
-        String[] a = In.readStrings();
-        sort(a);
-        assert isSorted(a);
-        show(a);
-    }
-}
-</code></pre><h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><p>首先，找到数组中最小的那个元素，其次，将它和数组的第一个元素交换位置（如果第一个元素就是最小元素那么它就和自己交换）。再次，在剩下的元素中找到最小的元素，将它与数组的第二个元素交换位置。如此往复，直到将整个数组排序。</p>
-<p>它有两个鲜明的特点：</p>
-<ul>
-<li>运行时间和输入无关。</li>
-<li>数据移动是最少的。</li>
-</ul>
-<p>下面给出代码实现：</p>
-<pre><code>public class Selection {
-    // 将a[]按升序排列
-    public static void sort(Comparable[] a) {
-        int N = a.length;        // 数组长度
-
-        // 将a[i]和a[i+1..N]中最小的元素交换
-        for (int i = 0; i &lt; N; i++) {
-            int min = i；     // 最小元素的索引
-
-            for (int j = i + 1; j &lt; N; j++) {
-                if (less(a[j], a[min])) {
-                    min = j;
-                }
-            }
-
-            exch(a, j, min);
-        }
-    }
-}
-</code></pre><h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><p>插入排序即将元素插入到有序的元素中，在实现中，为了要给插入的元素腾出空间，需要将其余所有元素在插入之前都向右移动一位。</p>
-<p>插入排序所需的时间取决于输入中元素的初始顺序。插入排序对于实际应用中常见的某些类型的非随机数组很有效。下面给出代码实现：</p>
-<pre><code>public class Insertion {
-    // 将a[]按升序排列
-    public static void sort(Comparable[] a) {
-        int N = a.length;
-
-        // 将a[i]插入到a[i-1]、a[i-2]、a[i-3]...之中
-        for (int i = 1; i &lt; N; i++) {
-            for (int j = i; j &gt; 0 &amp;&amp; less(a[j], a[j-1]); j--) {
-                exch(a, j , j-1);
-            }
-        }
-    }
-}
-</code></pre><h2 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h2><p>希尔排序为了加快速度简单地改进了插入排序，交换不相邻的元素以对数组的局部进行排序，并最终用插入排序将局部有序的数组排序。希尔排序的思想是使数组中任意间隔为h的元素都是有序的。这样的数组被称为h有序数组。即一个h有序数组就是h个互相独立的有序数组编织在一起组成的一个数组。</p>
-<p>希尔排序更高效的原因是它权衡了子数组的规模和有序性。排序之初，各个子数组都很短，排序之后子数组都是部分有序的，这两种情况都很适合插入排序。子数组部分有序的程度取决于递增序列的选择。代码如下：</p>
-<pre><code>public class Shell {
-    // 将a[]按升序排列
-    public static void sort(Comparable[] a) {
-        int N = a.length;
-        int h = 1;
-
-        while(h &lt; N/3) {
-            h = 3 * h + 1;
-        }
-
-        // 将数组变为h有序
-        while(h &gt;= 1) {
-            // 将a[i]插入到a[i-h],a[i-2*h],a[i-3*h]...之中
-            for (int i = h; i &lt; N; i++) {
-                for (int j = i; j &gt;= h &amp;&amp; less(a[j], a[j-h]); j -= h) {
-                    exch(a, j, j-h);
-                }
-            }
-
-            h = h / 3;
-        }
-    }
-}
-</code></pre>
       
     </div>
 
@@ -436,17 +328,7 @@ public class Example {
       
         <div class="post-tags">
           
-            <a href="/tags/Java/" rel="tag">#Java</a>
-          
-            <a href="/tags/希尔排序/" rel="tag">#希尔排序</a>
-          
-            <a href="/tags/排序/" rel="tag">#排序</a>
-          
-            <a href="/tags/插入排序/" rel="tag">#插入排序</a>
-          
-            <a href="/tags/算法/" rel="tag">#算法</a>
-          
-            <a href="/tags/选择排序/" rel="tag">#选择排序</a>
+            <a href="/tags/Python/" rel="tag">#Python</a>
           
         </div>
       
@@ -455,17 +337,13 @@ public class Example {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/18/ggplot2标度、坐标轴和图例/" rel="next" title="ggplot2标度、坐标轴和图例">
-                <i class="fa fa-chevron-left"></i> ggplot2标度、坐标轴和图例
+              <a href="/2016/06/07/绘图和可视化/" rel="next" title="绘图和可视化">
+                <i class="fa fa-chevron-left"></i> 绘图和可视化
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/21/ggplot2定位/" rel="prev" title="ggplot2定位">
-                ggplot2定位 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -480,10 +358,10 @@ public class Example {
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/04/20/初级排序算法/"
-     data-title="初级排序算法"
+        <div class="ds-share flat" data-thread-key="2016/06/08/数据聚合与分组运算/"
+     data-title="数据聚合与分组运算"
      data-content=""
-     data-url="http://yoursite.com/2016/04/20/初级排序算法/">
+     data-url="http://yoursite.com/2016/06/08/数据聚合与分组运算/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -510,8 +388,8 @@ public class Example {
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/04/20/初级排序算法/"
-           data-title="初级排序算法" data-url="http://yoursite.com/2016/04/20/初级排序算法/">
+      <div class="ds-thread" data-thread-key="2016/06/08/数据聚合与分组运算/"
+           data-title="数据聚合与分组运算" data-url="http://yoursite.com/2016/06/08/数据聚合与分组运算/">
       </div>
     
   </div>
@@ -624,7 +502,7 @@ public class Example {
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择排序"><span class="nav-number">2.</span> <span class="nav-text">选择排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入排序"><span class="nav-number">3.</span> <span class="nav-text">插入排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#希尔排序"><span class="nav-number">4.</span> <span class="nav-text">希尔排序</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思维导图"><span class="nav-number">2.</span> <span class="nav-text">思维导图</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
