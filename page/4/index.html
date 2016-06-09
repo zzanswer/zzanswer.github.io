@@ -238,11 +238,121 @@
 
     
     
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/04/06/ggplot2用图层构建图像/" itemprop="url">
+                  ggplot2用图层构建图像
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-06T10:46:47+08:00" content="2016-04-06">
+              2016-04-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/R语言/" itemprop="url" rel="index">
+                    <span itemprop="name">R语言</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/06/ggplot2用图层构建图像/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/06/ggplot2用图层构建图像/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
       
       
 
       
-    
+        
+          <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>本文主要对ggplot2中图层、几何对象、统计变换和位置调整的工作方式作一些技术说明：如何对它们进行调用和自定义。</p>
+<h2 id="创建绘图对象"><a href="#创建绘图对象" class="headerlink" title="创建绘图对象"></a>创建绘图对象</h2><p>当我们调用qplot()时，它已经帮我们做了这样一个流程：创建一个图形对象，添加图层并且展示结果。但如果我们想手动创建图形对象，就要用到ggplot()函数。该函数主要有两个参数：数据和图形属性的映射。其余全部参数可查看R帮助文档。举例：数据为diamonds，x为carat，y为price，colour为cut。</p>
+<pre><code>p &lt;- ggplot(diamonds, aes(carat, price, colour = cut))
+</code></pre><p>上面的代码就是创建一个图形对象，在加上图层之前是无法显示图形的。从这行代码可以看出图形对象可以存储到一个变量里，这有个好处就是有利于代码避繁就简。在文章后面会展示这一优点。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/06/ggplot2用图层构建图像/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -988,7 +1098,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">37</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

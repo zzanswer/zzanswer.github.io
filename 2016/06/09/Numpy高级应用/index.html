@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Java,优先队列,堆,排序,算法," />
+  <meta name="keywords" content="Python,numpy," />
 
 
 
@@ -57,16 +57,17 @@
 
 
 
-<meta name="description" content="简介许多应用程序都需要处理有序的元素，但不一定要求它们全部有序，或者不一定要一次就将它们排序。很多情况下我们会收集一些元素，处理当前键值最大的元素，然后再收集更多的元素，再处理当前键值最大的元素。在这种情况下，一个合适的数据结构应该支持两种操作：删除最大元素和插入元素。这种数据结构类型叫做优先队列。">
+<meta name="description" content="简介本文为《利用Python进行数据分析》一书第12章“时间序列”的读书笔记。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="优先队列">
-<meta property="og:url" content="http://yoursite.com/2016/05/03/优先队列/index.html">
+<meta property="og:title" content="Numpy高级应用">
+<meta property="og:url" content="http://yoursite.com/2016/06/09/Numpy高级应用/index.html">
 <meta property="og:site_name" content="zzanswer的博客">
-<meta property="og:description" content="简介许多应用程序都需要处理有序的元素，但不一定要求它们全部有序，或者不一定要一次就将它们排序。很多情况下我们会收集一些元素，处理当前键值最大的元素，然后再收集更多的元素，再处理当前键值最大的元素。在这种情况下，一个合适的数据结构应该支持两种操作：删除最大元素和插入元素。这种数据结构类型叫做优先队列。">
-<meta property="og:updated_time" content="2016-05-14T14:19:22.106Z">
+<meta property="og:description" content="简介本文为《利用Python进行数据分析》一书第12章“时间序列”的读书笔记。">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/NumPy%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8.png">
+<meta property="og:updated_time" content="2016-06-09T09:08:56.623Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="优先队列">
-<meta name="twitter:description" content="简介许多应用程序都需要处理有序的元素，但不一定要求它们全部有序，或者不一定要一次就将它们排序。很多情况下我们会收集一些元素，处理当前键值最大的元素，然后再收集更多的元素，再处理当前键值最大的元素。在这种情况下，一个合适的数据结构应该支持两种操作：删除最大元素和插入元素。这种数据结构类型叫做优先队列。">
+<meta name="twitter:title" content="Numpy高级应用">
+<meta name="twitter:description" content="简介本文为《利用Python进行数据分析》一书第12章“时间序列”的读书笔记。">
 
 
 
@@ -84,7 +85,7 @@
   };
 </script>
 
-  <title> 优先队列 | zzanswer的博客 </title>
+  <title> Numpy高级应用 | zzanswer的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -253,7 +254,7 @@
             
             
               
-                优先队列
+                Numpy高级应用
               
             
           </h1>
@@ -265,8 +266,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-03T14:51:18+08:00" content="2016-05-03">
-              2016-05-03
+            <time itemprop="dateCreated" datetime="2016-06-09T16:53:27+08:00" content="2016-06-09">
+              2016-06-09
             </time>
           </span>
 
@@ -279,8 +280,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构与算法</span>
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
                   </a>
                 </span>
 
@@ -295,8 +296,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/03/优先队列/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/03/优先队列/" itemprop="commentsCount"></span>
+                <a href="/2016/06/09/Numpy高级应用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/09/Numpy高级应用/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -317,118 +318,9 @@
       
 
       
-        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>许多应用程序都需要处理有序的元素，但不一定要求它们全部有序，或者不一定要一次就将它们排序。很多情况下我们会收集一些元素，处理当前键值最大的元素，然后再收集更多的元素，再处理当前键值最大的元素。在这种情况下，一个合适的数据结构应该支持两种操作：删除最大元素和插入元素。这种数据结构类型叫做优先队列。<br><a id="more"></a></p>
-<h2 id="堆的算法"><a href="#堆的算法" class="headerlink" title="堆的算法"></a>堆的算法</h2><p>下面给出基于堆的优先队列。</p>
-<pre><code>public class MaxPQ&lt;Key extends Comparable&lt;Key&gt;&gt; {
-    private Key[] pq;        // 基于堆的完全二叉树
-    private int N = 0;        // 存储与pq[1..N]中，pq[0]没有使用
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>本文为《利用Python进行数据分析》一书第12章“时间序列”的读书笔记。<br><a id="more"></a></p>
+<h3 id="思维导图"><a href="#思维导图" class="headerlink" title="思维导图"></a>思维导图</h3><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/NumPy%E9%AB%98%E7%BA%A7%E5%BA%94%E7%94%A8.png" alt="id"></p>
 
-    public MaxPQ(int maxN) {
-        pq = (Key[]) new Comparable[maxN + 1];
-    }
-
-    public boolean isEmpty() {
-        return N == 0;
-    }
-
-    public int size() {
-        return N;
-    }
-
-    public void insert(Key v) {
-        pq[++N] = v;
-        swim(N);
-    }
-
-    public Key delMax() {
-        Key max = pq[1];        // 从根结点得到最大元素
-        exch(1, N--);            // 将其和最后一个结点交换
-        pq[N + 1] = null;        // 防止对象游离
-        sink(1);                // 恢复堆的有序性
-        return max;
-    }
-
-    private boolean less(int i, int j) {
-        return pq[i].compareTo(pq[j]) &lt; 0;
-    }
-
-    private void exch(int i, int j) {
-        Key t = pq[i];
-        pq[i] = pq[j];
-        pq[j] = t;
-    }
-
-    private void swim(int k) {
-        while(k &gt; 1 &amp;&amp; less(k/2, k)) {
-            exch(k/2, k);
-            k = k/2;
-        }
-    }
-
-    private void sink(int k) {
-        while(2 * k &lt;= N) {
-            int j = 2 * k;
-
-            if (j &lt; N &amp;&amp; less(j, j + 1)) {
-                j++;
-            }
-
-            if (!less(k, j)) {
-                break;
-            }
-
-            exch(k, j);
-            k = j;
-        }
-    }
-}
-</code></pre><p>下面是使用优先队列的多向归并。</p>
-<pre><code>public class Multiway {
-    public static void merge(In[] streams) {
-        int N = streams.length;
-        IndexMinPQ&lt;String&gt; pq = new IndexMinPQ&lt;String&gt;(N);
-
-        for (int i = 0; i &lt; N; i++) {
-            if (!streams[i].isEmpty()) {
-                pq.insert(i, streams[i].readString());
-            }
-        }
-
-        while(!pq.isEmpty()) {
-            StdOut.println(pq.min());
-            int i = pq.delMin();
-
-            if (!streams[i].isEmpty()) {
-                pq.insert(i, streams[i].readString());
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        int N = args.length;
-        In[] streams = new In[N];
-
-        for (int i = 0; i &lt; N; i++) {
-            streams[i] = new In(args[i]);
-        }
-
-        merge(streams);
-    }
-}
-</code></pre><h2 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h2><p>堆排序可以分为两个阶段。在堆的构造阶段中，我们将原始数组重新组织安排进一个堆中；然后在下沉排序阶段，我们从堆中按递减顺序取出所有元素并得到排序结果。</p>
-<pre><code>public static void sort(Comparable[] a) {
-    int N = a.length;
-
-    for (int k = N / 2; k &gt;= 1; k--) {
-        sink(a, k, N);
-    }
-
-    while(N &gt; 1) {
-        exch(a, 1, N--);
-        sink(a, 1, N);
-    }
-}
-</code></pre>
       
     </div>
 
@@ -436,15 +328,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Java/" rel="tag">#Java</a>
+            <a href="/tags/Python/" rel="tag">#Python</a>
           
-            <a href="/tags/优先队列/" rel="tag">#优先队列</a>
-          
-            <a href="/tags/堆/" rel="tag">#堆</a>
-          
-            <a href="/tags/排序/" rel="tag">#排序</a>
-          
-            <a href="/tags/算法/" rel="tag">#算法</a>
+            <a href="/tags/numpy/" rel="tag">#numpy</a>
           
         </div>
       
@@ -453,17 +339,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/26/ggplot2精雕细琢/" rel="next" title="ggplot2精雕细琢">
-                <i class="fa fa-chevron-left"></i> ggplot2精雕细琢
+              <a href="/2016/06/09/时间序列/" rel="next" title="时间序列">
+                <i class="fa fa-chevron-left"></i> 时间序列
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/05/ggplot2数据操作/" rel="prev" title="ggplot2数据操作">
-                ggplot2数据操作 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -478,10 +360,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/05/03/优先队列/"
-     data-title="优先队列"
+        <div class="ds-share flat" data-thread-key="2016/06/09/Numpy高级应用/"
+     data-title="Numpy高级应用"
      data-content=""
-     data-url="http://yoursite.com/2016/05/03/优先队列/">
+     data-url="http://yoursite.com/2016/06/09/Numpy高级应用/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -508,8 +390,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/05/03/优先队列/"
-           data-title="优先队列" data-url="http://yoursite.com/2016/05/03/优先队列/">
+      <div class="ds-thread" data-thread-key="2016/06/09/Numpy高级应用/"
+           data-title="Numpy高级应用" data-url="http://yoursite.com/2016/06/09/Numpy高级应用/">
       </div>
     
   </div>
@@ -622,7 +504,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#堆的算法"><span class="nav-number">2.</span> <span class="nav-text">堆的算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#堆排序"><span class="nav-number">3.</span> <span class="nav-text">堆排序</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思维导图"><span class="nav-number">2.</span> <span class="nav-text">思维导图</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
