@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Python,排序," />
+  <meta name="keywords" content="Python,决策树,分类,机器学习," />
 
 
 
@@ -57,19 +57,27 @@
 
 
 
-<meta name="description" content="背景全球三大MOOC网站之一的Udacity进入了中国市场，更名为优达学城,还给了一个月的免费学习时间！我一下瞄准了一门机器学习工程师的纳米学位，上之前，有几个测试的题目，其中有一个Python排序题还蛮有意思的：
-统计 Python 中的字数">
+<meta name="description" content="基本概念决策树是一种常见的分类算法。
+优点：计算复杂度不高，输出结果易于理解，对中间值的缺失不敏感，可以处理不相关特征数据。
+缺点：可能会产生过度匹配问题。
+适用数据类型：数值型和标称型。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python多条件排序">
-<meta property="og:url" content="http://yoursite.com/2016/05/18/Python多条件排序/index.html">
+<meta property="og:title" content="决策树">
+<meta property="og:url" content="http://yoursite.com/2016/06/17/决策树/index.html">
 <meta property="og:site_name" content="zzanswer的博客">
-<meta property="og:description" content="背景全球三大MOOC网站之一的Udacity进入了中国市场，更名为优达学城,还给了一个月的免费学习时间！我一下瞄准了一门机器学习工程师的纳米学位，上之前，有几个测试的题目，其中有一个Python排序题还蛮有意思的：
-统计 Python 中的字数">
-<meta property="og:updated_time" content="2016-05-18T06:43:00.687Z">
+<meta property="og:description" content="基本概念决策树是一种常见的分类算法。
+优点：计算复杂度不高，输出结果易于理解，对中间值的缺失不敏感，可以处理不相关特征数据。
+缺点：可能会产生过度匹配问题。
+适用数据类型：数值型和标称型。">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/CodeCogsEqn.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/CodeCogsEqn1.png">
+<meta property="og:updated_time" content="2016-06-17T15:48:59.625Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python多条件排序">
-<meta name="twitter:description" content="背景全球三大MOOC网站之一的Udacity进入了中国市场，更名为优达学城,还给了一个月的免费学习时间！我一下瞄准了一门机器学习工程师的纳米学位，上之前，有几个测试的题目，其中有一个Python排序题还蛮有意思的：
-统计 Python 中的字数">
+<meta name="twitter:title" content="决策树">
+<meta name="twitter:description" content="基本概念决策树是一种常见的分类算法。
+优点：计算复杂度不高，输出结果易于理解，对中间值的缺失不敏感，可以处理不相关特征数据。
+缺点：可能会产生过度匹配问题。
+适用数据类型：数值型和标称型。">
 
 
 
@@ -87,7 +95,7 @@
   };
 </script>
 
-  <title> Python多条件排序 | zzanswer的博客 </title>
+  <title> 决策树 | zzanswer的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -256,7 +264,7 @@
             
             
               
-                Python多条件排序
+                决策树
               
             
           </h1>
@@ -268,8 +276,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-18T14:23:39+08:00" content="2016-05-18">
-              2016-05-18
+            <time itemprop="dateCreated" datetime="2016-06-17T22:32:35+08:00" content="2016-06-17">
+              2016-06-17
             </time>
           </span>
 
@@ -282,8 +290,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
                   </a>
                 </span>
 
@@ -298,8 +306,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/18/Python多条件排序/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/18/Python多条件排序/" itemprop="commentsCount"></span>
+                <a href="/2016/06/17/决策树/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/17/决策树/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -320,45 +328,18 @@
       
 
       
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>全球三大MOOC网站之一的Udacity进入了中国市场，更名为<a href="http://cn.udacity.com" target="_blank" rel="external">优达学城</a>,还给了一个月的免费学习时间！我一下瞄准了一门机器学习工程师的纳米学位，上之前，有几个测试的题目，其中有一个Python排序题还蛮有意思的：</p>
-<p>统计 Python 中的字数<br><a id="more"></a></p>
-<p>在 Python 中实施函数“count_words()”，该函数将字符串“s”和数字“n”用作输入，并返回“s”中“n”个出现频率最高的单词。返回值应该是一个元组列表 - 出现频率最高的“n”个单词及其相应的出现次数“[(, ), (, ), …]”，按出现次数的降序排列。</p>
-<p>您可以假设所有输入都是小写形式，并且不含标点符号或其他字符（只包含字母和单个分隔空格）。如果出现次数相同，则按字母顺序排列出现次数相同的单词。</p>
-<p>例如：</p>
-<pre><code>print count_words(&quot;betty bought a bit of butter but the butter was bitter&quot;,3)
-</code></pre><p>Output:</p>
-<pre><code>[(&apos;butter&apos;, 2), (&apos;a&apos;, 1), (&apos;betty&apos;, 1)]
-</code></pre><h2 id="思考过程"><a href="#思考过程" class="headerlink" title="思考过程"></a>思考过程</h2><p>刚拿到手觉得应该很简单，只需要排序函数<code>sorted()</code>就可以解决，结果发现这题需要两个条件，而且还是一个降序，一个升序。</p>
-<pre><code>myArray = sorted(myDict, key=itemgetter(1,0) )
+        <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>决策树是一种常见的分类算法。</p>
+<p>优点：计算复杂度不高，输出结果易于理解，对中间值的缺失不敏感，可以处理不相关特征数据。</p>
+<p>缺点：可能会产生过度匹配问题。</p>
+<p>适用数据类型：数值型和标称型。<br><a id="more"></a></p>
+<h2 id="信息增益"><a href="#信息增益" class="headerlink" title="信息增益"></a>信息增益</h2><p>这里是使用的ID3算法来划分数据集，每次划分数据集时是只选取一个特征，那么就有一个问题出现了，训练集中会存在多个特征，选取特征的顺序应该如何来界定呢？这里，划分数据集的大原则是：将无序的数据变得更加有序。</p>
+<h3 id="信息增益和熵"><a href="#信息增益和熵" class="headerlink" title="信息增益和熵"></a>信息增益和熵</h3><p>介绍信息论中的两个概念，信息增益和熵。</p>
+<p>信息增益指的是划分数据集之前之后信息发生的变化。依据这一点，那么获得信息增益最高的特征就是最好的选择，而信息增益的一个度量方式称之为熵（entropy）。</p>
+<p>单个的信息定义为： </p>
+<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/CodeCogsEqn.png" alt="id"></p>
+<p>整个熵的公式：</p>
+<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/CodeCogsEqn1.png" alt="id"></p>
 
-myArray = sorted(myDict, key=itemgetter(1,0), reverse=True )
-</code></pre><p>上面的就没有用了，google了一番之后终于找到了解决办法：</p>
-<pre><code>myArray = sorted(myDict.items(), key=lambda x: (-x[1],x[0]))
-</code></pre><h2 id="Python代码"><a href="#Python代码" class="headerlink" title="Python代码"></a>Python代码</h2><p>下面给出完整的解决代码：</p>
-<pre><code>from operator import itemgetter
-
-def count_words(s, n):
-    myDict = {}    
-    myArray = []
-
-    for w in s.split():
-        myDict[w] = 0
-
-    for w in s.split():
-        myDict[w] +=1
-
-    myArray = sorted(myDict.items(), key=lambda x: (-x[1],x[0]))
-
-    return myArray[:n]
-
-def test_run():
-    &quot;&quot;&quot;Test count_words() with some inputs.&quot;&quot;&quot;
-    print count_words(&quot;cat bat mat cat bat cat&quot;, 3)
-    print count_words(&quot;betty bought a bit of butter but the butter was bitter&quot;, 3)
-
-if __name__ == &apos;__main__&apos;:
-    test_run()
-</code></pre>
       
     </div>
 
@@ -368,7 +349,11 @@ if __name__ == &apos;__main__&apos;:
           
             <a href="/tags/Python/" rel="tag">#Python</a>
           
-            <a href="/tags/排序/" rel="tag">#排序</a>
+            <a href="/tags/决策树/" rel="tag">#决策树</a>
+          
+            <a href="/tags/分类/" rel="tag">#分类</a>
+          
+            <a href="/tags/机器学习/" rel="tag">#机器学习</a>
           
         </div>
       
@@ -377,17 +362,13 @@ if __name__ == &apos;__main__&apos;:
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/15/Python中range与xrange比较/" rel="next" title="Python中range与xrange比较">
-                <i class="fa fa-chevron-left"></i> Python中range与xrange比较
+              <a href="/2016/06/09/Numpy高级应用/" rel="next" title="Numpy高级应用">
+                <i class="fa fa-chevron-left"></i> Numpy高级应用
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/18/Python排序总结/" rel="prev" title="Python排序总结">
-                Python排序总结 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -402,10 +383,10 @@ if __name__ == &apos;__main__&apos;:
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/05/18/Python多条件排序/"
-     data-title="Python多条件排序"
+        <div class="ds-share flat" data-thread-key="2016/06/17/决策树/"
+     data-title="决策树"
      data-content=""
-     data-url="http://yoursite.com/2016/05/18/Python多条件排序/">
+     data-url="http://yoursite.com/2016/06/17/决策树/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -432,8 +413,8 @@ if __name__ == &apos;__main__&apos;:
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/05/18/Python多条件排序/"
-           data-title="Python多条件排序" data-url="http://yoursite.com/2016/05/18/Python多条件排序/">
+      <div class="ds-thread" data-thread-key="2016/06/17/决策树/"
+           data-title="决策树" data-url="http://yoursite.com/2016/06/17/决策树/">
       </div>
     
   </div>
@@ -546,7 +527,7 @@ if __name__ == &apos;__main__&apos;:
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思考过程"><span class="nav-number">2.</span> <span class="nav-text">思考过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python代码"><span class="nav-number">3.</span> <span class="nav-text">Python代码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信息增益"><span class="nav-number">2.</span> <span class="nav-text">信息增益</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#信息增益和熵"><span class="nav-number">2.1.</span> <span class="nav-text">信息增益和熵</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
