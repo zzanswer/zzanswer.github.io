@@ -71,7 +71,9 @@
 适用数据类型：数值型和标称型。">
 <meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/CodeCogsEqn.png">
 <meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/CodeCogsEqn1.png">
-<meta property="og:updated_time" content="2016-06-17T15:48:59.625Z">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/figure_1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/figure_2.png">
+<meta property="og:updated_time" content="2016-06-18T02:14:26.190Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="决策树">
 <meta name="twitter:description" content="基本概念决策树是一种常见的分类算法。
@@ -339,6 +341,220 @@
 <p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/CodeCogsEqn.png" alt="id"></p>
 <p>整个熵的公式：</p>
 <p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/CodeCogsEqn1.png" alt="id"></p>
+<h2 id="Python实现"><a href="#Python实现" class="headerlink" title="Python实现"></a>Python实现</h2><h3 id="计算给定数据集的信息熵"><a href="#计算给定数据集的信息熵" class="headerlink" title="计算给定数据集的信息熵"></a>计算给定数据集的信息熵</h3><pre><code>from math import log
+def calcShannonEnt(dataSet):
+    numEntries = len(dataSet)
+    labelCounts = {}
+    # 为所有可能分类创建字典
+    for featVec in dataSet:
+        currentLabel = featVec[-1]
+        if currentLabel not in labelCounts.keys():
+            labelCounts[currentLabel] = 0
+        labelCounts[currentLabel] += 1
+    shannonEnt = 0.0
+    for key in labelCounts:
+        prob = float(labelCounts[key]) / numEntries
+        shannonEnt -= prob * log(prob, 2)        # 以2为底求对数
+    return shannonEnt
+</code></pre><h3 id="创建数据集"><a href="#创建数据集" class="headerlink" title="创建数据集"></a>创建数据集</h3><pre><code>def createDataSet():
+    dataSet = [[1, 1, &apos;yes&apos;],
+            [1, 1, &apos;yes&apos;],
+            [1, 0, &apos;no&apos;],
+            [0, 1, &apos;no&apos;],
+            [0, 1, &apos;no&apos;]]
+    labels = [&apos;no surfacing&apos;, &apos;flippers&apos;]
+    return dataSet, labels
+
+In [12]: myDat,labels = trees.createDataSet()
+In [14]: myDat
+Out[14]: [[1, 1, &apos;yes&apos;], [1, 1, &apos;yes&apos;], [1, 0, &apos;no&apos;], [0, 1, &apos;no&apos;], [0, 1, &apos;no&apos;]]
+
+In [15]: trees.calcShannonEnt(myDat)
+Out[15]: 0.9709505944546686
+</code></pre><h3 id="划分数据集"><a href="#划分数据集" class="headerlink" title="划分数据集"></a>划分数据集</h3><pre><code>def splitDataSet(dataSet, axis, value):
+    retDataSet = []
+    for featVec in dataSet:
+        if featVec[axis] == value:
+            reducedFeatVec = featVec[:axis]
+            reducedFeatVec.extend(featVec[axis+1:])
+            retDataSet.append(reducedFeatVec)
+    return retDataSet
+
+In [16]: myDat,labels = trees.createDataSet()
+
+In [17]: myDat
+Out[17]: [[1, 1, &apos;yes&apos;], [1, 1, &apos;yes&apos;], [1, 0, &apos;no&apos;], [0, 1, &apos;no&apos;], [0, 1, &apos;no&apos;]]
+
+In [18]: trees.splitDataSet(myDat, 0, 1)
+Out[18]: [[1, &apos;yes&apos;], [1, &apos;yes&apos;], [0, &apos;no&apos;]]
+
+In [19]: trees.splitDataSet(myDat, 0, 0)
+Out[19]: [[1, &apos;no&apos;], [1, &apos;no&apos;]]
+</code></pre><h3 id="选择最好的数据集划分方式"><a href="#选择最好的数据集划分方式" class="headerlink" title="选择最好的数据集划分方式"></a>选择最好的数据集划分方式</h3><p>其中的数据集想要用此函数要满足一定要求：第一，数据必须是一种由列表元素组成的列表，而且所有的列表元素都要具有相同的数据长度；第二，数据的最后一列或者每个实例的最后一个元素是当前实例的类别标签。</p>
+<pre><code>def chooseBestFeatureToSplit(dataSet):
+    numFeatures = len(dataSet[0]) - 1        # 数据集特征个数
+    baseEntropy = calcShannonEnt(dataSet)    # 计算整个数据集的原始信息熵
+    bestInfoGain = 0.0; bestFeatrue = -1
+    for i in xrange(numFeatures):
+        featList = [example[i] for example in dataSet]
+        uniqueVals = set(featList)            # 获取唯一元素值
+        newEntropy = 0.0
+        for value in uniqueVals:
+            subDataSet = splitDataSet(dataSet, i, value)
+            prob = len(subDataSet) / float(len(dataSet))
+            newEntropy += prob * calcShannonEnt(subDataSet)        # 该特征划分所对应的熵
+        infoGain = baseEntropy - newEntropy
+        if (infoGain &gt; bestInfoGain):
+            bestInfoGain = infoGain
+            bestFeatrue = i
+    return bestFeatrue
+
+In [20]: myDat,labels = trees.createDataSet()
+
+In [21]: trees.chooseBestFeatureToSplit(myDat)
+Out[21]: 0
+
+In [22]: myDat
+Out[22]: [[1, 1, &apos;yes&apos;], [1, 1, &apos;yes&apos;], [1, 0, &apos;no&apos;], [0, 1, &apos;no&apos;], [0, 1, &apos;no&apos;]]
+</code></pre><h3 id="叶节点的分类"><a href="#叶节点的分类" class="headerlink" title="叶节点的分类"></a>叶节点的分类</h3><pre><code># 多数表决
+def majorityCnt(classList):
+    classCount = {}
+    for vote in classList:
+        if vote not in classCount.keys(): classCount[vote] = 0
+        classCount[vote] += 1
+    sortedClassCount = sorted(classCount.iteritems(), key = operator.itemgetter(1), reversed = True)
+    return sortedClassCount[0][0]
+</code></pre><h3 id="创建树"><a href="#创建树" class="headerlink" title="创建树"></a>创建树</h3><pre><code>def createTree(dataSet, labels):
+    classList = [example[-1] for example in dataSet]
+    if classList.count(classList[0]) == len(classList):        # 类标签完全相同则停止划分
+        return classList[0]
+    if len(dataSet[0]) == 1:
+        return majorityCnt(classList)        # 遍历完所有特征
+    bestFeat = chooseBestFeatureToSplit(dataSet)
+    bestFeatLabel = labels[bestFeat]
+    myTree = {bestFeatLabel:{}}
+    del(labels[bestFeat])
+    featValues = [example[bestFeat] for example in dataSet]
+    uniqueVals = set(featValues)
+    for value in uniqueVals:
+        subLabels = labels[:]
+        myTree[bestFeatLabel][value] = createTree(splitDataSet(dataSet, bestFeat, value), subLabels)
+    return myTree
+
+In [23]: myDat,labels = trees.createDataSet()
+
+In [24]: myTree = trees.createTree(myDat, labels)
+
+In [25]: myTree
+Out[25]: {&apos;no surfacing&apos;: {0: &apos;no&apos;, 1: {&apos;flippers&apos;: {0: &apos;no&apos;, 1: &apos;yes&apos;}}}}
+</code></pre><h3 id="绘制树形图"><a href="#绘制树形图" class="headerlink" title="绘制树形图"></a>绘制树形图</h3><p>绘图代码不是重点，就直接贴上来了。</p>
+<pre><code>import matplotlib.pyplot as plt
+
+decisionNode = dict(boxstyle = &quot;sawtooth&quot;, fc = &quot;0.8&quot;)
+leafNode = dict(boxstyle = &quot;round4&quot;, fc = &quot;0.8&quot;)
+arrow_args = dict(arrowstyle = &quot;&lt;-&quot;)
+
+def plotNode(nodeTxt, centerPt, parentPt, nodeType):
+    createPlot.axl.annotate(nodeTxt, xy = parentPt, xycoords = &apos;axes fraction&apos;, xytext = centerPt, textcoords = &apos;axes fraction&apos;, va = &quot;center&quot;, ha = &quot;center&quot;, bbox = nodeType, arrowprops = arrow_args)
+
+def createPlot(inTree):
+    fig = plt.figure(1, facecolor = &apos;white&apos;)
+    fig.clf()
+    axprops = dict(xticks = [], yticks = [])
+    createPlot.axl = plt.subplot(111, frameon = False, **axprops)
+    plotTree.totalW = float(getNumLeafs(inTree))
+    plotTree.totalD = float(getTreeDepth(inTree))
+    plotTree.xOff = -0.5/plotTree.totalW; plotTree.yOff = 1.0;
+    plotTree(inTree, (0.5, 1.0), &apos;&apos;)
+    plt.show()
+
+def getNumLeafs(myTree):
+    numLeafs = 0
+    firstStr = myTree.keys()[0]
+    secondDict = myTree[firstStr]
+    for key in secondDict.keys():
+        if type(secondDict[key]).__name__==&apos;dict&apos;:
+            numLeafs += getNumLeafs(secondDict[key])
+        else:
+            numLeafs += 1
+    return numLeafs
+
+def getTreeDepth(myTree):
+    maxDepth = 0
+    firstStr = myTree.keys()[0]
+    secondDict = myTree[firstStr]
+    for key in secondDict.keys():
+        if type(secondDict[key]).__name__==&apos;dict&apos;:
+            thisDepth = 1 + getTreeDepth(secondDict[key])
+        else:
+            thisDepth = 1
+        if thisDepth &gt; maxDepth:
+            maxDepth = thisDepth 
+    return maxDepth
+
+def retrieveTree(i):
+    listOfTrees = [{&apos;no surfacing&apos;: {0: &apos;no&apos;, 1: {&apos;flippers&apos;: {0: &apos;no&apos;, 1: &apos;yes&apos;}}}},
+                    {&apos;no surfacing&apos;: {0: &apos;no&apos;, 1: {&apos;flippers&apos;: {0: {&apos;head&apos;: {0: &apos;no&apos;, 1: &apos;yes&apos;}}, 1: &apos;no&apos;}}}}
+                    ]
+    return listOfTrees[i]
+
+def plotMidText(cntrPt, parentPt, txtString):
+    xMid = (parentPt[0] - cntrPt[0])/2.0 + cntrPt[0]
+    yMid = (parentPt[1] - cntrPt[1])/2.0 + cntrPt[1]
+    createPlot.axl.text(xMid, yMid, txtString)
+
+def plotTree(myTree, parentPt, nodeTxt):
+    numLeafs = getNumLeafs(myTree)
+    depth = getTreeDepth(myTree)
+    firstStr = myTree.keys()[0]
+    cntrPt = (plotTree.xOff + (1.0 + float(numLeafs))/2.0/plotTree.totalW, plotTree.yOff)
+    plotMidText(cntrPt, parentPt, nodeTxt)
+    plotNode(firstStr, cntrPt, parentPt, decisionNode)
+    secondDict = myTree[firstStr]
+    plotTree.yOff = plotTree.yOff - 1.0/plotTree.totalD
+    for key in secondDict.keys():
+        if type(secondDict[key]).__name__==&apos;dict&apos;:
+            plotTree(secondDict[key], cntrPt, str(key))
+        else:
+            plotTree.xOff = plotTree.xOff + 1.0/plotTree.totalW
+            plotNode(secondDict[key], (plotTree.xOff, plotTree.yOff), cntrPt, leafNode)
+            plotMidText((plotTree.xOff, plotTree.yOff), cntrPt, str(key))
+    plotTree.yOff = plotTree.yOff + 1.0/plotTree.totalD
+
+In [27]: myTree = treePlotter.retrieveTree(0)
+
+In [28]: treePlotter.createPlot(myTree)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/figure_1.png" alt="id"></p>
+<pre><code>In [29]: myTree[&apos;no surfacing&apos;][3] = &apos;maybe&apos;
+
+In [30]: myTree
+Out[30]: {&apos;no surfacing&apos;: {0: &apos;no&apos;, 1: {&apos;flippers&apos;: {0: &apos;no&apos;, 1: &apos;yes&apos;}}, 3: &apos;maybe&apos;}}
+
+In [31]: treePlotter.createPlot(myTree)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/figure_2.png" alt="id"></p>
+<h3 id="使用决策树的分类函数"><a href="#使用决策树的分类函数" class="headerlink" title="使用决策树的分类函数"></a>使用决策树的分类函数</h3><pre><code>def classify(inputTree, featLabels, testVec):
+    firstStr = inputTree.keys()[0]
+    secondDict = inputTree[firstStr]
+    featIndex = featLabels.index(firstStr)
+    for key in secondDict.keys():
+        if testVec[featIndex] == key:
+            if type(secondDict[key]).__name__==&apos;dict&apos;:
+                classLabel = classify(secondDict[key], featLabels, testVec)
+            else:
+                classLabel = secondDict[key]
+    return classLabel
+</code></pre><h3 id="决策树的存储"><a href="#决策树的存储" class="headerlink" title="决策树的存储"></a>决策树的存储</h3><p>主要是为了解决耗时的问题，引入pickle模块来序列化对象。</p>
+<pre><code>def storeTree(inputTree, filename):
+    import pickle
+    fw = open(filename, &apos;w&apos;)
+    pickle.dump(inputTree, fw)
+    fw.close()
+
+def grabTree(filename):
+    import pickle
+    fr = open(filename)
+    return pickle.load(fr)
+</code></pre><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1][机器学习实战]</p>
 
       
     </div>
@@ -527,7 +743,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信息增益"><span class="nav-number">2.</span> <span class="nav-text">信息增益</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#信息增益和熵"><span class="nav-number">2.1.</span> <span class="nav-text">信息增益和熵</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信息增益"><span class="nav-number">2.</span> <span class="nav-text">信息增益</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#信息增益和熵"><span class="nav-number">2.1.</span> <span class="nav-text">信息增益和熵</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python实现"><span class="nav-number">3.</span> <span class="nav-text">Python实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#计算给定数据集的信息熵"><span class="nav-number">3.1.</span> <span class="nav-text">计算给定数据集的信息熵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建数据集"><span class="nav-number">3.2.</span> <span class="nav-text">创建数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#划分数据集"><span class="nav-number">3.3.</span> <span class="nav-text">划分数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选择最好的数据集划分方式"><span class="nav-number">3.4.</span> <span class="nav-text">选择最好的数据集划分方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#叶节点的分类"><span class="nav-number">3.5.</span> <span class="nav-text">叶节点的分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建树"><span class="nav-number">3.6.</span> <span class="nav-text">创建树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绘制树形图"><span class="nav-number">3.7.</span> <span class="nav-text">绘制树形图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用决策树的分类函数"><span class="nav-number">3.8.</span> <span class="nav-text">使用决策树的分类函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#决策树的存储"><span class="nav-number">3.9.</span> <span class="nav-text">决策树的存储</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
