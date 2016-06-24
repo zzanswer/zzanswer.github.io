@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Python,numpy,数组," />
+  <meta name="keywords" content="Python,分类,机器学习,贝叶斯," />
 
 
 
@@ -57,17 +57,28 @@
 
 
 
-<meta name="description" content="简介本文为《利用Python进行数据分析》一书第4章“NumPy基础：数组和矢量计算”的读书笔记。">
+<meta name="description" content="基本概念朴素贝叶斯法是基于贝叶斯定理与特征条件独立假设的分类方法。其中朴素指的就是特征条件独立，贝叶斯指的是基于贝叶斯定理。对于给定的训练数据集，首先基于特征条件独立假设学习输入/输出的联合概率分布；然后基于此模型，对给定的输入x，利用贝叶斯定理求出后验概率最大的输出y。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="NumPy基础：数组和矢量计算">
-<meta property="og:url" content="http://yoursite.com/2016/05/26/NumPy基础：数组和矢量计算/index.html">
+<meta property="og:title" content="朴素贝叶斯">
+<meta property="og:url" content="http://yoursite.com/2016/06/23/朴素贝叶斯/index.html">
 <meta property="og:site_name" content="zzanswer的博客">
-<meta property="og:description" content="简介本文为《利用Python进行数据分析》一书第4章“NumPy基础：数组和矢量计算”的读书笔记。">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/NumPy%E5%9F%BA%E7%A1%80%EF%BC%9A%E6%95%B0%E7%BB%84%E5%92%8C%E7%9F%A2%E9%87%8F%E8%AE%A1%E7%AE%97.png">
-<meta property="og:updated_time" content="2016-05-26T02:27:02.754Z">
+<meta property="og:description" content="基本概念朴素贝叶斯法是基于贝叶斯定理与特征条件独立假设的分类方法。其中朴素指的就是特征条件独立，贝叶斯指的是基于贝叶斯定理。对于给定的训练数据集，首先基于特征条件独立假设学习输入/输出的联合概率分布；然后基于此模型，对给定的输入x，利用贝叶斯定理求出后验概率最大的输出y。">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? T=\left \{ (x_{1},y_{1}),(x_{2},y_{2}),...,(x_{N},y_{N}) \right \}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? x_{i}=\left(x_{i}^{(1)},x_{i}^{(2)},...,x_{i}^{(n)}\right)^{T}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? x_{i}^{(j)}\epsilon \left \{ x_{j1},x_{j2},...,x_{jS_{j}} \right \}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? a_{jl}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? S_{j}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? y_{i}\epsilon \left \{ c_{1},c_{2},...,c_{k}\right \}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? P\left ( Y=c_{k} \right )=\frac{\sum_{i=1}^{N}I(y_{i}=c_{k})}{N},k=1,2,...,K">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? P\left ( X^{j}=a_{jl}|Y=c_{k} \right )=\frac{\sum_{i=1}^{N}I(x_{i}^{(j)}=a_{jl},y_{i}=c_{k})}{\sum_{i=1}^{N}I(y_{i}=c_{k})}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? P(Y=c_{k})\prod_{j=1}^{n}P(X^{(j)}=x^{j}|Y=c_{k}),k=1,2,...,K">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? y=argmaxP(Y=c_{k})\prod_{j=1}^{n}P(X^{(j)}=x^{(j)}|Y=c_{k})">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? P_{\lambda }(X^{(j)}=a_{jl}|Y=c_{k})=\frac{\sum_{i=1}^{N}I(x_{i}^{(j)}=a_{jl},y_{i}=c_{k})+\lambda }{\sum_{i=1}^{N}I(y_{i}=c_{k})+S_{j}\lambda }">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? P_{\lambda }(Y=c_{k})=\frac{\sum_{i=1}^{N}I(y_{i}=c_{k})+\lambda }{N+K\lambda }">
+<meta property="og:updated_time" content="2016-06-24T06:00:07.990Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="NumPy基础：数组和矢量计算">
-<meta name="twitter:description" content="简介本文为《利用Python进行数据分析》一书第4章“NumPy基础：数组和矢量计算”的读书笔记。">
+<meta name="twitter:title" content="朴素贝叶斯">
+<meta name="twitter:description" content="基本概念朴素贝叶斯法是基于贝叶斯定理与特征条件独立假设的分类方法。其中朴素指的就是特征条件独立，贝叶斯指的是基于贝叶斯定理。对于给定的训练数据集，首先基于特征条件独立假设学习输入/输出的联合概率分布；然后基于此模型，对给定的输入x，利用贝叶斯定理求出后验概率最大的输出y。">
 
 
 
@@ -85,7 +96,7 @@
   };
 </script>
 
-  <title> NumPy基础：数组和矢量计算 | zzanswer的博客 </title>
+  <title> 朴素贝叶斯 | zzanswer的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -254,7 +265,7 @@
             
             
               
-                NumPy基础：数组和矢量计算
+                朴素贝叶斯
               
             
           </h1>
@@ -266,8 +277,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-26T10:22:50+08:00" content="2016-05-26">
-              2016-05-26
+            <time itemprop="dateCreated" datetime="2016-06-23T14:48:00+08:00" content="2016-06-23">
+              2016-06-23
             </time>
           </span>
 
@@ -280,8 +291,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
                   </a>
                 </span>
 
@@ -296,8 +307,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/26/NumPy基础：数组和矢量计算/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/26/NumPy基础：数组和矢量计算/" itemprop="commentsCount"></span>
+                <a href="/2016/06/23/朴素贝叶斯/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/23/朴素贝叶斯/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -318,8 +329,99 @@
       
 
       
-        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>本文为《利用Python进行数据分析》一书第4章“NumPy基础：数组和矢量计算”的读书笔记。<br><a id="more"></a></p>
-<h3 id="思维导图"><a href="#思维导图" class="headerlink" title="思维导图"></a>思维导图</h3><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/NumPy%E5%9F%BA%E7%A1%80%EF%BC%9A%E6%95%B0%E7%BB%84%E5%92%8C%E7%9F%A2%E9%87%8F%E8%AE%A1%E7%AE%97.png" alt="id"></p>
+        <p><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script></p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>朴素贝叶斯法是基于贝叶斯定理与特征条件独立假设的分类方法。其中朴素指的就是特征条件独立，贝叶斯指的是基于贝叶斯定理。对于给定的训练数据集，首先基于特征条件独立假设学习输入/输出的联合概率分布；然后基于此模型，对给定的输入x，利用贝叶斯定理求出后验概率最大的输出y。</p>
+<a id="more"></a>
+<p>优点：在数据较少的情况下仍然有效，可以处理多类别问题。</p>
+<p>缺点：对于输入数据的准备方式较为敏感。</p>
+<p>适用数据类型：标称型数据。</p>
+<p>关于朴素贝叶斯法的进一步介绍，可以参考这两篇博文：<a href="http://www.ruanyifeng.com/blog/2013/12/naive_bayes_classifier.html" target="_blank" rel="external">朴素贝叶斯分类器的应用</a>和<a href="http://www.cnblogs.com/leoo2sk/archive/2010/09/17/naive-bayesian-classifier.html" target="_blank" rel="external">算法杂货铺——分类算法之朴素贝叶斯分类(Naive Bayesian classification)</a>。</p>
+<h2 id="学习与分类算法"><a href="#学习与分类算法" class="headerlink" title="学习与分类算法"></a>学习与分类算法</h2><p>下面给出朴素贝叶斯法的学习与分类算法。</p>
+<p>输入：训练数据集<img src="http://www.forkosh.com/mathtex.cgi? T=\left \{ (x_{1},y_{1}),(x_{2},y_{2}),...,(x_{N},y_{N}) \right \}">，其中<img src="http://www.forkosh.com/mathtex.cgi? x_{i}=\left(x_{i}^{(1)},x_{i}^{(2)},...,x_{i}^{(n)}\right)^{T}">，\(x_{i}^{(j)}\)是第i个样本的第j个特征，</p>
+<p><img src="http://www.forkosh.com/mathtex.cgi? x_{i}^{(j)}\epsilon \left \{ x_{j1},x_{j2},...,x_{jS_{j}} \right \}">，<img src="http://www.forkosh.com/mathtex.cgi? a_{jl}">是第j个特征可能取得第l个值，j=1,2,…,n，l=1,2,…,<img src="http://www.forkosh.com/mathtex.cgi? S_{j}">,</p>
+<p><img src="http://www.forkosh.com/mathtex.cgi? y_{i}\epsilon \left \{ c_{1},c_{2},...,c_{k}\right \}">；实例x；</p>
+<p>输出：实例x的分类。</p>
+<p>（1）计算先验概率及条件概率</p>
+<p><img src="http://www.forkosh.com/mathtex.cgi? P\left ( Y=c_{k} \right )=\frac{\sum_{i=1}^{N}I(y_{i}=c_{k})}{N},k=1,2,...,K"></p>
+<p><img src="http://www.forkosh.com/mathtex.cgi? P\left ( X^{j}=a_{jl}|Y=c_{k} \right )=\frac{\sum_{i=1}^{N}I(x_{i}^{(j)}=a_{jl},y_{i}=c_{k})}{\sum_{i=1}^{N}I(y_{i}=c_{k})}"></p>
+<p>\(j=1,2,…,n;l=1,2,…,S_{j};k=1,2,…,K\)</p>
+<p>（2）对于给定的实例\(x=(x^{(1)},x^{(2)},…,x^{(n)})^{T}\)，计算</p>
+<p><img src="http://www.forkosh.com/mathtex.cgi? P(Y=c_{k})\prod_{j=1}^{n}P(X^{(j)}=x^{j}|Y=c_{k}),k=1,2,...,K"></p>
+<p>（3）确定实例x的类</p>
+<p><img src="http://www.forkosh.com/mathtex.cgi? y=argmaxP(Y=c_{k})\prod_{j=1}^{n}P(X^{(j)}=x^{(j)}|Y=c_{k})"></p>
+<h2 id="贝叶斯估计"><a href="#贝叶斯估计" class="headerlink" title="贝叶斯估计"></a>贝叶斯估计</h2><p>上述用的是极大似然估计，如果概率值为0的话，就会影响到结果，贝叶斯估计就是用来解决这个问题的，简单的说就是在分子和分母上加上常数，避免为0的情况。条件概率的贝叶斯估计是：</p>
+<p><img src="http://www.forkosh.com/mathtex.cgi? P_{\lambda }(X^{(j)}=a_{jl}|Y=c_{k})=\frac{\sum_{i=1}^{N}I(x_{i}^{(j)}=a_{jl},y_{i}=c_{k})+\lambda }{\sum_{i=1}^{N}I(y_{i}=c_{k})+S_{j}\lambda }"></p>
+<p>其中的\(\lambda\)=0时，就是极大似然估计。\(\lambda\)=1时，称为拉普拉斯平滑（Laplace smoothing）。</p>
+<p>同样先验概率的贝叶斯估计是：</p>
+<p><img src="http://www.forkosh.com/mathtex.cgi? P_{\lambda }(Y=c_{k})=\frac{\sum_{i=1}^{N}I(y_{i}=c_{k})+\lambda }{N+K\lambda }"></p>
+<h2 id="Python实现"><a href="#Python实现" class="headerlink" title="Python实现"></a>Python实现</h2><h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><pre><code># 创建实验样本
+def loadDataSet():
+    postingList = [[&apos;my&apos;, &apos;dog&apos;, &apos;has&apos;, &apos;flea&apos;, \
+                    &apos;problems&apos;, &apos;help&apos;, &apos;please&apos;],
+                    [&apos;maybe&apos;, &apos;not&apos;, &apos;take&apos;, &apos;him&apos;, \
+                    &apos;to&apos;, &apos;dog&apos;, &apos;park&apos;, &apos;stupid&apos;], 
+                    [&apos;my&apos;, &apos;dalmation&apos;, &apos;is&apos;, &apos;so&apos;, &apos;cute&apos;, \
+                    &apos;I&apos;, &apos;love&apos;, &apos;him&apos;],
+                    [&apos;stop&apos;, &apos;posting&apos;, &apos;stupid&apos;, &apos;worthless&apos;, &apos;garbage&apos;],
+                    [&apos;mr&apos;, &apos;licks&apos;, &apos;ate&apos;, &apos;my&apos;, &apos;steak&apos;, &apos;how&apos;, \
+                    &apos;to&apos;, &apos;stop&apos;, &apos;him&apos;],
+                    [&apos;quit&apos;, &apos;buying&apos;, &apos;worthless&apos;, &apos;dog&apos;, &apos;food&apos;, &apos;stupid&apos;]]
+    classVec = [0, 1, 0, 1, 0, 1]       # 1代表侮辱性文字，0代表正常言论
+    return postingList, classVec
+
+# 创建一个包含在所有文档中出现的不重复词的列表
+def createVocabList(dataSet):
+    vocabSet = set([])
+    for document in dataSet:
+        vocabSet = vocabSet | set(document)
+    return list(vocabSet)
+
+def setOfWords2Vec(vocabList, inputSet):
+    returnVec = [0] * len(vocabList)
+    for word in inputSet:
+        if word in vocabList:
+            returnVec[vocabList.index(word)] = 1
+        else: print &quot;the word: %s is not in my Vocabulary!&quot; % word
+    return returnVec
+</code></pre><h3 id="训练算法"><a href="#训练算法" class="headerlink" title="训练算法"></a>训练算法</h3><pre><code>def trainNB0(trainMatrix, trainCategory):
+    numTrainDocs = len(trainMatrix)
+    numWords = len(trainMatrix[0])
+    pAbusive = sum(trainCategory)/float(numTrainDocs)
+    p0Num = np.ones(numWords); p1Num = np.ones(numWords)
+    p0Denom = 2.0; p1Denom = 2.0
+    for i in xrange(numTrainDocs):
+        if trainCategory[i] == 1:
+            p1Num += trainMatrix[i]
+            p1Denom += sum(trainMatrix[i])
+        else:
+            p0Num += trainMatrix[i]
+            p0Denom += sum(trainMatrix[i])
+    p1Vect = np.log(p1Num/p1Denom)     # log防止下溢出
+    p0Vect = np.log(p0Num/p0Denom)     
+    return p0Vect, p1Vect, pAbusive
+</code></pre><h3 id="测试算法"><a href="#测试算法" class="headerlink" title="测试算法"></a>测试算法</h3><pre><code>def classifyNB(vec2Classify, p0Vec, p1Vec, pClass1):
+    p1 = sum(vec2Classify * p1Vec) + np.log(pClass1)
+    p0 = sum(vec2Classify * p0Vec) + np.log(1.0 - pClass1)
+    if p1 &gt; p0:
+        return 1
+    else:
+        return 0
+
+def testingNB():
+    listOPosts, listClasses = loadDataSet()
+    myVocabList = createVocabList(listOPosts)
+    trainMat = []
+    for postinDoc in listOPosts:
+        trainMat.append(setOfWords2Vec(myVocabList, postinDoc))
+    p0V, p1V, pAb =  trainNB0(np.array(trainMat), np.array(listClasses))
+    testEntry = [&apos;love&apos;, &apos;my&apos;, &apos;dalmation&apos;]
+    thisDoc = np.array(setOfWords2Vec(myVocabList, testEntry))
+    print testEntry, &apos;classified as: &apos;, classifyNB(thisDoc, p0V, p1V, pAb)
+    testEntry = [&apos;stupid&apos;, &apos;garbage&apos;]
+    thisDoc = np.array(setOfWords2Vec(myVocabList, testEntry))
+    print testEntry, &apos;classified as: &apos;, classifyNB(thisDoc, p0V, p1V, pAb)
+</code></pre><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1][机器学习实战]</p>
+<p>[2][统计学习方法]</p>
 
       
     </div>
@@ -330,9 +432,11 @@
           
             <a href="/tags/Python/" rel="tag">#Python</a>
           
-            <a href="/tags/numpy/" rel="tag">#numpy</a>
+            <a href="/tags/分类/" rel="tag">#分类</a>
           
-            <a href="/tags/数组/" rel="tag">#数组</a>
+            <a href="/tags/机器学习/" rel="tag">#机器学习</a>
+          
+            <a href="/tags/贝叶斯/" rel="tag">#贝叶斯</a>
           
         </div>
       
@@ -341,17 +445,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/23/设计原则/" rel="next" title="设计原则">
-                <i class="fa fa-chevron-left"></i> 设计原则
+              <a href="/2016/06/17/决策树/" rel="next" title="决策树">
+                <i class="fa fa-chevron-left"></i> 决策树
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/30/pandas入门/" rel="prev" title="pandas入门">
-                pandas入门 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -366,10 +466,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/05/26/NumPy基础：数组和矢量计算/"
-     data-title="NumPy基础：数组和矢量计算"
+        <div class="ds-share flat" data-thread-key="2016/06/23/朴素贝叶斯/"
+     data-title="朴素贝叶斯"
      data-content=""
-     data-url="http://yoursite.com/2016/05/26/NumPy基础：数组和矢量计算/">
+     data-url="http://yoursite.com/2016/06/23/朴素贝叶斯/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -396,8 +496,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/05/26/NumPy基础：数组和矢量计算/"
-           data-title="NumPy基础：数组和矢量计算" data-url="http://yoursite.com/2016/05/26/NumPy基础：数组和矢量计算/">
+      <div class="ds-thread" data-thread-key="2016/06/23/朴素贝叶斯/"
+           data-title="朴素贝叶斯" data-url="http://yoursite.com/2016/06/23/朴素贝叶斯/">
       </div>
     
   </div>
@@ -510,7 +610,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思维导图"><span class="nav-number">2.</span> <span class="nav-text">思维导图</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#学习与分类算法"><span class="nav-number">2.</span> <span class="nav-text">学习与分类算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#贝叶斯估计"><span class="nav-number">3.</span> <span class="nav-text">贝叶斯估计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python实现"><span class="nav-number">4.</span> <span class="nav-text">Python实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化"><span class="nav-number">4.1.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练算法"><span class="nav-number">4.2.</span> <span class="nav-text">训练算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试算法"><span class="nav-number">4.3.</span> <span class="nav-text">测试算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
