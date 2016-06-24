@@ -65,17 +65,20 @@
 <meta property="og:description" content="基本概念朴素贝叶斯法是基于贝叶斯定理与特征条件独立假设的分类方法。其中朴素指的就是特征条件独立，贝叶斯指的是基于贝叶斯定理。对于给定的训练数据集，首先基于特征条件独立假设学习输入/输出的联合概率分布；然后基于此模型，对给定的输入x，利用贝叶斯定理求出后验概率最大的输出y。">
 <meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? T=\left \{ (x_{1},y_{1}),(x_{2},y_{2}),...,(x_{N},y_{N}) \right \}">
 <meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? x_{i}=\left(x_{i}^{(1)},x_{i}^{(2)},...,x_{i}^{(n)}\right)^{T}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? x_{i}^{(j)}">
 <meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? x_{i}^{(j)}\epsilon \left \{ x_{j1},x_{j2},...,x_{jS_{j}} \right \}">
 <meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? a_{jl}">
 <meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? S_{j}">
 <meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? y_{i}\epsilon \left \{ c_{1},c_{2},...,c_{k}\right \}">
 <meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? P\left ( Y=c_{k} \right )=\frac{\sum_{i=1}^{N}I(y_{i}=c_{k})}{N},k=1,2,...,K">
 <meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? P\left ( X^{j}=a_{jl}|Y=c_{k} \right )=\frac{\sum_{i=1}^{N}I(x_{i}^{(j)}=a_{jl},y_{i}=c_{k})}{\sum_{i=1}^{N}I(y_{i}=c_{k})}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? j=1,2,...,n;l=1,2,...,S_{j};k=1,2,...,K">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? x=(x^{(1)},x^{(2)},...,x^{(n)})^{T}">
 <meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? P(Y=c_{k})\prod_{j=1}^{n}P(X^{(j)}=x^{j}|Y=c_{k}),k=1,2,...,K">
 <meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? y=argmaxP(Y=c_{k})\prod_{j=1}^{n}P(X^{(j)}=x^{(j)}|Y=c_{k})">
 <meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? P_{\lambda }(X^{(j)}=a_{jl}|Y=c_{k})=\frac{\sum_{i=1}^{N}I(x_{i}^{(j)}=a_{jl},y_{i}=c_{k})+\lambda }{\sum_{i=1}^{N}I(y_{i}=c_{k})+S_{j}\lambda }">
 <meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? P_{\lambda }(Y=c_{k})=\frac{\sum_{i=1}^{N}I(y_{i}=c_{k})+\lambda }{N+K\lambda }">
-<meta property="og:updated_time" content="2016-06-24T06:00:07.990Z">
+<meta property="og:updated_time" content="2016-06-24T06:12:46.190Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="朴素贝叶斯">
 <meta name="twitter:description" content="基本概念朴素贝叶斯法是基于贝叶斯定理与特征条件独立假设的分类方法。其中朴素指的就是特征条件独立，贝叶斯指的是基于贝叶斯定理。对于给定的训练数据集，首先基于特征条件独立假设学习输入/输出的联合概率分布；然后基于此模型，对给定的输入x，利用贝叶斯定理求出后验概率最大的输出y。">
@@ -337,15 +340,15 @@
 <p>适用数据类型：标称型数据。</p>
 <p>关于朴素贝叶斯法的进一步介绍，可以参考这两篇博文：<a href="http://www.ruanyifeng.com/blog/2013/12/naive_bayes_classifier.html" target="_blank" rel="external">朴素贝叶斯分类器的应用</a>和<a href="http://www.cnblogs.com/leoo2sk/archive/2010/09/17/naive-bayesian-classifier.html" target="_blank" rel="external">算法杂货铺——分类算法之朴素贝叶斯分类(Naive Bayesian classification)</a>。</p>
 <h2 id="学习与分类算法"><a href="#学习与分类算法" class="headerlink" title="学习与分类算法"></a>学习与分类算法</h2><p>下面给出朴素贝叶斯法的学习与分类算法。</p>
-<p>输入：训练数据集<img src="http://www.forkosh.com/mathtex.cgi? T=\left \{ (x_{1},y_{1}),(x_{2},y_{2}),...,(x_{N},y_{N}) \right \}">，其中<img src="http://www.forkosh.com/mathtex.cgi? x_{i}=\left(x_{i}^{(1)},x_{i}^{(2)},...,x_{i}^{(n)}\right)^{T}">，\(x_{i}^{(j)}\)是第i个样本的第j个特征，</p>
-<p><img src="http://www.forkosh.com/mathtex.cgi? x_{i}^{(j)}\epsilon \left \{ x_{j1},x_{j2},...,x_{jS_{j}} \right \}">，<img src="http://www.forkosh.com/mathtex.cgi? a_{jl}">是第j个特征可能取得第l个值，j=1,2,…,n，l=1,2,…,<img src="http://www.forkosh.com/mathtex.cgi? S_{j}">,</p>
-<p><img src="http://www.forkosh.com/mathtex.cgi? y_{i}\epsilon \left \{ c_{1},c_{2},...,c_{k}\right \}">；实例x；</p>
+<p>输入：训练数据集<br><img src="http://www.forkosh.com/mathtex.cgi? T=\left \{ (x_{1},y_{1}),(x_{2},y_{2}),...,(x_{N},y_{N}) \right \}"><br>其中<br><img src="http://www.forkosh.com/mathtex.cgi? x_{i}=\left(x_{i}^{(1)},x_{i}^{(2)},...,x_{i}^{(n)}\right)^{T}"><br><img src="http://www.forkosh.com/mathtex.cgi? x_{i}^{(j)}"><br>是第i个样本的第j个特征</p>
+<p><img src="http://www.forkosh.com/mathtex.cgi? x_{i}^{(j)}\epsilon \left \{ x_{j1},x_{j2},...,x_{jS_{j}} \right \}"><br><img src="http://www.forkosh.com/mathtex.cgi? a_{jl}">是第j个特征可能取得第l个值，j=1,2,…,n，l=1,2,…<br><img src="http://www.forkosh.com/mathtex.cgi? S_{j}"></p>
+<p><img src="http://www.forkosh.com/mathtex.cgi? y_{i}\epsilon \left \{ c_{1},c_{2},...,c_{k}\right \}"><br>实例x；</p>
 <p>输出：实例x的分类。</p>
 <p>（1）计算先验概率及条件概率</p>
 <p><img src="http://www.forkosh.com/mathtex.cgi? P\left ( Y=c_{k} \right )=\frac{\sum_{i=1}^{N}I(y_{i}=c_{k})}{N},k=1,2,...,K"></p>
 <p><img src="http://www.forkosh.com/mathtex.cgi? P\left ( X^{j}=a_{jl}|Y=c_{k} \right )=\frac{\sum_{i=1}^{N}I(x_{i}^{(j)}=a_{jl},y_{i}=c_{k})}{\sum_{i=1}^{N}I(y_{i}=c_{k})}"></p>
-<p>\(j=1,2,…,n;l=1,2,…,S_{j};k=1,2,…,K\)</p>
-<p>（2）对于给定的实例\(x=(x^{(1)},x^{(2)},…,x^{(n)})^{T}\)，计算</p>
+<p><img src="http://www.forkosh.com/mathtex.cgi? j=1,2,...,n;l=1,2,...,S_{j};k=1,2,...,K"></p>
+<p>（2）对于给定的实例<br><img src="http://www.forkosh.com/mathtex.cgi? x=(x^{(1)},x^{(2)},...,x^{(n)})^{T}"><br>计算</p>
 <p><img src="http://www.forkosh.com/mathtex.cgi? P(Y=c_{k})\prod_{j=1}^{n}P(X^{(j)}=x^{j}|Y=c_{k}),k=1,2,...,K"></p>
 <p>（3）确定实例x的类</p>
 <p><img src="http://www.forkosh.com/mathtex.cgi? y=argmaxP(Y=c_{k})\prod_{j=1}^{n}P(X^{(j)}=x^{(j)}|Y=c_{k})"></p>
