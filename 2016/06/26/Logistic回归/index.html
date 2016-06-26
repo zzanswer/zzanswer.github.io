@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Python,列表," />
+  <meta name="keywords" content="Logistic回归,Python,分类,机器学习," />
 
 
 
@@ -57,16 +57,31 @@
 
 
 
-<meta name="description" content="用法Python中的range和xrange基本都是在循环的时候使用，输出结果是一样的：">
+<meta name="description" content="概念介绍回归指的是假设现在有一些数据点，我们用一条直线对这些点进行拟合，这个拟合过程叫回归。利用Logistic回归进行分类的主要思想是：根据现有数据对分类边界线建立回归公式，以此进行分类。
+优点：计算代价不高，易于理解和实现。
+缺点：容易欠拟合，分类精度可能不高。
+适用数据类型：数值型和标称型数据。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python中range与xrange比较">
-<meta property="og:url" content="http://yoursite.com/2016/05/15/Python中range与xrange比较/index.html">
+<meta property="og:title" content="Logistic回归">
+<meta property="og:url" content="http://yoursite.com/2016/06/26/Logistic回归/index.html">
 <meta property="og:site_name" content="zzanswer的博客">
-<meta property="og:description" content="用法Python中的range和xrange基本都是在循环的时候使用，输出结果是一样的：">
-<meta property="og:updated_time" content="2016-05-15T01:39:01.775Z">
+<meta property="og:description" content="概念介绍回归指的是假设现在有一些数据点，我们用一条直线对这些点进行拟合，这个拟合过程叫回归。利用Logistic回归进行分类的主要思想是：根据现有数据对分类边界线建立回归公式，以此进行分类。
+优点：计算代价不高，易于理解和实现。
+缺点：容易欠拟合，分类精度可能不高。
+适用数据类型：数值型和标称型数据。">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/LR1.jpg">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/LR2.jpg">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/LR3.jpg">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/LRfigure_1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/LRfigure_2.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/LRfigure_3.png">
+<meta property="og:updated_time" content="2016-06-26T12:20:02.727Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python中range与xrange比较">
-<meta name="twitter:description" content="用法Python中的range和xrange基本都是在循环的时候使用，输出结果是一样的：">
+<meta name="twitter:title" content="Logistic回归">
+<meta name="twitter:description" content="概念介绍回归指的是假设现在有一些数据点，我们用一条直线对这些点进行拟合，这个拟合过程叫回归。利用Logistic回归进行分类的主要思想是：根据现有数据对分类边界线建立回归公式，以此进行分类。
+优点：计算代价不高，易于理解和实现。
+缺点：容易欠拟合，分类精度可能不高。
+适用数据类型：数值型和标称型数据。">
 
 
 
@@ -84,7 +99,7 @@
   };
 </script>
 
-  <title> Python中range与xrange比较 | zzanswer的博客 </title>
+  <title> Logistic回归 | zzanswer的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -253,7 +268,7 @@
             
             
               
-                Python中range与xrange比较
+                Logistic回归
               
             
           </h1>
@@ -265,8 +280,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-15T09:23:54+08:00" content="2016-05-15">
-              2016-05-15
+            <time itemprop="dateCreated" datetime="2016-06-26T19:33:36+08:00" content="2016-06-26">
+              2016-06-26
             </time>
           </span>
 
@@ -279,8 +294,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
                   </a>
                 </span>
 
@@ -295,8 +310,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/15/Python中range与xrange比较/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/15/Python中range与xrange比较/" itemprop="commentsCount"></span>
+                <a href="/2016/06/26/Logistic回归/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/26/Logistic回归/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -317,40 +332,104 @@
       
 
       
-        <h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>Python中的range和xrange基本都是在循环的时候使用，输出结果是一样的：<br><a id="more"></a></p>
-<pre><code>&gt;&gt;&gt; for i in range(0, 5):
-...     print i
-...
-0
-1
-2
-3
-4
-&gt;&gt;&gt; for i in xrange(0, 5):
-...     print i
-...
-0
-1
-2
-3
-4
-</code></pre><h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p>range生成的是一个列表对象，而xrange返回的则是一个生成器，因此xrange不需要一开始就开辟出一块很大的内存。</p>
-<p>即在做循环时，一般提倡用xrange，数据量很大的时候优势很明显。除非是想返回一个列表。下面给出代码示例：</p>
-<pre><code>&gt;&gt;&gt; a = range(0, 5)
-&gt;&gt;&gt; print type(a)
-&lt;type &apos;list&apos;&gt;
-&gt;&gt;&gt; print a
-[0, 1, 2, 3, 4]
-&gt;&gt;&gt; print a[0], a[1]
-0 1
-&gt;&gt;&gt; b = xrange(0, 5)
-&gt;&gt;&gt; print type(b)
-&lt;type &apos;xrange&apos;&gt;
-&gt;&gt;&gt; print b
-xrange(5)
-&gt;&gt;&gt; print b[0], b[1]
-0 1
-</code></pre>
+        <h2 id="概念介绍"><a href="#概念介绍" class="headerlink" title="概念介绍"></a>概念介绍</h2><p>回归指的是假设现在有一些数据点，我们用一条直线对这些点进行拟合，这个拟合过程叫回归。利用Logistic回归进行分类的主要思想是：根据现有数据对分类边界线建立回归公式，以此进行分类。</p>
+<p>优点：计算代价不高，易于理解和实现。</p>
+<p>缺点：容易欠拟合，分类精度可能不高。</p>
+<p>适用数据类型：数值型和标称型数据。</p>
+<a id="more"></a>
+<h2 id="Logistic回归数学推导"><a href="#Logistic回归数学推导" class="headerlink" title="Logistic回归数学推导"></a>Logistic回归数学推导</h2><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/LR1.jpg" alt="id"></p>
+<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/LR2.jpg" alt="id"></p>
+<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/LR3.jpg" alt="id"></p>
+<h2 id="Python实现"><a href="#Python实现" class="headerlink" title="Python实现"></a>Python实现</h2><h3 id="梯度上升优化方法"><a href="#梯度上升优化方法" class="headerlink" title="梯度上升优化方法"></a>梯度上升优化方法</h3><p>梯度上升和梯度下降本质上是一样的，只是公式中的假发需要编程剑法。梯度上升算法用来求函数的最大值，而梯度下降算法用来求函数的最小值。</p>
+<p>梯度上升法的伪代码如下：</p>
+<p>每个回归系数初始化为1</p>
+<p>重复R次：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;计算整个数据集</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;使用alpha*gradient更新回归系数的向量</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;返回回归系数</p>
+<pre><code>def loadDataSet():
+    dataMat = []; labelMat = []
+    fr = open(&apos;testSet.txt&apos;)
+    for line in fr.readlines():
+        lineArr = line.strip().split()
+        dataMat.append([1.0, float(lineArr[0]), float(lineArr[1])])
+        labelMat.append(int(lineArr[2]))
+    return dataMat, labelMat
+
+def sigmoid(inX):
+    return 1.0/(1+np.exp(-inX))
+
+# 梯度上升
+def gradAscent(dataMatIn, classLabels):
+    dataMatrix = np.mat(dataMatIn)
+    labelMat = np.mat(classLabels).transpose()
+    m, n = np.shape(dataMatrix)
+    alpha = 0.001
+    maxCycles = 500
+    weights = np.ones((n, 1))
+    for k in xrange(maxCycles):
+        h = sigmoid(dataMatrix*weights)
+        error = (labelMat - h)
+        weights = weights + alpha * dataMatrix.transpose() * error
+    return weights
+</code></pre><h3 id="画出决策边界"><a href="#画出决策边界" class="headerlink" title="画出决策边界"></a>画出决策边界</h3><pre><code>def plotBestFit(weights):
+    import matplotlib.pyplot as plt
+    dataMat, labelMat = loadDataSet()
+    dataArr = np.array(dataMat)
+    n = np.shape(dataArr)[0]
+    xcord1 = []; ycord1 = []
+    xcord2 = []; ycord2 = []
+    for i in xrange(n):
+        if int(labelMat[i]) == 1:
+            xcord1.append(dataArr[i, 1]); ycord1.append(dataArr[i, 2])
+        else:
+            xcord2.append(dataArr[i, 1]); ycord2.append(dataArr[i, 2])
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    ax.scatter(xcord1, ycord1, s = 30, c = &apos;red&apos;, marker = &apos;s&apos;)
+    ax.scatter(xcord2, ycord2, s = 30, c = &apos;green&apos;)
+    x = np.arange(-3.0, 3.0, 0.1)
+    y = (-weights[0]-weights[1]*x)/weights[2]
+    ax.plot(x, y)
+    plt.xlabel(&apos;X1&apos;); plt.ylabel(&apos;X2&apos;);
+    plt.show()
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/LRfigure_1.png" alt="id"></p>
+<h3 id="随机梯度上升算法"><a href="#随机梯度上升算法" class="headerlink" title="随机梯度上升算法"></a>随机梯度上升算法</h3><p>先看伪代码：</p>
+<p>所有回归系数初始化为1</p>
+<p>对数据集中每个样本</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;计算该样本的梯度</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;使用alpha*gradient更新回归系数值</p>
+<p>返回回归系数值</p>
+<pre><code>def stocGradAscent0(dataMatrix, classLabels):
+    m, n = np.shape(dataMatrix)
+    alpha = 0.01
+    weights = np.ones(n)
+    for i in xrange(m):
+        h = sigmoid(sum(dataMatrix[i]*weights))
+        error = classLabels[i] - h
+        weights = weights + alpha * error * dataMatrix[i]
+    return weights
+</code></pre><p>下图为训练效果，发现效果不是很好，可以有改进的空间。</p>
+<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/LRfigure_2.png" alt="id"></p>
+<p>改进的随机梯度上升算法：</p>
+<pre><code>def stocGradAscent1(dataMatrix, classLabels, numIter = 150):
+    import random
+    m, n = np.shape(dataMatrix)
+    weights = np.ones(n)
+    for j in xrange(numIter):
+        dataIndex = range(m)
+        for i in xrange(m):
+            alpha = 4/(1.0+j+i)+0.01    # 每次迭代时需要调整
+            randIndex = int(random.uniform(0, len(dataIndex)))      # 随机选取更新
+            h = sigmoid(sum(dataMatrix[randIndex]*weights))
+            error = classLabels[randIndex] - h
+            weights = weights + alpha * error * dataMatrix[randIndex]
+            del(dataIndex[randIndex])
+    return weights
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/LRfigure_3.png" alt="id"></p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1][机器学习实战]</p>
+<p>[2]<a href="http://blog.csdn.net/dongtingzhizi/article/details/15962797" target="_blank" rel="external">Logistic回归总结</a></p>
+
       
     </div>
 
@@ -358,9 +437,13 @@ xrange(5)
       
         <div class="post-tags">
           
+            <a href="/tags/Logistic回归/" rel="tag">#Logistic回归</a>
+          
             <a href="/tags/Python/" rel="tag">#Python</a>
           
-            <a href="/tags/列表/" rel="tag">#列表</a>
+            <a href="/tags/分类/" rel="tag">#分类</a>
+          
+            <a href="/tags/机器学习/" rel="tag">#机器学习</a>
           
         </div>
       
@@ -369,17 +452,13 @@ xrange(5)
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/14/Python中重要数据结构总结/" rel="next" title="Python中重要数据结构总结">
-                <i class="fa fa-chevron-left"></i> Python中重要数据结构总结
+              <a href="/2016/06/23/朴素贝叶斯/" rel="next" title="朴素贝叶斯">
+                <i class="fa fa-chevron-left"></i> 朴素贝叶斯
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/18/Python多条件排序/" rel="prev" title="Python多条件排序">
-                Python多条件排序 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -394,10 +473,10 @@ xrange(5)
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/05/15/Python中range与xrange比较/"
-     data-title="Python中range与xrange比较"
+        <div class="ds-share flat" data-thread-key="2016/06/26/Logistic回归/"
+     data-title="Logistic回归"
      data-content=""
-     data-url="http://yoursite.com/2016/05/15/Python中range与xrange比较/">
+     data-url="http://yoursite.com/2016/06/26/Logistic回归/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -424,8 +503,8 @@ xrange(5)
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/05/15/Python中range与xrange比较/"
-           data-title="Python中range与xrange比较" data-url="http://yoursite.com/2016/05/15/Python中range与xrange比较/">
+      <div class="ds-thread" data-thread-key="2016/06/26/Logistic回归/"
+           data-title="Logistic回归" data-url="http://yoursite.com/2016/06/26/Logistic回归/">
       </div>
     
   </div>
@@ -538,7 +617,7 @@ xrange(5)
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#用法"><span class="nav-number">1.</span> <span class="nav-text">用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#区别"><span class="nav-number">2.</span> <span class="nav-text">区别</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念介绍"><span class="nav-number">1.</span> <span class="nav-text">概念介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Logistic回归数学推导"><span class="nav-number">2.</span> <span class="nav-text">Logistic回归数学推导</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python实现"><span class="nav-number">3.</span> <span class="nav-text">Python实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#梯度上升优化方法"><span class="nav-number">3.1.</span> <span class="nav-text">梯度上升优化方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#画出决策边界"><span class="nav-number">3.2.</span> <span class="nav-text">画出决策边界</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#随机梯度上升算法"><span class="nav-number">3.3.</span> <span class="nav-text">随机梯度上升算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
