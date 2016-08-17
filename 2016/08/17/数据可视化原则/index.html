@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="R,ggplot2," />
+  <meta name="keywords" content="可视化," />
 
 
 
@@ -57,21 +57,16 @@
 
 
 
-<meta name="description" content="简介本文主要介绍关于数据清洗、操作和变换的一些问题。">
+<meta name="description" content="简介可视化简单的来说就是用图形检查数据。图形可以弥补一些统计概要发现不了的问题。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ggplot2数据操作">
-<meta property="og:url" content="http://yoursite.com/2016/05/05/ggplot2数据操作/index.html">
+<meta property="og:title" content="数据可视化原则">
+<meta property="og:url" content="http://yoursite.com/2016/08/17/数据可视化原则/index.html">
 <meta property="og:site_name" content="zzanswer的博客">
-<meta property="og:description" content="简介本文主要介绍关于数据清洗、操作和变换的一些问题。">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/dgmx1.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/dgmx2.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/dgmx3.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/dgmx4.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/dgmx5.png">
-<meta property="og:updated_time" content="2016-05-07T06:46:46.003Z">
+<meta property="og:description" content="简介可视化简单的来说就是用图形检查数据。图形可以弥补一些统计概要发现不了的问题。">
+<meta property="og:updated_time" content="2016-08-17T03:24:20.255Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ggplot2数据操作">
-<meta name="twitter:description" content="简介本文主要介绍关于数据清洗、操作和变换的一些问题。">
+<meta name="twitter:title" content="数据可视化原则">
+<meta name="twitter:description" content="简介可视化简单的来说就是用图形检查数据。图形可以弥补一些统计概要发现不了的问题。">
 
 
 
@@ -89,7 +84,7 @@
   };
 </script>
 
-  <title> ggplot2数据操作 | zzanswer的博客 </title>
+  <title> 数据可视化原则 | zzanswer的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -258,7 +253,7 @@
             
             
               
-                ggplot2数据操作
+                数据可视化原则
               
             
           </h1>
@@ -270,8 +265,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-05T09:10:53+08:00" content="2016-05-05">
-              2016-05-05
+            <time itemprop="dateCreated" datetime="2016-08-17T11:06:47+08:00" content="2016-08-17">
+              2016-08-17
             </time>
           </span>
 
@@ -284,8 +279,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/R语言/" itemprop="url" rel="index">
-                    <span itemprop="name">R语言</span>
+                  <a href="/categories/可视化/" itemprop="url" rel="index">
+                    <span itemprop="name">可视化</span>
                   </a>
                 </span>
 
@@ -300,8 +295,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/05/ggplot2数据操作/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/05/ggplot2数据操作/" itemprop="commentsCount"></span>
+                <a href="/2016/08/17/数据可视化原则/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/17/数据可视化原则/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -322,139 +317,21 @@
       
 
       
-        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>本文主要介绍关于数据清洗、操作和变换的一些问题。<br><a id="more"></a></p>
-<h2 id="plyr包简介"><a href="#plyr包简介" class="headerlink" title="plyr包简介"></a>plyr包简介</h2><p>plyr包提供了一整套工具集来处理列表（list）、数组（array）和数据框（data.frame），把复杂的数据分割成几个部分，分别对各个部分进行处理，最后把这些结果综合到一起。这里主要用到其中的<code>ddply()</code>函数。该函数能够根据行的取值，把数据框分解成几个子集，分别把各个子集输入某个函数，最后把结果综合在一个数据框内。函数基本用法是ddply(.data, .variables, .fun, …)。</p>
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>可视化简单的来说就是用图形检查数据。图形可以弥补一些统计概要发现不了的问题。<br><a id="more"></a></p>
+<h2 id="科学可视化"><a href="#科学可视化" class="headerlink" title="科学可视化"></a>科学可视化</h2><p>William Cleveland关于科学可视化有一些原则，关键点如下：</p>
+<ol>
+<li>一个图形应该尽它所能地显示更多的信息，将读者的认知压力降到可能的最低点。</li>
+<li><p>力争清晰，突出数据。具体建议包括：</p>
 <ul>
-<li>.data 是用来作图的数据。</li>
-<li>.variables 是对数据取自己的分组变量，形式是.(var1, var2)。</li>
-<li>.fun 是要在各子集上运行的统计汇总函数。</li>
-<li>subset()用来对数组取子集的函数，选择数据中前（或后）n个（或x%的）观测值，或是在某个阈值之上或下的观测值：</li>
+<li>避免太多的叠加元素，例如在同一个图形空间上放置太多的曲线。 </li>
+<li>为了恰当地显示数据细节，需要找到正确的纵横比和比例尺。</li>
+<li>避免数据全部偏向于图形的某一侧。</li>
 </ul>
-<pre><code>## 选取各个颜色里最小的钻石
-ddply(diamonds, .(color), subset, carat == min(carat)
-## 选取最小的两颗砖石
-ddply(diamonds, .(color), subset, order(carat) &lt;= 2)
-## 选取每组里大小为前1%的钻石
-ddply(diamonds, .(color), subset, carat &gt; quantile(carat, 0.99))
-## 选出所有比组平均值大的钻石
-ddply(diamonds, .(color), subset, price &gt; mean(price))
-</code></pre><ul>
-<li>transform()是用来进行数据变换的函数，与ddply()一起可以计算分组统计量，例如各组的标准差，并且加到原数据上去。</li>
-</ul>
-<pre><code>## 把每个颜色组里钻石的价格标准化，使其均值为0，方差为1
-ddply(diamonds, .(color), transform, price = scale(price))
-## 减去组均值
-ddply(diamonds, .(color), transform, price = price - mean(price))
-</code></pre><ul>
-<li>colwise()用来向量化一个普通函数，也就是说colwise()能把原本只接受向量输入的函数变成可以接受数据框输入的函数。</li>
-</ul>
-<pre><code>&gt; nmissing &lt;- function(x) sum(is.na(x))
-&gt; nmissing(msleep$name)
-[1] 0
-&gt; nmissing(msleep$brainwt)
-[1] 27
-&gt; nmissing_df &lt;- colwise(nmissing)
-&gt; nmissing_df(msleep)
-  name genus vore order conservation sleep_total sleep_rem sleep_cycle awake brainwt bodywt
-1    0     0    7     0           29           0        22          51     0      27      0
-## 更便捷的方法
-&gt; colwise(nmissing)(msleep)
-  name genus vore order conservation sleep_total sleep_rem sleep_cycle awake brainwt bodywt
-1    0     0    7     0           29           0        22          51     0      27      0
-</code></pre><ul>
-<li>numcolwise()是colwise()的一个特殊版本，功能类似，但numcolwise()只对数值类型的列操作。</li>
-</ul>
-<pre><code>&gt; msleep2 &lt;- msleep[, -6]       ## 移除第六列
-&gt; numcolwise(median)(msleep2, na.rm = T)
-  sleep_rem sleep_cycle awake brainwt bodywt
-1       1.5   0.3333333  13.9  0.0124   1.67
-&gt; numcolwise(quantile)(msleep2, na.rm = T)
-  sleep_rem sleep_cycle awake brainwt   bodywt
-1       0.1   0.1166667  4.10 0.00014    0.005
-2       0.9   0.1833333 10.25 0.00290    0.174
-3       1.5   0.3333333 13.90 0.01240    1.670
-4       2.4   0.5791667 16.15 0.12550   41.750
-5       6.6   1.5000000 22.10 5.71200 6654.000
-&gt; numcolwise(quantile)(msleep2, probs = c(0.25, 0.75), na.rm = T)
-  sleep_rem sleep_cycle awake brainwt bodywt
-1       0.9   0.1833333 10.25  0.0029  0.174
-2       2.4   0.5791667 16.15  0.1255 41.750
-
-## 以上这些函数与ddply一起可以对数据进行各种分组统计
-&gt; ddply(msleep2, .(vore), numcolwise(median), na.rm = T)
-     vore sleep_rem sleep_cycle awake  brainwt bodywt
-1   carni      1.95   0.3833333  13.6 0.044500 20.490
-2   herbi      0.95   0.2166667  13.7 0.012285  1.225
-3 insecti      3.00   0.1666667   5.9 0.001200  0.075
-4    omni      1.85   0.5000000  14.1 0.006600  0.950
-5    &lt;NA&gt;      2.00   0.1833333  13.4 0.003000  0.122
-&gt; ddply(msleep2, .(vore), numcolwise(mean), na.rm = T)
-     vore sleep_rem sleep_cycle    awake    brainwt    bodywt
-1   carni  2.290000   0.3733333 13.62632 0.07925556  90.75111
-2   herbi  1.366667   0.4180556 14.49062 0.62159750 366.87725
-3 insecti  3.525000   0.1611111  9.06000 0.02155000  12.92160
-4    omni  1.955556   0.5924242 13.07500 0.14573118  12.71800
-5    &lt;NA&gt;  1.880000   0.1833333 13.81429 0.00762600   0.85800
-</code></pre><ul>
-<li>如果以上提供的函数不够用，读者可以编写自己的函数，只要它也能接收、输出数据框就可以。例如下面的函数用于计算价格和克拉的秩相关系数以及对数变换后的普通相关系数。</li>
-</ul>
-<pre><code>&gt; my_summary &lt;- function(df) {
-+   with(df, data.frame(
-+       pc_cor = cor(price, carat, method = &quot;spearman&quot;),
-+       lpc_cor = cor(log(price), log(carat))
-+   ))
-+   }
-&gt; ddply(diamonds, .(cut), my_summary)
-        cut    pc_cor   lpc_cor
-1      Fair 0.9056144 0.9085131
-2      Good 0.9599684 0.9687510
-3 Very Good 0.9688534 0.9716746
-4   Premium 0.9605332 0.9697578
-5     Ideal 0.9537275 0.9661884
-
-&gt; ddply(diamonds, .(color), my_summary)
-  color    pc_cor   lpc_cor
-1     D 0.9561208 0.9606617
-2     E 0.9600994 0.9643845
-3     F 0.9641572 0.9623876
-4     G 0.9633681 0.9696785
-5     H 0.9730390 0.9801569
-6     I 0.9834392 0.9865118
-7     J 0.9846710 0.9879449
-</code></pre><h3 id="拟合多个模型"><a href="#拟合多个模型" class="headerlink" title="拟合多个模型"></a>拟合多个模型</h3><p>这里展示stat_smooth生成平滑数据(smoothed data)的过程（“平滑”是指用一个函数来拟合数据间的关系，例如回归就是一种平滑过程。而“平滑数据”是指用平滑函数得到的预测值）。下面先给用ggplot2的例子：</p>
-<pre><code>qplot(carat, price, data = diamonds, geom = &quot;smooth&quot;, colour = color)
-</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/dgmx1.png" alt="id"></p>
-<pre><code>dense &lt;- subset(diamonds, carat &lt; 2)
-qplot(carat, price, data = dense, geom = &quot;smooth&quot;, colour = color, fullrange = TRUE)
-</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/dgmx2.png" alt="id"></p>
-<p>再用plyr生成这样的图。先拟合这个模型，然后在一系列等距的点上求模型的预测值。</p>
-<pre><code>library(mgcv)
-smooth &lt;- function(df) {
-    mod &lt;- gam(price ~ s(carat, bs = &quot;cs&quot;), data = df)
-    grid &lt;- data.frame(carat = seq(0.2, 2, length = 50))
-    pred &lt;- predict(mod, grid, se = T)
-    grid$price &lt;- pred$fit
-    grid$se &lt;- pred$se.fit
-    grid
-}
-smoothes &lt;- ddply(dense, .(color), smooth)
-qplot(carat, price, data = smoothes, colour = color, geom = &quot;line&quot;)
-</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/dgmx3.png" alt="id"></p>
-<pre><code>qplot(carat, price, data = smoothes, colour = color, geom = &quot;smooth&quot;, ymax = price + 2 * se, ymin = price - 2 * se)
-</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/dgmx4.png" alt="id"></p>
-<pre><code>mod &lt;- gam(price ~ s(carat, bs = &quot;cs&quot;) + color, data = dense)
-grid &lt;- with(diamonds, expand.grid(carat = seq(0.2, 2, length = 50), color = levels(color)))
-grid$pred &lt;- predict(mod, grid)
-qplot(carat, pred, data = grid, colour = color, geom = &quot;line&quot;)
-</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/dgmx5.png" alt="id"></p>
-<h2 id="把数据化“宽”为“长”"><a href="#把数据化“宽”为“长”" class="headerlink" title="把数据化“宽”为“长”"></a>把数据化“宽”为“长”</h2><p>ggplot2进行数据分组时必须根据行，而不能根据列。这里介绍如何把“宽”的数据变成“长”的数据，也就是说变量不再是放在各个列上，而是排成一列，每个变量都分别占其中的几行。这样就能根据行把每个变量分组，然后作图。</p>
-<p>这里会用到reshape2包中的<code>melt()</code>函数。<code>melt()</code>函数有三个参数：</p>
-<ul>
-<li>data：待变形的原数据</li>
-<li>id.vars：依旧放在列上、位置保持不变的变量。id.vars通常是离散的，并且是预先给定的。用方差分析的角度来理解，id.vars好比是变量Yijk的下标(i,j,k)；用数据库的角度来理解，id.vars好比是数据表的主键。</li>
-<li>measure.vars：需要被放进同一列的变量。不同的变量放在同一列后，根据原变量名来分组，这样这些变量就可以同时画在一张图里。</li>
-</ul>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1][ggplot2:数据分析与图形艺术]</p>
+</li>
+<li>可视化是一个迭代过程。它的目的是回答有关数据的问题。</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在可视化阶段，用图形表示数据以了解尽可能多的信息，然后通过重新绘图来回答在先前图形中出现的问题，最好用不同的图形来回答不同的问题。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1][数据科学 理论、方法与R语言实践]</p>
 
       
     </div>
@@ -463,9 +340,7 @@ qplot(carat, pred, data = grid, colour = color, geom = &quot;line&quot;)
       
         <div class="post-tags">
           
-            <a href="/tags/R/" rel="tag">#R</a>
-          
-            <a href="/tags/ggplot2/" rel="tag">#ggplot2</a>
+            <a href="/tags/可视化/" rel="tag">#可视化</a>
           
         </div>
       
@@ -474,17 +349,13 @@ qplot(carat, pred, data = grid, colour = color, geom = &quot;line&quot;)
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/03/优先队列/" rel="next" title="优先队列">
-                <i class="fa fa-chevron-left"></i> 优先队列
+              <a href="/2016/08/14/支持向量机/" rel="next" title="支持向量机">
+                <i class="fa fa-chevron-left"></i> 支持向量机
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/07/ggplot2减少重复性工作/" rel="prev" title="ggplot2减少重复性工作">
-                ggplot2减少重复性工作 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -499,10 +370,10 @@ qplot(carat, pred, data = grid, colour = color, geom = &quot;line&quot;)
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/05/05/ggplot2数据操作/"
-     data-title="ggplot2数据操作"
+        <div class="ds-share flat" data-thread-key="2016/08/17/数据可视化原则/"
+     data-title="数据可视化原则"
      data-content=""
-     data-url="http://yoursite.com/2016/05/05/ggplot2数据操作/">
+     data-url="http://yoursite.com/2016/08/17/数据可视化原则/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -529,8 +400,8 @@ qplot(carat, pred, data = grid, colour = color, geom = &quot;line&quot;)
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/05/05/ggplot2数据操作/"
-           data-title="ggplot2数据操作" data-url="http://yoursite.com/2016/05/05/ggplot2数据操作/">
+      <div class="ds-thread" data-thread-key="2016/08/17/数据可视化原则/"
+           data-title="数据可视化原则" data-url="http://yoursite.com/2016/08/17/数据可视化原则/">
       </div>
     
   </div>
@@ -643,7 +514,7 @@ qplot(carat, pred, data = grid, colour = color, geom = &quot;line&quot;)
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#plyr包简介"><span class="nav-number">2.</span> <span class="nav-text">plyr包简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#拟合多个模型"><span class="nav-number">2.1.</span> <span class="nav-text">拟合多个模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#把数据化“宽”为“长”"><span class="nav-number">3.</span> <span class="nav-text">把数据化“宽”为“长”</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#科学可视化"><span class="nav-number">2.</span> <span class="nav-text">科学可视化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
