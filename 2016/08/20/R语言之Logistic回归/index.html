@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Python,pandas," />
+  <meta name="keywords" content="Logistic回归,R,分类,回归," />
 
 
 
@@ -57,17 +57,18 @@
 
 
 
-<meta name="description" content="简介本文为《利用Python进行数据分析》一书第5章“pandas入门”的读书笔记。">
+<meta name="description" content="背景Logistic回归通常情况下会用在分类问题中，一般是二分类问题。Logistic回归直接将预测限定在（0， 1）区间内，因此也可以将它理解为线性回归的归一化。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="pandas入门">
-<meta property="og:url" content="http://yoursite.com/2016/05/30/pandas入门/index.html">
+<meta property="og:title" content="R语言之Logistic回归">
+<meta property="og:url" content="http://yoursite.com/2016/08/20/R语言之Logistic回归/index.html">
 <meta property="og:site_name" content="zzanswer的博客">
-<meta property="og:description" content="简介本文为《利用Python进行数据分析》一书第5章“pandas入门”的读书笔记。">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/pandas%E5%85%A5%E9%97%A8.png">
-<meta property="og:updated_time" content="2016-05-30T13:07:13.710Z">
+<meta property="og:description" content="背景Logistic回归通常情况下会用在分类问题中，一般是二分类问题。Logistic回归直接将预测限定在（0， 1）区间内，因此也可以将它理解为线性回归的归一化。">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/lg1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/lg2.png">
+<meta property="og:updated_time" content="2016-08-20T10:18:35.911Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="pandas入门">
-<meta name="twitter:description" content="简介本文为《利用Python进行数据分析》一书第5章“pandas入门”的读书笔记。">
+<meta name="twitter:title" content="R语言之Logistic回归">
+<meta name="twitter:description" content="背景Logistic回归通常情况下会用在分类问题中，一般是二分类问题。Logistic回归直接将预测限定在（0， 1）区间内，因此也可以将它理解为线性回归的归一化。">
 
 
 
@@ -85,7 +86,7 @@
   };
 </script>
 
-  <title> pandas入门 | zzanswer的博客 </title>
+  <title> R语言之Logistic回归 | zzanswer的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -254,7 +255,7 @@
             
             
               
-                pandas入门
+                R语言之Logistic回归
               
             
           </h1>
@@ -266,8 +267,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-30T21:04:10+08:00" content="2016-05-30">
-              2016-05-30
+            <time itemprop="dateCreated" datetime="2016-08-20T17:31:57+08:00" content="2016-08-20">
+              2016-08-20
             </time>
           </span>
 
@@ -280,8 +281,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
+                  <a href="/categories/R语言/" itemprop="url" rel="index">
+                    <span itemprop="name">R语言</span>
                   </a>
                 </span>
 
@@ -296,8 +297,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/05/30/pandas入门/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/30/pandas入门/" itemprop="commentsCount"></span>
+                <a href="/2016/08/20/R语言之Logistic回归/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/20/R语言之Logistic回归/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -318,8 +319,132 @@
       
 
       
-        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>本文为《利用Python进行数据分析》一书第5章“pandas入门”的读书笔记。<br><a id="more"></a></p>
-<h3 id="思维导图"><a href="#思维导图" class="headerlink" title="思维导图"></a>思维导图</h3><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/pandas%E5%85%A5%E9%97%A8.png" alt="id"></p>
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>Logistic回归通常情况下会用在分类问题中，一般是二分类问题。Logistic回归直接将预测限定在（0， 1）区间内，因此也可以将它理解为线性回归的归一化。<br><a id="more"></a></p>
+<h2 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h2><p>数据集为一个医学数据，主要用来预测新生儿是否需要额外的医学护理。数据在<a href="https://github.com/WinVector/zmPDSwR/tree/master/CDC/NatalRiskData.rData" target="_blank" rel="external">这里</a></p>
+<h2 id="R语言实现过程"><a href="#R语言实现过程" class="headerlink" title="R语言实现过程"></a>R语言实现过程</h2><h3 id="加载数据"><a href="#加载数据" class="headerlink" title="加载数据"></a>加载数据</h3><p>首先加载数据集，并划分训练集和测试集。</p>
+<pre><code>load(&quot;D:/zmPDSwR-master/CDC/NatalRiskData.rData&quot;)
+train &lt;- sdata[sdata$ORIGRANDGROUP &lt;= 5,]
+test &lt;- sdata[sdata$ORIGRANDGROUP &gt; 5,]
+</code></pre><h3 id="构建模型"><a href="#构建模型" class="headerlink" title="构建模型"></a>构建模型</h3><p>由于数据集中变量很多，先构建一个公式来方便建模：</p>
+<pre><code>complications &lt;- c(&quot;ULD_MECO&quot;, &quot;ULD_PRECIP&quot;, &quot;ULD_BREECH&quot;)
+riskfactors &lt;- c(&quot;URF_DIAB&quot;, &quot;URF_CHYPER&quot;, &quot;URF_PHYPER&quot;, &quot;URF_ECLAM&quot;)
+y &lt;- &quot;atRisk&quot;
+x &lt;- c(&quot;PWGT&quot;,
+    &quot;UPREVIS&quot;,
+    &quot;CIG_REC&quot;,
+    &quot;GESTREC3&quot;,
+    &quot;DPLURAL&quot;,
+    complications,
+    riskfactors)
+fmla &lt;- paste(y, paste(x, collapse = &quot;+&quot;), sep = &quot;~&quot;)
+
+&gt; print(fmla)
+[1] &quot;atRisk~PWGT+UPREVIS+CIG_REC+GESTREC3+DPLURAL+ULD_MECO+ULD_PRECIP+ULD_BREECH+URF_DIAB+URF_CHYPER+URF_PHYPER+URF_ECLAM&quot;
+</code></pre><p>建模并预测：</p>
+<pre><code>model &lt;- glm(fmla, data = train, family = binomial(link = &quot;logit&quot;))
+
+train$pred &lt;- predict(model, newdata = train, type = &quot;response&quot;)
+test$pred &lt;- predict(model, newdata = test, type = &quot;response&quot;)
+</code></pre><h3 id="评价模型"><a href="#评价模型" class="headerlink" title="评价模型"></a>评价模型</h3><p>先通过图形来看一下打分情况：</p>
+<pre><code>library(ggplot2)
+ggplot(train, aes(x = pred, color = atRisk, linetype = atRisk)) + geom_density() + scale_colour_hue()
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/lg1.png" alt="id"></p>
+<p>打分的分布并不是分离的，发现模型的效果不是很好。这个时候需要选择一个阈值，高于该阈值的打分为正例，反之为负例。在选择阈值时，主要是在准确率和召回率之间寻找平衡。下面是用ROC包来做这件事：</p>
+<pre><code>library(ROCR)
+library(grid)
+predObj &lt;- prediction(train$pred, train$atRisk)
+precObj &lt;- performance(predObj, measure = &quot;prec&quot;)
+recObj &lt;- performance(predObj, measure = &quot;rec&quot;)
+
+precision &lt;- (precObj@y.values)[[1]]
+prec.x &lt;- (precObj@x.values)[[1]]
+recall &lt;- (recObj@y.values)[[1]]
+
+rocFrame &lt;- data.frame(threshold = prec.x, precision = precision, recall = recall)
+
+nplot &lt;- function(plist) {
+    n &lt;- length(plist)
+    grid.newpage()
+    pushViewport(viewport(layout = grid.layout(n, 1)))
+    vplayout = function(x, y) {
+        viewport(layout.pos.row = x, layout.pos.col = y)
+    }
+
+    for(i in 1:n) {
+        print(plist[[i]], vp = vplayout(i, 1))
+    }
+}
+
+pnull &lt;- mean(as.numeric(train$atRisk))
+
+p1 &lt;- ggplot(rocFrame, aes(x = threshold)) + geom_line(aes(y = precision / pnull)) + coord_cartesian(xlim = c(0, 0.05), ylim = c(0, 10))
+p2 &lt;- ggplot(rocFrame, aes(x = threshold)) + geom_line(aes(y = recall)) + coord_cartesian(xlim = c(0, 0.05))
+
+nplot(list(p1, p2))
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/lg2.png" alt="id"></p>
+<p>选择一个阈值0.02来看看结果：</p>
+<pre><code>&gt; ctab.test &lt;- table(pred = test$pred &gt; 0.02, atRisk = test$atRisk)
+&gt; ctab.test
+    atRisk
+pred    FALSE TRUE
+FALSE  9487   93
+TRUE   2405  116
+&gt; precision &lt;- ctab.test[2, 2] / sum(ctab.test[2, ])
+&gt; precision
+[1] 0.04601349
+&gt; recall &lt;- ctab.test[2, 2] / sum(ctab.test[, 2])
+&gt; recall
+[1] 0.5550239
+&gt; enrich &lt;- precision / mean(as.numeric(test$atRisk))
+&gt; enrich
+[1] 2.664159
+</code></pre><p>再来看看模型的概要：</p>
+<pre><code>&gt; summary(model)
+
+Call:
+glm(formula = fmla, family = binomial(link = &quot;logit&quot;), data = train)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-0.9732  -0.1818  -0.1511  -0.1358   3.2641  
+
+Coefficients:
+                        Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)              -4.412189   0.289352 -15.249  &lt; 2e-16 ***
+PWGT                      0.003762   0.001487   2.530 0.011417 *  
+UPREVIS                  -0.063289   0.015252  -4.150 3.33e-05 ***
+CIG_RECTRUE               0.313169   0.187230   1.673 0.094398 .  
+GESTREC3&lt; 37 weeks        1.545183   0.140795  10.975  &lt; 2e-16 ***
+DPLURALtriplet or higher  1.394193   0.498866   2.795 0.005194 ** 
+DPLURALtwin               0.312319   0.241088   1.295 0.195163    
+ULD_MECOTRUE              0.818426   0.235798   3.471 0.000519 ***
+ULD_PRECIPTRUE            0.191720   0.357680   0.536 0.591951    
+ULD_BREECHTRUE            0.749237   0.178129   4.206 2.60e-05 ***
+URF_DIABTRUE             -0.346467   0.287514  -1.205 0.228187    
+URF_CHYPERTRUE            0.560025   0.389678   1.437 0.150676    
+URF_PHYPERTRUE            0.161599   0.250003   0.646 0.518029    
+URF_ECLAMTRUE             0.498064   0.776948   0.641 0.521489    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 2698.7  on 14211  degrees of freedom
+Residual deviance: 2463.0  on 14198  degrees of freedom
+AIC: 2491
+
+Number of Fisher Scoring iterations: 7
+</code></pre><h2 id="要点总结"><a href="#要点总结" class="headerlink" title="要点总结"></a>要点总结</h2><ul>
+<li>Logistic回归是二元分类首选的统计建模方法。首先尝试Logistic回归，如果适用，再尝试其他方法；</li>
+<li>处理具有大量变量或者大量类别值得类别型变量的问题时，Logistic回归将遇到麻烦；</li>
+<li>Logistic可以被很好地校准：它再现数据的边缘概率；</li>
+<li>即便在变量相关的情况下，Logistic回归也能很好地进行预测，但相关的变量会降低模型给出的建议质量；</li>
+<li>特别大的系数量级、系数估计上得到特别大的标准差、系数上的错误符号，都可能是输入变量具有相关性的征兆；</li>
+<li>太多的菲舍尔迭代次数，或者具有特别大标准差的特大系数，可能标志着一个输入变量或输入变量组合与所要应答的一个子集完全相关。这可能需要通过分割数据来处理这个问题；</li>
+<li>glm()能提供好的诊断，但利用测试数据对模型进行检查仍然是最有效的诊断方法；</li>
+<li>伪R-平方是关于拟合优度的一个有用的启发式度量指标。</li>
+</ul>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1][数据科学 理论、方法与R语言实践]</p>
 
       
     </div>
@@ -328,9 +453,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Python/" rel="tag">#Python</a>
+            <a href="/tags/Logistic回归/" rel="tag">#Logistic回归</a>
           
-            <a href="/tags/pandas/" rel="tag">#pandas</a>
+            <a href="/tags/R/" rel="tag">#R</a>
+          
+            <a href="/tags/分类/" rel="tag">#分类</a>
+          
+            <a href="/tags/回归/" rel="tag">#回归</a>
           
         </div>
       
@@ -339,17 +468,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/26/NumPy基础：数组和矢量计算/" rel="next" title="NumPy基础：数组和矢量计算">
-                <i class="fa fa-chevron-left"></i> NumPy基础：数组和矢量计算
+              <a href="/2016/08/19/R语言之线性回归/" rel="next" title="R语言之线性回归">
+                <i class="fa fa-chevron-left"></i> R语言之线性回归
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/06/01/数据加载、存储与文件格式/" rel="prev" title="数据加载、存储与文件格式">
-                数据加载、存储与文件格式 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -364,10 +489,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/05/30/pandas入门/"
-     data-title="pandas入门"
+        <div class="ds-share flat" data-thread-key="2016/08/20/R语言之Logistic回归/"
+     data-title="R语言之Logistic回归"
      data-content=""
-     data-url="http://yoursite.com/2016/05/30/pandas入门/">
+     data-url="http://yoursite.com/2016/08/20/R语言之Logistic回归/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -394,8 +519,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/05/30/pandas入门/"
-           data-title="pandas入门" data-url="http://yoursite.com/2016/05/30/pandas入门/">
+      <div class="ds-thread" data-thread-key="2016/08/20/R语言之Logistic回归/"
+           data-title="R语言之Logistic回归" data-url="http://yoursite.com/2016/08/20/R语言之Logistic回归/">
       </div>
     
   </div>
@@ -508,7 +633,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思维导图"><span class="nav-number">2.</span> <span class="nav-text">思维导图</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据"><span class="nav-number">2.</span> <span class="nav-text">数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#R语言实现过程"><span class="nav-number">3.</span> <span class="nav-text">R语言实现过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加载数据"><span class="nav-number">3.1.</span> <span class="nav-text">加载数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构建模型"><span class="nav-number">3.2.</span> <span class="nav-text">构建模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#评价模型"><span class="nav-number">3.3.</span> <span class="nav-text">评价模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#要点总结"><span class="nav-number">4.</span> <span class="nav-text">要点总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
