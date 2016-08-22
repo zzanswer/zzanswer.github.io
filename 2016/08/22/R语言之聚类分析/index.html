@@ -1,0 +1,1258 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="R,k-means,层次聚类,聚类," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="背景聚类分析的目的是将观测数据聚为若干个簇（cluster）。与其他簇的数据相比，簇中的每个数据和本簇的数据更加相似。这里讨论两种方法：层次聚类和k-means聚类算法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="R语言之聚类分析">
+<meta property="og:url" content="http://yoursite.com/2016/08/22/R语言之聚类分析/index.html">
+<meta property="og:site_name" content="zzanswer的博客">
+<meta property="og:description" content="背景聚类分析的目的是将观测数据聚为若干个簇（cluster）。与其他簇的数据相比，簇中的每个数据和本簇的数据更加相似。这里讨论两种方法：层次聚类和k-means聚类算法。">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/cluster1.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/cluster2.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/means3.png">
+<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/cluster4.png">
+<meta property="og:updated_time" content="2016-08-22T09:27:09.807Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="R语言之聚类分析">
+<meta name="twitter:description" content="背景聚类分析的目的是将观测数据聚为若干个簇（cluster）。与其他簇的数据相比，簇中的每个数据和本簇的数据更加相似。这里讨论两种方法：层次聚类和k-means聚类算法。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> R语言之聚类分析 | zzanswer的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?44ddfc9b0cc56445f07e8c0c54e1b40f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">zzanswer的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'cv_CXT8pifMcXfAEzUW2SfW','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                R语言之聚类分析
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-22T15:41:56+08:00" content="2016-08-22">
+              2016-08-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/R语言/" itemprop="url" rel="index">
+                    <span itemprop="name">R语言</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/22/R语言之聚类分析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/22/R语言之聚类分析/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>聚类分析的目的是将观测数据聚为若干个簇（cluster）。与其他簇的数据相比，簇中的每个数据和本簇的数据更加相似。这里讨论两种方法：层次聚类和k-means聚类算法。<br><a id="more"></a></p>
+<h2 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h2><p>本数据集为1973年欧洲25个国家里9个不同的食品组关于蛋白质消费的小型数据集，目标是根据蛋白质消费的模式将这些国家分组。数据集在<a href="https://github.com/WinVector/zmPDSwR/tree/tree/master/Protein/" target="_blank" rel="external">这里</a></p>
+<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><h3 id="加载数据"><a href="#加载数据" class="headerlink" title="加载数据"></a>加载数据</h3><p>首先加载数据集，并查看数据概况。</p>
+<pre><code>protein &lt;- read.table(&quot;D:/zmPDSwR-master/Protein/protein.txt&quot;, sep = &quot;\t&quot;, header = T)
+summary(protein)
+
+        Country      RedMeat         WhiteMeat           Eggs            Milk            Fish       
+Albania       : 1   Min.   : 4.400   Min.   : 1.400   Min.   :0.500   Min.   : 4.90   Min.   : 0.200  
+Austria       : 1   1st Qu.: 7.800   1st Qu.: 4.900   1st Qu.:2.700   1st Qu.:11.10   1st Qu.: 2.100  
+Belgium       : 1   Median : 9.500   Median : 7.800   Median :2.900   Median :17.60   Median : 3.400  
+Bulgaria      : 1   Mean   : 9.828   Mean   : 7.896   Mean   :2.936   Mean   :17.11   Mean   : 4.284  
+Czechoslovakia: 1   3rd Qu.:10.600   3rd Qu.:10.800   3rd Qu.:3.700   3rd Qu.:23.30   3rd Qu.: 5.800  
+Denmark       : 1   Max.   :18.000   Max.   :14.000   Max.   :4.700   Max.   :33.70   Max.   :14.200  
+(Other)       :19                                                                                     
+    Cereals          Starch           Nuts           Fr.Veg     
+Min.   :18.60   Min.   :0.600   Min.   :0.700   Min.   :1.400  
+1st Qu.:24.30   1st Qu.:3.100   1st Qu.:1.500   1st Qu.:2.900  
+Median :28.00   Median :4.700   Median :2.400   Median :3.800  
+Mean   :32.25   Mean   :4.276   Mean   :3.072   Mean   :4.136  
+3rd Qu.:40.10   3rd Qu.:5.700   3rd Qu.:4.700   3rd Qu.:4.900  
+Max.   :56.70   Max.   :6.500   Max.   :7.800   Max.   :7.900
+</code></pre><h3 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h3><p>这里的预处理主要是归一化。</p>
+<pre><code>vars.to.use &lt;- colnames(protein)[-1]
+pmatrix &lt;- scale(protein[, vars.to.use])
+pcenter &lt;- attr(pmatrix, &quot;scaled:center&quot;)
+pscale &lt;- attr(pmatrix, &quot;scaled:scale&quot;)  
+</code></pre><h3 id="层次聚类"><a href="#层次聚类" class="headerlink" title="层次聚类"></a>层次聚类</h3><p>R语言中是<code>hclust()</code>函数来进行层次聚类。</p>
+<pre><code>d &lt;- dist(pmatrix, method = &quot;euclidean&quot;)
+pfit &lt;- hclust(d, method = &quot;ward.D&quot;)
+plot(pfit, labels = protein$Country)
+rect.hclust(pfit, k = 5)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/cluster1.png" alt="id"></p>
+<p>提取聚类的结果：</p>
+<pre><code>groups &lt;- cutree(pfit, k = 5)
+print_clusters &lt;- function(labels, k) {
+    for (i in 1:k) {
+        print(paste(&quot;cluster&quot;, i))
+        print(protein[labels == i, c(&quot;Country&quot;, &quot;RedMeat&quot;, &quot;Fish&quot;, &quot;Fr.Veg&quot;)])
+    }
+}
+
+&gt; print_clusters(groups, 5)
+[1] &quot;cluster 1&quot;
+    Country RedMeat Fish Fr.Veg
+1     Albania    10.1  0.2    1.7
+4    Bulgaria     7.8  1.2    4.2
+18    Romania     6.2  1.0    2.8
+25 Yugoslavia     4.4  0.6    3.2
+[1] &quot;cluster 2&quot;
+    Country RedMeat Fish Fr.Veg
+2      Austria     8.9  2.1    4.3
+3      Belgium    13.5  4.5    4.0
+9       France    18.0  5.7    6.5
+12     Ireland    13.9  2.2    2.9
+14 Netherlands     9.5  2.5    3.7
+21 Switzerland    13.1  2.3    4.9
+22          UK    17.4  4.3    3.3
+24   W Germany    11.4  3.4    3.8
+[1] &quot;cluster 3&quot;
+        Country RedMeat Fish Fr.Veg
+5  Czechoslovakia     9.7  2.0    4.0
+7       E Germany     8.4  5.4    3.6
+11        Hungary     5.3  0.3    4.2
+16         Poland     6.9  3.0    6.6
+23           USSR     9.3  3.0    2.9
+[1] &quot;cluster 4&quot;
+Country RedMeat Fish Fr.Veg
+6  Denmark    10.6  9.9    2.4
+8  Finland     9.5  5.8    1.4
+15  Norway     9.4  9.7    2.7
+20  Sweden     9.9  7.5    2.0
+[1] &quot;cluster 5&quot;
+    Country RedMeat Fish Fr.Veg
+10   Greece    10.2  5.9    6.5
+13    Italy     9.0  3.4    6.7
+17 Portugal     6.2 14.2    7.9
+19    Spain     7.1  7.0    7.2
+</code></pre><p>簇的可视化：</p>
+<pre><code>library(ggplot2)
+princ &lt;- prcomp(pmatrix)
+nComp &lt;- 2
+project &lt;- predict(princ, newdata = pmatrix)[, 1:nComp]
+project.plus &lt;- cbind(as.data.frame(project),
+                    cluster = as.factor(groups),
+                    country = protein$Country)
+ggplot(project.plus, aes(x = PC1, y = PC2)) +
+    geom_point(aes(shape = cluster)) +
+    geom_text(aes(label = country), hjust = 0, vjust = 1)
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/cluster2.png" alt="id"></p>
+<p>对于聚类出的结果是否稳定，可以采用bootstrp重抽样来评价模型的稳定性，在R语言中是用<code>clusterboot()</code>函数来实现：</p>
+<pre><code>library(fpc)
+kbest.p &lt;- 5 # 设置期望的簇的数量
+&gt; cboot.hclust &lt;- clusterboot(pmatrix, clustermethod = hclustCBI, method = &quot;ward.D&quot;, k = 5)
+boot 1 
+boot 2 
+boot 3 
+...
+boot 100 
+&gt; summary(cboot.hclust$result)
+            Length Class  Mode     
+result         7     hclust list     
+noise          1     -none- logical  
+nc             1     -none- numeric  
+clusterlist    5     -none- list     
+partition     25     -none- numeric  
+clustermethod  1     -none- character
+nccl           1     -none- numeric  
+
+&gt; groups &lt;- cboot.hclust$result$partition
+&gt; print_clusters(groups, kbest.p)
+[1] &quot;cluster 1&quot;
+    Country RedMeat Fish Fr.Veg
+1     Albania    10.1  0.2    1.7
+4    Bulgaria     7.8  1.2    4.2
+18    Romania     6.2  1.0    2.8
+25 Yugoslavia     4.4  0.6    3.2
+[1] &quot;cluster 2&quot;
+    Country RedMeat Fish Fr.Veg
+2      Austria     8.9  2.1    4.3
+3      Belgium    13.5  4.5    4.0
+9       France    18.0  5.7    6.5
+12     Ireland    13.9  2.2    2.9
+14 Netherlands     9.5  2.5    3.7
+21 Switzerland    13.1  2.3    4.9
+22          UK    17.4  4.3    3.3
+24   W Germany    11.4  3.4    3.8
+[1] &quot;cluster 3&quot;
+        Country RedMeat Fish Fr.Veg
+5  Czechoslovakia     9.7  2.0    4.0
+7       E Germany     8.4  5.4    3.6
+11        Hungary     5.3  0.3    4.2
+16         Poland     6.9  3.0    6.6
+23           USSR     9.3  3.0    2.9
+[1] &quot;cluster 4&quot;
+Country RedMeat Fish Fr.Veg
+6  Denmark    10.6  9.9    2.4
+8  Finland     9.5  5.8    1.4
+15  Norway     9.4  9.7    2.7
+20  Sweden     9.9  7.5    2.0
+[1] &quot;cluster 5&quot;
+    Country RedMeat Fish Fr.Veg
+10   Greece    10.2  5.9    6.5
+13    Italy     9.0  3.4    6.7
+17 Portugal     6.2 14.2    7.9
+19    Spain     7.1  7.0    7.2
+&gt; cboot.hclust$bootmean     # 簇的稳定性向量
+[1] 0.8405000 0.7686746 0.6144325 0.8562976 0.8080000
+&gt; cboot.hclust$bootbrd      # 每一个簇被消除的次数
+[1] 17 14 46 18 21
+</code></pre><p>关于簇数量的选择，一般是要利用领域知识来选，也有各种启发式的方法来可以来帮助选择，下面的R语言实现的就是一种简单的方法是计算不同k值得总的簇内平方和（WSS），找到曲线的“肘弯”。</p>
+<pre><code># 计算2个向量之间的平方距离
+sqr_edist &lt;- function(x, y) {
+    sum((x - y)^2)
+}
+
+# 计算单个簇的WSS，表示为一个矩阵（每个点一行）
+wss.cluster &lt;- function(clustermat) {
+    c0 &lt;- apply(clustermat, 2, FUN = mean)
+    sum(apply(clustermat, 1, FUN = function(row) {sqr_edist(row, c0)}))
+}
+
+# 根据数据点集合和簇标签，计算总的WSS
+wss.total &lt;- function(dmatrix, labels) {
+    wsstot &lt;- 0
+    k &lt;- length(unique(labels))
+    for(i in 1:k)
+        wsstot &lt;- wsstot + wss.cluster(subset(dmatrix, labels == i))
+    wsstot
+}
+</code></pre><p>想要发现这个“肘弯”不能靠肉眼，这里介绍的是Calinski-Harabasz指数，意思是簇间方差（本质上是所有簇的中心点到数据集的大中心点的方差）与总的簇内方差(基本上是聚类中簇的平均WSS)之间的比率。</p>
+<pre><code>totss &lt;- function(dmatrix) {
+    grandmean &lt;- apply(dmatrix, 2, FUN = mean)
+    sum(apply(dmatrix, 1, FUN = function(row){sqr_edist(row, grandmean)}))
+}
+
+ch_criterion &lt;- function(dmatrix, kmax, method = &quot;kmeans&quot;) {
+    if(!(method %in% c(&quot;kmeans&quot;, &quot;hclust&quot;))) {
+        stop(&quot;method must be one of c(&apos;kmeans&apos;, &apos;hclust&apos;)&quot;)
+    }
+    npts &lt;- dim(dmatrix)[1]
+    totss &lt;- totss(dmatrix)
+    wss &lt;- numeric(kmax)
+    crit &lt;- numeric(kmax)
+    wss[1] &lt;- (npts - 1) * sum(apply(dmatrix, 2, var))
+    for (k in 2:kmax) {
+        if(method == &quot;kmeans&quot;) {
+            clustering &lt;- kmeans(dmatrix, k, nstart = 10, iter.max = 100)
+            wss[k] &lt;- clustering$tot.withinss
+        } else {
+            d &lt;- dist(dmatrix, method = &quot;euclidean&quot;)
+            pfit &lt;- hclust(d, method = &quot;ward.D&quot;)
+            labels &lt;- cutree(pfit, k = k)
+            wss[k] &lt;- wss.total(dmatrix, labels)
+        }
+    }
+
+    bss &lt;- totss - wss
+    crit.num &lt;- bss / (0 : (kmax - 1))
+    crit.denom &lt;- wss / (npts - 1:kmax)
+    list(crit = crit.num / crit.denom, wss = wss, totss = totss)
+}
+</code></pre><p>可视化来看一下：</p>
+<pre><code>library(reshape2)
+clustcrit &lt;- ch_criterion(pmatrix, 10, method = &quot;hclust&quot;)
+critframe &lt;- data.frame(k = 1:10, ch = scale(clustcrit$crit), wss = scale(clustcrit$wss))
+critframe &lt;- melt(critframe, id.vars = c(&quot;k&quot;), variable.name = &quot;measure&quot;, value.name = &quot;score&quot;)
+ggplot(critframe, aes(x = k, y = score, color = measure)) +
+    geom_point(aes(shape = measure)) +
+    geom_line(aes(linetype = measure)) +
+    scale_x_continuous(breaks = 1:10, labels = 1:10) +
+    scale_colour_hue()
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/means3.png" alt="id"></p>
+<h3 id="k-means聚类"><a href="#k-means聚类" class="headerlink" title="k-means聚类"></a>k-means聚类</h3><pre><code>&gt; pclusters &lt;- kmeans(pmatrix, kbest.p, nstart = 100, iter.max = 100)
+&gt; summary(pclusters)
+            Length Class  Mode   
+cluster      25     -none- numeric
+centers      45     -none- numeric
+totss         1     -none- numeric
+withinss      5     -none- numeric
+tot.withinss  1     -none- numeric
+betweenss     1     -none- numeric
+size          5     -none- numeric
+iter          1     -none- numeric
+ifault        1     -none- numeric
+&gt; pclusters$centers
+    RedMeat  WhiteMeat        Eggs       Milk       Fish    Cereals     Starch       Nuts      Fr.Veg
+1 -0.807569986 -0.8719354 -1.55330561 -1.0783324 -1.0386379  1.7200335 -1.4234267  0.9961313 -0.64360439
+2  0.006572897 -0.2290150  0.19147892  1.3458748  1.1582546 -0.8722721  0.1676780 -0.9553392 -1.11480485
+3 -0.570049402  0.5803879 -0.08589708 -0.4604938 -0.4537795  0.3181839  0.7857609 -0.2679180  0.06873983
+4  1.011180399  0.7421332  0.94084150  0.5700581 -0.2671539 -0.6877583  0.2288743 -0.5083895  0.02161979
+5 -0.508801956 -1.1088009 -0.41248496 -0.8320414  0.9819154  0.1300253 -0.1842010  1.3108846  1.62924487
+&gt; pclusters$size
+[1] 4 4 5 8 4
+&gt; groups &lt;- pclusters$cluster
+&gt; print_clusters(groups, kbest.p)
+[1] &quot;cluster 1&quot;
+    Country RedMeat Fish Fr.Veg
+1     Albania    10.1  0.2    1.7
+4    Bulgaria     7.8  1.2    4.2
+18    Romania     6.2  1.0    2.8
+25 Yugoslavia     4.4  0.6    3.2
+[1] &quot;cluster 2&quot;
+Country RedMeat Fish Fr.Veg
+6  Denmark    10.6  9.9    2.4
+8  Finland     9.5  5.8    1.4
+15  Norway     9.4  9.7    2.7
+20  Sweden     9.9  7.5    2.0
+[1] &quot;cluster 3&quot;
+        Country RedMeat Fish Fr.Veg
+5  Czechoslovakia     9.7  2.0    4.0
+7       E Germany     8.4  5.4    3.6
+11        Hungary     5.3  0.3    4.2
+16         Poland     6.9  3.0    6.6
+23           USSR     9.3  3.0    2.9
+[1] &quot;cluster 4&quot;
+    Country RedMeat Fish Fr.Veg
+2      Austria     8.9  2.1    4.3
+3      Belgium    13.5  4.5    4.0
+9       France    18.0  5.7    6.5
+12     Ireland    13.9  2.2    2.9
+14 Netherlands     9.5  2.5    3.7
+21 Switzerland    13.1  2.3    4.9
+22          UK    17.4  4.3    3.3
+24   W Germany    11.4  3.4    3.8
+[1] &quot;cluster 5&quot;
+    Country RedMeat Fish Fr.Veg
+10   Greece    10.2  5.9    6.5
+13    Italy     9.0  3.4    6.7
+17 Portugal     6.2 14.2    7.9
+19    Spain     7.1  7.0    7.2
+</code></pre><p>绘制簇的准则：</p>
+<pre><code>&gt; clustering.ch &lt;- kmeansruns(pmatrix, krange = 1:10, criterion = &quot;ch&quot;)
+&gt; clustering.ch$bestk
+[1] 2
+&gt; clustering.asw &lt;- kmeansruns(pmatrix, krange = 1:10, criterion = &quot;asw&quot;)
+&gt; clustering.asw$bestk
+[1] 3
+&gt; clustering.ch$crit
+[1]  0.000000 14.094814 11.417985 10.418801 10.011797  9.964967  9.861682  9.412089  9.166676  9.075569
+&gt; clustcrit$crit
+[1]       NaN 12.215107 10.359587  9.690891 10.011797  9.964967  9.506978  9.092065  8.822406  8.695065
+&gt; critframe &lt;- data.frame(k = 1:10, ch = scale(clustering.ch$crit), asw = scale(clustering.asw$crit))
+&gt; critframe &lt;- melt(critframe, id.vars = c(&quot;k&quot;), variable.name = &quot;measure&quot;, value.name = &quot;score&quot;)
+&gt; ggplot(critframe, aes(x = k, y = score, color = measure)) +
+      geom_point(aes(shape = measure)) +
+      geom_line(aes(linetype = measure)) +
+      scale_x_continuous(breaks = 1:10, labels = 1:10) +
+      scale_colour_hue()
+</code></pre><p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/cluster4.png" alt="id"></p>
+<pre><code>&gt; summary(clustering.ch)
+            Length Class  Mode   
+cluster      25     -none- numeric
+centers      18     -none- numeric
+totss         1     -none- numeric
+withinss      2     -none- numeric
+tot.withinss  1     -none- numeric
+betweenss     1     -none- numeric
+size          2     -none- numeric
+iter          1     -none- numeric
+ifault        1     -none- numeric
+crit         10     -none- numeric
+bestk         1     -none- numeric
+</code></pre><p>这里也用k-means算法来运行一下clusterboot()函数：</p>
+<pre><code>kbest.p &lt;- 5
+cboot &lt;- clusterboot(pmatrix, clustermethod = kmeansCBI, runs = 100, iter.max = 100, krange = kbest.p, seed = 15555)
+boot 1 
+boot 2 
+...
+boot 100
+
+&gt; groups &lt;- cboot$result$partition
+&gt; print_clusters(cboot$result$partition, kbest.p)
+[1] &quot;cluster 1&quot;
+    Country RedMeat Fish Fr.Veg
+1     Albania    10.1  0.2    1.7
+4    Bulgaria     7.8  1.2    4.2
+18    Romania     6.2  1.0    2.8
+25 Yugoslavia     4.4  0.6    3.2
+[1] &quot;cluster 2&quot;
+Country RedMeat Fish Fr.Veg
+6  Denmark    10.6  9.9    2.4
+8  Finland     9.5  5.8    1.4
+15  Norway     9.4  9.7    2.7
+20  Sweden     9.9  7.5    2.0
+[1] &quot;cluster 3&quot;
+        Country RedMeat Fish Fr.Veg
+5  Czechoslovakia     9.7  2.0    4.0
+7       E Germany     8.4  5.4    3.6
+11        Hungary     5.3  0.3    4.2
+16         Poland     6.9  3.0    6.6
+23           USSR     9.3  3.0    2.9
+[1] &quot;cluster 4&quot;
+    Country RedMeat Fish Fr.Veg
+2      Austria     8.9  2.1    4.3
+3      Belgium    13.5  4.5    4.0
+9       France    18.0  5.7    6.5
+12     Ireland    13.9  2.2    2.9
+14 Netherlands     9.5  2.5    3.7
+21 Switzerland    13.1  2.3    4.9
+22          UK    17.4  4.3    3.3
+24   W Germany    11.4  3.4    3.8
+[1] &quot;cluster 5&quot;
+    Country RedMeat Fish Fr.Veg
+10   Greece    10.2  5.9    6.5
+13    Italy     9.0  3.4    6.7
+17 Portugal     6.2 14.2    7.9
+19    Spain     7.1  7.0    7.2
+&gt; cboot$bootmean
+[1] 0.8670000 0.8420714 0.6147024 0.7647341 0.7508333
+&gt; cboot$bootbrd
+[1] 15 20 49 17 32
+</code></pre><h3 id="分派点到新的簇"><a href="#分派点到新的簇" class="headerlink" title="分派点到新的簇"></a>分派点到新的簇</h3><pre><code>assign_cluster &lt;- function(newpt, centers, xcenter = 0, xscale = 1) {
+    xpt &lt;- (newpt - xcenter) / xscale
+    dists &lt;- apply(centers, 1, FUN = function(c0) {sqr_edist(c0, xpt)})
+    which.min(dists)    # 返回最接近的中心点编号
+}
+
+rnorm.multidim &lt;- function(n, mean, sd, colstr = &quot;x&quot;) {
+    ndim &lt;- length(mean)
+    data &lt;- NULL
+    for(i in 1:ndim) {
+        col &lt;- rnorm(n, mean = mean[[i]], sd = sd[[i]])
+        data &lt;- cbind(data, col)
+    }
+    cnames &lt;- paste(colstr, 1:ndim, sep = &apos;&apos;)
+    colnames(data) &lt;- cnames
+    data
+}
+
+mean1 &lt;- c(1, 1, 1)     # 高斯分布的参数
+sd1 &lt;- c(1, 2, 1)
+
+mean2 &lt;- c(10, -3, 5)
+sd2 &lt;- c(2, 1, 2)
+
+mean3 &lt;- c(-5, -5, -5)
+sd3 &lt;- c(1.5, 2, 1)
+
+clust1 &lt;- rnorm.multidim(100, mean1, sd1)       # 创建100个点的数据集，每个点都从上述数据分布中产生
+clust2 &lt;- rnorm.multidim(100, mean2, sd2)
+clust3 &lt;- rnorm.multidim(100, mean3, sd3)
+toydata &lt;- rbind(clust3, rbind(clust1, clust2))
+
+tmatrix &lt;- scale(toydata)
+tcenter &lt;- attr(tmatrix, &quot;scaled:center&quot;)
+tscale &lt;- attr(tmatrix, &quot;scaled:scale&quot;)
+kbest.t &lt;- 3
+tclusters &lt;- kmeans(tmatrix, kbest.t, nstart = 100, iter.max = 100)     # 采用k-means算法，用3个簇对数据集进行聚类
+
+&gt; tclusters$size
+[1] 101  99 100
+
+unscale &lt;- function(scaledpt, centervec, scalevec) {        # “还原”数据点（将它们放回到原始数据集的坐标中）
+    scaledpt * scalevec + centervec
+}
+
+&gt; unscale(tclusters$centers[1, ], tcenter, tscale)
+    x1        x2        x3 
+9.630898 -3.084541  4.949446 
+&gt; mean2
+[1] 10 -3  5
+&gt; unscale(tclusters$centers[2, ], tcenter, tscale)
+    x1        x2        x3 
+-4.833429 -5.018246 -5.064261 
+&gt; mean3
+[1] -5 -5 -5
+&gt; unscale(tclusters$centers[3, ], tcenter, tscale)
+    x1        x2        x3 
+1.0029535 0.7651268 0.8445897 
+&gt; mean1
+[1] 1 1 1
+&gt; assign_cluster(rnorm.multidim(1, mean1, sd1),
+                 tclusters$centers,
+                 tcenter, tscale)
+3 
+3 
+&gt; assign_cluster(rnorm.multidim(1, mean2, sd1),
+                 tclusters$centers,
+                 tcenter, tscale)
+1 
+1 
+&gt; assign_cluster(rnorm.multidim(1, mean3, sd1),
+                 tclusters$centers,
+                 tcenter, tscale)
+2 
+2
+</code></pre><h2 id="聚类总结"><a href="#聚类总结" class="headerlink" title="聚类总结"></a>聚类总结</h2><ul>
+<li>聚类的目的是发现或找出数据子集之间的相似性。</li>
+<li>在一个好的聚类中，同一个簇中的点，应该比这些点与其他簇中的点更相似（相接近）。</li>
+<li>聚类时，每一个变量单位是变量的一种度量方式。不同的单位会导致计算的距离不同，进而潜在地导致了不同的聚类结果。</li>
+<li>理想情况下，你想要的每一个坐标单位代表相同程度的变化。一种近似方法是把所有的列转化成均值为0，标准差为1.0的数据分布，比如<code>scale()</code>函数。</li>
+<li>聚类常常被当作是数据探索的一部分，或者是监督学习方法的前提。</li>
+<li>像可视化这样的方法一样，聚类具有更多迭代和交互过程，并且和监督方法相比，自动化程度更低。</li>
+<li>不同的聚类算法会给出不同的结果，你应该考虑不同的聚类方法，并采用不同的簇的数目。</li>
+<li>有很多估计最佳簇数的启发式算法。再次重申，你应该仔细考虑不同的启发式算法的结果，并探索各种不同的簇数。</li>
+</ul>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1][数据科学 理论、方法与R语言实践] </p>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/R/" rel="tag">#R</a>
+          
+            <a href="/tags/k-means/" rel="tag">#k-means</a>
+          
+            <a href="/tags/层次聚类/" rel="tag">#层次聚类</a>
+          
+            <a href="/tags/聚类/" rel="tag">#聚类</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/20/R语言之Logistic回归/" rel="next" title="R语言之Logistic回归">
+                <i class="fa fa-chevron-left"></i> R语言之Logistic回归
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/08/22/R语言之聚类分析/"
+     data-title="R语言之聚类分析"
+     data-content=""
+     data-url="http://yoursite.com/2016/08/22/R语言之聚类分析/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/22/R语言之聚类分析/"
+           data-title="R语言之聚类分析" data-url="http://yoursite.com/2016/08/22/R语言之聚类分析/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/iverson.png"
+               alt="zzanswer" />
+          <p class="site-author-name" itemprop="name">zzanswer</p>
+          <p class="site-description motion-element" itemprop="description">学而不思则罔，思而不学则殆</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">46</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/zzanswer" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> github
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/zzanswer" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> zhihu
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据"><span class="nav-number">2.</span> <span class="nav-text">数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现过程"><span class="nav-number">3.</span> <span class="nav-text">实现过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加载数据"><span class="nav-number">3.1.</span> <span class="nav-text">加载数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据预处理"><span class="nav-number">3.2.</span> <span class="nav-text">数据预处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#层次聚类"><span class="nav-number">3.3.</span> <span class="nav-text">层次聚类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#k-means聚类"><span class="nav-number">3.4.</span> <span class="nav-text">k-means聚类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分派点到新的簇"><span class="nav-number">3.5.</span> <span class="nav-text">分派点到新的簇</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚类总结"><span class="nav-number">4.</span> <span class="nav-text">聚类总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zzanswer</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zzanswer"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+  
+
+
+</body>
+</html>
