@@ -64,7 +64,7 @@
 <meta property="og:site_name" content="zzanswer的博客">
 <meta property="og:description" content="背景之前我们用过决策树算法，决策树有一些缺点，其中有一个就是训练方法很高，在这里，我们使用bagging技术来改进决策树模型，并且还会用到随机森林。">
 <meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/rf.png">
-<meta property="og:updated_time" content="2016-08-26T10:16:20.795Z">
+<meta property="og:updated_time" content="2016-08-26T10:27:40.957Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="R语言之bagging和随机森林">
 <meta name="twitter:description" content="背景之前我们用过决策树算法，决策树有一些缺点，其中有一个就是训练方法很高，在这里，我们使用bagging技术来改进决策树模型，并且还会用到随机森林。">
@@ -387,7 +387,7 @@ accuracyMeasures(predict.bag(treelist, newdata = spamTest), spamTest$spam == &qu
         model  accuracy        f1  dev.norm
 1 bagging, test 0.9061135 0.7646497 0.5280876
 </code></pre><p>结果蛮好的，提高了模型的精度和F1值。</p>
-<h2 id="使用随机森林"><a href="#使用随机森林" class="headerlink" title="使用随机森林"></a>使用随机森林</h2><h3 id="随机森林简介"><a href="#随机森林简介" class="headerlink" title="随机森林简介"></a>随机森林简介</h3><p>简要介绍，随机森林方法尝试通过随机化每棵树允许使用的变量集来使得这些树不想关。</p>
+<h2 id="使用随机森林"><a href="#使用随机森林" class="headerlink" title="使用随机森林"></a>使用随机森林</h2><h3 id="随机森林简介"><a href="#随机森林简介" class="headerlink" title="随机森林简介"></a>随机森林简介</h3><p>简要介绍，随机森林方法尝试通过随机化每棵树允许使用的变量集来使得这些树不相关。</p>
 <h3 id="随机森林实现"><a href="#随机森林实现" class="headerlink" title="随机森林实现"></a>随机森林实现</h3><pre><code>library(randomForest)
 set.seed(5123512)
 fmodel &lt;- randomForest(x = spamTrain[, spamVars],
@@ -484,6 +484,10 @@ accuracyMeasures(predict(fsel,
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2016/08/28/R语言之广义加性模型（GAM）/" rel="prev" title="R语言之广义加性模型（GAM）">
+                R语言之广义加性模型（GAM） <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -573,7 +577,7 @@ accuracyMeasures(predict(fsel,
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-count">49</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -590,7 +594,7 @@ accuracyMeasures(predict(fsel,
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">63</span>
+                <span class="site-state-item-count">65</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
