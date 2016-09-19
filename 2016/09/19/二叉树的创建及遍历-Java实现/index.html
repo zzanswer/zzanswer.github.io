@@ -63,7 +63,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/09/19/二叉树的创建及遍历-Java实现/index.html">
 <meta property="og:site_name" content="zzanswer的博客">
 <meta property="og:description" content="背景本文主要用Java来实现二叉树的创建和递归遍历的过程。主要参考这篇博文">
-<meta property="og:updated_time" content="2016-09-19T02:06:35.754Z">
+<meta property="og:updated_time" content="2016-09-19T02:11:15.958Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="二叉树的创建及遍历 Java实现">
 <meta name="twitter:description" content="背景本文主要用Java来实现二叉树的创建和递归遍历的过程。主要参考这篇博文">
@@ -410,7 +410,7 @@ public class Bintrees {
         binTree.createBintree();
         Node root = nodeList.get(0);
 
-        System.out.println(&quot;先序遍历：&quot;);
+        System.out.println(&quot;前序遍历：&quot;);
         preOrderTraverse(root);
         System.out.println();
 
@@ -422,6 +422,13 @@ public class Bintrees {
         postOrderTraverse(root);
     }
 }
+</code></pre><p>输出结果：</p>
+<pre><code>前序遍历：
+1 2 4 8 9 5 3 6 7 
+中序遍历：
+8 4 9 2 5 1 6 3 7 
+后序遍历：
+8 9 4 5 2 6 7 3 1 
 </code></pre>
       
     </div>
