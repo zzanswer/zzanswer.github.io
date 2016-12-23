@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="向量,数学,矩阵,线性代数," />
+  <meta name="keywords" content="数学,矩阵,线性代数," />
 
 
 
@@ -57,19 +57,16 @@
 
 
 
-<meta name="description" content="简介机器学习算法里面充斥着线性代数的知识，但是之前的学习主要关注了如何解题，忽略了对概念的理解，因而看着算法依然困惑，于是想重新回顾一下线性代数，对照着《线性代数及其应用》一书把概念走一遍。首先就是线性方程组。">
+<meta name="description" content="简介这一篇主要关注矩阵的代数运算，介绍关于矩阵的各种概念。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="线性代数之线性方程组">
-<meta property="og:url" content="http://yoursite.com/2016/12/22/线性代数之线性方程组/index.html">
+<meta property="og:title" content="线性代数之矩阵代数">
+<meta property="og:url" content="http://yoursite.com/2016/12/23/线性代数之矩阵代数/index.html">
 <meta property="og:site_name" content="zzanswer的博客">
-<meta property="og:description" content="简介机器学习算法里面充斥着线性代数的知识，但是之前的学习主要关注了如何解题，忽略了对概念的理解，因而看着算法依然困惑，于是想重新回顾一下线性代数，对照着《线性代数及其应用》一书把概念走一遍。首先就是线性方程组。">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/math1.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/xianglaing.png">
-<meta property="og:image" content="http://7xs1l0.com1.z0.glb.clouddn.com/juzh.png">
-<meta property="og:updated_time" content="2016-12-22T10:24:12.304Z">
+<meta property="og:description" content="简介这一篇主要关注矩阵的代数运算，介绍关于矩阵的各种概念。">
+<meta property="og:updated_time" content="2016-12-23T14:50:02.281Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="线性代数之线性方程组">
-<meta name="twitter:description" content="简介机器学习算法里面充斥着线性代数的知识，但是之前的学习主要关注了如何解题，忽略了对概念的理解，因而看着算法依然困惑，于是想重新回顾一下线性代数，对照着《线性代数及其应用》一书把概念走一遍。首先就是线性方程组。">
+<meta name="twitter:title" content="线性代数之矩阵代数">
+<meta name="twitter:description" content="简介这一篇主要关注矩阵的代数运算，介绍关于矩阵的各种概念。">
 
 
 
@@ -87,7 +84,7 @@
   };
 </script>
 
-  <title> 线性代数之线性方程组 | zzanswer的博客 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 线性代数之矩阵代数 | zzanswer的博客 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -256,7 +253,7 @@
             
             
               
-                线性代数之线性方程组
+                线性代数之矩阵代数
               
             
           </h1>
@@ -268,8 +265,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-22T14:50:49+08:00" content="2016-12-22">
-              2016-12-22
+            <time itemprop="dateCreated" datetime="2016-12-23T22:21:04+08:00" content="2016-12-23">
+              2016-12-23
             </time>
           </span>
 
@@ -298,8 +295,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/12/22/线性代数之线性方程组/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/22/线性代数之线性方程组/" itemprop="commentsCount"></span>
+                <a href="/2016/12/23/线性代数之矩阵代数/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/23/线性代数之矩阵代数/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -320,30 +317,26 @@
       
 
       
-        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>机器学习算法里面充斥着线性代数的知识，但是之前的学习主要关注了如何解题，忽略了对概念的理解，因而看着算法依然困惑，于是想重新回顾一下线性代数，对照着《线性代数及其应用》一书把概念走一遍。首先就是线性方程组。</p>
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>这一篇主要关注矩阵的代数运算，介绍关于矩阵的各种概念。</p>
 <a id="more"></a>
-<h2 id="线性方程组"><a href="#线性方程组" class="headerlink" title="线性方程组"></a>线性方程组</h2><p>线性方程组是线性代数的核心，从线性方程组来进入线性代数的世界是最平滑的方法，从而引入线性代数的许多重要概念。下面就是一个线性方程组：</p>
-<p>\begin{matrix}<br>a_{11}x_{1}+a_{12}x_{2}+ a_{13}x_{3}=b_{1} \\<br>a_{21}x_{1}+a_{22}x_{2}+ a_{23}x_{3}=b_{2} \\<br>a_{31}x_{1}+a_{32}x_{2}+ a_{33}x_{3}=b_{3}<br>\end{matrix}</p>
-<p>观察这个线性方程组可以发现，每一个线性方程中都有$x_{1}$、$x_{2}$、$x_{3}$，从信息的角度来看，线性方程组的主要信息其实就是系数和方程组右边的常数，这个时候就可以用矩阵来表达线性方程组的主要信息：</p>
-<p>系数矩阵：</p>
-<p>\begin{bmatrix}<br>a_{11} &amp;a_{12}  &amp;a_{13} \\<br>a_{21} &amp;a_{22}  &amp;a_{23} \\<br>a_{31} &amp;a_{32}  &amp;a_{33}<br>\end{bmatrix}</p>
-<p>增广矩阵（即加上常数项）：</p>
-<p>\begin{bmatrix}<br>a_{11} &amp;a_{12}  &amp;a_{13}  &amp;b_{1} \\<br>a_{21} &amp;a_{22}  &amp;a_{23}  &amp;b_{2} \\<br>a_{31} &amp;a_{32}  &amp;a_{33}  &amp;b_{3}<br>\end{bmatrix}</p>
-<p>而这样也就把求解线性方程组的问题转化为求解矩阵，具体的算法是行化简算法，本文主要是想理清概念，具体算法就不详细说了,学过线性代数的应该都知道。</p>
-<h2 id="向量方程"><a href="#向量方程" class="headerlink" title="向量方程"></a>向量方程</h2><p>这是要说的第二个概念。向量和标量的概念对应，简单的说就是有方向的量，表示一组数。严格的数学定义与向量空间有关，之后的文章会详细介绍。</p>
-<h3 id="R-n-中的向量"><a href="#R-n-中的向量" class="headerlink" title="$R^{n}$中的向量"></a>$R^{n}$中的向量</h3><p>设n是正整数，$R^{n}$表示所有n个实数数列的集合，通常写成下面的形式：</p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/math1.png" alt="id"></p>
-<h3 id="线性组合"><a href="#线性组合" class="headerlink" title="线性组合"></a>线性组合</h3><p>给定$R^{n}$中的向量和一组标量，这种形式：<strong>b</strong>=$x_{1}a_{1}+…+x_{p}a_{p}$</p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/xianglaing.png" alt="id"></p>
-<p>向量<strong>b</strong>称为向量$a_{1}$,…,$a_{p}$以$x_{1}$,…,$x_{p}$为权的线性组合。和上面增广矩阵比较可以发现两者有相同的解集。</p>
-<h2 id="矩阵方程"><a href="#矩阵方程" class="headerlink" title="矩阵方程"></a>矩阵方程</h2><p>其实就一句话说明：矩阵方程Ax = b 这个形式其实就是把向量方程中的向量变成一个矩阵，然后乘以未知数向量，就得到了矩阵方程。</p>
-<p><img src="http://7xs1l0.com1.z0.glb.clouddn.com/juzh.png" alt="id"></p>
-<p>这下就理清楚了着三个方程的关系了，这三个是有<strong>相同解集</strong>的，可以相互之间进行<strong>转化</strong>。</p>
-<h2 id="线性方程组的解集"><a href="#线性方程组的解集" class="headerlink" title="线性方程组的解集"></a>线性方程组的解集</h2><p>这里给出一个名词：齐次线性方程组，就是可以写成<code>Ax = 0</code>形式的方程组。这种形式的方程组至少有个<strong>0</strong>向量解（每个未知数为0组成的向量），这个解称做它的平凡解。而如果说它有非平凡解的话，当且仅当方程至少有一个自由变量。根据上面理清的关系，可以换个角度来看，把它们写成向量方程,这个时候如果说仅有平凡解的话就称那组向量<strong>线性无关</strong>，否则就是<strong>线性相关</strong>(如果一个向量组的向量个数超过每个向量元素的个数，那么这个向量组一定是线性相关的)。</p>
-<h2 id="线性变换"><a href="#线性变换" class="headerlink" title="线性变换"></a>线性变换</h2><p>Ax=b这是矩阵方程，对这个矩阵方程之前说他与向量方程仅仅是表示不同，这里换一种理解方法：</p>
-<p>b是Ax产生的向量，可以这样理解x向量乘以A矩阵，得到了b。说的抽象一点：x（$R^{3}$）到b（$R^{3}$）的一个变换A（T）是一个规则，通过了A实现了线性变换。</p>
-<p>这里还有名词<strong>矩阵变换</strong>，我觉得可以这样理解，向量就可以看作矩阵的列，所以线性变换也就是矩阵变换。术语线性变换强调映射的性质，而矩阵变换描述这样的映射如何实现（即先拆分成列，再做乘法）。</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1][线性代数及其应用]<br>[2][<a href="https://zh.wikipedia.org/wiki/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84" target="_blank" rel="external">https://zh.wikipedia.org/wiki/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84</a>]<br>[3][<a href="https://zh.wikipedia.org/wiki/%E5%90%91%E9%87%8F" target="_blank" rel="external">https://zh.wikipedia.org/wiki/%E5%90%91%E9%87%8F</a>]</p>
+<h2 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h2><p>这里主要介绍矩阵的乘法。回顾一下线性变换的概念，把矩阵$B$乘以向量$x$，它将$x$变换为向量$Bx$，如果这个向量又乘以矩阵$A$，结果得到向量$A(Bx)$。换一种说法，$A(Bx)$是由$x$经过<strong>复合映射</strong>变换所得的，我们就可以把这个复合映射表示为乘以一个矩阵的变换，此矩阵记为$AB$，即</p>
+<p>$A(Bx)=(AB)x$</p>
+<p>具体相乘的方法这里不再说明。</p>
+<h2 id="矩阵的逆"><a href="#矩阵的逆" class="headerlink" title="矩阵的逆"></a>矩阵的逆</h2><p>这个概念可以与乘法的倒数类比。$AA^{-1}=I$</p>
+<h2 id="可逆矩阵定理"><a href="#可逆矩阵定理" class="headerlink" title="可逆矩阵定理"></a>可逆矩阵定理</h2><p>可逆矩阵定理的作用在于它给出了许多重要概念的联系,详细介绍看<a href="https://zh.wikipedia.org/wiki/%E9%9D%9E%E5%A5%87%E5%BC%82%E6%96%B9%E9%98%B5" target="_blank" rel="external">这里</a>。比如矩阵$A$的列的线性无关性与$Ax=b$的解的存在性关联起来。对于这一点，我的理解是线性无关使得取值空间（余定义域）为$R^{n}$，对于$b$和$x$向量也都在$R^{n}$这个空间里，故至少有一解。</p>
+<h2 id="分块矩阵"><a href="#分块矩阵" class="headerlink" title="分块矩阵"></a>分块矩阵</h2><p>这个概念又是从另一个角度来看待矩阵，之前是把矩阵看作一个“表”（从整体的角度看），这个则是把它看作一组列向量（从部分的角度看）。分块矩阵的运算类比正常矩阵的运算。</p>
+<h2 id="矩阵因式分解"><a href="#矩阵因式分解" class="headerlink" title="矩阵因式分解"></a>矩阵因式分解</h2><p>这里摘抄《线性代数及其应用》其中的一段话，对做机器学习很有启发：</p>
+<blockquote>
+<p>矩阵A的因式分解是把A表示为两个或更多个矩阵的乘积，矩阵乘法是数据的综合（把两个或更多个线性变换的作用结合成一个矩阵），矩阵因式分解是数据的分解，在计算机科学的语言种，将A表示为矩阵的乘积是对A中数据的预处理，把这些数据组成两个或更多部分，这种结构可能更有用，或者更便于计算。</p>
+</blockquote>
+<h3 id="LU分解"><a href="#LU分解" class="headerlink" title="LU分解"></a>LU分解</h3><p>LU分解主要用来解一系列具有相同系数矩阵的线性方程。</p>
+<p>设$A$是m*n矩阵可以行化简为阶梯形而不必行对换，则$A$可写成形式$A=LU$，$L$是m*m下三角矩阵，主对角线元素全是$I$，$U$是$A$的一个等价的m*n阶梯形矩阵。下面直接来看$L$和$U$是如何构造的：</p>
+<p>解$Ax=b$:</p>
+<p>当$A=LU$，可以变成如下形式：</p>
+<p>$Ly=b$<br>$Ux=y$</p>
+<p>首先解$Ly=b$然后解$Ux=y$求得$x$。</p>
+<h4 id="LU分解算法"><a href="#LU分解算法" class="headerlink" title="LU分解算法"></a>LU分解算法</h4><p>LU分解在本质上是高斯消元法的一种表达形式。实质上是将$A$通过初等行变换变成一个上三角矩阵，其变换矩阵就是一个单位下三角矩阵。这正是所谓的<a href="https://zh.wikipedia.org/wiki/LU%E5%88%86%E8%A7%A3" target="_blank" rel="external">杜尔里特算法（Doolittle algorithm）</a>：从下至上地对矩阵A做初等行变换，将对角线左下方的元素变成零，然后再证明这些行变换的效果等同于左乘一系列单位下三角矩阵，这一系列单位下三角矩阵的乘积的逆就是L矩阵，它也是一个单位下三角矩阵。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1][线性代数及其应用]</p>
 
       
     </div>
@@ -351,8 +344,6 @@
     <footer class="post-footer">
       
         <div class="post-tags">
-          
-            <a href="/tags/向量/" rel="tag">#向量</a>
           
             <a href="/tags/数学/" rel="tag">#数学</a>
           
@@ -367,17 +358,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/30/重排字符/" rel="next" title="重排字符">
-                <i class="fa fa-chevron-left"></i> 重排字符
+              <a href="/2016/12/22/线性代数之线性方程组/" rel="next" title="线性代数之线性方程组">
+                <i class="fa fa-chevron-left"></i> 线性代数之线性方程组
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/12/23/线性代数之矩阵代数/" rel="prev" title="线性代数之矩阵代数">
-                线性代数之矩阵代数 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -392,10 +379,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/12/22/线性代数之线性方程组/"
-     data-title="线性代数之线性方程组"
+        <div class="ds-share flat" data-thread-key="2016/12/23/线性代数之矩阵代数/"
+     data-title="线性代数之矩阵代数"
      data-content=""
-     data-url="http://yoursite.com/2016/12/22/线性代数之线性方程组/">
+     data-url="http://yoursite.com/2016/12/23/线性代数之矩阵代数/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -422,8 +409,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/12/22/线性代数之线性方程组/"
-           data-title="线性代数之线性方程组" data-url="http://yoursite.com/2016/12/22/线性代数之线性方程组/">
+      <div class="ds-thread" data-thread-key="2016/12/23/线性代数之矩阵代数/"
+           data-title="线性代数之矩阵代数" data-url="http://yoursite.com/2016/12/23/线性代数之矩阵代数/">
       </div>
     
   </div>
@@ -536,7 +523,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线性方程组"><span class="nav-number">2.</span> <span class="nav-text">线性方程组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#向量方程"><span class="nav-number">3.</span> <span class="nav-text">向量方程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#R-n-中的向量"><span class="nav-number">3.1.</span> <span class="nav-text">$R^{n}$中的向量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性组合"><span class="nav-number">3.2.</span> <span class="nav-text">线性组合</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#矩阵方程"><span class="nav-number">4.</span> <span class="nav-text">矩阵方程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线性方程组的解集"><span class="nav-number">5.</span> <span class="nav-text">线性方程组的解集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线性变换"><span class="nav-number">6.</span> <span class="nav-text">线性变换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">7.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#矩阵运算"><span class="nav-number">2.</span> <span class="nav-text">矩阵运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#矩阵的逆"><span class="nav-number">3.</span> <span class="nav-text">矩阵的逆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可逆矩阵定理"><span class="nav-number">4.</span> <span class="nav-text">可逆矩阵定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分块矩阵"><span class="nav-number">5.</span> <span class="nav-text">分块矩阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#矩阵因式分解"><span class="nav-number">6.</span> <span class="nav-text">矩阵因式分解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LU分解"><span class="nav-number">6.1.</span> <span class="nav-text">LU分解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LU分解算法"><span class="nav-number">6.1.1.</span> <span class="nav-text">LU分解算法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">7.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
